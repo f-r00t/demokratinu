@@ -19,6 +19,7 @@ public class ArticleRetriever {
 	private static SyndFeed feed;
 	
 	private ArticleRetriever(){
+		
 		try {
 			
 			URL feedSource = new URL(FEED_URL);
@@ -40,14 +41,15 @@ public class ArticleRetriever {
 			e.printStackTrace();
 		}
 		
-		
 	}
 	public static ArticleRetriever getInstance(){
 		if(INSTANCE==null){
 			INSTANCE = new ArticleRetriever();
 		}
 		
-		return INSTANCE;
+		if(feed!=null)
+			return INSTANCE;
+		return null;
 	}
 	
 }
