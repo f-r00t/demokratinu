@@ -3,6 +3,8 @@ package com.example.pocketpolitics.control;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.sun.syndication.feed.synd.SyndFeed;
+
 
 
 public class ArticleRetriever {
@@ -10,7 +12,7 @@ public class ArticleRetriever {
 	public static final String FEED_URL = "http://www.riksdagen.se/sv/Debatter--beslut/?rss=true&type=biksmall";
 	
 	private static ArticleRetriever INSTANCE;
-	//private static SyndFeed feed;
+	private static SyndFeed feed;
 	
 	private ArticleRetriever(){
 		URL feedSource;
