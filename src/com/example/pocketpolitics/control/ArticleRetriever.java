@@ -54,10 +54,11 @@ public class ArticleRetriever {
 		
 	}
 	
-	private void printFeed(){
+	public boolean printFeed(){
+
 		if(feed==null){
 			System.out.println("Error in printFeed! null feed!");
-			return;
+			return false;
 		}
 		
 		System.out.println("Feed name: "+feed.getAuthor()+"\n");
@@ -67,6 +68,8 @@ public class ArticleRetriever {
 			System.out.println("Inlägg:"+ entry.getTitle());
 			System.out.println(entry.getLink()+"\n");
 		}
+		
+		return true;
 	}
 	
 	
