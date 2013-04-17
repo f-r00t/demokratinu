@@ -1,5 +1,7 @@
 package com.example.pocketpolitics.control;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -74,7 +76,7 @@ public class ArticleRetriever {
 	
 	@Test
 	public static void test(){
-		
+		assertTrue(true);
 	}
 	
 	
