@@ -24,6 +24,12 @@
             </intent-filter>
         </activity>
         
+        <uses-library android:name="android.test.runner"/>
     </application>
-
+	
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.example.pocketpolitics"
+        android:label="Tests for PocketPolitics" />
+    
 </manifest>
