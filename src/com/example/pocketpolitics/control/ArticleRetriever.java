@@ -3,7 +3,11 @@ package com.example.pocketpolitics.control;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 
+import org.junit.Test;
+
+import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
@@ -17,6 +21,16 @@ public class ArticleRetriever {
 	
 	private static ArticleRetriever INSTANCE;
 	private static SyndFeed feed;
+	
+	public static ArticleRetriever getInstance(){
+		if(INSTANCE==null){
+			INSTANCE = new ArticleRetriever();
+		}
+		
+		if(feed!=null)
+			return INSTANCE;
+		return null;
+	}
 	
 	private ArticleRetriever(){
 		
@@ -42,14 +56,26 @@ public class ArticleRetriever {
 		}
 		
 	}
-	public static ArticleRetriever getInstance(){
-		if(INSTANCE==null){
-			INSTANCE = new ArticleRetriever();
+	
+	private void printFeed(){
+		if(feed==null){
+			System.out.println("Error in printFeed! null feed!");
+			return;
 		}
 		
-		if(feed!=null)
-			return INSTANCE;
-		return null;
+		System.out.println("Feed name: "+feed.getAuthor()+"\n");
+		
+		for (Iterator i = feed.getEntries().iterator(); i.hasNext();){
+			SyndEntry entry = (SyndEntry) i.next();
+			System.out.println("Inlägg:"+ entry.getTitle());
+			System.out.println(entry.getLink()+"\n");
+		}
 	}
+	
+	@Test
+	public static void test(){
+		
+	}
+	
 	
 }

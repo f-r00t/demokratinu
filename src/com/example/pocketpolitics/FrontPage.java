@@ -18,5 +18,6 @@ public class FrontPage extends Activity {
 		getMenuInflater().inflate(R.menu.front_page, menu);
 		return true;
 	}
+	
 
 }
