@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.pocketpolitics.control.ArticleListAdapter;
+import com.example.pocketpolitics.control.ArticleRetriever;
 import com.example.pocketpolitics.model.Article;
 import android.app.Activity;
 import android.content.Context;
@@ -32,8 +33,12 @@ public class FrontPage extends Activity {
             List articleList = new ArrayList();
             
             //Replace this with the factory later, really ugly code incoming:
+            ArticleRetriever ar = ArticleRetriever.getInstance();
+            
             Article a = new Article();
-            a.setTitle("Artikel A");
+            
+            List titleList = ar.getArticleTitles();
+            a.setTitle((String)titleList.get(0));
             articleList.add(a);
             Article b = new Article();
             b.setTitle("Artikel B");
