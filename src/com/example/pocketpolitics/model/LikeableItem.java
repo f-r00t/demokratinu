@@ -1,4 +1,4 @@
-package model;
+package com.example.pocketpolitics.model;
 
 import java.util.Date;
 import java.util.List;

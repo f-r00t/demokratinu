@@ -1,4 +1,4 @@
-package model;
+package com.example.pocketpolitics.model;
 
 public class Article extends LikeableItem {
 	

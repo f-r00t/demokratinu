@@ -1,16 +1,16 @@
-package model;
+package com.example.pocketpolitics.model;
 
-import java.awt.Image;
+import android.provider.MediaStore.Images.Thumbnails;
 
 public class Party {
 
-	private Image logo;
+	private Thumbnails logo;
 	private String name;
 	
-	public Image getLogo() {
+	public Thumbnails getLogo() {
 		return logo;
 	}
-	public void setLogo(Image logo) {
+	public void setLogo(Thumbnails logo) {
 		this.logo = logo;
 	}
 	public String getName() {
