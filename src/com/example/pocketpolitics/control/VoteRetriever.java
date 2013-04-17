@@ -3,6 +3,7 @@ package com.example.pocketpolitics.control;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.zip.DataFormatException;
 
 import com.sun.syndication.io.XmlReader;
 
@@ -21,9 +22,26 @@ public class VoteRetriever {
 		return INSTANCE;
 	}
 	
-	public static void getVotes(String year, String articleCode){
+	/**
+	 * @param year
+	 * Ex 2012
+	 * 
+	 * @param articleCode
+	 * Ex Sku21
+	 */
+	public static void getVotes(String year, String articleCode) throws DataFormatException{
+		if(year.length()!=4)
+			throw new DataFormatException("parameter year: not length 4!");
+		
+		int last = Integer.parseInt(year.substring(2));
+		String qyear =  year + "%2F" + Integer.toString(++last);
+		
+		if("2012".equals(year) && ! "2012%2F13".equals(qyear))
+			throw new DataFormatException("format error in getVotes()");
+		
+		
 		try {
-			URL xmlSource = new URL(QUERY_START+"rm="+year+"&bet="+"articleCode"+QUERY_END);
+			URL xmlSource = new URL(QUERY_START+"rm="+qyear+"&bet="+"articleCode"+QUERY_END);
 			
 			XmlReader reader = new XmlReader(xmlSource);
 			
