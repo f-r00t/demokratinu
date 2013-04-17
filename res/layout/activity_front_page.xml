@@ -17,34 +17,12 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
-        <fragment
-            android:id="@+id/article_fragment"
-            android:name="com.example.pocketpolitics.ArticleFragment"
+        <ListView
+            android:id="@+id/listView1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            class="com.example.pocketpolitics.ArticleFragment" />
+            android:layout_height="wrap_content" >
+        </ListView>
 
-        <fragment
-            android:id="@+id/article_fragment2"
-            android:name="com.example.pocketpolitics.ArticleFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-        
-        <fragment
-            android:id="@+id/article_fragment3"
-            android:name="com.example.pocketpolitics.ArticleFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-        <fragment
-            android:id="@+id/article_fragment4"
-            android:name="com.example.pocketpolitics.ArticleFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </LinearLayout>
 
 </RelativeLayout>
