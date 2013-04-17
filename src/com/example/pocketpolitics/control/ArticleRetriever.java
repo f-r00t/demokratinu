@@ -1,20 +1,15 @@
 package com.example.pocketpolitics.control;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
-
-import org.junit.Test;
 
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
-
 
 
 public class ArticleRetriever {
@@ -67,16 +62,11 @@ public class ArticleRetriever {
 		
 		System.out.println("Feed name: "+feed.getAuthor()+"\n");
 		
-		for (Iterator i = feed.getEntries().iterator(); i.hasNext();){
-			SyndEntry entry = (SyndEntry) i.next();
+		for (Iterator<SyndEntry> i = feed.getEntries().iterator(); i.hasNext();){
+			SyndEntry entry = i.next();
 			System.out.println("Inlägg:"+ entry.getTitle());
 			System.out.println(entry.getLink()+"\n");
 		}
-	}
-	
-	@Test
-	public static void test(){
-		assertTrue(true);
 	}
 	
 	
