@@ -39,7 +39,7 @@
                     android:src="@drawable/greenarrow" />
 
                 <TextView
-                    android:id="@+id/articleTitle"
+                    android:id="@+id/TextView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -82,7 +82,7 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/TextView15"
+                    android:id="@+id/articleTitle"
                     android:layout_width="216dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
