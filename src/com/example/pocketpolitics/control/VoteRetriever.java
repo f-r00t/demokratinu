@@ -1,5 +1,11 @@
 package com.example.pocketpolitics.control;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import com.sun.syndication.io.XmlReader;
+
 public class VoteRetriever {
 	
 	public static final String QUERY_START = "http://data.riksdagen.se/voteringlista/?"; // rm=2012%2F13&bet=Sku21
@@ -15,8 +21,19 @@ public class VoteRetriever {
 		return INSTANCE;
 	}
 	
-	public static void getVotes(){
-		
+	public static void getVotes(String year, String articleCode){
+		try {
+			URL xmlSource = new URL(QUERY_START+"rm="+year+"&bet="+"articleCode"+QUERY_END);
+			
+			XmlReader reader = new XmlReader(xmlSource);
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private VoteRetriever(){
