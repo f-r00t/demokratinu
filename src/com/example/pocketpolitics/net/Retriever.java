@@ -28,8 +28,14 @@ public class Retriever {
 		return artRet.getArticleTitles();
 	}
 	
-	public void printSomeTest(){
-		texRet.read();
+	/**
+	 * Retrieves the simple text of an article.
+	 * @param year
+	 * @param articleid
+	 * @return
+	 */
+	public String getText(String year, String articleid){
+		return texRet.getText(year, articleid);
 	}
 	
 	private Retriever(){
