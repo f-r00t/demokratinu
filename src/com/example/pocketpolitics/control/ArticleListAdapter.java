@@ -38,7 +38,7 @@ public class ArticleListAdapter extends BaseAdapter{
             /* Extract the article's object to show */
             Article article = (Article) getItem( position );
 
-            /* Take the TextView from layout and set the city's name */
+            /* Take the TextView from layout and set the articel's title */
             TextView txtName = (TextView) convertView.findViewById(R.id.articleTitle);
             txtName.setText(article.getTitle());
             
