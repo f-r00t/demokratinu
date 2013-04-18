@@ -3,7 +3,6 @@ package com.example.pocketpolitics.net;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -14,6 +13,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.JsonReader;
 import android.util.Log;
 
 class TextRetriever {
@@ -23,6 +23,9 @@ class TextRetriever {
 	private static final String QUERY_STR_2 = "&d=&ts=&sn=&parti=&iid=&bet=";
 	private static final String QUERY_STR_3 = "&org=&kat=&sz=10&sort=c&utformat=json&termlista=";
 	//private static final String QUERY_STR_3 = "Sku21&org=&kat=&sz=10&sort=c&utformat=xml&termlista=";
+	
+	private static final String KEY_DOK = "dokumentstatus_url_xml";
+	//private static final String KEY_DOK = "dokumentlista";
 
 	protected TextRetriever(){
 		
@@ -48,12 +51,44 @@ class TextRetriever {
 			return null;
 		}
 		
+		InputStreamReader reader = new InputStreamReader(source);
+		
+		JsonReader jread = new JsonReader(reader);
+		try {
+			
+			String ret = null;
+			
+			jread.beginObject();
+			while(jread.hasNext()){
+				String instr = jread.nextName();
+				if(instr.equals(KEY_DOK)){
+					ret = jread.nextString();
+				}
+				else{
+					jread.skipValue();
+				}
+			}
+			jread.endObject();
+			
+			if(ret == null){
+				Log.w(this.getClass().getSimpleName(), "Leif: Warning: Key "+KEY_DOK+" not found in json");
+			}
+			else{
+				return ret;
+			}
+			
+			
+		} catch (IOException e1) {
+			Log.e(this.getClass().getSimpleName(), "Leif: Error: io exception reading json: "+e1.getMessage());
+			e1.printStackTrace();
+		}
+		
 		/*
-		Reader reader = new InputStreamReader(source);
 		Gson gson = new Gson();
 		DocumentList response = gson.fromJson(reader, DocumentList.class);
 		*/
 		
+		/*
 		String key = "dokument";
 		
 		try {
@@ -71,7 +106,7 @@ class TextRetriever {
 			
 			Log.e(this.getClass().getSimpleName(), "Leif: Error: json exception: "+e.getMessage());
 			e.printStackTrace();
-		}
+		}*/
 		
 		return null;
 	}

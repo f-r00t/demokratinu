@@ -9,7 +9,7 @@ public class ArticleRetrieverTester extends AndroidTestCase {
 	
 	public void testAnything() throws Throwable {
 		System.out.println("I'm running, can't you see?");
-		assertTrue(1+1==2);
+		assertTrue(true);
 	}
 	
 	public void testSingleton() throws Throwable {
