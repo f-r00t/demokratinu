@@ -7,6 +7,7 @@ public class Retriever {
 	
 	private ArticleRetriever artRet;
 	private VoteRetriever voteRet;
+	private TextRetriever texRet;
 	
 	public static Retriever getInstance(){
 		if(INSTANCE==null){
@@ -27,9 +28,14 @@ public class Retriever {
 		return artRet.getArticleTitles();
 	}
 	
+	public void printSomeTest(){
+		texRet.read();
+	}
+	
 	private Retriever(){
 		artRet = new ArticleRetriever();
 		voteRet = new VoteRetriever();
+		texRet = new TextRetriever();
 	}
 
 }
