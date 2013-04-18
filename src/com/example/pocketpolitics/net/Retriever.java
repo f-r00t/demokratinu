@@ -1,5 +1,7 @@
 package com.example.pocketpolitics.net;
 
+import java.util.List;
+
 public class Retriever {
 	private static Retriever INSTANCE;
 	
@@ -12,6 +14,12 @@ public class Retriever {
 		}
 		
 		return INSTANCE;
+	}
+	
+	public List<String> getImportantArticleTitles(boolean update){
+		if(update)
+			artRet.update();
+		return artRet.getArticleTitles();
 	}
 	
 	private Retriever(){
