@@ -28,7 +28,7 @@ public class FrontPage extends Activity {
       public void onCreate(Bundle savedInstanceState) {
 
             super.onCreate(savedInstanceState);
-            setContentView(R.layout.article_view);
+            setContentView(R.layout.activity_front_page);
             ctx=this;
             
             
