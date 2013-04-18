@@ -1,4 +1,4 @@
-package com.example.pocketpolitics.control;
+package com.example.pocketpolitics.net;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -7,7 +7,7 @@ import java.util.zip.DataFormatException;
 
 import com.sun.syndication.io.XmlReader;
 
-public class VoteRetriever {
+class VoteRetriever {
 	
 	public static final String QUERY_START = "http://data.riksdagen.se/voteringlista/?"; // rm=2012%2F13&bet=Sku21
 	public static final String QUERY_END = "&punkt=&valkrets=&rost=&iid=&sz=500&utformat=xml&gruppering=";

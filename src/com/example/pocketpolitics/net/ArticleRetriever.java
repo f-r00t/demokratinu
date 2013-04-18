@@ -1,4 +1,4 @@
-package com.example.pocketpolitics.control;
+package com.example.pocketpolitics.net;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -14,7 +14,7 @@ import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
 
-public class ArticleRetriever {
+class ArticleRetriever {
 	
 	public static final String FEED_URL = "http://www.riksdagen.se/sv/Debatter--beslut/?rss=true&type=biksmall";
 	

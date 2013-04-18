@@ -8,8 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.pocketpolitics.control.ArticleListAdapter;
-import com.example.pocketpolitics.control.ArticleRetriever;
 import com.example.pocketpolitics.model.Article;
+import com.example.pocketpolitics.net.ArticleRetriever;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;

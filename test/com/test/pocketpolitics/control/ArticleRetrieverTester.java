@@ -2,7 +2,7 @@ package com.test.pocketpolitics.control;
 
 import android.test.AndroidTestCase;
 
-import com.example.pocketpolitics.control.ArticleRetriever;
+import com.example.pocketpolitics.net.ArticleRetriever;
 
 
 public class ArticleRetrieverTester extends AndroidTestCase {

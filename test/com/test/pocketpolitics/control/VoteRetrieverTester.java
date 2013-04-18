@@ -4,7 +4,7 @@ import java.util.zip.DataFormatException;
 
 import android.test.AndroidTestCase;
 
-import com.example.pocketpolitics.control.VoteRetriever;
+import com.example.pocketpolitics.net.VoteRetriever;
 
 
 public class VoteRetrieverTester extends AndroidTestCase {
