@@ -18,11 +18,11 @@ class ArticleRetriever {
 	
 	public static final String FEED_URL = "http://www.riksdagen.se/sv/Debatter--beslut/?rss=true&type=biksmall";
 	
-	private static ArticleRetriever INSTANCE = null;
+	//private static ArticleRetriever INSTANCE = null;
 	private static SyndFeed feed = null;
 	private static List<SyndEntry> entries = null;
 	
-	public static ArticleRetriever getInstance(){
+	/*public static ArticleRetriever getInstance(){
 		if(INSTANCE==null){
 			INSTANCE = new ArticleRetriever();
 		}
@@ -30,9 +30,9 @@ class ArticleRetriever {
 		if(feed!=null)
 			return INSTANCE;
 		return null;
-	}
+	}*/
 	
-	private ArticleRetriever(){
+	protected ArticleRetriever(){
 		update();
 	}
 	

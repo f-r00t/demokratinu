@@ -12,15 +12,15 @@ class VoteRetriever {
 	public static final String QUERY_START = "http://data.riksdagen.se/voteringlista/?"; // rm=2012%2F13&bet=Sku21
 	public static final String QUERY_END = "&punkt=&valkrets=&rost=&iid=&sz=500&utformat=xml&gruppering=";
 	
-	private static VoteRetriever INSTANCE;
+	//private static VoteRetriever INSTANCE;
 	
-	public static VoteRetriever getInstance(){
+	/*public static VoteRetriever getInstance(){
 		if(INSTANCE==null){
 			INSTANCE = new VoteRetriever();
 		}
 		
 		return INSTANCE;
-	}
+	}*/
 	
 	/**
 	 * @param year
@@ -29,7 +29,7 @@ class VoteRetriever {
 	 * @param articleCode
 	 * Ex Sku21
 	 */
-	public static void getVotes(String year, String articleCode) throws DataFormatException{
+	public void getVotes(String year, String articleCode) throws DataFormatException{
 		if(year.length()!=4)
 			throw new DataFormatException("parameter year: not length 4!");
 		
@@ -54,7 +54,7 @@ class VoteRetriever {
 		}
 	}
 	
-	private VoteRetriever(){
+	protected VoteRetriever(){
 		
 	}
 
