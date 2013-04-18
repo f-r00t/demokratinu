@@ -2,6 +2,8 @@ package com.example.pocketpolitics.net;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -11,6 +13,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.util.Log;
+
+import com.google.gson.Gson;
 
 class TextRetriever {
 	
@@ -23,20 +27,31 @@ class TextRetriever {
 		
 	}
 	
+	/**
+	 * 
+	 * @param year 2013
+	 * @param articleid Sku21
+	 * @return
+	 */
 	public String getText(String year, String articleid){
+		
+		DocumentList docl = getDocList(year, articleid);
 		
 		return "";
 	}
 	
-	/**
-	 * 
-	 * @param year 2013
-	 * @param artid Sku21
-	 */
-	private void getDocList(String year, String artid){
+	private DocumentList getDocList(String year, String artid){
 		String query = QUERY_STR_1 + year + QUERY_STR_2 + artid + QUERY_STR_3;
 		InputStream source = retrieveStream(query);
+		if(source == null)
+			return null;
 		
+		Gson gson = new Gson();
+		Reader reader = new InputStreamReader(source);
+		
+		DocumentList response = gson.fromJson(reader, DocumentList.class);
+		
+		return response;
 	}
 	
 	private InputStream retrieveStream(String url){
