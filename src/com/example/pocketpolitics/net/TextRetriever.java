@@ -10,11 +10,13 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.util.JsonReader;
 import android.util.Log;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 class TextRetriever {
 	
@@ -24,8 +26,6 @@ class TextRetriever {
 	private static final String QUERY_STR_3 = "&org=&kat=&sz=10&sort=c&utformat=json&termlista=";
 	//private static final String QUERY_STR_3 = "Sku21&org=&kat=&sz=10&sort=c&utformat=xml&termlista=";
 	
-	private static final String KEY_DOK = "dokumentstatus_url_xml";
-	//private static final String KEY_DOK = "dokumentlista";
 
 	protected TextRetriever(){
 		
@@ -40,6 +40,7 @@ class TextRetriever {
 	public String getText(String year, String articleid){
 		
 		String docl = getDocList(year, articleid);
+		Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docl);
 		return docl;
 	}
 	
@@ -53,6 +54,17 @@ class TextRetriever {
 		
 		InputStreamReader reader = new InputStreamReader(source);
 		
+		JsonParser jpars = new JsonParser();
+		JsonElement result = jpars.parse(reader)
+				.getAsJsonObject().get("dokumentlista")
+				.getAsJsonObject().get("dokument")
+				.getAsJsonObject().get("dokumentstatus_url_xml");
+		
+		Log.i(this.getClass().getSimpleName(), "Leif: jsonElement toString: "+result.toString());
+		
+		return result.getAsString();
+		
+		/*
 		JsonReader jread = new JsonReader(reader);
 		try {
 			
@@ -77,11 +89,10 @@ class TextRetriever {
 				return ret;
 			}
 			
-			
 		} catch (IOException e1) {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error: io exception reading json: "+e1.getMessage());
 			e1.printStackTrace();
-		}
+		}*/
 		
 		/*
 		Gson gson = new Gson();
@@ -108,7 +119,7 @@ class TextRetriever {
 			e.printStackTrace();
 		}*/
 		
-		return null;
+		//return null;
 	}
 	
 	private InputStream retrieveStream(String url){
