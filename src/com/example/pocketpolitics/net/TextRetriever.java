@@ -11,13 +11,14 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-
 class TextRetriever {
 	
+	//http://data.riksdagen.se/dokumentlista/?rm=2013&d=&ts=&sn=&parti=&iid=&bet=Sku21&org=&kat=&sz=10&sort=c&utformat=json&termlista=
 	private static final String QUERY_STR_1 = "http://data.riksdagen.se/dokumentlista/?rm=";
 	private static final String QUERY_STR_2 = "&d=&ts=&sn=&parti=&iid=&bet=";
 	private static final String QUERY_STR_3 = "&org=&kat=&sz=10&sort=c&utformat=json&termlista=";
@@ -35,23 +36,44 @@ class TextRetriever {
 	 */
 	public String getText(String year, String articleid){
 		
-		DocumentList docl = getDocList(year, articleid);
-		
-		return "";
+		String docl = getDocList(year, articleid);
+		return docl;
 	}
 	
-	private DocumentList getDocList(String year, String artid){
+	private String getDocList(String year, String artid){
 		String query = QUERY_STR_1 + year + QUERY_STR_2 + artid + QUERY_STR_3;
 		InputStream source = retrieveStream(query);
-		if(source == null)
+		if(source == null){
+			Log.e(this.getClass().getSimpleName(), "Leif: Error, InputStream failed!");
 			return null;
+		}
 		
-		Gson gson = new Gson();
+		/*
 		Reader reader = new InputStreamReader(source);
-		
+		Gson gson = new Gson();
 		DocumentList response = gson.fromJson(reader, DocumentList.class);
+		*/
 		
-		return response;
+		String key = "dokument";
+		
+		try {
+			JSONObject json = new JSONObject(source.toString());
+			if(json.isNull(key)){
+				Log.w(this.getClass().getSimpleName(), "Leif: Key " +key+ " not found in json!");
+				return null;
+			}
+			else{
+				Log.i(this.getClass().getSimpleName(), "Leif: Key " +key+ " is found in json");
+				return json.getString(key);
+			}
+			
+		} catch (JSONException e) {
+			
+			Log.e(this.getClass().getSimpleName(), "Leif: Error: json exception: "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 	private InputStream retrieveStream(String url){
