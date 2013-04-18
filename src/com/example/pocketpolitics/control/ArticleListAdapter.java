@@ -11,19 +11,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class ArticleListAdapter extends ArrayAdapter{
+public class ArticleListAdapter extends BaseAdapter{
 
       private int resource;
       private LayoutInflater inflater;
       private Context context;
 
 	public ArticleListAdapter ( Context ctx, int resourceId, List objects) {
-
-            super( ctx, resourceId, objects );
+            super( );
             resource = resourceId;
             inflater = LayoutInflater.from( ctx );
             context=ctx;
@@ -44,4 +44,22 @@ public class ArticleListAdapter extends ArrayAdapter{
             
             return convertView;
       }
+
+	@Override
+	public int getCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Object getItem(int arg0) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
