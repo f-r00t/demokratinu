@@ -9,7 +9,6 @@ import java.util.List;
 
 import com.example.pocketpolitics.control.ArticleListAdapter;
 import com.example.pocketpolitics.model.Article;
-import com.example.pocketpolitics.net.ArticleRetriever;
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,15 +30,12 @@ public class FrontPage extends Activity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.article_view);
             ctx=this;
-            List articleList = new ArrayList();
+            
             
             //Replace this with the factory later, really ugly code incoming:
-            ArticleRetriever ar = ArticleRetriever.getInstance();
-            
+            List<Article> articleList = new ArrayList<Article>();
             Article a = new Article();
-            
-            List titleList = ar.getArticleTitles();
-            a.setTitle((String)titleList.get(0));
+            a.setTitle("Artikel A");
             articleList.add(a);
             Article b = new Article();
             b.setTitle("Artikel B");
