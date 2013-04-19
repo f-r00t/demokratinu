@@ -39,25 +39,10 @@ class TextRetriever /*extends AsyncTask<String, Integer, String>*/{
 		
 	}
 	
-	/*
-	@Override
-	protected String doInBackground(String... arg0) {
-		return getText(arg0[0], arg0[1]);
-	}
-	
-	@Override
-	protected void onPostExecute(String result){
-		this.result = result;
-	}
-	
-	@Override
-	protected void onCancelled(String result){
-		this.result = null;
-	}
 	
 	public static String getResult(){
 		return result;
-	}*/
+	}
 	
 	/**
 	 * 
