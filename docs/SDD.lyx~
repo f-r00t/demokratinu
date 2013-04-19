@@ -74,7 +74,7 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Description
-Version: 1.0
+Version: 
 \end_layout
 
 \begin_layout Description
@@ -82,30 +82,10 @@ Date
 \end_layout
 
 \begin_layout Description
-Authors
-\end_layout
-
-\begin_layout Author
-Björn Bergqvist
-\end_layout
-
-\begin_layout Author
-\noindent
-Harry Eriksson
-\end_layout
-
-\begin_layout Author
-\noindent
-Johan Hasselqvist
-\end_layout
-
-\begin_layout Author
-\noindent
-Leif Schelin 
+Author 
 \end_layout
 
 \begin_layout Standard
-\noindent
 This version overrides all previous versions.
 \end_layout
 
