@@ -60,7 +60,7 @@
 
 \begin_body
 
-\begin_layout Part*
+\begin_layout Title
 System design document for NNN
 \end_layout
 
@@ -74,7 +74,7 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Description
-Version: 1.0
+Version 1.0
 \end_layout
 
 \begin_layout Description
@@ -90,23 +90,19 @@ Björn Bergqvist
 \end_layout
 
 \begin_layout Author
-\noindent
 Harry Eriksson
 \end_layout
 
 \begin_layout Author
-\noindent
 Johan Hasselqvist
 \end_layout
 
 \begin_layout Author
-\noindent
 Leif Schelin 
 \end_layout
 
-\begin_layout Standard
-\noindent
-This version overrides all previous versions.
+\begin_layout Description
+Note This version overrides all previous versions.
 \end_layout
 
 \begin_layout Section
