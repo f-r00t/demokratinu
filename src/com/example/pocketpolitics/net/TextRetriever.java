@@ -16,12 +16,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.xml.sax.InputSource;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-class TextRetriever {
+class TextRetriever extends AsyncTask<String, Integer, String>{
 	
 	//http://data.riksdagen.se/dokumentlista/?rm=2013&d=&ts=&sn=&parti=&iid=&bet=Sku21&org=&kat=&sz=10&sort=c&utformat=json&termlista=
 	private static final String QUERY_STR_1 = "http://data.riksdagen.se/dokumentlista/?rm=";
@@ -31,9 +32,31 @@ class TextRetriever {
 	
 	private static final String TEXT_XPATH = "/dokumentstatus/dokuppgift/uppgift[namn='Beslut i korthet']/text";
 	
+	
+	private static String result;
 
 	protected TextRetriever(){
 		
+	}
+	
+
+	@Override
+	protected String doInBackground(String... arg0) {
+		return getText(arg0[0], arg0[1]);
+	}
+	
+	@Override
+	protected void onPostExecute(String result){
+		this.result = result;
+	}
+	
+	@Override
+	protected void onCancelled(String result){
+		this.result = null;
+	}
+	
+	public static String getResult(){
+		return result;
 	}
 	
 	/**
@@ -42,7 +65,7 @@ class TextRetriever {
 	 * @param articleid Sku21
 	 * @return
 	 */
-	public String getText(String year, String articleid){
+	private String getText(String year, String articleid){
 		
 		String docUrl = getDocUrl(year, articleid);
 		//Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docUrl);
@@ -178,5 +201,6 @@ class TextRetriever {
 		
 		return null;
 	}
+
 	
 }
