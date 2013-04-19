@@ -24,7 +24,7 @@ class VoteRetriever {
 	
 	/**
 	 * @param year
-	 * Ex 2012
+	 * Ex "2012" motsvarar mandatperioden "2012/2013"
 	 * 
 	 * @param articleCode
 	 * Ex Sku21

@@ -16,12 +16,13 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.xml.sax.InputSource;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-class TextRetriever {
+class TextRetriever /*extends AsyncTask<String, Integer, String>*/{
 	
 	//http://data.riksdagen.se/dokumentlista/?rm=2013&d=&ts=&sn=&parti=&iid=&bet=Sku21&org=&kat=&sz=10&sort=c&utformat=json&termlista=
 	private static final String QUERY_STR_1 = "http://data.riksdagen.se/dokumentlista/?rm=";
@@ -31,9 +32,16 @@ class TextRetriever {
 	
 	private static final String TEXT_XPATH = "/dokumentstatus/dokuppgift/uppgift[namn='Beslut i korthet']/text";
 	
+	
+	private static String result;
 
 	protected TextRetriever(){
 		
+	}
+	
+	
+	public static String getResult(){
+		return result;
 	}
 	
 	/**
@@ -61,6 +69,8 @@ class TextRetriever {
 		
 		try {
 			String result = xpath.evaluate(TEXT_XPATH, isource);
+			result = result.replaceAll("&nbsp;", " ");
+			
 			//Log.i(this.getClass().getSimpleName(), "Leif: Xpath evaluated: "+result);
 			return result;
 		} catch (XPathExpressionException e) {
@@ -176,5 +186,6 @@ class TextRetriever {
 		
 		return null;
 	}
+
 	
 }
