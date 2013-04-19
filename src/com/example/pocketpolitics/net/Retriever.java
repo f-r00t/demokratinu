@@ -29,9 +29,9 @@ public class Retriever {
 	}
 	
 	/**
-	 * Retrieves the simple text of an article.
-	 * @param year
-	 * @param articleid
+	 * Retrieves the short text of an article.
+	 * @param year ex 2013
+	 * @param articleid ex Sku21
 	 * @return
 	 */
 	public String getText(String year, String articleid){
