@@ -26,6 +26,7 @@ class TextRetriever {
 	private static final String QUERY_STR_3 = "&org=&kat=&sz=10&sort=c&utformat=json&termlista=";
 	//private static final String QUERY_STR_3 = "Sku21&org=&kat=&sz=10&sort=c&utformat=xml&termlista=";
 	
+	private static final String TEXT_XPATH = "/dokumentstatus/dokuppgift/uppgift[namn='Beslut i korthet']/text";
 
 	protected TextRetriever(){
 		
@@ -39,12 +40,17 @@ class TextRetriever {
 	 */
 	public String getText(String year, String articleid){
 		
-		String docl = getDocList(year, articleid);
+		String docl = getDocUrl(year, articleid);
 		Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docl);
 		return docl;
 	}
 	
-	private String getDocList(String year, String artid){
+	private String getTextFromXml(String xmlUrl){
+		InputStream instream = retrieveStream(xmlUrl);
+		return "";
+	}
+	
+	private String getDocUrl(String year, String artid){
 		String query = QUERY_STR_1 + year + QUERY_STR_2 + artid + QUERY_STR_3;
 		InputStream source = retrieveStream(query);
 		if(source == null){
