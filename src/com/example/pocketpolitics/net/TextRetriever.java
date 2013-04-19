@@ -4,18 +4,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.xml.sax.InputSource;
 
-import android.util.JsonReader;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 class TextRetriever {
@@ -27,6 +30,7 @@ class TextRetriever {
 	//private static final String QUERY_STR_3 = "Sku21&org=&kat=&sz=10&sort=c&utformat=xml&termlista=";
 	
 	private static final String TEXT_XPATH = "/dokumentstatus/dokuppgift/uppgift[namn='Beslut i korthet']/text";
+	
 
 	protected TextRetriever(){
 		
@@ -40,13 +44,30 @@ class TextRetriever {
 	 */
 	public String getText(String year, String articleid){
 		
-		String docl = getDocUrl(year, articleid);
-		Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docl);
-		return docl;
+		String docUrl = getDocUrl(year, articleid);
+		//Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docUrl);
+		
+		String text = getTextFromXml(docUrl); 
+		//Log.i(this.getClass().getSimpleName(), "Leif: parsed this Text form XML: "+text);
+		
+		return text;
 	}
 	
 	private String getTextFromXml(String xmlUrl){
 		InputStream instream = retrieveStream(xmlUrl);
+		
+		XPath xpath = XPathFactory.newInstance().newXPath();
+		InputSource isource = new InputSource(instream);
+		
+		try {
+			String result = xpath.evaluate(TEXT_XPATH, isource);
+			//Log.i(this.getClass().getSimpleName(), "Leif: Xpath evaluated: "+result);
+			return result;
+		} catch (XPathExpressionException e) {
+			Log.e(this.getClass().getSimpleName(),"Leif: Error: XPath failure in getTextFromXml");
+			e.printStackTrace();
+		}
+		
 		return "";
 	}
 	
@@ -66,7 +87,7 @@ class TextRetriever {
 				.getAsJsonObject().get("dokument")
 				.getAsJsonObject().get("dokumentstatus_url_xml");
 		
-		Log.i(this.getClass().getSimpleName(), "Leif: jsonElement toString: "+result.toString());
+		//Log.i(this.getClass().getSimpleName(), "Leif: jsonElement toString: "+result.toString());
 		
 		return result.getAsString();
 		
