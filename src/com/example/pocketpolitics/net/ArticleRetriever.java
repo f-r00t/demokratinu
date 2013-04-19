@@ -36,6 +36,9 @@ class ArticleRetriever {
 		update();
 	}
 	
+	/**
+	 * Updates the RSS feed
+	 */
 	public void update(){
 		try {
 			
@@ -64,6 +67,10 @@ class ArticleRetriever {
 		
 	}
 	
+	/**
+	 * 
+	 * @return list of feed titles
+	 */
 	public List<String> getArticleTitles(){
 		if(entries == null)
 			return null;
@@ -77,6 +84,10 @@ class ArticleRetriever {
 		return ls;
 	}
 	
+	/**
+	 * Primitive test
+	 * @return
+	 */
 	public boolean printFeed(){
 
 		if(feed==null){

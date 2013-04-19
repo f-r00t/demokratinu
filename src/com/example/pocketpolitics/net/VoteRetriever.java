@@ -24,7 +24,7 @@ class VoteRetriever {
 	
 	/**
 	 * @param year
-	 * Ex 2012
+	 * Ex "2012" motsvarar mandatperioden "2012/2013"
 	 * 
 	 * @param articleCode
 	 * Ex Sku21
@@ -44,6 +44,7 @@ class VoteRetriever {
 			URL xmlSource = new URL(QUERY_START+"rm="+qyear+"&bet="+"articleCode"+QUERY_END);
 			
 			XmlReader reader = new XmlReader(xmlSource);
+			
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
