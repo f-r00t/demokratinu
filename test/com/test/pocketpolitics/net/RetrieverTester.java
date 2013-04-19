@@ -10,6 +10,14 @@ import android.util.Log;
 public class RetrieverTester extends AndroidTestCase {
 	
 	public void testTx(){
-		Log.i( "TextRetriever"  ,Retriever.getInstance().getText("2013", "Sku21") );
+		
+		String result = Retriever.getInstance().getText("2013", "Sku21");
+		if(result!=null){
+			Log.i( "TextRetriever"  , "Result: "+result);
+		}
+		else{
+			Log.e(this.getClass().getSimpleName(), "Leif: Error: null result");
+			fail();
+		}
 	}
 }
