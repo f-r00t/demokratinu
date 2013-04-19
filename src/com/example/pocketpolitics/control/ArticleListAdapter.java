@@ -31,13 +31,15 @@ public class ArticleListAdapter extends BaseAdapter{
       
       @Override  
       public View getView(final int position, View convertView, ViewGroup parent) {  
-
-      	View vi=convertView;
+    	  
+    	Article article = items.get(position);  
+        View vi=convertView;
           
           if(convertView==null)
               vi = inflater.inflate(R.layout.article_view, null);
               
-          
+          TextView txtName = (TextView) convertView.findViewById(R.id.articleTitle);
+          txtName.setText(article.getTitle());
             
           return vi;  
       }
