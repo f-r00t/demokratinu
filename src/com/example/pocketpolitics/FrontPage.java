@@ -29,6 +29,7 @@ public class FrontPage extends Activity {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_front_page);
+            listViewArticles =  ( ListView ) findViewById(R.id.testListItem);
             ctx=this;
             
             
@@ -44,7 +45,6 @@ public class FrontPage extends Activity {
             c.setTitle("Artikel C");
             articleList.add(c);
 
-            listViewArticles =  ( ListView ) findViewById( R.id.article_list);
             listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
       }
 }
