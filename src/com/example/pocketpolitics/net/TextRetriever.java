@@ -61,6 +61,8 @@ class TextRetriever {
 		
 		try {
 			String result = xpath.evaluate(TEXT_XPATH, isource);
+			result = result.replaceAll("&nbsp;", " ");
+			
 			//Log.i(this.getClass().getSimpleName(), "Leif: Xpath evaluated: "+result);
 			return result;
 		} catch (XPathExpressionException e) {
