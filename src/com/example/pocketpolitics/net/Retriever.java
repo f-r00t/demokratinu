@@ -35,9 +35,9 @@ public class Retriever {
 	 * @return
 	 */
 	public String getText(String year, String articleid){
-		//return texRet.getText(year, articleid);
-		new TextRetriever().execute(year, articleid);
-		return TextRetriever.getResult();
+		return texRet.getText(year, articleid);
+		//new TextRetriever().execute(year, articleid);
+		//return TextRetriever.getResult();
 	}
 	
 	private Retriever(){

@@ -22,7 +22,7 @@ import android.util.Log;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-class TextRetriever extends AsyncTask<String, Integer, String>{
+class TextRetriever /*extends AsyncTask<String, Integer, String>*/{
 	
 	//http://data.riksdagen.se/dokumentlista/?rm=2013&d=&ts=&sn=&parti=&iid=&bet=Sku21&org=&kat=&sz=10&sort=c&utformat=json&termlista=
 	private static final String QUERY_STR_1 = "http://data.riksdagen.se/dokumentlista/?rm=";
@@ -39,7 +39,7 @@ class TextRetriever extends AsyncTask<String, Integer, String>{
 		
 	}
 	
-
+	/*
 	@Override
 	protected String doInBackground(String... arg0) {
 		return getText(arg0[0], arg0[1]);
@@ -57,7 +57,7 @@ class TextRetriever extends AsyncTask<String, Integer, String>{
 	
 	public static String getResult(){
 		return result;
-	}
+	}*/
 	
 	/**
 	 * 
@@ -65,7 +65,7 @@ class TextRetriever extends AsyncTask<String, Integer, String>{
 	 * @param articleid Sku21
 	 * @return
 	 */
-	private String getText(String year, String articleid){
+	public String getText(String year, String articleid){
 		
 		String docUrl = getDocUrl(year, articleid);
 		//Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docUrl);
