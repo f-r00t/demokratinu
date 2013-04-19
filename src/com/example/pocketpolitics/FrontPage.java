@@ -45,6 +45,6 @@ public class FrontPage extends Activity {
             articleList.add(c);
 
             listViewArticles =  ( ListView ) findViewById( R.id.article_list);
-            listViewArticles.setAdapter(new ArticleListAdapter(ctx, R.layout.article_view, articleList));
+            listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
       }
 }
