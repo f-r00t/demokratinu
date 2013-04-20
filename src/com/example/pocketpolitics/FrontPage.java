@@ -29,7 +29,7 @@ public class FrontPage extends Activity {
 
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_front_page);
-            listViewArticles =  ( ListView ) findViewById(R.id.article_list);//Probable cause of the problem.
+            listViewArticles =  ( ListView ) findViewById(R.id.article_list);
             ctx=this;
             
             
