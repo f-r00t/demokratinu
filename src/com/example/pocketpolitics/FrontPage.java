@@ -35,14 +35,23 @@ public class FrontPage extends Activity {
             
             //Replace this with the factory later, really ugly code incoming:
             ArrayList<Article> articleList = new ArrayList<Article>();
+            
             Article a = new Article();
             a.setTitle("Artikel A");
+            a.setNbrOfLikes(1000);
+            a.setNbrOfDislikes(100);
             articleList.add(a);
+            
             Article b = new Article();
             b.setTitle("Artikel B");
+            b.setNbrOfLikes(2000);
+            b.setNbrOfDislikes(200);
             articleList.add(b);
+            
             Article c = new Article();
             c.setTitle("Artikel C");
+            c.setNbrOfLikes(3000);
+            c.setNbrOfDislikes(300);
             articleList.add(c);
 
             listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
