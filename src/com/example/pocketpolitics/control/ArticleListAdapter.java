@@ -37,7 +37,7 @@ public class ArticleListAdapter extends BaseAdapter{
         View vi=convertView;
           
           if(convertView==null)
-              vi = inflater.inflate(R.layout.article_view, null);
+              vi = inflater.inflate(R.layout.article_list_item, null);
               
           TextView txtName = (TextView) vi.findViewById(R.id.articleTitle);
           txtName.setText(article.getTitle());
