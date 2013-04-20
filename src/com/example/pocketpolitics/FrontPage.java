@@ -34,7 +34,7 @@ public class FrontPage extends Activity {
             
             
             //Replace this with the factory later, really ugly code incoming:
-            List<Article> articleList = new ArrayList<Article>();
+            ArrayList<Article> articleList = new ArrayList<Article>();
             Article a = new Article();
             a.setTitle("Artikel A");
             articleList.add(a);

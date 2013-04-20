@@ -1,5 +1,6 @@
 package com.example.pocketpolitics.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.pocketpolitics.R;
@@ -20,9 +21,9 @@ import android.widget.TextView;
 public class ArticleListAdapter extends BaseAdapter{
 
 	LayoutInflater inflater;
-	List<Article> items;
+	ArrayList<Article> items;
 
-      public ArticleListAdapter(Activity context, List<Article> items) {  
+      public ArticleListAdapter(Activity context, ArrayList<Article> items) {  
 		    super();
 			
 		    this.items = items;
@@ -36,9 +37,9 @@ public class ArticleListAdapter extends BaseAdapter{
         View vi=convertView;
           
           if(convertView==null)
-              vi = inflater.inflate(R.layout.article_view, null);
+              vi = inflater.inflate(R.layout.list_view_item, null);
               
-          TextView txtName = (TextView) convertView.findViewById(R.id.txtTitle);
+          TextView txtName = (TextView) vi.findViewById(R.id.txtTitle);
           txtName.setText(article.getTitle());
             
           return vi;  
@@ -63,18 +64,19 @@ public class ArticleListAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return items.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return null;
+		return items.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
+		//return arg0;
 		return 0;
 	}
 }
