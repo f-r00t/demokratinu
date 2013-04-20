@@ -36,31 +36,25 @@ public class ArticleListAdapter extends BaseAdapter{
     	Article article = items.get(position);  
         View vi=convertView;
           
-          if(convertView==null)
+          if(convertView==null){
               vi = inflater.inflate(R.layout.article_list_item, null);
-              
-          TextView txtName = (TextView) vi.findViewById(R.id.articleTitle);
-          txtName.setText(article.getTitle());
-            
+          }
+          //Sets the title text
+          TextView articleTitle = (TextView) vi.findViewById(R.id.articleTitle);
+          articleTitle.setText(article.getTitle());
+          
+          /*
+          //Sets the number of likes
+          TextView textViewLikes = (TextView) vi.findViewById(R.id.TextViewLikes);
+          textViewLikes.setText(1337);//article.getNbrOfLikes());
+          /* 
+          //Sets the number of dislikes
+          TextView textViewDislikes = (TextView) vi.findViewById(R.id.TextViewDislikes);
+          textViewDislikes.setText(article.getNbrOfDislikes());
+          */
           return vi;  
       }
-      /*
-      @Override
-      public View getView ( int position, View convertView, ViewGroup parent ) {
 
-            //create a new view of my layout and inflate it in the row 
-            convertView = ( LinearLayout ) inflater.inflate( resource, null );
-
-            // Extract the article's object to show 
-            Article article = (Article) getItem( position );
-
-            /* Take the TextView from layout and set the articel's title
-            TextView txtName = (TextView) convertView.findViewById(R.id.articleTitle);
-            txtName.setText(article.getTitle());
-            
-            return convertView;
-      	}
-       */
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -70,13 +64,12 @@ public class ArticleListAdapter extends BaseAdapter{
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return items.get(arg0);
+		return 0;//items.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
 		// TODO Auto-generated method stub
-		//return arg0;
 		return 0;
 	}
 }

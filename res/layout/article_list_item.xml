@@ -10,24 +10,6 @@
                 android:layout_gravity="center"
                 android:orientation="vertical" >
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal" >
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-
-                    <Space
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
-                </LinearLayout>
-
                 <ImageButton
                     android:id="@+id/ImageButton15"
                     android:layout_width="20dp"
