@@ -43,15 +43,15 @@ public class ArticleListAdapter extends BaseAdapter{
           TextView articleTitle = (TextView) vi.findViewById(R.id.articleTitle);
           articleTitle.setText(article.getTitle());
           
-          /*
+          
           //Sets the number of likes
           TextView textViewLikes = (TextView) vi.findViewById(R.id.TextViewLikes);
-          textViewLikes.setText(1337);//article.getNbrOfLikes());
-          /* 
+          textViewLikes.setText(Integer.toString(article.getNbrOfLikes())); //article.getNbrOfLikes());
+
           //Sets the number of dislikes
           TextView textViewDislikes = (TextView) vi.findViewById(R.id.TextViewDislikes);
-          textViewDislikes.setText(article.getNbrOfDislikes());
-          */
+          textViewDislikes.setText(Integer.toString(article.getNbrOfDislikes()));
+          
           return vi;  
       }
 
