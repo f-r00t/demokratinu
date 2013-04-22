@@ -1,22 +1,22 @@
 package com.example.pocketpolitics.control;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import com.example.pocketpolitics.R;
 import com.example.pocketpolitics.model.Article;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+/**
+ * 
+ * @author Group 13
+ */
 
 public class ArticleListAdapter extends BaseAdapter{
 
@@ -46,7 +46,7 @@ public class ArticleListAdapter extends BaseAdapter{
           
           //Sets the number of likes
           TextView textViewLikes = (TextView) vi.findViewById(R.id.TextViewLikes);
-          textViewLikes.setText(Integer.toString(article.getNbrOfLikes())); //article.getNbrOfLikes());
+          textViewLikes.setText(Integer.toString(article.getNbrOfLikes())); 
 
           //Sets the number of dislikes
           TextView textViewDislikes = (TextView) vi.findViewById(R.id.TextViewDislikes);
@@ -57,19 +57,16 @@ public class ArticleListAdapter extends BaseAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return items.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;//items.get(arg0);
+		return items.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }
