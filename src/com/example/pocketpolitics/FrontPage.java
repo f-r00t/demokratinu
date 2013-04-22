@@ -1,28 +1,22 @@
 package com.example.pocketpolitics;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-
 import java.util.ArrayList;
-import java.util.List;
-
-import com.example.pocketpolitics.control.ArticleListAdapter;
-import com.example.pocketpolitics.model.Article;
 
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.example.pocketpolitics.control.ArticleListAdapter;
+import com.example.pocketpolitics.model.Article;
+import com.example.pocketpolitics.net.FeedTitlesAsyncTask;
 
 public class FrontPage extends Activity {
 
 
       private ListView listViewArticles;
       private Context ctx;
+      private ArrayList<Article> articleList = new ArrayList<Article>();
      
       @Override
       public void onCreate(Bundle savedInstanceState) {
@@ -34,7 +28,7 @@ public class FrontPage extends Activity {
             
             
             //Replace this with the factory later, really ugly code incoming:
-            ArrayList<Article> articleList = new ArrayList<Article>();
+            
             
             Article a = new Article();
             a.setTitle("Artikel A");
@@ -53,7 +47,42 @@ public class FrontPage extends Activity {
             c.setNbrOfLikes(3000);
             c.setNbrOfDislikes(300);
             articleList.add(c);
+            
+            setAdapter();
+            
+      }
+      
+      private void getMoreArticles(){
+    	  
+      }
+      
+      private void setAdapter(){
+    	  listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
+      }
+      
+      private class ArticleFromFeed extends FeedTitlesAsyncTask{
 
-            listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
+    	  @Override
+    	  protected void onPreExecute() {
+    		  // TODO Auto-generated method stub
+
+    	  }
+
+    	  @Override
+    	  protected void onPostExecute(Article result) {
+    		  
+              articleList.add(result);
+              
+              // hmmm...
+              setAdapter();
+    	  }
+
+    	  @Override
+    	  protected void onCancelled(Article result) {
+    		  // TODO Auto-generated method stub
+    		  // Display some error message?
+
+    	  }
+
       }
 }
