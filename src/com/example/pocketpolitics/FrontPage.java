@@ -1,9 +1,12 @@
 package com.example.pocketpolitics;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -50,10 +53,16 @@ public class FrontPage extends Activity {
             
             setAdapter();
             
+            getMoreArticles();
       }
       
       private void getMoreArticles(){
-    	  
+    	  ConnectivityManager conMgr = (ConnectivityManager)
+    			  getSystemService(Context.CONNECTIVITY_SERVICE);
+    	  NetworkInfo netwInfo = conMgr.getActiveNetworkInfo();
+    	  if(netwInfo != null && netwInfo.isConnected()){
+    		  new ArticleFromFeed().execute("");
+    	  }
       }
       
       private void setAdapter(){
@@ -65,23 +74,24 @@ public class FrontPage extends Activity {
     	  @Override
     	  protected void onPreExecute() {
     		  // TODO Auto-generated method stub
-
+    		  // starta snurrande hjul till exempel
     	  }
 
     	  @Override
-    	  protected void onPostExecute(Article result) {
-    		  
-              articleList.add(result);
-              
-              // hmmm...
-              setAdapter();
+    	  protected void onPostExecute(List<Article> results) {
+    		  addResults(results);
     	  }
 
     	  @Override
-    	  protected void onCancelled(Article result) {
+    	  protected void onCancelled(List<Article> results) {
     		  // TODO Auto-generated method stub
     		  // Display some error message?
-
+    		  addResults(results);
+    	  }
+    	  
+    	  private void addResults(List<Article> arts){
+    		  articleList.addAll(arts);
+    		  setAdapter();
     	  }
 
       }
