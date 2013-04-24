@@ -35,12 +35,13 @@ public final class R {
         public static final int ImageButton15=0x7f080008;
         public static final int TextViewDislikes=0x7f08000b;
         public static final int TextViewLikes=0x7f080009;
-        public static final int action_forgot_password=0x7f080011;
-        public static final int action_settings=0x7f080010;
+        public static final int action_forgot_password=0x7f080012;
+        public static final int action_settings=0x7f080011;
         public static final int articleTitle=0x7f08000d;
         public static final int article_list=0x7f080001;
-        public static final int detailViewBlockText=0x7f08000f;
+        public static final int detailViewBlockText=0x7f080010;
         public static final int detailViewTitleText=0x7f08000e;
+        public static final int detailViewVotesList=0x7f08000f;
         public static final int email=0x7f080003;
         public static final int linearLayout1=0x7f080000;
         public static final int login=0x7f080005;
