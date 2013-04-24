@@ -9,7 +9,6 @@
     <string name="title_item">Votering Barnen i afrika får fortsatt svält</string>
     <string name="title_downvotes">271</string>
     <string name="descPartyIcon">Vänsterpartiet</string>
-    
-    
+    <string name="title_activity_main">MainActivity</string>
 
 </resources>

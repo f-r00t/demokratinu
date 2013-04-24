@@ -1,7 +1,5 @@
 package com.test.pocketpolitics.control;
 
-import java.util.zip.DataFormatException;
-
 import android.test.AndroidTestCase;
 
 //import com.example.pocketpolitics.net.VoteRetriever;
