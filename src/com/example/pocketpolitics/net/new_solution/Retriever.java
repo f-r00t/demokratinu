@@ -1,13 +1,12 @@
 package com.example.pocketpolitics.net.new_solution;
 
-import java.util.List;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.util.Log;
 
 public class Retriever {
 	private static Retriever INSTANCE;
-	
-	/*private ArticleRetriever artRet;
-	private VoteRetriever voteRet;
-	private TextRetriever texRet;*/
 	
 	public static Retriever getInstance(){
 		if(INSTANCE==null){
@@ -18,6 +17,19 @@ public class Retriever {
 	}
 	
 	private Retriever(){
+	}
+	
+	public static boolean isConnected(Context ctx){
+		if(ctx == null){
+			Log.e(Retriever.class.getSimpleName(),"Leif: in Connected: Context null error");
+			return false;
+		}
+		
+		ConnectivityManager conMgr = (ConnectivityManager)
+				ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netwInfo = conMgr.getActiveNetworkInfo();
+		
+		return netwInfo != null && netwInfo.isConnected();
 	}
 	
 	/**
