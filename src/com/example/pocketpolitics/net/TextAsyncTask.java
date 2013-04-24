@@ -16,11 +16,7 @@ import android.os.AsyncTask;
  * @author Leif
  *
  */
-class TextAsyncTask extends AsyncTask<String, Integer, String> {
-	
-	TextAsyncTask(){
-		super();
-	}
+public abstract class TextAsyncTask extends AsyncTask<String, Integer, String> {
 	
 	@Override
 	protected String doInBackground(String... arg0) {
@@ -28,25 +24,14 @@ class TextAsyncTask extends AsyncTask<String, Integer, String> {
 		return Retriever.getInstance().getText(arg0[0], arg0[1]);
 	}
 
-	@Override
-	protected void onPreExecute(){
-		
-	}
 	
 	@Override
-	protected void onProgressUpdate(Integer... progress){
-		
-	}
-	
+	protected abstract void onPreExecute();
+
 	@Override
-	protected void onPostExecute(String result){
-		
-	}
-	
+	protected abstract void onPostExecute(String result);
+
 	@Override
-	protected void onCancelled(String result){
-		
-	}
-	
+	protected abstract void onCancelled(String result);
 	
 }
