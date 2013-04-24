@@ -10,34 +10,35 @@ import android.view.Menu;
 public class MainActivity extends Activity {
 
 	SharedPreferences prefs;
+	Intent intent;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		/*prefs = this.getSharedPreferences("com.example.pocketpolitics", 0);
+		prefs = this.getSharedPreferences("com.example.pocketpolitics", 0);
 		
 		//Editor editor = prefs.edit();
-		//editor.putBoolean("com.example.pocketpolitics.stayloggedin", true);
+		//editor.putBoolean("com.example.pocketpolitics.stayloggedin", false);
 		//editor.apply();
 		
 		if (prefs.getBoolean("com.example.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
-			
+			/*
 			String uname = prefs.getString("com.example.politics.username", "");
 			String pass = prefs.getString("com.example.pocketpolitics.password", "");
 			
-			if (SomeNetClass.getInstance.authenticate(this, uname, pass)) {*/
-				Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+			if (SomeNetClass.getInstance.authenticate(this, uname, pass)) {
+			*/
+				intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			/*}
 			else {
 				Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-			}
+			}*/
 		}
 		else {
-			Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+			intent = new Intent(getApplicationContext(), LoginActivity.class);
 		}
-		*/
 		startActivity(intent);
 		finish();
 	}
