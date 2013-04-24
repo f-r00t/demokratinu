@@ -21,7 +21,6 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 
 
 	private ListView listViewArticles;
-	private Context ctx;
 	private ArrayList<Article> articleList = new ArrayList<Article>();
 
 	@Override
@@ -30,7 +29,6 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_front_page);
 		listViewArticles =  ( ListView ) findViewById(R.id.article_list);
-		ctx=this;
 
 
 		//Replace this with the factory later, really ugly code incoming:
@@ -63,14 +61,15 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 	public void addArticles(List<Article> arts) {
 		articleList.addAll(arts);
 		setAdapter();
-
 	}
 
 	private void getMoreArticles(){
-		ConnectivityManager conMgr = (ConnectivityManager)
+		/*ConnectivityManager conMgr = (ConnectivityManager)
 				getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netwInfo = conMgr.getActiveNetworkInfo();
-		if(netwInfo != null && netwInfo.isConnected()){
+		
+		if(netwInfo != null && netwInfo.isConnected()){*/
+		if(Retriever.isConnected(this)){
 			//new ArticleFromFeed().execute("");
 			Retriever.getInstance().retrieveRssArticleTitles(this);
 		}
