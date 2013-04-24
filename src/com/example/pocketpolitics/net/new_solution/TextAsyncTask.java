@@ -47,40 +47,39 @@ class TextAsyncTask extends AsyncTask<String, Integer, String> {
 
 	private static final String TEXT_XPATH = "/dokumentstatus/dokuppgift/uppgift[namn='Beslut i korthet']/text";
 
+	private TextViewInterface view;
+	private String year;
+	private String dokid;
 
-	private static String result;
-
+	TextAsyncTask(TextViewInterface tview, String year, String dokid){
+		this.view = tview;
+		this.year = year;
+		this.dokid = dokid;
+	}
 
 	@Override
 	protected String doInBackground(String... arg0) {
-		// eller anropa TextRetriever direkt?
-		//return Retriever.getInstance().getText(arg0[0], arg0[1]);
-		return "";
+		return getText();
 	}
 
 	@Override
 	protected void onPreExecute(){
-		
+
 	}
-	
+
 	@Override
 	protected void onProgressUpdate(Integer... progress){
-		
+
 	}
-	
+
 	@Override
 	protected void onPostExecute(String result){
-		
+
 	}
-	
+
 	@Override
 	protected void onCancelled(String result){
-		
-	}
 
-
-	public static String getResult(){
-		return result;
 	}
 
 	/**
@@ -89,15 +88,19 @@ class TextAsyncTask extends AsyncTask<String, Integer, String> {
 	 * @param articleid Sku21
 	 * @return
 	 */
-	public String getText(String year, String articleid){
+	private String getText(/*String year, String articleid*/){
 
-		String docUrl = getDocUrl(year, articleid);
+		String docUrl = getDocUrl(year, dokid);
 		//Log.i(this.getClass().getSimpleName(), "Leif: parsed this URL from json: "+docUrl);
 
-		String text = getTextFromXml(docUrl); 
-		//Log.i(this.getClass().getSimpleName(), "Leif: parsed this Text form XML: "+text);
+		if(docUrl!=null){
+			String text = getTextFromXml(docUrl);
+			//Log.i(this.getClass().getSimpleName(), "Leif: parsed this Text form XML: "+text);
 
-		return text;
+			return text;
+		}
+		
+		return null;
 	}
 
 	@SuppressLint("NewApi")
@@ -118,7 +121,7 @@ class TextAsyncTask extends AsyncTask<String, Integer, String> {
 			e.printStackTrace();
 		}
 
-		return "";
+		return null;
 	}
 
 	private String getDocUrl(String year, String artid){

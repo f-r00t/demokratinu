@@ -72,7 +72,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		NetworkInfo netwInfo = conMgr.getActiveNetworkInfo();
 		if(netwInfo != null && netwInfo.isConnected()){
 			//new ArticleFromFeed().execute("");
-			Retriever.getInstance().getRssArticleTitles(this);
+			Retriever.getInstance().retrieveRssArticleTitles(this);
 		}
 	}
 
