@@ -21,7 +21,8 @@ public abstract class TextAsyncTask extends AsyncTask<String, Integer, String> {
 	@Override
 	protected String doInBackground(String... arg0) {
 		// eller anropa TextRetriever direkt?
-		return Retriever.getInstance().getText(arg0[0], arg0[1]);
+		//return Retriever.getInstance().getText(arg0[0], arg0[1]);
+		return "";
 	}
 	
 	@Override

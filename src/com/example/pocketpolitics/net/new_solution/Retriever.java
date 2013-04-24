@@ -5,9 +5,9 @@ import java.util.List;
 public class Retriever {
 	private static Retriever INSTANCE;
 	
-	private ArticleRetriever artRet;
+	/*private ArticleRetriever artRet;
 	private VoteRetriever voteRet;
-	private TextRetriever texRet;
+	private TextRetriever texRet;*/
 	
 	public static Retriever getInstance(){
 		if(INSTANCE==null){
@@ -22,13 +22,14 @@ public class Retriever {
 	 * @param update True if want to update the RSS (access the server anew)
 	 * @return A list of titles for articles
 	 */
+	/*
 	public List<String> getImportantArticleTitles(boolean update){
 		if(update)
 			artRet.update();
 		return artRet.getArticleTitles();
-	}
+	}*/
 	public void getRssArticleTitles(ArtActivityInterface act){
-		
+		new FeedTitlesAsyncTask(act).execute("");
 	}
 	
 	/**
@@ -37,16 +38,17 @@ public class Retriever {
 	 * @param articleid ex Sku21
 	 * @return
 	 */
+	/*
 	public String getText(String year, String articleid){
 		return texRet.getText(year, articleid);
 		//new TextRetriever().execute(year, articleid);
 		//return TextRetriever.getResult();
-	}
+	}*/
 	
 	private Retriever(){
-		artRet = new ArticleRetriever();
-		voteRet = new VoteRetriever();
-		texRet = new TextRetriever();
+		//artRet = new ArticleRetriever();
+		//voteRet = new VoteRetriever();
+		//texRet = new TextRetriever();
 	}
 
 }
