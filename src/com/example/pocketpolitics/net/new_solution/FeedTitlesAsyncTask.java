@@ -37,7 +37,11 @@ class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 		Iterator<String> iter = titles.listIterator();
 		while(iter.hasNext() && !this.isCancelled()){
 			Article a = new Article();
-			a.setTitle(iter.next());
+			String total= iter.next();
+			
+			String[] title = total.split("\\(");
+			a.setTitle(title[0]);
+			a.setDokid((title[1].split("\\)")[0]));
 			arts.add(a);
 		}
 
@@ -104,5 +108,6 @@ class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 
 		return ls;
 	}
+	
 
 }
