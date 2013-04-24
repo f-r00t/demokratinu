@@ -11,6 +11,7 @@
 
         <LinearLayout
             style="@style/LoginFormContainer"
+            android:gravity="right"
             android:orientation="vertical" >
 
             <EditText
@@ -33,6 +34,12 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true" />
+
+            <CheckBox
+                android:id="@+id/stay_logged_in_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/stay_logged_in_checkbox" />
 
             <Button
                 android:id="@+id/sign_in_button"
