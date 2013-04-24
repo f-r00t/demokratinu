@@ -10,5 +10,6 @@
     <string name="title_downvotes">271</string>
     <string name="descPartyIcon">Vänsterpartiet</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="stay_logged_in_checkbox">Förbli inloggad</string>
 
 </resources>
