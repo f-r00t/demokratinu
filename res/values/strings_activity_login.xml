@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="title_activity_login">Logga in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Användarnamn</string>
+    <string name="prompt_password">Lösenord</string>
+    <string name="action_sign_in_register"><b>Logga in</b></string>
+    <string name="action_sign_in_short">Logga in</string>
+    <string name="action_forgot_password">Glömt lösenord</string>
+    <string name="error_invalid_email">Inkorrekt email</string>
+    <string name="error_invalid_password">För kort lösenord</string>
+    <string name="error_incorrect_password">Inkorrekt lösenord</string>
+    <string name="error_field_required">Fältet måste fyllas i</string>
+
+</resources>

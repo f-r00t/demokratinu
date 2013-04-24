@@ -23,19 +23,15 @@ public abstract class TextAsyncTask extends AsyncTask<String, Integer, String> {
 		// eller anropa TextRetriever direkt?
 		return Retriever.getInstance().getText(arg0[0], arg0[1]);
 	}
-	
-	@Override
-	protected void onProgressUpdate(Integer... progress){
-	}
+
 	
 	@Override
 	protected abstract void onPreExecute();
-	
+
 	@Override
 	protected abstract void onPostExecute(String result);
-	
+
 	@Override
 	protected abstract void onCancelled(String result);
-	
 	
 }
