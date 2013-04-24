@@ -117,8 +117,6 @@ public class LoginActivity extends Activity {
 			//authenticate();
 			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			startActivity(intent);
-			finish();
-			
 		}
 	}
 }
