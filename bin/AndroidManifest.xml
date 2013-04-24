@@ -14,11 +14,11 @@
     <application
         
         android:allowBackup="true"
-        android:icon="@drawable/ic_pocketpolitics"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.pocketpolitics.FrontPageActivity"
+            android:name="com.example.pocketpolitics.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,11 +28,19 @@
         </activity>
         
         <uses-library android:name="android.test.runner"/>
+        
+        <activity
+            android:name="com.example.pocketpolitics.LoginActivity"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.example.pocketpolitics.FrontPageActivity"
+            android:label="@string/app_name" />
     </application>
 	
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:targetPackage="com.example.pocketpolitics"
         android:label="Tests for PocketPolitics" />
+    
     
 </manifest>
