@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 
 import com.example.pocketpolitics.model.Article;
 
-public abstract class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
+class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 	@Override
 	protected List<Article> doInBackground(String... strings){
 		
@@ -26,12 +26,18 @@ public abstract class FeedTitlesAsyncTask extends AsyncTask<String, Integer, Lis
 	}
 	
 	@Override
-	protected abstract void onPreExecute();
+	protected void onPreExecute(){
+		
+	}
 	
 	@Override
-	protected abstract void onPostExecute(List<Article> result);
+	protected void onPostExecute(List<Article> result){
+		
+	}
 	
 	@Override
-	protected abstract void onCancelled(List<Article> result);
+	protected void onCancelled(List<Article> result){
+		
+	}
 	
 }

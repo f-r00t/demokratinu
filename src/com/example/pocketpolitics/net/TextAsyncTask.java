@@ -16,26 +16,37 @@ import android.os.AsyncTask;
  * @author Leif
  *
  */
-public abstract class TextAsyncTask extends AsyncTask<String, Integer, String> {
+class TextAsyncTask extends AsyncTask<String, Integer, String> {
+	
+	TextAsyncTask(){
+		super();
+	}
 	
 	@Override
 	protected String doInBackground(String... arg0) {
 		// eller anropa TextRetriever direkt?
 		return Retriever.getInstance().getText(arg0[0], arg0[1]);
 	}
-	
+
 	@Override
-	protected void onProgressUpdate(Integer... progress){
+	protected void onPreExecute(){
+		
 	}
 	
 	@Override
-	protected abstract void onPreExecute();
+	protected void onProgressUpdate(Integer... progress){
+		
+	}
 	
 	@Override
-	protected abstract void onPostExecute(String result);
+	protected void onPostExecute(String result){
+		
+	}
 	
 	@Override
-	protected abstract void onCancelled(String result);
+	protected void onCancelled(String result){
+		
+	}
 	
 	
 }

@@ -27,6 +27,9 @@ public class Retriever {
 			artRet.update();
 		return artRet.getArticleTitles();
 	}
+	public void getRssArticleTitles(ArtActivityInterface act){
+		
+	}
 	
 	/**
 	 * Retrieves the short text of an article.
