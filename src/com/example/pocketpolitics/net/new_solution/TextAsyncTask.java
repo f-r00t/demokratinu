@@ -74,7 +74,7 @@ class TextAsyncTask extends AsyncTask<String, Integer, String> {
 
 	@Override
 	protected void onPostExecute(String result){
-
+		view.setText(result);
 	}
 
 	@Override
