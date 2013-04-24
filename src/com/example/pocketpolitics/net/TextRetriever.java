@@ -16,7 +16,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.xml.sax.InputSource;
 
-import android.os.AsyncTask;
+import android.annotation.SuppressLint;
 import android.util.Log;
 
 import com.google.gson.JsonElement;
@@ -61,6 +61,7 @@ class TextRetriever /*extends AsyncTask<String, Integer, String>*/{
 		return text;
 	}
 	
+	@SuppressLint("NewApi")
 	private String getTextFromXml(String xmlUrl){
 		InputStream instream = retrieveStream(xmlUrl);
 		

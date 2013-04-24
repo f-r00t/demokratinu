@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/detailViewTitleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sjöfartsfrågor - Trafikutskottets betänkande"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <ListView
+        android:id="@+id/detailViewVotesList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <TextView
+        android:id="@+id/detailViewBlockText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="I detta betänkande behandlar trafikutskottet frågor om sjöfart. Dels behandlas proposition 2012/13:110 om överlåtelse av tillsynsuppgifter inom sjöfarten, dels behandlas 44 yrkanden från den allmänna motionstiden 2012." />
+
+</LinearLayout>
