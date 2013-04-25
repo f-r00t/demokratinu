@@ -23,6 +23,8 @@ public class LocalConnect{
 		Connection con = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
+			
+			System.out.println("hej");
 			String[] sens = readFromFile(path);
 			//con = DriverManager.getConnection(URL, read("Username: "), read("Password: "));
 			con = DriverManager.getConnection(URL, sens[0], sens[1]);
