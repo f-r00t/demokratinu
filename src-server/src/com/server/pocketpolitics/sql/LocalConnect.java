@@ -14,7 +14,8 @@ public class LocalConnect{
 
 	private static final String URL = "jdbc:mysql://localhost/pocketpolitics_test";
 	
-	public static ResultSet run(String query) throws ClassNotFoundException, SQLException {
+	public static void runTest() throws ClassNotFoundException, SQLException {
+		String query = "SELECT * FROM votes";
 		Connection con = null;
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
@@ -23,9 +24,13 @@ public class LocalConnect{
 			Statement statem = con.createStatement();
 			
 			
-			ResultSet res = statem.executeQuery(query);
+			ResultSet r = statem.executeQuery(query);
 			
-			return res;
+			if(r!=null){
+				while(r.next()){
+					System.out.println(r.getString("voter")+" "+r.getString("issue")+" "+r.getString("opinion"));
+				}
+			}
 		} 
 		finally {
 			System.out.println("in LocalConnect: Warning: entered finally");
