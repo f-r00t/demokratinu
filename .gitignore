@@ -1,3 +1,6 @@
+# Sensitive files ie password
+server.src/sensitive/*
+
 # Binary files
 
 demokratinu.src/bin/*
