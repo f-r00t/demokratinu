@@ -1,5 +1,5 @@
 package com.server.pocketpolitics.sql;
 
-public class LocalConnect {
+public class LocalConnect implements Connectable {
 
 }
