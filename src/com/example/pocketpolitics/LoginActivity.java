@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,11 +31,35 @@ public class LoginActivity extends Activity {
 	private EditText usernameView;
 	private EditText passwordView;
 
+	// 
+	private SharedPreferences prefs;
+	private Intent intent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_login);
+		
+		prefs = this.getSharedPreferences("com.example.pocketpolitics", 0);
+		
+		//Editor editor = prefs.edit();
+		//editor.putBoolean("com.example.pocketpolitics.stayloggedin", false);
+		//editor.apply();
+/*
+		if (prefs.getBoolean("com.example.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
+			
+			String uname = prefs.getString("com.example.politics.username", "");
+			String pass = prefs.getString("com.example.pocketpolitics.password", "");
+			
+			if (SomeNetClass.getInstance.authenticate(this, uname, pass)) {
+			
+				intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+			}
+		}
+		startActivity(intent);
+		finish();
+*/
 
 		// Set up the login form.
 		usernameView = (EditText) findViewById(R.id.email);

@@ -24,38 +24,39 @@ public final class R {
         public static final int downarrow=0x7f020000;
         public static final int greenarrow=0x7f020001;
         public static final int ic_launcher=0x7f020002;
-        public static final int itemview=0x7f020003;
-        public static final int neutral=0x7f020004;
-        public static final int uparrow=0x7f020005;
-        public static final int vpk=0x7f020006;
+        public static final int ic_pocketpolitics=0x7f020003;
+        public static final int itemview=0x7f020004;
+        public static final int neutral=0x7f020005;
+        public static final int uparrow=0x7f020006;
+        public static final int vpk=0x7f020007;
     }
     public static final class id {
-        public static final int ImageButton13=0x7f08000c;
-        public static final int ImageButton14=0x7f08000a;
-        public static final int ImageButton15=0x7f080008;
-        public static final int TextViewDislikes=0x7f08000b;
-        public static final int TextViewLikes=0x7f080009;
+        public static final int ImageButton13=0x7f08000f;
+        public static final int ImageButton14=0x7f08000d;
+        public static final int ImageButton15=0x7f08000b;
+        public static final int TextViewDislikes=0x7f08000e;
+        public static final int TextViewLikes=0x7f08000c;
         public static final int action_forgot_password=0x7f080012;
         public static final int action_settings=0x7f080011;
-        public static final int articleTitle=0x7f08000d;
-        public static final int article_list=0x7f080001;
-        public static final int detailViewBlockText=0x7f080010;
-        public static final int detailViewTitleText=0x7f08000e;
-        public static final int detailViewVotesList=0x7f08000f;
-        public static final int email=0x7f080003;
-        public static final int linearLayout1=0x7f080000;
-        public static final int login=0x7f080005;
-        public static final int login_form=0x7f080002;
-        public static final int password=0x7f080004;
-        public static final int sign_in_button=0x7f080007;
-        public static final int stay_logged_in_checkbox=0x7f080006;
+        public static final int articleTitle=0x7f080010;
+        public static final int article_list=0x7f080004;
+        public static final int detailViewBlockText=0x7f080002;
+        public static final int detailViewTitleText=0x7f080000;
+        public static final int detailViewVotesList=0x7f080001;
+        public static final int email=0x7f080006;
+        public static final int linearLayout1=0x7f080003;
+        public static final int login=0x7f080008;
+        public static final int login_form=0x7f080005;
+        public static final int password=0x7f080007;
+        public static final int sign_in_button=0x7f08000a;
+        public static final int stay_logged_in_checkbox=0x7f080009;
     }
     public static final class layout {
-        public static final int activity_front_page=0x7f030000;
-        public static final int activity_login=0x7f030001;
-        public static final int activity_main=0x7f030002;
-        public static final int article_list_item=0x7f030003;
-        public static final int detail_view=0x7f030004;
+        public static final int activity_details=0x7f030000;
+        public static final int activity_front_page=0x7f030001;
+        public static final int activity_login=0x7f030002;
+        public static final int activity_main=0x7f030003;
+        public static final int article_list_item=0x7f030004;
     }
     public static final class menu {
         public static final int front_page=0x7f070000;
