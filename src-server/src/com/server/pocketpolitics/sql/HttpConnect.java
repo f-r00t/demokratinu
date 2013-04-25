@@ -1,9 +1,14 @@
 package com.server.pocketpolitics.sql;
 
-public class HttpConnect implements Connectable {
+import com.mysql.jdbc.Connection;
 
-	private HttpConnect(){
-		
+public class HttpConnect extends Connect {
+
+	
+	@Override
+	public Connection getConnection() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -1,5 +1,8 @@
 package com.server.pocketpolitics.sql;
 
-interface Connectable {
+import com.mysql.jdbc.Connection;
 
+public interface Connectable {
+
+	public Connection getConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException ;
 }
