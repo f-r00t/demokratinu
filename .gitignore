@@ -1,10 +1,10 @@
 # Sensitive files ie password
-server.src/sensitive/*
+src-server/sensitive/*
 
 # Binary files
 
 demokratinu.src/bin/*
-server.src/bin/*
+src-server/bin/*
 
 # Java-classes
 
