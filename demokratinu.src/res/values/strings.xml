@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PocketPolitics</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="descUpArrow">Click here if you agree</string>
+    <string name="title_upvotes">2478</string>
+    <string name="title_item">Votering Barnen i afrika får fortsatt svält</string>
+    <string name="title_downvotes">271</string>
+    <string name="descPartyIcon">Vänsterpartiet</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="stay_logged_in_checkbox">Förbli inloggad</string>
+
+</resources>
