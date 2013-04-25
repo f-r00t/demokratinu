@@ -28,6 +28,7 @@ public class LocalConnect{
 			return res;
 		} 
 		finally {
+			System.out.println("in LocalConnect: Warning: entered finally");
 			if (con!=null && !con.isClosed()){
 				System.out.println("Closing connection to SQL");
 				con.close();
