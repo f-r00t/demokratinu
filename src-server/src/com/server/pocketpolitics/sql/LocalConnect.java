@@ -16,7 +16,7 @@ public class LocalConnect{
 	public static ResultSet run(String query) throws ClassNotFoundException, SQLException {
 		Connection con = null;
 		try{
-			Class.forName("com.mysql.jdb.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			con = DriverManager.getConnection(URL, uname, pwd);
 			
 			Statement statem = con.createStatement();
