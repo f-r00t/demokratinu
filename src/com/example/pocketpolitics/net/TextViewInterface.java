@@ -1,4 +1,4 @@
-package com.example.pocketpolitics.net.new_solution;
+package com.example.pocketpolitics.net;
 
 public interface TextViewInterface {
 

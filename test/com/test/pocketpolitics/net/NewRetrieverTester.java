@@ -1,4 +1,4 @@
-package com.test.pocketpolitics.net.new_solution;
+package com.test.pocketpolitics.net;
 
 import java.util.List;
 import java.util.ListIterator;
@@ -7,9 +7,9 @@ import android.test.AndroidTestCase;
 import android.util.Log;
 
 import com.example.pocketpolitics.model.Article;
-import com.example.pocketpolitics.net.new_solution.ArtActivityInterface;
-import com.example.pocketpolitics.net.new_solution.Retriever;
-import com.example.pocketpolitics.net.new_solution.TextViewInterface;
+import com.example.pocketpolitics.net.ArtActivityInterface;
+import com.example.pocketpolitics.net.Retriever;
+import com.example.pocketpolitics.net.TextViewInterface;
 
 public class NewRetrieverTester extends AndroidTestCase implements TextViewInterface, ArtActivityInterface {
 

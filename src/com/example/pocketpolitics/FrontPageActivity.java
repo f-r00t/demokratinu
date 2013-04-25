@@ -12,10 +12,9 @@ import android.widget.ListView;
 
 import com.example.pocketpolitics.control.ArticleListAdapter;
 import com.example.pocketpolitics.model.Article;
-import com.example.pocketpolitics.net.FeedTitlesAsyncTask;
 
-import com.example.pocketpolitics.net.new_solution.ArtActivityInterface;
-import com.example.pocketpolitics.net.new_solution.Retriever;
+import com.example.pocketpolitics.net.ArtActivityInterface;
+import com.example.pocketpolitics.net.Retriever;
 
 public class FrontPageActivity extends Activity implements ArtActivityInterface {
 
@@ -77,33 +76,6 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 
 	private void setAdapter(){
 		listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
-	}
-
-	private class ArticleFromFeed extends FeedTitlesAsyncTask{
-
-		@Override
-		protected void onPreExecute() {
-			// TODO Auto-generated method stub
-			// starta snurrande hjul till exempel
-		}
-
-		@Override
-		protected void onPostExecute(List<Article> results) {
-			addResults(results);
-		}
-
-		@Override
-		protected void onCancelled(List<Article> results) {
-			// TODO Auto-generated method stub
-			// Display some error message?
-			addResults(results);
-		}
-
-		private void addResults(List<Article> arts){
-			articleList.addAll(arts);
-			setAdapter();
-		}
-
 	}
 
 }
