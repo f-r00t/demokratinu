@@ -15,9 +15,10 @@ public class ServerMain {
 		
 		try {
 			ResultSet r =  LocalConnect.run(query);
-			
-			while(r.next()){
-				System.out.println(r.getString("voter")+" "+r.getString("issue")+" "+r.getString("opinion"));
+			if(r!=null){
+				while(r.next()){
+					System.out.println(r.getString("voter")+" "+r.getString("issue")+" "+r.getString("opinion"));
+				}
 			}
 			
 		} catch (ClassNotFoundException e) {
