@@ -12,11 +12,12 @@ if (isset($_GET['user']) && isset($_GET['pass']) {
     $stmt->bindParam(":username", $username);
     $stmt->execute();
     $dbcollected = $stmt->fetch();
+    
     if ($dbcollected['password'] != crypt($pass, $dbcollected['password'])) {
-        
+        echo "0"; // Wrong username/pass
     }
     else {
-	
+	    echo "1"; // Success
     }
 }
 ?>
