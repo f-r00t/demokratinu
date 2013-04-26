@@ -8,11 +8,12 @@ public class Article extends LikeableItem {
 	private String title;
 	private String dokid;
 	
-	
-
 	public Article(String content, Date date, boolean isHidden, int opinion,
-			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, String title, String dokid) {
+			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, 
+			String title, String dokid) {
+		
 		super(content, date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
+		
 		this.title = title;
 		this.dokid = dokid;
 	}
