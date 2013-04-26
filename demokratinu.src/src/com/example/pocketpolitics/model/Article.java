@@ -60,6 +60,104 @@ public class Article extends LikeableItem {
 	public Article() {
 		super();
 	}
+	
+	public int getTraffnummer() {
+		return traffnummer;
+	}
+
+	public void setTraffnummer(int traffnummer) {
+		this.traffnummer = traffnummer;
+	}
+
+	public String getDatum() {
+		return datum;
+	}
+
+	public void setDatum(String datum) {
+		this.datum = datum;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public String getRm() {
+		return rm;
+	}
+
+	public void setRm(String rm) {
+		this.rm = rm;
+	}
+
+	public String getRelaterat_id() {
+		return relaterat_id;
+	}
+
+	public void setRelaterat_id(String relaterat_id) {
+		this.relaterat_id = relaterat_id;
+	}
+
+	public String getBeteckning() {
+		return beteckning;
+	}
+
+	public void setBeteckning(String beteckning) {
+		this.beteckning = beteckning;
+	}
+
+	public double getScore() {
+		return score;
+	}
+
+	public void setScore(double score) {
+		this.score = score;
+	}
+
+	public String getNotisrubrik() {
+		return notisrubrik;
+	}
+
+	public void setNotisrubrik(String notisrubrik) {
+		this.notisrubrik = notisrubrik;
+	}
+
+	public String getNotis() {
+		return notis;
+	}
+
+	public void setNotis(String notis) {
+		this.notis = notis;
+	}
+
+	public String getBeslutsdag() {
+		return beslutsdag;
+	}
+
+	public void setBeslutsdag(String beslutsdag) {
+		this.beslutsdag = beslutsdag;
+	}
+
+	public int getBeslutad() {
+		return beslutad;
+	}
+
+	public void setBeslutad(int beslutad) {
+		this.beslutad = beslutad;
+	}
+
+	
 
 
 	/**
