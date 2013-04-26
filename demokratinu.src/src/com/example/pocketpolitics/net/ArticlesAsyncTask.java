@@ -22,7 +22,7 @@ import com.example.pocketpolitics.model.Article;
 
 public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResult>{
 	//private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
-	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s"; //"&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
+	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&utformat=&a=s"; //"&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	private static final String xmlns = null;
 	
 
@@ -60,7 +60,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 
 	private QueryResult createArticles(QueryParam qpar){
 
-		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE;
+		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.sort;
 		InputStream instr = retrieveStream(url);
 
 		try {
@@ -144,9 +144,11 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			}
 			String name = parser.getName();
 			if (name.equals("traff")){
+				Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <traff>");
 				traffarList.add(readTraff(parser));
 			}
 			else if(name.equals("trafflista")){
+				Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <trafflista>");
 				continue;
 			}
 			else{
@@ -162,7 +164,6 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 	private Article readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "traff");
 		
-		
 		Article art = new Article();
 		
 		while(parser.next()!= XmlPullParser.END_TAG){
@@ -170,6 +171,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 				continue;
 			}
 			String name = parser.getName();
+			Log.i(this.getClass().getSimpleName(), "Leif: in readTraff: looking at <"+name+">");
 			
 			if(name.equals("traffnummer")){ 
 				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer")));
@@ -201,6 +203,8 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 				art.setBeslutsdag(readString(parser, "beslutsdag"));
 			} else if(name.equals("beslutad")){
 				art.setBeslutad(Integer.parseInt(readString(parser, "beslutad")));
+			} else{
+				skip(parser);
 			}
 		}
 		
@@ -213,6 +217,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		if(parser.next() == XmlPullParser.TEXT){
 			result = parser.getText();
 			parser.nextTag();
+			Log.i(this.getClass().getSimpleName(), "Leif: in readString(...) reading <"+tag+">, finds "+result);
 		}
 		else{
 			Log.w(this.getClass().getSimpleName(), "Leif: in ArticlesAsyncTask.readString(): Didn't find text");
