@@ -99,6 +99,14 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		return null;
 	}
 
+	/**
+	 * http://developer.android.com/training/basics/network-ops/xml.html#analyze
+	 * 
+	 * @param instr
+	 * @return
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
 	private QueryResult parseXml(InputStream instr) throws XmlPullParserException, IOException{
 		try{
 			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
@@ -114,7 +122,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 	}
 
 	private QueryResult readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
-		List<Article> traffarList = new ArrayList();
+		List<Article> traffarList = new ArrayList<Article>();
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "sok");
 		int thisPage = Integer.parseInt(parser.getAttributeValue(xmlns, "sida"));
@@ -129,6 +137,9 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			if (name.equals("traff")){
 				traffarList.add(readTraff(parser));
 			}
+			else if(name.equals("trafflista")){
+				continue;
+			}
 			else{
 				skip(parser);
 			}
@@ -136,7 +147,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		
 		QueryResult qres = new QueryResult(traffarList, totalPages, thisPage, totalTraffar);
 
-		return null;
+		return qres;
 	}
 	
 	private Article readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
@@ -152,7 +163,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			String name = parser.getName();
 			
 			if(name.equals("traffnummer")){ 
-				
+				art.setTraffnummer(readInt(parser, "traffnummer"));
 			} else if(name.equals("datum")){ 
 				art.setDatum(readString(parser, "datum"));
 			} else if(name.equals("id")){ 
@@ -166,7 +177,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			} else if(name.equals("beteckning")){ 
 				art.setDokid(readString(parser, "beteckning"));
 			} else if(name.equals("score")){ 
-				
+				art.setScore(readDouble(parser, "score"));
 			} else if(name.equals("notisrubrik")){ 
 				art.setNotisrubrik(readString(parser, "notisrubrik"));
 			} else if(name.equals("notis")){ 
@@ -174,9 +185,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			} else if(name.equals("beslutsdag")){ 
 				art.setBeslutsdag(readString(parser, "beslutsdag"));
 			} else if(name.equals("beslutad")){
-				
-			} else {
-				
+				art.setBeslutad(readInt(parser, "beslutad"));
 			}
 		}
 		
@@ -198,7 +207,9 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 	}
 	private int readInt(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, tag);
-		return -1;
+		int result = -1;
+		if(parser.next() == XmlPullParser.)
+		return result;
 	}
 	private double readDouble(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, tag);
