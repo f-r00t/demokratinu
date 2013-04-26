@@ -210,7 +210,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			} else if(name.equals("notisrubrik")){ 
 				art.setNotisrubrik(readString(parser, "notisrubrik"));
 			} else if(name.equals("notis")){ 
-				art.setNotis(readString(parser, "notis"));
+				art.setContent((readString(parser, "notis")));
 			} else if(name.equals("beslutsdag")){ 
 				art.setBeslutsdag(readString(parser, "beslutsdag"));
 			} else if(name.equals("beslutad")){

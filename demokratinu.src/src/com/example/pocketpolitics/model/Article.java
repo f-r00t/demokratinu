@@ -17,7 +17,7 @@ public class Article extends LikeableItem {
 	//private String beteckning;	//dokid
 	private double score;
 	private String notisrubrik;
-	private String notis;
+	//private String notis;			//content
 	private String beslutsdag;
 	private int beslutad;
 	
@@ -51,7 +51,7 @@ public class Article extends LikeableItem {
 		//this.beteckning = beteckning;
 		this.score=score;
 		this.notisrubrik=notisrubrik;
-		this.notis=notis;
+		//this.notis=notis;
 		this.beslutsdag=beslutsdag;
 		this.beslutad=beslutad;
 	}
@@ -115,14 +115,6 @@ public class Article extends LikeableItem {
 
 	public void setNotisrubrik(String notisrubrik) {
 		this.notisrubrik = notisrubrik;
-	}
-
-	public String getNotis() {
-		return notis;
-	}
-
-	public void setNotis(String notis) {
-		this.notis = notis;
 	}
 
 	public String getBeslutsdag() {
