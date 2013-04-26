@@ -48,22 +48,57 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 	protected void onCancelled(QueryResult qres){
 		
 	}
-	
+
 	private QueryResult createArticles(QueryParam qpar){
-		
+
 		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE;
 		InputStream instr = retrieveStream(url);
-		
-		// xml parsing...
-		
+
 		try {
-			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+			List parsedXml = parseXml(instr);
 		} catch (XmlPullParserException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		List<Article> arts = new ArrayList();
+
+		return null;
+	}
+	
+	private List parseXml(InputStream instr) throws XmlPullParserException, IOException{
+		try{
+			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			parser.setInput(instr, null);
+			parser.nextTag();
+			return readFeed(parser);
+		}
+		finally{
+			instr.close();
 		}
 		
-		List<Article> arts = new ArrayList();
+	}
+	
+	private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
+		List traffar = new ArrayList();
+		
+		parser.require(XmlPullParser.START_TAG, XmlPullParser.NO_NAMESPACE, "sok");
+		while(parser.next() != XmlPullParser.END_TAG){
+			if(parser.getEventType() != XmlPullParser.START_TAG){
+				continue;
+			}
+			String name = parser.getName();
+			if (name.equals("traff")){
+				traffar.add(readEntry(parser));
+			}
+			else{
+				skip(parser);
+			}
+		}
 		
 		return null;
 	}
