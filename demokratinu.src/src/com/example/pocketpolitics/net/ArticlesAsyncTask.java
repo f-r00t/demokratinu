@@ -2,6 +2,7 @@ package com.example.pocketpolitics.net;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
@@ -27,8 +28,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 
 	@Override
 	protected QueryResult doInBackground(QueryParam... params) {
-		// TODO Auto-generated method stub
-		return null;
+		return createArticles(params[0]);
 	}
 	
 	@Override
@@ -46,11 +46,14 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		
 	}
 	
-	private List<Article> createArticles(QueryParam qpar){
+	private QueryResult createArticles(QueryParam qpar){
 		
-		String url = QUERY + "&datum=";
+		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE;
 		InputStream instr = retrieveStream(url);
 		
+		// xml parsing...
+		
+		List<Article> arts = new ArrayList();
 		
 		return null;
 	}
