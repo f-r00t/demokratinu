@@ -28,7 +28,7 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 
 	public void testArticlesAsyncTask(){
 		for(int i=0; i<npages; i++){
-			retr.retrieveArticles(this, "", "2013-04-26", i, -1);
+			retr.retrieveArticles(this, "", "2013-04-26", i+1, -1);
 			threads++;
 		}
 		
@@ -50,7 +50,15 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 		threads--;
 		finished++;
 		
+		if(qres == null){
+			Log.e(this.getClass().getSimpleName(), "Leif: Something went wrong! QueryResult is null!");
+			fail();
+			return;
+		}
+		
 		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask. Page no "+qres.thisPage+ " just finished.");
+		
+		Log.i(this.getClass().getSimpleName(), "Leif: QueryResults sidor="+qres.totalPages+". Artiklar på denna sida: "+qres.arts.size());
 		
 		ListIterator<Article> it = qres.arts.listIterator();
 		while(it.hasNext() ){

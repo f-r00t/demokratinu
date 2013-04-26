@@ -92,10 +92,4 @@ public class TextAsyncTaskTester extends AndroidTestCase implements TextViewInte
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-
-
-
-
 }

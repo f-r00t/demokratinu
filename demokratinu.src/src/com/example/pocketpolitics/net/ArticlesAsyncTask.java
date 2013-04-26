@@ -68,10 +68,10 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			
 			return parsedXml;
 		} catch (XmlPullParserException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): XmlPullParserException");
+			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): XmlPullParserException",e);
 			e.printStackTrace();
 		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): IOException");
+			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): IOException",e);
 			e.printStackTrace();
 		}
 
@@ -136,6 +136,8 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		int totalPages = Integer.parseInt(parser.getAttributeValue(xmlns, "sidor"));
 		int totalTraffar = Integer.parseInt(parser.getAttributeValue(xmlns, "traffar"));
 		
+		Log.i(this.getClass().getSimpleName(), "Leif: attributes gathered. sida="+thisPage+" sidor="+totalPages+" traffar="+totalTraffar);
+		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
 				continue;
@@ -158,7 +160,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 	}
 	
 	private Article readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, xmlns, "Traff");
+		parser.require(XmlPullParser.START_TAG, xmlns, "traff");
 		
 		
 		Article art = new Article();
