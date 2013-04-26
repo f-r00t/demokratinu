@@ -14,6 +14,7 @@ import com.example.pocketpolitics.control.ArticleListAdapter;
 import com.example.pocketpolitics.model.Article;
 
 import com.example.pocketpolitics.net.ArtActivityInterface;
+import com.example.pocketpolitics.net.QueryResult;
 import com.example.pocketpolitics.net.Retriever;
 
 public class FrontPageActivity extends Activity implements ArtActivityInterface {
@@ -76,6 +77,13 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 
 	private void setAdapter(){
 		listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
+	}
+
+
+	@Override
+	public void addArticles(QueryResult qres) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

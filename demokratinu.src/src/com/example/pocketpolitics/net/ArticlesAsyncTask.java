@@ -11,6 +11,9 @@ import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -18,10 +21,10 @@ import android.util.Log;
 import com.example.pocketpolitics.model.Article;
 
 public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResult>{
-	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
+	//private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
+	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s"; //"&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	
 	private static int ARTICLES_PER_PAGE = 15;
-	// URL = QUERY + "&datum=" + afterthis + "&tom=" + beforethis"
 	
 	private ArtActivityInterface acti;
 	
@@ -53,6 +56,13 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		
 		// xml parsing...
 		
+		try {
+			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+		} catch (XmlPullParserException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		List<Article> arts = new ArrayList();
 		
 		return null;
@@ -75,11 +85,11 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			HttpEntity responseEntity = response.getEntity();
 			return responseEntity.getContent();
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
+			Log.e(this.getClass().getSimpleName(), "Error ClientProtocolException for URL "+url, e);
 			e.printStackTrace();
 		} catch (IOException e) {
 			request.abort();
-			Log.w(this.getClass().getSimpleName(), "Error for URL "+url, e);
+			Log.e(this.getClass().getSimpleName(), "Error IOException for URL "+url, e);
 			e.printStackTrace();
 		}
 
