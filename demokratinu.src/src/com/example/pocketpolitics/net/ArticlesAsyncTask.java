@@ -2,6 +2,7 @@ package com.example.pocketpolitics.net;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -13,20 +14,19 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class ArticlesAsyncTask extends AsyncTask<String, Integer, String>{
+import com.example.pocketpolitics.model.Article;
+
+public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, String>{
 	
 	private static final String QUERY_1 = "http://data.riksdagen.se/sok/?sok=&rm=&typ=bet&doktyp=&subtyp=&titel=&talare=&bet=&tempbet=&datum=&tom=";
 	private static final String QUERY_2 = "&nr=&fulltext=&planering=&org=&iid=&avd=&valkrets=&personstatus=&webbtv=&debattgrupp=&sort=rel&utformat=&exakt=&utdrag=&a=s#soktraff";
-
 	private static int ARTICLES_PER_PAGE = 15;
-	
 	// QUERY_1 + "yyyy-mm-dd" + "&p=" +pageNo + "&sz="+ARTICLES_PER_PAGE + QUERY_2
-			
-			
-	ArtActivityInterface acti;
+	
+	private ArtActivityInterface acti;
 	
 	@Override
-	protected String doInBackground(String... arg0) {
+	protected String doInBackground(QueryParam... arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -49,6 +49,15 @@ public class ArticlesAsyncTask extends AsyncTask<String, Integer, String>{
 	@Override
 	protected void onCancelled(String result){
 
+	}
+	
+	private List<Article> createArticles(QueryParam qpar){
+		
+		String url = QUERY_1 + qpar.date + "&p=" +qpar.page + "&sz="+ARTICLES_PER_PAGE + QUERY_2;
+		InputStream instr = retrieveStream(url);
+		
+		
+		return null;
 	}
 	
 	private InputStream retrieveStream(String url){
