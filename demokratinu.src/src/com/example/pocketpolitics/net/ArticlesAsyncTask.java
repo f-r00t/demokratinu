@@ -16,7 +16,7 @@ import android.util.Log;
 
 import com.example.pocketpolitics.model.Article;
 
-public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, String>{
+public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResult>{
 	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	
 	private static int ARTICLES_PER_PAGE = 15;
@@ -24,30 +24,26 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, String>{
 	
 	private ArtActivityInterface acti;
 	
+
 	@Override
-	protected String doInBackground(QueryParam... arg0) {
+	protected QueryResult doInBackground(QueryParam... params) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	
-
 	@Override
 	protected void onPreExecute(){
-
+		
 	}
-
+	
 	@Override
-	protected void onProgressUpdate(Integer... progress){
-
+	protected void onPostExecute(QueryResult qres){
+		
 	}
-
+	
 	@Override
-	protected void onPostExecute(String result){
-	}
-
-	@Override
-	protected void onCancelled(String result){
-
+	protected void onCancelled(QueryResult qres){
+		
 	}
 	
 	private List<Article> createArticles(QueryParam qpar){
@@ -86,4 +82,5 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, String>{
 
 		return null;
 	}
+
 }
