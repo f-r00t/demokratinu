@@ -17,11 +17,10 @@ import android.util.Log;
 import com.example.pocketpolitics.model.Article;
 
 public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, String>{
+	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	
-	private static final String QUERY_1 = "http://data.riksdagen.se/sok/?sok=&rm=&typ=bet&doktyp=&subtyp=&titel=&talare=&bet=&tempbet=&datum=&tom=";
-	private static final String QUERY_2 = "&nr=&fulltext=&planering=&org=&iid=&avd=&valkrets=&personstatus=&webbtv=&debattgrupp=&sort=rel&utformat=&exakt=&utdrag=&a=s#soktraff";
 	private static int ARTICLES_PER_PAGE = 15;
-	// QUERY_1 + "yyyy-mm-dd" + "&p=" +pageNo + "&sz="+ARTICLES_PER_PAGE + QUERY_2
+	// URL = QUERY + "&datum=" + afterthis + "&tom=" + beforethis"
 	
 	private ArtActivityInterface acti;
 	
@@ -53,7 +52,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, String>{
 	
 	private List<Article> createArticles(QueryParam qpar){
 		
-		String url = QUERY_1 + qpar.date + "&p=" +qpar.page + "&sz="+ARTICLES_PER_PAGE + QUERY_2;
+		String url = QUERY + "&datum=";
 		InputStream instr = retrieveStream(url);
 		
 		

@@ -4,11 +4,14 @@ import android.util.Log;
 
 public class QueryParam {
 
-	protected String date;
+	protected String dateFrom;
+	protected String dateTo;
 	protected int page;
 	
-	QueryParam(String date, int page){
-		this.date = date;
+	QueryParam(String dateFrom, String dateTo, int page){
+		this.dateFrom = dateFrom;
+		this.dateTo= dateTo;
+		
 		if(page <1){
 			Log.w(this.getClass().getSimpleName(), "Leif: bad page number: "+page);
 			page=1;
