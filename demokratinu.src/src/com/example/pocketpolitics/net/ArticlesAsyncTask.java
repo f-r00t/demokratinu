@@ -2,8 +2,11 @@ package com.example.pocketpolitics.net;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -107,7 +110,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 	}
 
 	/**
-	 * http://developer.android.com/training/basics/network-ops/xml.html#analyze
+	 * Källa: http://developer.android.com/training/basics/network-ops/xml.html#analyze
 	 * 
 	 * @param instr
 	 * @return
@@ -144,11 +147,11 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			}
 			String name = parser.getName();
 			if (name.equals("traff")){
-				Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <traff>");
+				//Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <traff>");
 				traffarList.add(readTraff(parser));
 			}
 			else if(name.equals("trafflista")){
-				Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <trafflista>");
+				//Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <trafflista>");
 				continue;
 			}
 			else{
@@ -171,7 +174,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 				continue;
 			}
 			String name = parser.getName();
-			Log.i(this.getClass().getSimpleName(), "Leif: in readTraff: looking at <"+name+">");
+			//Log.i(this.getClass().getSimpleName(), "Leif: in readTraff: looking at <"+name+">");
 			
 			if(name.equals("traffnummer")){ 
 				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer")));
@@ -185,16 +188,25 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 				art.setRm(readString(parser, "rm"));
 			} else if(name.equals("relaterat_id")){ 
 				
-				Log.i(this.getClass().getSimpleName(), "Leif: relaterat_id läses...");
-				
+				//Log.i(this.getClass().getSimpleName(), "Leif: relaterat_id läses...");
 				art.setRelaterat_id(readString(parser, "relaterat_id"));
-				
-				Log.w(this.getClass().getSimpleName(), "Leif: relaterat_id läst: "+art.getRelaterat_id());
+				//Log.w(this.getClass().getSimpleName(), "Leif: relaterat_id läst: "+art.getRelaterat_id());
 				
 			} else if(name.equals("beteckning")){ 
 				art.setDokid(readString(parser, "beteckning"));
-			} else if(name.equals("score")){ 
-				art.setScore(Double.parseDouble(readString(parser, "score")));
+			} else if(name.equals("score")){
+				
+				//Källa: http://stackoverflow.com/questions/4323599/best-way-to-parsedouble-with-comma-as-decimal-separator
+				NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
+				double d = -1;
+				String read = readString(parser, "score");
+				try {
+					d=  format.parse(read).doubleValue();
+				} catch (ParseException e) {
+					Log.e(this.getClass().getSimpleName(), "Leif: reading <score>, Format exception: "+read);
+					e.printStackTrace();
+				}
+				art.setScore(d);
 			} else if(name.equals("notisrubrik")){ 
 				art.setNotisrubrik(readString(parser, "notisrubrik"));
 			} else if(name.equals("notis")){ 
@@ -217,11 +229,11 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 		if(parser.next() == XmlPullParser.TEXT){
 			result = parser.getText();
 			parser.nextTag();
-			Log.i(this.getClass().getSimpleName(), "Leif: in readString(...) reading <"+tag+">, finds "+result);
+			//Log.i(this.getClass().getSimpleName(), "Leif: in readString(...) reading <"+tag+">, finds "+result);
 		}
 		else{
-			Log.w(this.getClass().getSimpleName(), "Leif: in ArticlesAsyncTask.readString(): Didn't find text");
-			throw new IllegalStateException();
+			//Log.w(this.getClass().getSimpleName(), "Leif: in readString(): Didn't find text for <"+tag+">");
+			//throw new IllegalStateException();
 		}
 		parser.require(XmlPullParser.END_TAG, xmlns, tag);
 		return result;

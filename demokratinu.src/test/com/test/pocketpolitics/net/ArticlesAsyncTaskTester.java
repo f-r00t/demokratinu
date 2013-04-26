@@ -13,8 +13,9 @@ import com.example.pocketpolitics.net.Retriever;
 
 public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActivityInterface  {
 
-	private final int npages = 1;
+	private final int npages = 3;
 	private final int totalwait = 20;	//secs
+	private final int show = 4;
 	
 	private int threads;
 	private int finished;
@@ -38,7 +39,7 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 				Thread.sleep(500);
 				Log.i(this.getClass().getSimpleName(), "Leif: Slept another 500 ms. Number extra threads: "+threads);
 			}
-			Log.i(this.getClass().getSimpleName(), "Leif: Total time to retrieve "+npages+ " pages: "+(i/2)+" secs"); 
+			Log.i(this.getClass().getSimpleName(), "Leif: Total time to retrieve "+npages+ " pages: ca "+((double)i)/2+" secs"); 
 		} catch (InterruptedException e) {
 			Log.e(this.getClass().getSimpleName(), "Leif: error: interruption");
 			e.printStackTrace();
@@ -61,10 +62,11 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 		Log.i(this.getClass().getSimpleName(), "Leif: QueryResults sidor="+qres.totalPages+". Artiklar på denna sida: "+qres.arts.size());
 		
 		ListIterator<Article> it = qres.arts.listIterator();
-		while(it.hasNext() ){
+		int is=0;
+		while(it.hasNext() && is++<show){
 			Article a = it.next();
 			
-			Log.i(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask["+qres.thisPage + "] Dokid: "+a.getDokid()+" Title: "+a.getTitle() + " Id: "+a.getId());
+			Log.i(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask["+qres.thisPage + "] Id: "+a.getId()+" Beslutsdatum "+a.getBeslutsdag());
 		}
 		
 	}
