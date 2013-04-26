@@ -7,7 +7,7 @@ import android.util.Log;
  * @author Leif
  *
  */
-public class QueryParam {
+class QueryParam {
 
 	protected final String dateFrom;
 	protected final String dateTo;

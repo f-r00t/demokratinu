@@ -6,6 +6,10 @@ import com.example.pocketpolitics.model.Article;
 
 public interface ArtActivityInterface {
 
+	public void onPreExecute();
+	
 	public void addArticles(List<Article> arts);
 	public void addArticles(QueryResult qres);
+	
+	public void wasCancelled(QueryResult qres);
 }

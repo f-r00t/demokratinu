@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.pocketpolitics.model.Article;
 import com.example.pocketpolitics.net.ArtActivityInterface;
+import com.example.pocketpolitics.net.QueryResult;
 import com.example.pocketpolitics.net.Retriever;
 import com.example.pocketpolitics.net.TextViewInterface;
 
@@ -24,6 +25,10 @@ public class NewRetrieverTester extends AndroidTestCase implements TextViewInter
 		threads = 0;
 		finished = 0;
 		retr = Retriever.getInstance();
+	}
+	
+	public void testArticlesAsyncTas(){
+		
 	}
 
 	public void testTextAsyncTask(){
@@ -61,6 +66,18 @@ public class NewRetrieverTester extends AndroidTestCase implements TextViewInter
 			fail();
 		}
 	}
+	
+
+	@Override
+	public void addArticles(QueryResult qres) {
+		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask. ");
+	}
+
+	@Override
+	public void wasCancelled(QueryResult qres) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
 	public void setText(String text) {
@@ -73,6 +90,14 @@ public class NewRetrieverTester extends AndroidTestCase implements TextViewInter
 			fail();
 		}
 	}
+
+	@Override
+	public void onPreExecute() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
 
 
 }

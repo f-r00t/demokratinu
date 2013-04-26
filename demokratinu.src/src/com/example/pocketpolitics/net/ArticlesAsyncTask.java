@@ -30,25 +30,32 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 
 	private ArtActivityInterface acti;
 
+	ArticlesAsyncTask(ArtActivityInterface act){
+		this.acti=act;
+	}
 
 	@Override
 	protected QueryResult doInBackground(QueryParam... params) {
+		if(params==null || params[0] == null){
+			return null;
+		}
+		
 		return createArticles(params[0]);
 	}
 
 	@Override
 	protected void onPreExecute(){
-
+		acti.onPreExecute();
 	}
 
 	@Override
 	protected void onPostExecute(QueryResult qres){
-
+		acti.addArticles(qres);
 	}
 
 	@Override
 	protected void onCancelled(QueryResult qres){
-
+		acti.wasCancelled(qres);
 	}
 
 	private QueryResult createArticles(QueryParam qpar){
@@ -61,10 +68,10 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			
 			return parsedXml;
 		} catch (XmlPullParserException e) {
-			// TODO Auto-generated catch block
+			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): XmlPullParserException");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): IOException");
 			e.printStackTrace();
 		}
 
@@ -163,7 +170,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			String name = parser.getName();
 			
 			if(name.equals("traffnummer")){ 
-				art.setTraffnummer(readInt(parser, "traffnummer"));
+				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer")));
 			} else if(name.equals("datum")){ 
 				art.setDatum(readString(parser, "datum"));
 			} else if(name.equals("id")){ 
@@ -177,7 +184,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			} else if(name.equals("beteckning")){ 
 				art.setDokid(readString(parser, "beteckning"));
 			} else if(name.equals("score")){ 
-				art.setScore(readDouble(parser, "score"));
+				art.setScore(Double.parseDouble(readString(parser, "score")));
 			} else if(name.equals("notisrubrik")){ 
 				art.setNotisrubrik(readString(parser, "notisrubrik"));
 			} else if(name.equals("notis")){ 
@@ -185,7 +192,7 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			} else if(name.equals("beslutsdag")){ 
 				art.setBeslutsdag(readString(parser, "beslutsdag"));
 			} else if(name.equals("beslutad")){
-				art.setBeslutad(readInt(parser, "beslutad"));
+				art.setBeslutad(Integer.parseInt(readString(parser, "beslutad")));
 			}
 		}
 		
@@ -200,20 +207,11 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			parser.nextTag();
 		}
 		else{
+			Log.w(this.getClass().getSimpleName(), "Leif: in ArticlesAsyncTask.readString(): Didn't find text");
 			throw new IllegalStateException();
 		}
 		parser.require(XmlPullParser.END_TAG, xmlns, tag);
 		return result;
-	}
-	private int readInt(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, xmlns, tag);
-		int result = -1;
-		if(parser.next() == XmlPullParser.)
-		return result;
-	}
-	private double readDouble(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, xmlns, tag);
-		return -1;
 	}
 	
 	private void skip(XmlPullParser parser) throws XmlPullParserException, IOException{

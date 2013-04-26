@@ -86,4 +86,18 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		
 	}
 
+
+	@Override
+	public void wasCancelled(QueryResult qres) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onPreExecute() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
