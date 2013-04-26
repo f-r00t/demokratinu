@@ -180,7 +180,13 @@ public class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResul
 			} else if(name.equals("rm")){ 
 				art.setRm(readString(parser, "rm"));
 			} else if(name.equals("relaterat_id")){ 
+				
+				Log.i(this.getClass().getSimpleName(), "Leif: relaterat_id läses...");
+				
 				art.setRelaterat_id(readString(parser, "relaterat_id"));
+				
+				Log.w(this.getClass().getSimpleName(), "Leif: relaterat_id läst: "+art.getRelaterat_id());
+				
 			} else if(name.equals("beteckning")){ 
 				art.setDokid(readString(parser, "beteckning"));
 			} else if(name.equals("score")){ 
