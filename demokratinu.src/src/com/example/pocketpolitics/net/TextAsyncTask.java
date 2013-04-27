@@ -24,6 +24,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 /**
+ * @deprecated
  * AsyncTask that retrieves short text of an Article from the Riksdag in the background. 
  * 
  * This class should be extended in an activity:

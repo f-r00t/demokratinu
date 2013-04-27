@@ -16,6 +16,11 @@ import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedInput;
 import com.sun.syndication.io.XmlReader;
 
+/**
+ * @deprecated
+ * @author Leif
+ *
+ */
 class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 
 	private static final String FEED_URL = "http://www.riksdagen.se/sv/Debatter--beslut/?rss=true&type=biksmall";
