@@ -50,6 +50,7 @@ public class Retriever {
 	}
 	
 	/**
+	 * @deprecated
 	 * Retrieves the latest articles in the RSS "Beslut i korthet" from riksdagen.se
 	 * @param update True if want to update the RSS (access the server anew)
 	 * @return A list of titles for articles
@@ -59,6 +60,7 @@ public class Retriever {
 	}
 	
 	/**
+	 * @deprecated
 	 * Retrieves the short text of an article.
 	 * @param year ex 2013
 	 * @param articleid ex Sku21

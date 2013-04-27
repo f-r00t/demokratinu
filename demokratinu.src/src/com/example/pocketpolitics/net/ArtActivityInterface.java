@@ -8,6 +8,10 @@ public interface ArtActivityInterface {
 
 	public void onPreExecute();
 	
+	/**
+	 * @deprecated
+	 * @param arts
+	 */
 	public void addArticles(List<Article> arts);
 	public void addArticles(QueryResult qres);
 	
