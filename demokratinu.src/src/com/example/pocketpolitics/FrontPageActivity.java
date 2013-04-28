@@ -54,6 +54,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		setAdapter();
 
 		getMoreArticles();
+		//This comment is here to test if git works.
 	}
 
 
