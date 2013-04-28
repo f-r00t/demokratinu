@@ -8,6 +8,9 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.example.pocketpolitics.control.ArticleListAdapter;
@@ -29,7 +32,13 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_front_page);
 		listViewArticles =  ( ListView ) findViewById(R.id.article_list);
+		listViewArticles.setOnItemClickListener(new OnItemClickListener(){
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+				//Code goes here
+			}
+		});
 
 		//Replace this with the factory later, really ugly code incoming:
 
