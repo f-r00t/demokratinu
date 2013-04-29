@@ -8,12 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -25,7 +19,8 @@ import com.example.pocketpolitics.model.Article;
 class ArticlesAsyncTask extends XmlAsyncTask{
 	//private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&utformat=&a=s"; //"&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
-	private static final String xmlns = null;
+	
+	private final String xmlns = null;
 	
 
 	private static int ARTICLES_PER_PAGE = 15;
@@ -76,34 +71,6 @@ class ArticlesAsyncTask extends XmlAsyncTask{
 			e.printStackTrace();
 		} catch (IOException e) {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): IOException",e);
-			e.printStackTrace();
-		}
-
-		return null;
-	}
-
-	private InputStream retrieveStream(String url){
-
-		DefaultHttpClient client = new DefaultHttpClient();
-		HttpGet request = new HttpGet(url);
-
-		HttpResponse response;
-		try {
-			response = client.execute(request);
-			final int statusCode = response.getStatusLine().getStatusCode();
-
-			if(statusCode != HttpStatus.SC_OK){
-				Log.w(this.getClass().getSimpleName(), "Error "+statusCode+" for URL "+url);
-				return null;
-			}
-			HttpEntity responseEntity = response.getEntity();
-			return responseEntity.getContent();
-		} catch (ClientProtocolException e) {
-			Log.e(this.getClass().getSimpleName(), "Error ClientProtocolException for URL "+url, e);
-			e.printStackTrace();
-		} catch (IOException e) {
-			request.abort();
-			Log.e(this.getClass().getSimpleName(), "Error IOException for URL "+url, e);
 			e.printStackTrace();
 		}
 
@@ -178,29 +145,29 @@ class ArticlesAsyncTask extends XmlAsyncTask{
 			//Log.i(this.getClass().getSimpleName(), "Leif: in readTraff: looking at <"+name+">");
 			
 			if(name.equals("traffnummer")){ 
-				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer")));
+				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer", xmlns)));
 			} else if(name.equals("datum")){ 
-				art.setDatum(readString(parser, "datum"));
+				art.setDatum(readString(parser, "datum", xmlns));
 			} else if(name.equals("id")){ 
-				art.setId(readString(parser, "id"));
+				art.setId(readString(parser, "id", xmlns));
 			} else if(name.equals("titel")){ 
-				art.setTitle(readString(parser, "titel"));
+				art.setTitle(readString(parser, "titel", xmlns));
 			} else if(name.equals("rm")){ 
-				art.setRm(readString(parser, "rm"));
+				art.setRm(readString(parser, "rm", xmlns));
 			} else if(name.equals("relaterat_id")){ 
 				
 				//Log.i(this.getClass().getSimpleName(), "Leif: relaterat_id läses...");
-				art.setRelaterat_id(readString(parser, "relaterat_id"));
+				art.setRelaterat_id(readString(parser, "relaterat_id", xmlns));
 				//Log.w(this.getClass().getSimpleName(), "Leif: relaterat_id läst: "+art.getRelaterat_id());
 				
 			} else if(name.equals("beteckning")){ 
-				art.setDokid(readString(parser, "beteckning"));
+				art.setDokid(readString(parser, "beteckning", xmlns));
 			} else if(name.equals("score")){
 				
 				//Källa: http://stackoverflow.com/questions/4323599/best-way-to-parsedouble-with-comma-as-decimal-separator
 				NumberFormat format = NumberFormat.getInstance(Locale.FRANCE);
 				double d = -1;
-				String read = readString(parser, "score");
+				String read = readString(parser, "score", xmlns);
 				try {
 					d=  format.parse(read).doubleValue();
 				} catch (ParseException e) {
@@ -209,13 +176,13 @@ class ArticlesAsyncTask extends XmlAsyncTask{
 				}
 				art.setScore(d);
 			} else if(name.equals("notisrubrik")){ 
-				art.setNotisrubrik(readString(parser, "notisrubrik"));
+				art.setNotisrubrik(readString(parser, "notisrubrik", xmlns));
 			} else if(name.equals("notis")){ 
-				art.setContent((readString(parser, "notis")));
+				art.setContent((readString(parser, "notis", xmlns)));
 			} else if(name.equals("beslutsdag")){ 
-				art.setBeslutsdag(readString(parser, "beslutsdag"));
+				art.setBeslutsdag(readString(parser, "beslutsdag", xmlns));
 			} else if(name.equals("beslutad")){
-				art.setBeslutad(Integer.parseInt(readString(parser, "beslutad")));
+				art.setBeslutad(Integer.parseInt(readString(parser, "beslutad", xmlns)));
 			} else{
 				skip(parser);
 			}
@@ -224,38 +191,6 @@ class ArticlesAsyncTask extends XmlAsyncTask{
 		return art;
 	}
 	
-	private String readString(XmlPullParser parser, String tag) throws XmlPullParserException, IOException{
-		parser.require(XmlPullParser.START_TAG, xmlns, tag);
-		String result="";
-		if(parser.next() == XmlPullParser.TEXT){
-			result = parser.getText();
-			parser.nextTag();
-			//Log.i(this.getClass().getSimpleName(), "Leif: in readString(...) reading <"+tag+">, finds "+result);
-		}
-		else{
-			//Log.w(this.getClass().getSimpleName(), "Leif: in readString(): Didn't find text for <"+tag+">");
-			//throw new IllegalStateException();
-		}
-		parser.require(XmlPullParser.END_TAG, xmlns, tag);
-		return result;
-	}
 	
-	private void skip(XmlPullParser parser) throws XmlPullParserException, IOException{
-		if(parser.getEventType() != XmlPullParser.START_TAG){
-			throw new IllegalStateException();
-		}
-		int depth = 1;
-		while(depth != 0){
-			switch(parser.next()){
-			case XmlPullParser.END_TAG:
-				depth--;
-				break;
-			case XmlPullParser.START_TAG:
-				depth++;
-				break;
-			}
-		}
-	}
-
-
+	
 }
