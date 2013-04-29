@@ -6,18 +6,22 @@ import android.net.NetworkInfo;
 import android.util.Log;
 
 public class Retriever {
-	private static Retriever INSTANCE;
+	//private static Retriever INSTANCE;
 	
-	public static Retriever getInstance(){
+	/*public static Retriever getInstance(){
 		if(INSTANCE==null){
 			INSTANCE = new Retriever();
 		}
 		
 		return INSTANCE;
-	}
+	}*/
 	
-	private Retriever(){
-	}
+
+	/*private Retriever(){
+	}*/
+	
+	private static int threads=0;
+	
 	
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
@@ -45,7 +49,8 @@ public class Retriever {
 	 * 0 = sort after date (all issues); 
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
-	public void retrieveArticles(ArtActivityInterface act, String dateFrom, String dateTo, int page, int sort){
+	public static void retrieveArticles(ArtActivityInterface act, String dateFrom, String dateTo, int page, int sort){
+		threads++;
 		new ArticlesAsyncTask(act).execute(new QueryParam(dateFrom, dateTo, page, sort));
 	}
 	
@@ -55,7 +60,8 @@ public class Retriever {
 	 * @param update True if want to update the RSS (access the server anew)
 	 * @return A list of titles for articles
 	 */
-	public void retrieveRssArticleTitles(ArtActivityInterface act){
+	public static void retrieveRssArticleTitles(ArtActivityInterface act){
+		threads++;
 		new FeedTitlesAsyncTask(act).execute("");
 	}
 	
@@ -66,10 +72,14 @@ public class Retriever {
 	 * @param articleid ex Sku21
 	 * @return
 	 */
-	public void retrieveText(TextViewInterface tview , String year, String articleid){
+	public static void retrieveText(TextViewInterface tview , String year, String articleid){
+		threads++;
 		new TextAsyncTask(tview, year, articleid).execute("");
 	}
 	
+	public static void threadFinished(){
+		threads--;
+	}
 	
 
 }
