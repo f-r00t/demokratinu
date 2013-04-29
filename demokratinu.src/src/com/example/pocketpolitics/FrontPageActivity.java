@@ -37,6 +37,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 				//Code goes here
+				System.out.println("Clicked"+position);
 			}
 		});
 
