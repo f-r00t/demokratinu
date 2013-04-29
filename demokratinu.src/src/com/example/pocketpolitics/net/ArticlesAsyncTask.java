@@ -18,12 +18,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.pocketpolitics.model.Article;
 
-class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResult>{
+class ArticlesAsyncTask extends XmlAsyncTask{
 	//private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&utformat=&a=s"; //"&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	private static final String xmlns = null;
@@ -53,11 +52,13 @@ class ArticlesAsyncTask extends AsyncTask<QueryParam, Integer, QueryResult>{
 
 	@Override
 	protected void onPostExecute(QueryResult qres){
+		Retriever.threadFinished();
 		acti.addArticles(qres);
 	}
 
 	@Override
 	protected void onCancelled(QueryResult qres){
+		Retriever.threadFinished();
 		acti.wasCancelled(qres);
 	}
 

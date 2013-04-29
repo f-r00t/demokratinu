@@ -77,7 +77,7 @@ public class Retriever {
 		new TextAsyncTask(tview, year, articleid).execute("");
 	}
 	
-	public static void threadFinished(){
+	protected static void threadFinished(){
 		threads--;
 	}
 	
