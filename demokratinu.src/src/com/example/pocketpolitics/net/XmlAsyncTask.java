@@ -15,7 +15,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public abstract class XmlAsyncTask extends AsyncTask<QueryParam, Integer, QueryResult> {
+public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 
 	
 	protected InputStream retrieveStream(String url){

@@ -16,7 +16,7 @@ import android.util.Log;
 
 import com.example.pocketpolitics.model.Article;
 
-class ArticlesAsyncTask extends XmlAsyncTask{
+class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 	//private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&sort=datum&utformat=&a=s&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	private static final String QUERY = "http://data.riksdagen.se/sok/?doktyp=bet&avd=dokument&utformat=&a=s"; //"&datum=2012-11-11&tom=2013-01-01&p=1&sz=3";
 	
