@@ -16,7 +16,8 @@ public enum Utskott {
 	Social("SoU"),
 	Trafik("TU"),
 	Utbildning("UbU"),
-	Utrikes("UU");
+	Utrikes("UU"),
+	NULL("");
 	
 	
 	private String org;

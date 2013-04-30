@@ -5,23 +5,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-public class Retriever {
-	//private static Retriever INSTANCE;
-	
-	/*public static Retriever getInstance(){
-		if(INSTANCE==null){
-			INSTANCE = new Retriever();
-		}
-		
-		return INSTANCE;
-	}*/
-	
+import com.example.pocketpolitics.model.Utskott;
 
-	/*private Retriever(){
-	}*/
-	
+public class Retriever {
+
 	private static int threads=0;
-	
 	
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
@@ -49,9 +37,9 @@ public class Retriever {
 	 * 0 = sort after date (all issues); 
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
-	public static void retrieveArticles(ArtActivityInterface act, String dateFrom, String dateTo, int page, int sort){
+	public static void retrieveArticles(ArtActivityInterface act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
 		threads++;
-		new ArticlesAsyncTask(act).execute(new QueryParam(dateFrom, dateTo, page, sort));
+		new ArticlesAsyncTask(act).execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
 	
 	/**
@@ -61,7 +49,7 @@ public class Retriever {
 	 * @return A list of titles for articles
 	 */
 	public static void retrieveRssArticleTitles(ArtActivityInterface act){
-		threads++;
+		//threads++;
 		new FeedTitlesAsyncTask(act).execute("");
 	}
 	
@@ -73,13 +61,18 @@ public class Retriever {
 	 * @return
 	 */
 	public static void retrieveText(TextViewInterface tview , String year, String articleid){
-		threads++;
+		//threads++;
 		new TextAsyncTask(tview, year, articleid).execute("");
 	}
 	
 	protected static void threadFinished(){
 		threads--;
 	}
+	
+	public static int threadsRunning(){
+		return threads;
+	}
+	
 	
 
 }
