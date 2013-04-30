@@ -77,29 +77,9 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 		return null;
 	}
 
-	/**
-	 * Källa: http://developer.android.com/training/basics/network-ops/xml.html#analyze
-	 * 
-	 * @param instr
-	 * @return
-	 * @throws XmlPullParserException
-	 * @throws IOException
-	 */
-	private QueryResult parseXml(InputStream instr) throws XmlPullParserException, IOException{
-		try{
-			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
-			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-			parser.setInput(instr, null);
-			parser.nextTag();
-			return readFeed(parser);
-		}
-		finally{
-			instr.close();
-		}
-
-	}
-
-	private QueryResult readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
+	
+	@Override
+	protected QueryResult readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
 		List<Article> traffarList = new ArrayList<Article>();
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "sok");

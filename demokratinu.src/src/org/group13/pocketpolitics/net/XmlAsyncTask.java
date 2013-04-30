@@ -11,6 +11,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -46,6 +47,31 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 		return null;
 	}
 	
+	/**
+	 * Creates an XmlPullParser and calls .readFeed()
+	 * <p>Källa: http://developer.android.com/training/basics/network-ops/xml.html#analyze
+	 * 
+	 * @param instr
+	 * @return
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+	protected O parseXml(InputStream instr) throws XmlPullParserException, IOException{
+		try{
+			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
+			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+			parser.setInput(instr, null);
+			parser.nextTag();
+			return readFeed(parser);
+		}
+		finally{
+			instr.close();
+		}
+
+	}
+	
+	protected abstract O readFeed(XmlPullParser parser) throws XmlPullParserException, IOException;
+	
 	protected String readString(XmlPullParser parser, String tag, String xmlns) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, tag);
 		String result="";
@@ -78,4 +104,5 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 			}
 		}
 	}
+	
 }
