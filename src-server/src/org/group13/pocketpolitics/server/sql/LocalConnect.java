@@ -1,4 +1,4 @@
-package com.server.pocketpolitics.sql;
+package org.group13.pocketpolitics.server.sql;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;

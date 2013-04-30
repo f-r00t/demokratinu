@@ -1,8 +1,9 @@
-package com.server.pocketpolitics;
+package org.group13.pocketpolitics.server;
 
 import java.sql.SQLException;
 
-import com.server.pocketpolitics.sql.LocalConnect;
+import org.group13.pocketpolitics.server.sql.LocalConnect;
+
 
 public class ServerMain {
 
