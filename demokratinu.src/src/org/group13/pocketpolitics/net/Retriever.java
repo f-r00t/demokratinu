@@ -1,16 +1,22 @@
 package org.group13.pocketpolitics.net;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+
 import org.group13.pocketpolitics.model.Utskott;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Log;
 
 
 public class Retriever {
 
 	private static int threads=0;
+	private static List<AsyncTask> tasks = new ArrayList<AsyncTask>();
 	
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
@@ -40,13 +46,38 @@ public class Retriever {
 	 */
 	public static void retrieveArticles(ArtActivityInterface act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
 		threads++;
-		new ArticlesAsyncTask(act).execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
+		ArticlesAsyncTask task =new ArticlesAsyncTask(act);
+		tasks.add(task);
+		task.execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
 	
 	public static void retrieveVotes(VotesInterface act, String dokCode, String motionCode){
 		threads++;
-		new VotesAsyncTask(act, dokCode, motionCode).execute();
+		VotesAsyncTask task =new VotesAsyncTask(act, dokCode, motionCode);
+		tasks.add(task);
+		task.execute();
 	}
+	
+	public static void cancelAllTasks(){
+		ListIterator<AsyncTask> iter = tasks.listIterator();
+		while(iter.hasNext()){
+			if(iter!=null && !iter.next().isCancelled()){
+				iter.next().cancel(true);
+				Log.w(Retriever.class.getSimpleName(), "Leif: Thread cancelled!");
+			}
+		}
+		
+		tasks.clear();
+	}
+
+	protected static void threadFinished(){
+		threads--;
+	}
+	
+	public static int threadsRunning(){
+		return threads;
+	}
+	
 	
 	/**
 	 * @deprecated
@@ -69,14 +100,6 @@ public class Retriever {
 	public static void retrieveText(TextViewInterface tview , String year, String articleid){
 		//threads++;
 		new TextAsyncTask(tview, year, articleid).execute("");
-	}
-	
-	protected static void threadFinished(){
-		threads--;
-	}
-	
-	public static int threadsRunning(){
-		return threads;
 	}
 	
 	

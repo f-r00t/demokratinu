@@ -30,17 +30,17 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 			final int statusCode = response.getStatusLine().getStatusCode();
 
 			if(statusCode != HttpStatus.SC_OK){
-				Log.w(this.getClass().getSimpleName(), "Error "+statusCode+" for URL "+url);
+				Log.w(this.getClass().getSimpleName(), "Leif: in .retrieveStream(): Error "+statusCode+" for URL "+url);
 				return null;
 			}
 			HttpEntity responseEntity = response.getEntity();
 			return responseEntity.getContent();
 		} catch (ClientProtocolException e) {
-			Log.e(this.getClass().getSimpleName(), "Error ClientProtocolException for URL "+url, e);
+			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieveStream(): Error ClientProtocolException for URL "+url, e);
 			e.printStackTrace();
 		} catch (IOException e) {
 			request.abort();
-			Log.e(this.getClass().getSimpleName(), "Error IOException for URL "+url, e);
+			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieveStream(): Error IOException for URL "+url, e);
 			e.printStackTrace();
 		}
 

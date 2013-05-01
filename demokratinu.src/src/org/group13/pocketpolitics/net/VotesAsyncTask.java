@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 
-	private final String URL = "data.riksdagen.se/utskottsforslag/";
+	private final String URL = "http://data.riksdagen.se/utskottsforslag/";
 	
 	private final String xmlns = null;
 	
@@ -51,10 +51,12 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	
 	private VotesResult retrieveVotes(){
 		String url = URL+dokCode;
+		Log.i(this.getClass().getSimpleName(), "Leif: url = "+url);
 		
 		InputStream instr = retrieveStream(url);
 		
 		try {
+			Log.i(this.getClass().getSimpleName(), "Leif: start parsing xml...");
 			VotesResult result = this.parseXml(instr);
 			
 			return result;
@@ -73,9 +75,11 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	protected VotesResult readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
 
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
+		Log.i(this.getClass().getSimpleName(), "Leif: entering <utskottsforslag>");
 		
 		parser.next();
-		if(parser.getName()=="dokument"){
+		if(parser.getName().equals("dokument")){
+			Log.i(this.getClass().getSimpleName(), "Leif: entering <dokument>");
 			if (!parseDokument(parser)){
 				Log.w(this.getClass().getSimpleName(), "Leif: Wrong dokument retrieved!");
 				return null;
@@ -87,7 +91,13 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		
 		VotesResult out=null;
 		parser.next();
-		if(parser.getName()=="dokutskottsforslag"){
+		
+		if(parser.getName()==null){
+			Log.e(this.getClass().getSimpleName(), "Leif: in readFeed: Error! parser.getName()==null!");
+			return null;
+		}
+		
+		if(parser.getName().equals("dokutskottsforslag")){
 			
 			while(parser.next()!=XmlPullParser.END_TAG){
 				if(out==null){
