@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.group13.pocketpolitics.control.ArticleListAdapter;
 import org.group13.pocketpolitics.model.Article;
@@ -35,9 +36,12 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		listViewArticles.setOnItemClickListener(new OnItemClickListener(){
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				//Code goes here
-				System.out.println("Clicked"+position);
+				Toast.makeText(getApplicationContext(),
+					      "Click ListItem Number " + position, Toast.LENGTH_LONG)
+					      .show();
+				
 			}
 		});
 
@@ -62,7 +66,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		articleList.add(c);
 
 		setAdapter();
-
+		
 		getMoreArticles();
 	}
 
