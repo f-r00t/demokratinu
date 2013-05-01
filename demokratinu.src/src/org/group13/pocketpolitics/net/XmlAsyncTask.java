@@ -90,6 +90,7 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 
 	protected void skip(XmlPullParser parser) throws XmlPullParserException, IOException{
 		if(parser.getEventType() != XmlPullParser.START_TAG){
+			Log.e(this.getClass().getSimpleName(), "Leif: in .skip(): Expected start tag!");
 			throw new IllegalStateException();
 		}
 		int depth = 1;

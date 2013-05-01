@@ -90,10 +90,17 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		}
 		
 		VotesResult out=null;
-		parser.next();
+		
+		while(parser.next()!=XmlPullParser.START_TAG){
+			Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped a tag of type: "+parser.getEventType());
+			if(parser.getEventType()==XmlPullParser.END_TAG){
+				Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped an END_TAG!");
+			}
+			Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: ...");
+		}
 		
 		if(parser.getName()==null){
-			Log.e(this.getClass().getSimpleName(), "Leif: in readFeed: Error! parser.getName()==null!");
+			Log.e(this.getClass().getSimpleName(), "Leif: in .readFeed(): Error! parser.getName()==null!");
 			return null;
 		}
 		
@@ -117,7 +124,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		return out;
 	}
 	
-	protected VotesResult parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private VotesResult parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		
 		boolean found = false;
@@ -162,7 +169,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		return null;
 	}
 	
-	protected List<PartyVote> parseVotering(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private List<PartyVote> parseVotering(XmlPullParser parser) throws XmlPullParserException, IOException{
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "votering_sammanfattning_html");
 		parser.nextTag();
@@ -220,7 +227,14 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		return partyVotes;
 	}
 	
-	protected boolean parseDokument(XmlPullParser parser) throws XmlPullParserException, IOException{
+	/**
+	 * Found the right document?
+	 * @param parser
+	 * @return
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+	private boolean parseDokument(XmlPullParser parser) throws XmlPullParserException, IOException{
 		
 		boolean correct = false;
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokument");
@@ -229,12 +243,16 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 				continue;
 			}
 			String name = parser.getName();
+			Log.i(this.getClass().getSimpleName(), "Leif: in .parseDokument(): looking at <" + name + ">");
+			
 			if(name.equals("dok_id")){
 				correct = this.readString(parser, "dok_id", xmlns).equals(this.dokCode);
 			} else {
 				skip(parser);
 			}
 		}
+		parser.require(XmlPullParser.END_TAG, xmlns, "dokument");
+		Log.i(this.getClass().getSimpleName(), "Leif: in .parseDokument(): looking at </"+parser.getName()+">");
 		
 		return correct;
 	}
