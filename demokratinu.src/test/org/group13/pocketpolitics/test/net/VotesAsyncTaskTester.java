@@ -1,5 +1,8 @@
 package org.group13.pocketpolitics.test.net;
 
+import java.util.ListIterator;
+
+import org.group13.pocketpolitics.net.PartyVote;
 import org.group13.pocketpolitics.net.Retriever;
 import org.group13.pocketpolitics.net.VotesInterface;
 import org.group13.pocketpolitics.net.VotesResult;
@@ -12,7 +15,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements VotesInterf
 	private final int totalWait = 20;	//secs
 	
 	public void testVotes(){
-		Retriever.retrieveVotes(this, "H001UbU5", "H002Ub354");
+		Retriever.retrieveVotes(this, "H001UbU5", "Ub354");
 		int threads;
 		int i = 0;
 		boolean cancelled = false;
@@ -58,14 +61,22 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements VotesInterf
 			fail();
 		} else {
 			Log.w(this.getClass().getSimpleName(), "Leif: Votes retrieved.");
+			
+			Log.i(this.getClass().getSimpleName(), "Leif: " +votes.vinnare + " vann omröstningen");
+			ListIterator<PartyVote> iter = votes.voteItems.listIterator();
+			while(iter.hasNext()){
+				this.printPartyVote(iter.next());
+			}
 		}
-		
-		
 	}
-
+	
 	@Override
 	public void votesCancelled(VotesResult votes) {
 		Log.e(this.getClass().getSimpleName(), "Leif: Votes cancelled!");
 		fail();
+	}
+	
+	private void printPartyVote(PartyVote vit){
+		Log.i(this.getClass().getSimpleName(), "Leif:   "+vit.party+": " + vit.yes + " ja, " + vit.no + " nej, "+ vit.neutral + " avstår, " + vit.absent + " frånvarande");
 	}
 }
