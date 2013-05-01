@@ -42,7 +42,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 
 	@Override
 	protected void onPreExecute(){
-		acti.onPreExecute();
+		acti.onArticlesPreExecute();
 	}
 
 	@Override
@@ -54,7 +54,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 	@Override
 	protected void onCancelled(QueryResult qres){
 		Retriever.threadFinished();
-		acti.wasCancelled(qres);
+		acti.articlesCancelled(qres);
 	}
 
 	private QueryResult createArticles(QueryParam qpar){

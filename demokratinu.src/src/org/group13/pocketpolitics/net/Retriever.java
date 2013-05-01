@@ -43,6 +43,11 @@ public class Retriever {
 		new ArticlesAsyncTask(act).execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
 	
+	public static void retrieveVotes(VotesInterface act, String dokCode, String motionCode){
+		threads++;
+		new VotesAsyncTask(act, dokCode, motionCode).execute();
+	}
+	
 	/**
 	 * @deprecated
 	 * Retrieves the latest articles in the RSS "Beslut i korthet" from riksdagen.se

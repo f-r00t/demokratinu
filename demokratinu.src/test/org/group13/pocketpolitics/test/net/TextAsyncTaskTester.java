@@ -75,7 +75,7 @@ public class TextAsyncTaskTester extends AndroidTestCase implements TextViewInte
 	}
 
 	@Override
-	public void onPreExecute() {
+	public void onArticlesPreExecute() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -87,7 +87,7 @@ public class TextAsyncTaskTester extends AndroidTestCase implements TextViewInte
 	}
 
 	@Override
-	public void wasCancelled(QueryResult qres) {
+	public void articlesCancelled(QueryResult qres) {
 		// TODO Auto-generated method stub
 		
 	}

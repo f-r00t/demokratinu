@@ -5,13 +5,12 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.group13.pocketpolitics.net.PartyVote;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class VotesAsyncTask<Input> extends XmlAsyncTask<Input, Integer, VotesResult> {
+public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 
 	private final String URL = "data.riksdagen.se/utskottsforslag/";
 	
@@ -19,16 +18,35 @@ public class VotesAsyncTask<Input> extends XmlAsyncTask<Input, Integer, VotesRes
 	
 	private final String dokCode;
 	private final String motionCode;
+	private final VotesInterface act;
 	
-	VotesAsyncTask(String dokCode, String motionCode){
+	VotesAsyncTask(VotesInterface act, String dokCode, String motionCode){
 		this.dokCode = dokCode;
 		this.motionCode = motionCode;
+		this.act = act;
 	}
 	
 	@Override
-	protected VotesResult doInBackground(Input... arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	protected void onPreExecute(){
+		act.onVotesPreExecute();
+	}
+	
+	@Override
+	protected VotesResult doInBackground(Void... params) {
+		
+		return retrieveVotes();
+	}
+	
+	@Override
+	protected void onPostExecute(VotesResult res){
+		Retriever.threadFinished();
+		act.handleVotes(res);
+	}
+	
+	@Override
+	protected void onCancelled(VotesResult res){
+		Retriever.threadFinished();
+		act.votesCancelled(res);
 	}
 	
 	private VotesResult retrieveVotes(){

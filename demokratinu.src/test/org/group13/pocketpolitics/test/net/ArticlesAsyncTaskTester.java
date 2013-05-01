@@ -71,13 +71,13 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 		
 	}
 	@Override
-	public void wasCancelled(QueryResult qres) {
+	public void articlesCancelled(QueryResult qres) {
 		threads--;
 		finished++;
 		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask: Thread Cancelled!");
 	}
 	@Override
-	public void onPreExecute() {
+	public void onArticlesPreExecute() {
 		// TODO Auto-generated method stub
 		
 	}

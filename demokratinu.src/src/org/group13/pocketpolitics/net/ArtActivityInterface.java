@@ -7,7 +7,7 @@ import org.group13.pocketpolitics.model.Article;
 
 public interface ArtActivityInterface {
 
-	public void onPreExecute();
+	public void onArticlesPreExecute();
 	
 	/**
 	 * @deprecated
@@ -16,5 +16,5 @@ public interface ArtActivityInterface {
 	public void addArticles(List<Article> arts);
 	public void addArticles(QueryResult qres);
 	
-	public void wasCancelled(QueryResult qres);
+	public void articlesCancelled(QueryResult qres);
 }
