@@ -5,12 +5,12 @@ import java.util.ListIterator;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.PartyVote;
 import org.group13.pocketpolitics.net.Retriever;
-import org.group13.pocketpolitics.net.VotesResult;
+import org.group13.pocketpolitics.net.UtskottsForslag;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<VotesResult>{
+public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<UtskottsForslag>{
 
 	private final int totalWait = 20;	//secs
 	
@@ -49,7 +49,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	}
 
 	@Override
-	public void onSuccess(VotesResult votes) {
+	public void onSuccess(UtskottsForslag votes) {
 		if(votes==null){
 			Log.e(this.getClass().getSimpleName(), "Leif: Votes null, something went wrong!");
 			fail();

@@ -10,7 +10,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
+public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, UtskottsForslag> {
 
 	private final String URL = "http://data.riksdagen.se/utskottsforslag/";
 	
@@ -18,7 +18,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	
 	private final String dokCode;
 	private final String motionId;
-	private final ActivityNetInterface<VotesResult> act;
+	private final ActivityNetInterface<UtskottsForslag> act;
 	
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	 * @param dokCode on type "H001UbU5"
 	 * @param motionId on type "Ub354"
 	 */
-	VotesAsyncTask(ActivityNetInterface act, String dokCode, String motionId){
+	VotesAsyncTask(ActivityNetInterface<UtskottsForslag> act, String dokCode, String motionId){
 		this.dokCode = dokCode;
 		this.motionId = motionId;
 		this.act = act;
@@ -42,13 +42,13 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	}
 	
 	@Override
-	protected VotesResult doInBackground(Void... params) {
+	protected UtskottsForslag doInBackground(Void... params) {
 		
 		return retrieveVotes();
 	}
 	
 	@Override
-	protected void onPostExecute(VotesResult res){
+	protected void onPostExecute(UtskottsForslag res){
 		Retriever.threadFinished();
 		if(act!=null){
 			act.onSuccess(res);
@@ -58,7 +58,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	}
 	
 	@Override
-	protected void onCancelled(VotesResult res){
+	protected void onCancelled(UtskottsForslag res){
 		Retriever.threadFinished();
 		if(act!=null){
 			act.onFailure("! Cancelled!");
@@ -68,7 +68,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		
 	}
 	
-	private VotesResult retrieveVotes(){
+	private UtskottsForslag retrieveVotes(){
 		String url = URL+dokCode;
 		// Log.i(this.getClass().getSimpleName(), "Leif: url = "+url);
 		
@@ -76,7 +76,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		
 		try {
 			// Log.i(this.getClass().getSimpleName(), "Leif: start parsing xml...");
-			VotesResult result = this.parseXml(instr);
+			UtskottsForslag result = this.parseXml(instr);
 			
 			return result;
 		} catch (XmlPullParserException e) {
@@ -91,7 +91,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	}
 
 	@Override
-	protected VotesResult readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
+	protected UtskottsForslag readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
 
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		// Log.i(this.getClass().getSimpleName(), "Leif: entering <utskottsforslag>");
@@ -108,7 +108,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 			return null;
 		}
 		
-		VotesResult out=null;
+		UtskottsForslag out=null;
 		
 		while(parser.next()!=XmlPullParser.START_TAG){
 			//Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped a tag of type: "+parser.getEventType());
@@ -149,7 +149,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		return out;
 	}
 	
-	private VotesResult parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private UtskottsForslag parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		
 		boolean found = false;
@@ -206,7 +206,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 		parser.require(XmlPullParser.END_TAG, xmlns, "utskottsforslag");
 		
 		if(found){
-			VotesResult res = new VotesResult(this.motionId, voteXmlUrl, motParti, motForslag, vinnare, partyVotes);
+			UtskottsForslag res = new UtskottsForslag(this.motionId, voteXmlUrl, motParti, motForslag, vinnare, partyVotes);
 			return res;
 		}
 		return null;
