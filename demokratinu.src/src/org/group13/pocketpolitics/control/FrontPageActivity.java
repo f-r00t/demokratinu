@@ -9,6 +9,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,6 +42,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				//Code goes here
+				Log.i("Test","Viking:Line");
 				Toast.makeText(getApplicationContext(),
 					      "Click ListItem Number " + position, Toast.LENGTH_LONG)
 					      .show();
