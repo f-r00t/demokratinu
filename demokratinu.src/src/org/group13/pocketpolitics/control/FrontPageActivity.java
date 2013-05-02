@@ -42,7 +42,6 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				//Code goes here
-				Log.i("Test","Viking:Line");
 				Toast.makeText(getApplicationContext(),
 					      "Click ListItem Number " + position, Toast.LENGTH_LONG)
 					      .show();
