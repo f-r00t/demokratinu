@@ -6,7 +6,7 @@ import java.util.List;
 public class Article extends LikeableItem {
 
 	private String title;
-	private String dokid;
+	private String beteckning;
 	
 	private int traffnummer;
 	private String datum;
@@ -17,6 +17,9 @@ public class Article extends LikeableItem {
 	private String notisrubrik;
 	private String beslutsdag;
 	private int beslutad;
+	
+	private List<UtskottsForslag> fors;
+	
 	
 	/**
 	 * Ett betänkande
@@ -29,7 +32,7 @@ public class Article extends LikeableItem {
 	 * @param nbrOfDislikes
 	 * @param replies
 	 * @param title
-	 * @param dokid	beteckning: "UbU5"
+	 * @param beteckning	beteckning: "UbU5"
 	 * @param traffnummer
 	 * @param datum
 	 * @param id	fullt id: "H001UbU5"
@@ -42,7 +45,8 @@ public class Article extends LikeableItem {
 	 */
 	public Article(String content, Date date, boolean isHidden, int opinion,
 			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, 
-			String title, String dokid,
+			String title, 
+			String beteckning,
 			int traffnummer,
 			String datum,
 			String id,
@@ -51,12 +55,13 @@ public class Article extends LikeableItem {
 			double score,
 			String notisrubrik,
 			String beslutsdag,
-			int beslutad) {
+			int beslutad,
+			List<UtskottsForslag> fors) {
 		
 		super(content, date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
 		
 		this.title = title;
-		this.dokid = dokid;
+		this.beteckning = beteckning;
 		
 		this.traffnummer = traffnummer;
 		this.datum = datum;
@@ -67,6 +72,8 @@ public class Article extends LikeableItem {
 		this.notisrubrik=notisrubrik;
 		this.beslutsdag=beslutsdag;
 		this.beslutad=beslutad;
+		
+		this.fors=fors;
 	}
 	
 	// Temporary constructor
@@ -146,7 +153,14 @@ public class Article extends LikeableItem {
 		this.beslutad = beslutad;
 	}
 
-	
+	public List<UtskottsForslag> getFors() {
+		return fors;
+	}
+
+	public void setFors(List<UtskottsForslag> fors) {
+		this.fors = fors;
+	}
+
 
 
 	/**
@@ -167,15 +181,15 @@ public class Article extends LikeableItem {
 	 * 
 	 * @return The document id of this article on the Riksdag database.
 	 */
-	public String getDokid() {
-		return dokid;
+	public String getBeteckning() {
+		return beteckning;
 	}
 	
 	/**
 	 * 
-	 * @param dokid The document id of this article on the Riksdag database.
+	 * @param beteckning The document id of this article on the Riksdag database.
 	 */
-	public void setDokid(String dokid) {
-		this.dokid = dokid;
+	public void setBeteckning(String beteckning) {
+		this.beteckning = beteckning;
 	}
 }

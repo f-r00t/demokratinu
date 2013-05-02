@@ -2,10 +2,10 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
+import org.group13.pocketpolitics.model.UtskottsForslag;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.PartyVote;
 import org.group13.pocketpolitics.net.Retriever;
-import org.group13.pocketpolitics.net.UtskottsForslag;
 
 import android.test.AndroidTestCase;
 import android.util.Log;

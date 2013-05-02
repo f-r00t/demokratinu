@@ -11,7 +11,6 @@ import java.util.Locale;
 import org.group13.pocketpolitics.model.Article;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
 
 import android.util.Log;
 
@@ -155,7 +154,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 				//Log.w(this.getClass().getSimpleName(), "Leif: relaterat_id läst: "+art.getRelaterat_id());
 				
 			} else if(name.equals("beteckning")){ 
-				art.setDokid(readString(parser, "beteckning", xmlns));
+				art.setBeteckning(readString(parser, "beteckning", xmlns));
 			} else if(name.equals("score")){
 				
 				//Källa: http://stackoverflow.com/questions/4323599/best-way-to-parsedouble-with-comma-as-decimal-separator
