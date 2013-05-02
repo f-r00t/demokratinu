@@ -34,7 +34,11 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	
 	@Override
 	protected void onPreExecute(){
-		act.onPreExecute();
+		if(act!=null){
+			act.onPreExecute();
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
+		}
 	}
 	
 	@Override
@@ -46,13 +50,22 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	@Override
 	protected void onPostExecute(VotesResult res){
 		Retriever.threadFinished();
-		act.onSuccess(res);
+		if(act!=null){
+			act.onSuccess(res);
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
+		}
 	}
 	
 	@Override
 	protected void onCancelled(VotesResult res){
 		Retriever.threadFinished();
-		act.onFailure("! Cancelled!");
+		if(act!=null){
+			act.onFailure("! Cancelled!");
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
+		}
+		
 	}
 	
 	private VotesResult retrieveVotes(){

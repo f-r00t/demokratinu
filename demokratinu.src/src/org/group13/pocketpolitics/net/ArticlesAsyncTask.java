@@ -42,19 +42,33 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 
 	@Override
 	protected void onPreExecute(){
+		if(acti!=null){
+			
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
+		}
 		acti.onPreExecute();
 	}
 
 	@Override
 	protected void onPostExecute(QueryResult qres){
 		Retriever.threadFinished();
-		acti.onSuccess(qres);
+		if(acti!=null){
+			acti.onSuccess(qres);
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
+		}
 	}
 
 	@Override
 	protected void onCancelled(QueryResult qres){
 		Retriever.threadFinished();
-		acti.onFailure("! Cancelled!");
+		
+		if(acti!=null){
+			acti.onFailure("! Cancelled!");
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
+		}
 	}
 
 	private QueryResult createArticles(QueryParam qpar){
