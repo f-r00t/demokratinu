@@ -47,7 +47,7 @@ class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 			
 			String[] title = total.split("\\(");
 			a.setTitle(title[0]);
-			a.setDokid((title[1].split("\\)")[0]));
+			a.setBeteckning((title[1].split("\\)")[0]));
 			arts.add(a);
 		}
 

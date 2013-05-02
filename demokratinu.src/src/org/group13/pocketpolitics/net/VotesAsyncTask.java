@@ -5,31 +5,32 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.UtskottsForslag;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, UtskottsForslag> {
+public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, OutClass> {
 
 	private final String URL = "http://data.riksdagen.se/utskottsforslag/";
 	
 	private final String xmlns = null;
 	
-	private final String dokCode;
-	private final String motionId;
-	private final ActivityNetInterface<UtskottsForslag> act;
+	private final Article article;
+	
+	//private final String dokCode;	//H001...
+	//private final String motionId;
+	private final ActivityNetInterface<OutClass> act;
 	
 	/**
 	 * 
-	 * @param act
-	 * @param dokCode on type "H001UbU5"
-	 * @param motionId on type "Ub354"
+	 * @param act	Interface updating the GUI
+	 * @param article The article to find votes for. It is updated dynamically
 	 */
-	VotesAsyncTask(ActivityNetInterface<UtskottsForslag> act, String dokCode, String motionId){
-		this.dokCode = dokCode;
-		this.motionId = motionId;
+	VotesAsyncTask(ActivityNetInterface<OutClass> act, Article article){
+		this.article = article;
 		this.act = act;
 	}
 	
@@ -39,17 +40,23 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, UtskottsForslag>
 			act.onPreExecute();
 		} else {
 			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
+			this.cancel(true);
+		}
+		
+		if(article == null || article.getId() == null){
+			Log.e(this.getClass().getSimpleName(), "Leif: in @.onPreExecute: Article is null or has no id!");
+			this.cancel(true);
 		}
 	}
 	
 	@Override
-	protected UtskottsForslag doInBackground(Void... params) {
+	protected OutClass doInBackground(Article... params) {
 		
 		return retrieveVotes();
 	}
 	
 	@Override
-	protected void onPostExecute(UtskottsForslag res){
+	protected void onPostExecute(OutClass res){
 		Retriever.threadFinished();
 		if(act!=null){
 			act.onSuccess(res);
@@ -59,7 +66,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, UtskottsForslag>
 	}
 	
 	@Override
-	protected void onCancelled(UtskottsForslag res){
+	protected void onCancelled(OutClass res){
 		Retriever.threadFinished();
 		if(act!=null){
 			act.onFailure("! Cancelled!");
@@ -69,15 +76,15 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, UtskottsForslag>
 		
 	}
 	
-	private UtskottsForslag retrieveVotes(){
-		String url = URL+dokCode;
+	private OutClass retrieveVotes(){
+		String url = URL+article.getId();
 		// Log.i(this.getClass().getSimpleName(), "Leif: url = "+url);
 		
 		InputStream instr = retrieveStream(url);
 		
 		try {
 			// Log.i(this.getClass().getSimpleName(), "Leif: start parsing xml...");
-			UtskottsForslag result = this.parseXml(instr);
+			OutClass result = this.parseXml(instr);
 			
 			return result;
 		} catch (XmlPullParserException e) {
@@ -92,7 +99,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, UtskottsForslag>
 	}
 
 	@Override
-	protected UtskottsForslag readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
+	protected OutClass readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
 
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		// Log.i(this.getClass().getSimpleName(), "Leif: entering <utskottsforslag>");
