@@ -126,6 +126,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		}
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokutskottsforslag");
+		List<UtskottsForslag> lForslag = new ArrayList<UtskottsForslag>();
 		
 		if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("dokutskottsforslag")){
 			
@@ -139,7 +140,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 					// Log.i(this.getClass().getSimpleName(), "Leif: Entering <utskottsforslag>");
 					UtskottsForslag out = parseForslag(parser);
 					if(out!=null){
-						article.getFors().add(out);
+						lForslag.add(out);
 					} else {
 						Log.w(this.getClass().getSimpleName(), "Leif: in .readFeed(): UtskottsForslag null!");
 					}
@@ -153,6 +154,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 			return null;
 		}
 		
+		article.setFors(lForslag);
 		return article.getId();
 	}
 	
@@ -214,8 +216,14 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 	private List<PartyVote> parseVotering(XmlPullParser parser) throws XmlPullParserException, IOException{
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "votering_sammanfattning_html");
-		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <votering_sammanfattning_html>");
-		while(parser.nextTag() !=XmlPullParser.START_TAG);
+		
+		Log.i(this.getClass().getSimpleName(), "Leif: Entering <votering_sammanfattning_html>");
+		
+		while(parser.nextTag() !=XmlPullParser.START_TAG){
+			if(parser.getEventType()==XmlPullParser.END_TAG && "votering_sammanfattning_html".equals(parser.getName())){
+				return null;
+			}
+		}
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "table");
 		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <table>");

@@ -2,6 +2,7 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
+import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.UtskottsForslag;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.PartyVote;
@@ -10,12 +11,17 @@ import org.group13.pocketpolitics.net.Retriever;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<UtskottsForslag>{
+public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<String>{
 
 	private final int totalWait = 20;	//secs
+	private Article testArt;
 	
 	public void testVotes(){
-		Retriever.retrieveVotes(this, "H001UbU5", "Ub354");
+		
+		this.testArt = new Article();
+		testArt.setId("H001UbU5");
+		
+		Retriever.retrieveVotes(this, testArt);
 		int threads;
 		int i = 0;
 		boolean cancelled = false;
@@ -28,8 +34,8 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 				Log.i(this.getClass().getSimpleName(), "Leif: Slept another 500 ms. Number extra threads: "+threads);
 				
 				if(i>totalWait*2){
-					Retriever.cancelAllTasks();
 					cancelled = true;
+					Retriever.cancelAllTasks();
 				}
 				
 			}while(threads>0);
@@ -49,15 +55,23 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	}
 
 	@Override
-	public void onSuccess(UtskottsForslag votes) {
-		if(votes==null){
-			Log.e(this.getClass().getSimpleName(), "Leif: Votes null, something went wrong!");
+	public void onSuccess(String id) {
+		if(id==null || !testArt.getId().equals(id)){
+			Log.e(this.getClass().getSimpleName(), "Leif: in @.onSuccess(): id null, something went wrong!");
 			fail();
-		} else {
+		}
+		
+		if(testArt.getFors()==null){
+			Log.e(this.getClass().getSimpleName(), "Leif: in @.onSuccess(): .getFors() null, something went wrong!");
+			fail();
+		}
+		else {
 			Log.w(this.getClass().getSimpleName(), "Leif: Votes retrieved.");
 			
-			Log.i(this.getClass().getSimpleName(), "Leif: " +votes.vinnare + " vann omröstningen");
-			ListIterator<PartyVote> iter = votes.voteItems.listIterator();
+			UtskottsForslag fors = testArt.getFors().get(0);
+			
+			Log.i(this.getClass().getSimpleName(), "Leif: " +fors.vinnare + " vann omröstningen");
+			ListIterator<PartyVote> iter = fors.voteItems.listIterator();
 			while(iter.hasNext()){
 				this.printPartyVote(iter.next());
 			}
