@@ -21,6 +21,29 @@ public class Article extends LikeableItem {
 	private String beslutsdag;
 	private int beslutad;
 	
+	/**
+	 * Ett betänkande
+	 * 
+	 * @param content
+	 * @param date
+	 * @param isHidden
+	 * @param opinion
+	 * @param nbrOfLikes
+	 * @param nbrOfDislikes
+	 * @param replies
+	 * @param title
+	 * @param dokid	beteckning: UbU5
+	 * @param traffnummer
+	 * @param datum
+	 * @param id	fullt id: H001UbU5
+	 * @param titel
+	 * @param rm	2012/13
+	 * @param relaterat_id
+	 * @param score	3.6777
+	 * @param notisrubrik
+	 * @param beslutsdag
+	 * @param beslutad
+	 */
 	public Article(String content, Date date, boolean isHidden, int opinion,
 			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, 
 			String title, String dokid,
@@ -30,10 +53,8 @@ public class Article extends LikeableItem {
 			String titel,
 			String rm,
 			String relaterat_id,
-			String beteckning,
 			double score,
 			String notisrubrik,
-			String notis,
 			String beslutsdag,
 			int beslutad) {
 		
@@ -45,13 +66,10 @@ public class Article extends LikeableItem {
 		this.traffnummer = traffnummer;
 		this.datum = datum;
 		this.id = id;
-		//this.titel = titel;
 		this.rm = rm;
 		this.relaterat_id =relaterat_id;
-		//this.beteckning = beteckning;
 		this.score=score;
 		this.notisrubrik=notisrubrik;
-		//this.notis=notis;
 		this.beslutsdag=beslutsdag;
 		this.beslutad=beslutad;
 	}
