@@ -189,13 +189,16 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 				motParti = this.readString(parser, "motforslag_partier", xmlns);
 			} else if("votering_url_xml".equals(name)){
 				voteXmlUrl = this.readString(parser, "votering_url_xml", xmlns);
-				Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Found url xml:"+voteXmlUrl);
+				
+				//Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Found url xml:"+voteXmlUrl);
 				
 			} else if("vinnare".equals(name)){
 				vinnare = this.readString(parser, "vinnare", xmlns);
 			} else if("votering_sammanfattning_html".equals(name)){
 				partyVotes = this.parseVotering(parser);
-				Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Finished parsing the html votes table.");
+				
+				//Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Finished parsing the html votes table.");
+				
 			} else {
 				this.skip(parser);
 			}
@@ -217,7 +220,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "votering_sammanfattning_html");
 		
-		Log.i(this.getClass().getSimpleName(), "Leif: Entering <votering_sammanfattning_html>");
+		//Log.i(this.getClass().getSimpleName(), "Leif: Entering <votering_sammanfattning_html>");
 		
 		while(parser.nextTag() !=XmlPullParser.START_TAG){
 			if(parser.getEventType()==XmlPullParser.END_TAG && "votering_sammanfattning_html".equals(parser.getName())){
@@ -241,8 +244,8 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		parser.require(XmlPullParser.START_TAG, xmlns, "tr");
 		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <tr class=\"vottabellrubrik\">");
 		attr = parser.getAttributeValue(xmlns, "class");
-		if(!"vottabellrubrik".equals(attr)){
-			Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): <tr class=\"vottabellrubrik\"> expected, found class=\""+attr+"\"");
+		if(!"vottabellrubik".equals(attr)){
+			Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): <tr class=\"vottabellrubik\"> expected, found class=\""+attr+"\"");
 		}
 		this.skip(parser);
 		
