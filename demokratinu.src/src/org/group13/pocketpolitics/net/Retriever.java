@@ -44,14 +44,14 @@ public class Retriever {
 	 * 0 = sort after date (all issues); 
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
-	public static void retrieveArticles(ArtActivityInterface act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
+	public static void retrieveArticles(ActivityNetInterface act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
 		threads++;
 		ArticlesAsyncTask task =new ArticlesAsyncTask(act);
 		tasks.add(task);
 		task.execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
 	
-	public static void retrieveVotes(VotesInterface act, String dokCode, String motionCode){
+	public static void retrieveVotes(ActivityNetInterface act, String dokCode, String motionCode){
 		threads++;
 		VotesAsyncTask task =new VotesAsyncTask(act, dokCode, motionCode);
 		tasks.add(task);

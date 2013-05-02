@@ -4,7 +4,11 @@ import java.util.List;
 
 import org.group13.pocketpolitics.model.Article;
 
-
+/**
+ * @deprecated
+ * @author Leif
+ *
+ */
 public interface ArtActivityInterface {
 
 	public void onArticlesPreExecute();

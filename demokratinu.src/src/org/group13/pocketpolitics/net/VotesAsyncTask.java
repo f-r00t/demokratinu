@@ -18,7 +18,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	
 	private final String dokCode;
 	private final String motionId;
-	private final VotesInterface act;
+	private final ActivityNetInterface<VotesResult> act;
 	
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	 * @param dokCode on type "H001UbU5"
 	 * @param motionId on type "Ub354"
 	 */
-	VotesAsyncTask(VotesInterface act, String dokCode, String motionId){
+	VotesAsyncTask(ActivityNetInterface act, String dokCode, String motionId){
 		this.dokCode = dokCode;
 		this.motionId = motionId;
 		this.act = act;
@@ -34,7 +34,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	
 	@Override
 	protected void onPreExecute(){
-		act.onVotesPreExecute();
+		act.onPreExecute();
 	}
 	
 	@Override
@@ -46,13 +46,13 @@ public class VotesAsyncTask extends XmlAsyncTask<Void, Integer, VotesResult> {
 	@Override
 	protected void onPostExecute(VotesResult res){
 		Retriever.threadFinished();
-		act.handleVotes(res);
+		act.onSuccess(res);
 	}
 	
 	@Override
 	protected void onCancelled(VotesResult res){
 		Retriever.threadFinished();
-		act.votesCancelled(res);
+		act.onFailure("! Cancelled!");
 	}
 	
 	private VotesResult retrieveVotes(){

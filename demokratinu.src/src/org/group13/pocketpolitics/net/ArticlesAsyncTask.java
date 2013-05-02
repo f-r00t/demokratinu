@@ -25,9 +25,9 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 
 	private static int ARTICLES_PER_PAGE = 15;
 
-	private ArtActivityInterface acti;
+	private ActivityNetInterface<QueryResult> acti;
 
-	ArticlesAsyncTask(ArtActivityInterface act){
+	ArticlesAsyncTask(ActivityNetInterface<QueryResult> act){
 		this.acti=act;
 	}
 
@@ -42,19 +42,19 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 
 	@Override
 	protected void onPreExecute(){
-		acti.onArticlesPreExecute();
+		acti.onPreExecute();
 	}
 
 	@Override
 	protected void onPostExecute(QueryResult qres){
 		Retriever.threadFinished();
-		acti.addArticles(qres);
+		acti.onSuccess(qres);
 	}
 
 	@Override
 	protected void onCancelled(QueryResult qres){
 		Retriever.threadFinished();
-		acti.articlesCancelled(qres);
+		acti.onFailure("! Cancelled!");
 	}
 
 	private QueryResult createArticles(QueryParam qpar){

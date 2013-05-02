@@ -1,11 +1,10 @@
 package org.group13.pocketpolitics.test.net;
 
-import java.util.List;
 import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Utskott;
-import org.group13.pocketpolitics.net.ArtActivityInterface;
+import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
 
@@ -13,7 +12,7 @@ import android.test.AndroidTestCase;
 import android.util.Log;
 
 
-public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActivityInterface  {
+public class ArticlesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<QueryResult>  {
 
 	private final int npages = 3;
 	private final int totalwait = 20;	//secs
@@ -47,7 +46,7 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 		Log.i(this.getClass().getSimpleName(), "Leif: Thread finished sleeping");
 	}
 	@Override
-	public void addArticles(QueryResult qres) {
+	public void onSuccess(QueryResult qres) {
 		threads--;
 		finished++;
 		
@@ -71,19 +70,13 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements ArtActiv
 		
 	}
 	@Override
-	public void articlesCancelled(QueryResult qres) {
+	public void onFailure(String message) {
 		threads--;
 		finished++;
-		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask: Thread Cancelled!");
+		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask: Failed "+message);
 	}
 	@Override
-	public void onArticlesPreExecute() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addArticles(List<Article> arts) {
+	public void onPreExecute() {
 		// TODO Auto-generated method stub
 		
 	}

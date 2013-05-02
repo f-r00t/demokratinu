@@ -2,15 +2,15 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
+import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.PartyVote;
 import org.group13.pocketpolitics.net.Retriever;
-import org.group13.pocketpolitics.net.VotesInterface;
 import org.group13.pocketpolitics.net.VotesResult;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
 
-public class VotesAsyncTaskTester extends AndroidTestCase implements VotesInterface{
+public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<VotesResult>{
 
 	private final int totalWait = 20;	//secs
 	
@@ -49,13 +49,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements VotesInterf
 	}
 
 	@Override
-	public void onVotesPreExecute() {
-		Log.i(this.getClass().getSimpleName(), "Leif: Votes test commencing...");
-		
-	}
-
-	@Override
-	public void handleVotes(VotesResult votes) {
+	public void onSuccess(VotesResult votes) {
 		if(votes==null){
 			Log.e(this.getClass().getSimpleName(), "Leif: Votes null, something went wrong!");
 			fail();
@@ -71,12 +65,18 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements VotesInterf
 	}
 	
 	@Override
-	public void votesCancelled(VotesResult votes) {
-		Log.e(this.getClass().getSimpleName(), "Leif: Votes cancelled!");
+	public void onFailure(String message) {
+		Log.e(this.getClass().getSimpleName(), "Leif: Votes failed: "+message);
 		fail();
 	}
 	
 	private void printPartyVote(PartyVote vit){
 		Log.i(this.getClass().getSimpleName(), "Leif:   "+vit.party+": " + vit.yes + " ja, " + vit.no + " nej, "+ vit.neutral + " avstår, " + vit.absent + " frånvarande");
+	}
+
+	@Override
+	public void onPreExecute() {
+		Log.i(this.getClass().getSimpleName(), "Leif: Votes test commencing...");
+		
 	}
 }

@@ -1,5 +1,10 @@
 package org.group13.pocketpolitics.net;
 
+/**
+ * @deprecated
+ * @author Leif
+ *
+ */
 public interface VotesInterface {
 
 	public void onVotesPreExecute();
