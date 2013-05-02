@@ -52,10 +52,10 @@ public class TextAsyncTaskTester extends AndroidTestCase implements TextViewInte
 		int is = 0;
 		while(it.hasNext() && is++<ntexts){
 			Article a = it.next();
-			Retriever.retrieveText(this, "2013", a.getDokid());
+			Retriever.retrieveText(this, "2013", a.getBeteckning());
 			threads++;
 			
-			Log.w(this.getClass().getSimpleName(), "Leif testing TextAsyncTask. " + "Dokid: "+a.getDokid()+" Title: "+a.getTitle());
+			Log.w(this.getClass().getSimpleName(), "Leif testing TextAsyncTask. " + "Dokid: "+a.getBeteckning()+" Title: "+a.getTitle());
 		}
 		if(is<ntexts){
 			fail();

@@ -12,7 +12,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, OutClass> {
+public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 
 	private final String URL = "http://data.riksdagen.se/utskottsforslag/";
 	
@@ -22,14 +22,14 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 	
 	//private final String dokCode;	//H001...
 	//private final String motionId;
-	private final ActivityNetInterface<OutClass> act;
+	private final ActivityNetInterface<String> act;
 	
 	/**
 	 * 
 	 * @param act	Interface updating the GUI
 	 * @param article The article to find votes for. It is updated dynamically
 	 */
-	VotesAsyncTask(ActivityNetInterface<OutClass> act, Article article){
+	VotesAsyncTask(ActivityNetInterface<String> act, Article article){
 		this.article = article;
 		this.act = act;
 	}
@@ -50,13 +50,13 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 	}
 	
 	@Override
-	protected OutClass doInBackground(Article... params) {
+	protected String doInBackground(Article... params) {
 		
 		return retrieveVotes();
 	}
 	
 	@Override
-	protected void onPostExecute(OutClass res){
+	protected void onPostExecute(String res){
 		Retriever.threadFinished();
 		if(act!=null){
 			act.onSuccess(res);
@@ -66,7 +66,7 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 	}
 	
 	@Override
-	protected void onCancelled(OutClass res){
+	protected void onCancelled(String res){
 		Retriever.threadFinished();
 		if(act!=null){
 			act.onFailure("! Cancelled!");
@@ -76,7 +76,7 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 		
 	}
 	
-	private OutClass retrieveVotes(){
+	private String retrieveVotes(){
 		String url = URL+article.getId();
 		// Log.i(this.getClass().getSimpleName(), "Leif: url = "+url);
 		
@@ -84,7 +84,7 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 		
 		try {
 			// Log.i(this.getClass().getSimpleName(), "Leif: start parsing xml...");
-			OutClass result = this.parseXml(instr);
+			String result = this.parseXml(instr);
 			
 			return result;
 		} catch (XmlPullParserException e) {
@@ -99,7 +99,7 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 	}
 
 	@Override
-	protected OutClass readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
+	protected String readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
 
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		// Log.i(this.getClass().getSimpleName(), "Leif: entering <utskottsforslag>");
@@ -116,7 +116,7 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 			return null;
 		}
 		
-		UtskottsForslag out=null;
+		
 		
 		while(parser.next()!=XmlPullParser.START_TAG){
 			//Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped a tag of type: "+parser.getEventType());
@@ -133,40 +133,38 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 			while(parser.next()!=XmlPullParser.END_TAG){
 				if(parser.getEventType()!=XmlPullParser.START_TAG) {
 					continue;
-				} else if(out==null) {
-					if(parser.getName().equals("utskottsforslag")){
-						// Log.i(this.getClass().getSimpleName(), "Leif: Entering <utskottsforslag>");
-						out = parseForslag(parser);
-					} else {
-						Log.w(this.getClass().getSimpleName(), "Leif: in .readFeed: expected <utskottsforslag>, found <"+parser.getName() +">");
-						skip(parser);
-					}
-					
-				} else {
-					this.skip(parser);
 				}
 				
+				if(parser.getName().equals("utskottsforslag")){
+					// Log.i(this.getClass().getSimpleName(), "Leif: Entering <utskottsforslag>");
+					UtskottsForslag out = parseForslag(parser);
+					if(out!=null){
+						article.getFors().add(out);
+					} else {
+						Log.w(this.getClass().getSimpleName(), "Leif: in .readFeed(): UtskottsForslag null!");
+					}
+				} else {
+					Log.w(this.getClass().getSimpleName(), "Leif: in .readFeed: expected <utskottsforslag>, found <"+parser.getName() +">");
+					skip(parser);
+				}
 			}
 		} else {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error, tag <dokutskottsforslag> expected, got <" + parser.getName()+">");
 			return null;
 		}
 		
-		
-		
-		return out;
+		return article.getId();
 	}
 	
 	private UtskottsForslag parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		
-		boolean found = false;
-		
+		int punkt = -1;
 		String rubrik = null;
-		
+		String forslag = null;
 		String voteXmlUrl = null;
 		String motParti = null;
-		String motForslag = null;
+		int motForslag = -1;
 		String vinnare = null;
 		List<PartyVote> partyVotes = null;
 		
@@ -177,44 +175,37 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 			
 			String name = parser.getName();
 			
-			if(name.equals("rubrik")){
+			if("punkt".equals(name)){
+				punkt = Integer.parseInt(this.readString(parser, "punkt", xmlns));
+			} else if("rubrik".equals(name)){
 				rubrik = this.readString(parser, "rubrik", xmlns);
-			} else if(name.equals("forslag")){
-				String fors = this.readString(parser, "forslag", xmlns);
-				found = fors.contains(this.motionId);
-				if(!found){
-					Log.i(this.getClass().getSimpleName(), "Leif: hoped to find \""+this.motionId + "\" in: "+fors);
-				}
-			} else if(found){
-				if(name.equals("motforslag_nummer")){
-					motForslag = this.readString(parser, "motforslag_nummer", xmlns);
-				} else if(name.equals("motforslag_partier")){
-					motParti = this.readString(parser, "motforslag_partier", xmlns);
-				} else if(name.equals("votering_url_xml")){
-					voteXmlUrl = this.readString(parser, "votering_url_xml", xmlns);
-					Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Found url xml:"+voteXmlUrl);
-					
-				} else if(name.equals("vinnare")){
-					vinnare = this.readString(parser, "vinnare", xmlns);
-				} else if(name.equals("votering_sammanfattning_html")){
-					partyVotes = this.parseVotering(parser);
-					Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Finished parsing the html votes table.");
-					
-				} else {
-					this.skip(parser);
-				}
-			}
-			else {
+			} else if("forslag".equals(name)){
+				forslag = this.readString(parser, "forslag", xmlns);
+			} else if("motforslag_nummer".equals(name)){
+				motForslag = Integer.parseInt(this.readString(parser, "motforslag_nummer", xmlns));
+			} else if("motforslag_partier".equals(name)){
+				motParti = this.readString(parser, "motforslag_partier", xmlns);
+			} else if("votering_url_xml".equals(name)){
+				voteXmlUrl = this.readString(parser, "votering_url_xml", xmlns);
+				Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Found url xml:"+voteXmlUrl);
+				
+			} else if("vinnare".equals(name)){
+				vinnare = this.readString(parser, "vinnare", xmlns);
+			} else if("votering_sammanfattning_html".equals(name)){
+				partyVotes = this.parseVotering(parser);
+				Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Finished parsing the html votes table.");
+			} else {
 				this.skip(parser);
 			}
+			
 		}
 		// Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag: event type " + parser.getEventType());
 		// Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag: tag name <" + parser.getName() + ">");
 		
 		parser.require(XmlPullParser.END_TAG, xmlns, "utskottsforslag");
 		
-		if(found){
-			UtskottsForslag res = new UtskottsForslag(this.motionId, voteXmlUrl, motParti, motForslag, vinnare, partyVotes);
+		if(forslag!=null){
+			UtskottsForslag res = new UtskottsForslag(punkt, rubrik, forslag, voteXmlUrl, motParti, motForslag, vinnare, partyVotes);
 			return res;
 		}
 		return null;
@@ -321,7 +312,7 @@ public class VotesAsyncTask<OutClass> extends XmlAsyncTask<Article, Integer, Out
 			//Log.i(this.getClass().getSimpleName(), "Leif: in .parseDokument(): looking at <" + name + ">");
 			
 			if(name.equals("dok_id")){
-				correct = this.readString(parser, "dok_id", xmlns).equals(this.dokCode);
+				correct = this.readString(parser, "dok_id", xmlns).equals(this.article.getId());
 			} else {
 				skip(parser);
 			}

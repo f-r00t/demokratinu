@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Utskott;
 
 import android.content.Context;
@@ -44,16 +45,16 @@ public class Retriever {
 	 * 0 = sort after date (all issues); 
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
-	public static void retrieveArticles(ActivityNetInterface act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
+	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
 		threads++;
 		ArticlesAsyncTask task =new ArticlesAsyncTask(act);
 		tasks.add(task);
 		task.execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
 	
-	public static void retrieveVotes(ActivityNetInterface act, String dokCode, String motionCode){
+	public static void retrieveVotes(ActivityNetInterface<String> act, Article article){
 		threads++;
-		VotesAsyncTask task =new VotesAsyncTask(act, dokCode, motionCode);
+		VotesAsyncTask task =new VotesAsyncTask(act, article);
 		tasks.add(task);
 		task.execute();
 	}
