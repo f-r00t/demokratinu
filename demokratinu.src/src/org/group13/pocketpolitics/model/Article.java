@@ -11,13 +11,10 @@ public class Article extends LikeableItem {
 	private int traffnummer;
 	private String datum;
 	private String id;
-	//private String titel;		// title
 	private String rm;
 	private String relaterat_id;
-	//private String beteckning;	//dokid
 	private double score;
 	private String notisrubrik;
-	//private String notis;			//content
 	private String beslutsdag;
 	private int beslutad;
 	
@@ -32,12 +29,11 @@ public class Article extends LikeableItem {
 	 * @param nbrOfDislikes
 	 * @param replies
 	 * @param title
-	 * @param dokid	beteckning: UbU5
+	 * @param dokid	beteckning: "UbU5"
 	 * @param traffnummer
 	 * @param datum
-	 * @param id	fullt id: H001UbU5
-	 * @param titel
-	 * @param rm	2012/13
+	 * @param id	fullt id: "H001UbU5"
+	 * @param rm	"2012/13"
 	 * @param relaterat_id
 	 * @param score	3.6777
 	 * @param notisrubrik
@@ -50,7 +46,6 @@ public class Article extends LikeableItem {
 			int traffnummer,
 			String datum,
 			String id,
-			String titel,
 			String rm,
 			String relaterat_id,
 			double score,
