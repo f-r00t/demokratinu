@@ -1,5 +1,5 @@
 
-package org.group13.pocketpolitics;
+package org.group13.pocketpolitics.control;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +15,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.group13.pocketpolitics.control.ArticleListAdapter;
+import org.group13.pocketpolitics.R;
+import org.group13.pocketpolitics.R.id;
+import org.group13.pocketpolitics.R.layout;
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.net.ArtActivityInterface;
 import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 public class FrontPageActivity extends Activity implements ArtActivityInterface {
 
