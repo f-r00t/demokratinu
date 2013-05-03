@@ -10,9 +10,11 @@ import android.util.Log;
 
 public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 
+	private final static String URL = "http:/data.riksdagen.se/dokumentstatus/";
+	private final static String xmlns = null;
+	
 	private final ActivityNetInterface<OutClass> act;
 	private final String dokId;
-	private final String URL = "http:/data.riksdagen.se/dokumentstatus/";
 	
 	/**
 	 * 
@@ -65,6 +67,9 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 	@Override
 	protected OutClass readFeed(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
+		
+		parser.require(XmlPullParser.START_TAG, xmlns, "dokumentstatus");
+		
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -109,7 +114,6 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 		ret+=docNum;
 		
 		//Log.i(MotionAsyncTask.class.getSimpleName(), "Leif: Returning "+ret+" for "+year+":"+docNum);
-		
 		return ret;
 	}
 
