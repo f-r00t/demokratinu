@@ -104,6 +104,7 @@ public class Retriever {
 	}
 	
 	/**
+	 * Motioner and propositioner. Not betänkanden!
 	 * 
 	 * @param year	"2012" or "2012/13"
 	 * @param docNum
@@ -127,16 +128,26 @@ public class Retriever {
 			}
 		}
 		
+		int first = (iyear+4)/36;	//2012 -> 56
+		ret+= (char)(first-56+'H');
 		
 		int sec = (iyear-1976)%36;
 		// ska bli 0 för år 2012
+		
 		if(sec<10){
-			ret += sec;
+			ret+= sec;
 		} else {
-			ret += (char) ('A' + sec-10);
+			ret+=(char) ('A' + sec-10);
 		}
 		
-		Log.i(MotionAsyncTask.class.getSimpleName(), "Leif: Returning "+ret+" for "+year+docNum);
+		if( docNum.matches("\\d+") ){
+			ret += "03";
+		} else {
+			ret += "02";
+		}
+		ret+=docNum;
+		
+		Log.i(MotionAsyncTask.class.getSimpleName(), "Leif: Returning "+ret+" for "+year+":"+docNum);
 		
 		return ret;
 	}

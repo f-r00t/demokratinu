@@ -70,7 +70,7 @@ public class UtskottsForslag {
 			}
 			
 			//Log.i(this.getClass().getSimpleName(), "Leif: temp: "+temp);
-			Log.w(this.getClass().getSimpleName(), "Leif: build: "+build);
+			//Log.w(this.getClass().getSimpleName(), "Leif: build: "+build);
 			//Log.i(this.getClass().getSimpleName(), "Leif: forslag: "+forslag);
 			
 			this.moprositionParsed = build;
