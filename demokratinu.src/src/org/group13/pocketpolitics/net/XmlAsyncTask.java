@@ -18,8 +18,27 @@ import android.util.Log;
 
 public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 
+	protected O retrieve(String url, I in){
+		InputStream instr = retrieveStream(url);
+
+		try {
+			O parsedXml = parseXml(instr);
+			
+			return parsedXml;
+		} catch (XmlPullParserException e) {
+			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieve() caught XmlPullParserException",e);
+			e.printStackTrace();
+			this.cancel(true);
+		} catch (IOException e) {
+			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieve() caught IOException",e);
+			e.printStackTrace();
+			this.cancel(true);
+		}
+
+		return null;
+	}
 	
-	protected InputStream retrieveStream(String url){
+	private InputStream retrieveStream(String url){
 
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(url);
@@ -56,7 +75,7 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 	 * @throws XmlPullParserException
 	 * @throws IOException
 	 */
-	protected O parseXml(InputStream instr) throws XmlPullParserException, IOException{
+	private O parseXml(InputStream instr) throws XmlPullParserException, IOException{
 		try{
 			XmlPullParser parser = XmlPullParserFactory.newInstance().newPullParser();
 			parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);

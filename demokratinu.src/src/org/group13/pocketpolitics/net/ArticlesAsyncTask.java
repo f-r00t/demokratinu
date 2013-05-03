@@ -1,7 +1,6 @@
 package org.group13.pocketpolitics.net;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -36,7 +35,10 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 			return null;
 		}
 		
-		return createArticles(params[0]);
+		QueryParam qpar = params[0];
+		
+		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.sort + "&org="+qpar.utskott.getQueryName();
+		return retrieve(url, qpar);
 	}
 
 	@Override
@@ -69,29 +71,6 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
 		}
 	}
-
-	private QueryResult createArticles(QueryParam qpar){
-
-		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.sort + "&org="+qpar.utskott.getQueryName();
-		InputStream instr = retrieveStream(url);
-
-		try {
-			QueryResult parsedXml = parseXml(instr);
-			
-			return parsedXml;
-		} catch (XmlPullParserException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): XmlPullParserException",e);
-			e.printStackTrace();
-			this.cancel(true);
-		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): IOException",e);
-			e.printStackTrace();
-			this.cancel(true);
-		}
-
-		return null;
-	}
-
 	
 	@Override
 	protected QueryResult readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{

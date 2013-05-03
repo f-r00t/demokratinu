@@ -37,7 +37,8 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 	
 	@Override
 	protected OutClass doInBackground(Void... arg0) {
-		return retrieveMotion();
+		String url = URL+this.dokId;
+		return retrieve(url, null);
 	}
 	
 	@Override
@@ -59,30 +60,6 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 		} else {
 			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
 		}
-	}
-	
-	private OutClass retrieveMotion(){
-		String url = URL+this.dokId;
-		
-		InputStream instr = retrieveStream(url);
-		
-		OutClass result;
-		try {
-			result = this.parseXml(instr);
-			return result;
-		} catch (XmlPullParserException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): XmlPullParserException",e);
-			e.printStackTrace();
-			this.cancel(true);
-		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): IOException",e);
-			e.printStackTrace();
-			this.cancel(true);
-		}
-		
-		
-		//TODO
-		return null;
 	}
 
 	@Override

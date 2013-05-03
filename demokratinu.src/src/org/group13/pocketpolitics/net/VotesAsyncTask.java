@@ -1,7 +1,6 @@
 package org.group13.pocketpolitics.net;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +51,8 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 	@Override
 	protected String doInBackground(Article... params) {
 		
-		return retrieveVotes();
+		String url = URL+article.getId();
+		return retrieve(url, article);
 	}
 	
 	@Override
@@ -76,30 +76,6 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		
 	}
 	
-	private String retrieveVotes(){
-		String url = URL+article.getId();
-		// Log.i(this.getClass().getSimpleName(), "Leif: url = "+url);
-		
-		InputStream instr = retrieveStream(url);
-		
-		try {
-			// Log.i(this.getClass().getSimpleName(), "Leif: start parsing xml...");
-			String result = this.parseXml(instr);
-			
-			return result;
-		} catch (XmlPullParserException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): XmlPullParserException",e);
-			e.printStackTrace();
-			this.cancel(true);
-		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): IOException",e);
-			e.printStackTrace();
-			this.cancel(true);
-		}
-		
-		return null;
-	}
-
 	@Override
 	protected String readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
 
