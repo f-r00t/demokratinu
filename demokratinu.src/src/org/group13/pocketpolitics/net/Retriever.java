@@ -103,6 +103,42 @@ public class Retriever {
 		new TextAsyncTask(tview, year, articleid).execute("");
 	}
 	
-	
+	/**
+	 * 
+	 * @param year	"2012" or "2012/13"
+	 * @param docNum
+	 * @return
+	 */
+	public static String translate(String year, String docNum){
+		String ret = "";
+		
+		int slash = year.indexOf("/");
+		int iyear;
+		if(slash<0){
+			iyear = Integer.parseInt(year);
+		} else {
+			String[] temp =year.split("/",2);
+			iyear = Integer.parseInt(temp[0]);
+			int pyear = Integer.parseInt(temp[1]);
+			
+			if( pyear != (iyear+1)%100){
+				Log.e(MotionAsyncTask.class.getSimpleName(), "Leif: Years entered don't match! "+year);
+				return null;
+			}
+		}
+		
+		
+		int sec = (iyear-1976)%36;
+		// ska bli 0 för år 2012
+		if(sec<10){
+			ret += sec;
+		} else {
+			ret += (char) ('A' + sec-10);
+		}
+		
+		Log.i(MotionAsyncTask.class.getSimpleName(), "Leif: Returning "+ret+" for "+year+docNum);
+		
+		return ret;
+	}
 
 }

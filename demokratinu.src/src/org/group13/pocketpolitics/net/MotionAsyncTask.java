@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.util.Log;
+
 public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 
 	private final ActivityNetInterface<OutClass> act;
@@ -27,12 +29,11 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	protected OutClass doInBackground(Void... arg0) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
 }
