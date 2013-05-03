@@ -90,9 +90,11 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		} catch (XmlPullParserException e) {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): XmlPullParserException",e);
 			e.printStackTrace();
+			this.cancel(true);
 		} catch (IOException e) {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): IOException",e);
 			e.printStackTrace();
+			this.cancel(true);
 		}
 		
 		return null;

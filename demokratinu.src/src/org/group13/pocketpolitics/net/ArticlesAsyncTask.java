@@ -82,9 +82,11 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 		} catch (XmlPullParserException e) {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): XmlPullParserException",e);
 			e.printStackTrace();
+			this.cancel(true);
 		} catch (IOException e) {
 			Log.e(this.getClass().getSimpleName(), "Leif: Error in ArticlesAsyncTask.parseXml(): IOException",e);
 			e.printStackTrace();
+			this.cancel(true);
 		}
 
 		return null;

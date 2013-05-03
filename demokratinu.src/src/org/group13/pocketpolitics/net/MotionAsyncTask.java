@@ -1,6 +1,7 @@
 package org.group13.pocketpolitics.net;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -11,6 +12,7 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 
 	private final ActivityNetInterface<OutClass> act;
 	private final String dokId;
+	private final String URL = "http:/data.riksdagen.se/dokumentstatus/";
 	
 	/**
 	 * 
@@ -60,6 +62,24 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 	}
 	
 	private OutClass retrieveMotion(){
+		String url = URL+this.dokId;
+		
+		InputStream instr = retrieveStream(url);
+		
+		OutClass result;
+		try {
+			result = this.parseXml(instr);
+			return result;
+		} catch (XmlPullParserException e) {
+			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): XmlPullParserException",e);
+			e.printStackTrace();
+			this.cancel(true);
+		} catch (IOException e) {
+			Log.e(this.getClass().getSimpleName(), "Leif: Error in .parseXml(): IOException",e);
+			e.printStackTrace();
+			this.cancel(true);
+		}
+		
 		
 		//TODO
 		return null;
