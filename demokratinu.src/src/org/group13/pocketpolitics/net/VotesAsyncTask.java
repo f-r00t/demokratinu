@@ -62,6 +62,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 			act.onSuccess(res);
 		} else {
 			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
+			act.onFailure("! Null returned!");
 		}
 	}
 	
@@ -96,7 +97,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		
 		
 		
-		while(parser.next()!=XmlPullParser.START_TAG){
+		while(parser.next()!=XmlPullParser.START_TAG && !this.isCancelled()){
 			//Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped a tag of type: "+parser.getEventType());
 			if(parser.getEventType()==XmlPullParser.END_TAG){
 				Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped an END_TAG!");
@@ -109,7 +110,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("dokutskottsforslag")){
 			
 			// Log.i(this.getClass().getSimpleName(), "Leif: Entered <dokutskottsforslag>");
-			while(parser.next()!=XmlPullParser.END_TAG){
+			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 				if(parser.getEventType()!=XmlPullParser.START_TAG) {
 					continue;
 				}
@@ -148,7 +149,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		String vinnare = null;
 		List<PartyVote> partyVotes = null;
 		
-		while(parser.next()!=XmlPullParser.END_TAG){
+		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 			if(parser.getEventType()!=XmlPullParser.START_TAG){
 				continue;
 			}
@@ -217,7 +218,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 			Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): <tr class=\"sakfragan\"> expected, found class=\""+attr+"\"");
 		}
 		this.skip(parser);
-		while(parser.nextTag() !=XmlPullParser.START_TAG);
+		while(parser.nextTag() !=XmlPullParser.START_TAG && !this.isCancelled());
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "tr");
 		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <tr class=\"vottabellrubrik\">");
@@ -229,7 +230,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		
 		List<PartyVote> partyVotes = new ArrayList<PartyVote>();
 		
-		while(parser.next()!=XmlPullParser.END_TAG){
+		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 			if(parser.getEventType()!=XmlPullParser.START_TAG){
 				continue;
 			}
@@ -293,7 +294,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		
 		boolean correct = false;
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokument");
-		while(parser.next()!=XmlPullParser.END_TAG){
+		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 			if(parser.getEventType()!=XmlPullParser.START_TAG){
 				continue;
 			}

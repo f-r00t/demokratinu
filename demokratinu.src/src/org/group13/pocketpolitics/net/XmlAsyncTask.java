@@ -102,6 +102,7 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 		else{
 			//Log.w(this.getClass().getSimpleName(), "Leif: in readString(): Didn't find text for <"+tag+">");
 			//throw new IllegalStateException();
+			//result = null;
 		}
 		parser.require(XmlPullParser.END_TAG, xmlns, tag);
 		return result;

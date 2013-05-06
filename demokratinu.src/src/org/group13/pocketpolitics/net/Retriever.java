@@ -35,7 +35,7 @@ public class Retriever {
 	/**
 	 * 
 	 * Retrieves articles to the GUI. These articles will contain title, id, date, text etc from data.Riksdagen.se but not votations or comments. Allows sorting and filtering.
-	 * Date format: "yyyy-mm-dd"
+	 * <p>Date format: "yyyy-mm-dd"
 	 * 
 	 * @param act		Interface for updating GUI
 	 * @param dateFrom  Search for articles after this date, leave empty "" for no restriction
@@ -52,6 +52,11 @@ public class Retriever {
 		task.execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
 	
+	/**
+	 * 
+	 * @param act		Interface for updating GUI
+	 * @param article	Adds voting data to this article. The article object itself gets updated. The returning string only holds the id of the same article.  
+	 */
 	public static void retrieveVotes(ActivityNetInterface<String> act, Article article){
 		threads++;
 		VotesAsyncTask task =new VotesAsyncTask(act, article);
