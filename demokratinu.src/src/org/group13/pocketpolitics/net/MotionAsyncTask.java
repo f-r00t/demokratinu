@@ -1,19 +1,18 @@
 package org.group13.pocketpolitics.net;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
+class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 
 	private final static String URL = "http:/data.riksdagen.se/dokumentstatus/";
 	private final static String xmlns = null;
 	
-	private final ActivityNetInterface<OutClass> act;
+	//private final ActivityNetInterface<OutClass> act;
 	private final String dokId;
 	
 	/**
@@ -23,45 +22,16 @@ public class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutC
 	 * @param code	"Ub354" or "73"
 	 */
 	MotionAsyncTask(ActivityNetInterface<OutClass> act, String year, String docNum){
-		this.act=act;
+		super(act);
+		//this.act=act;
 		this.dokId = translate(year, docNum);
 	}
 	
-	@Override
-	protected void onPreExecute(){
-		if(act!=null){
-			act.onPreExecute();
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
-			this.cancel(true);
-		}
-	}
 	
 	@Override
 	protected OutClass doInBackground(Void... arg0) {
 		String url = URL+this.dokId;
 		return retrieve(url, null);
-	}
-	
-	@Override
-	protected void onPostExecute(OutClass res){
-		Retriever.threadFinished();
-		if(act!=null){
-			act.onSuccess(res);
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
-		}
-	}
-	
-
-	@Override
-	protected void onCancelled(OutClass res){
-		Retriever.threadFinished();
-		if(act!=null){
-			act.onFailure("! Cancelled!");
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
-		}
 	}
 
 	@Override

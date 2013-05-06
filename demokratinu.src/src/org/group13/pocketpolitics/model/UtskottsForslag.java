@@ -51,8 +51,8 @@ public class UtskottsForslag {
 					
 					String primitiveYear = temp.substring(slash-4, slash+3);
 					
-					String webYear = primitiveYear.replace("/", "%2F");
-					build+=temp.substring(0, slash-4)+"[[" + webYear+"]:[";
+					//String webYear = primitiveYear.replace("/", "%2F");
+					build+=temp.substring(0, slash-4)+"[[" + primitiveYear+"]:[";
 					
 					temp=temp.substring(slash+4);
 					

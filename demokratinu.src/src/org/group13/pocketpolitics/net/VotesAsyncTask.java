@@ -21,7 +21,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 	
 	//private final String dokCode;	//H001...
 	//private final String motionId;
-	private final ActivityNetInterface<String> act;
+	//private final ActivityNetInterface<String> act;
 	
 	/**
 	 * 
@@ -29,8 +29,9 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 	 * @param article The article to find votes for. It is updated dynamically
 	 */
 	VotesAsyncTask(ActivityNetInterface<String> act, Article article){
+		super(act);
 		this.article = article;
-		this.act = act;
+		//this.act = act;
 	}
 	
 	@Override
@@ -53,28 +54,6 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		
 		String url = URL+article.getId();
 		return retrieve(url, article);
-	}
-	
-	@Override
-	protected void onPostExecute(String res){
-		Retriever.threadFinished();
-		if(act!=null){
-			act.onSuccess(res);
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
-			act.onFailure("! Null returned!");
-		}
-	}
-	
-	@Override
-	protected void onCancelled(String res){
-		Retriever.threadFinished();
-		if(act!=null){
-			act.onFailure("! Cancelled!");
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
-		}
-		
 	}
 	
 	@Override

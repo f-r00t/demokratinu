@@ -80,6 +80,10 @@ public class Retriever {
 		threads--;
 	}
 	
+	/**
+	 * 
+	 * @return Number of running background threads.
+	 */
 	public static int threadsRunning(){
 		return threads;
 	}

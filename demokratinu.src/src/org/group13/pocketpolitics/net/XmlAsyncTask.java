@@ -18,6 +18,44 @@ import android.util.Log;
 
 public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 
+	protected final ActivityNetInterface<O> act;
+	
+	XmlAsyncTask(ActivityNetInterface<O> act){
+		this.act = act;
+	}
+
+	@Override
+	protected void onPreExecute(){
+		if(act!=null){
+			act.onPreExecute();
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
+			this.cancel(true);
+		}
+	}
+	
+	@Override
+	protected void onPostExecute(O res){
+		Retriever.threadFinished();
+		if(act!=null){
+			act.onSuccess(res);
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
+			act.onFailure("! Null returned!");
+		}
+	}
+	
+	@Override
+	protected void onCancelled(O qres){
+		Retriever.threadFinished();
+		
+		if(act!=null){
+			act.onFailure("! Cancelled!");
+		} else {
+			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
+		}
+	}
+	
 	protected O retrieve(String url, I in){
 		InputStream instr = retrieveStream(url);
 

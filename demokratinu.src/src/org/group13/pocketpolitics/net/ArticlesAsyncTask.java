@@ -23,10 +23,11 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 
 	private static int ARTICLES_PER_PAGE = 15;
 
-	private ActivityNetInterface<QueryResult> acti;
+	//private ActivityNetInterface<QueryResult> acti;
 
 	ArticlesAsyncTask(ActivityNetInterface<QueryResult> act){
-		this.acti=act;
+		super(act);
+		//this.acti=act;
 	}
 
 	@Override
@@ -39,37 +40,6 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, Integer, QueryResult>{
 		
 		String url = QUERY + "&datum=" + qpar.dateFrom + "&tom=" + qpar.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.sort + "&org="+qpar.utskott.getQueryName();
 		return retrieve(url, qpar);
-	}
-
-	@Override
-	protected void onPreExecute(){
-		if(acti!=null){
-			
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
-		}
-		acti.onPreExecute();
-	}
-
-	@Override
-	protected void onPostExecute(QueryResult qres){
-		Retriever.threadFinished();
-		if(acti!=null){
-			acti.onSuccess(qres);
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
-		}
-	}
-
-	@Override
-	protected void onCancelled(QueryResult qres){
-		Retriever.threadFinished();
-		
-		if(acti!=null){
-			acti.onFailure("! Cancelled!");
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
-		}
 	}
 	
 	@Override
