@@ -3,9 +3,9 @@ package org.group13.pocketpolitics.test.net;
 import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.PartyVote;
 import org.group13.pocketpolitics.model.UtskottsForslag;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.PartyVote;
 import org.group13.pocketpolitics.net.Retriever;
 
 import android.test.AndroidTestCase;

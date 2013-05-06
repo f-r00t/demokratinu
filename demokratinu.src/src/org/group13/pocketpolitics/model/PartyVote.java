@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.net;
+package org.group13.pocketpolitics.model;
 
 public class PartyVote {
 
@@ -8,7 +8,7 @@ public class PartyVote {
 	public final int neutral;
 	public final int absent;
 	
-	PartyVote(String party, int yes, int no, int neutral, int absent){
+	public PartyVote(String party, int yes, int no, int neutral, int absent){
 		this.party = party;
 		this.no = no;
 		this.yes = yes;

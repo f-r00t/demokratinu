@@ -3,7 +3,7 @@ package org.group13.pocketpolitics.model;
 
 import java.util.List;
 
-import org.group13.pocketpolitics.net.PartyVote;
+
 
 import android.util.Log;
 
