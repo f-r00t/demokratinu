@@ -1,5 +1,7 @@
 package org.group13.pocketpolitics.control;
 
-public class ArticleActivity {
+import android.app.Activity;
+
+public class ArticleActivity extends Activity{
 
 }
