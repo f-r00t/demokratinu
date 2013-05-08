@@ -31,7 +31,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 				threads = Retriever.threadsRunning();
 				Thread.sleep(500);
 				i++;
-				Log.i(this.getClass().getSimpleName(), "Leif: Slept another 500 ms. Number extra threads: "+threads);
+				Log.i(this.getClass().getSimpleName(), "Leif: Thread slept another 500 ms. Number extra threads: "+threads);
 				
 				if(i>totalWait*2){
 					cancelled = true;
