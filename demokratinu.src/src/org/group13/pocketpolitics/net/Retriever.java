@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.Moprosition;
 import org.group13.pocketpolitics.model.Utskott;
 
 import android.content.Context;
@@ -19,20 +20,20 @@ public class Retriever {
 	private static int threads=0;
 	@SuppressWarnings("rawtypes")
 	private static List<AsyncTask> tasks = new ArrayList<AsyncTask>();
-	
+
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
 			Log.e(Retriever.class.getSimpleName(),"Leif: in Connected: Context null error");
 			return false;
 		}
-		
+
 		ConnectivityManager conMgr = (ConnectivityManager)
 				ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netwInfo = conMgr.getActiveNetworkInfo();
-		
+
 		return netwInfo != null && netwInfo.isConnected();
 	}
-	
+
 	/**
 	 * 
 	 * Retrieves articles to the GUI. These articles will contain title, id, date, text etc from data.Riksdagen.se but not votations or comments. Allows sorting and filtering.
@@ -52,7 +53,7 @@ public class Retriever {
 		tasks.add(task);
 		task.execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
 	}
-	
+
 	/**
 	 * 
 	 * @param act		Interface for updating GUI
@@ -65,7 +66,15 @@ public class Retriever {
 		task.execute();
 	}
 	
-		public static void cancelAllTasks(){
+	
+	public static void retrieveMoprosition(ActivityNetInterface<Moprosition> act, String year,  String beteckning){
+		threads++;
+		MotionAsyncTask task = new MotionAsyncTask(act, year, beteckning);
+		tasks.add(task);
+		task.execute();
+	}
+
+	public static void cancelAllTasks(){
 		@SuppressWarnings("rawtypes")
 		ListIterator<AsyncTask> iter = tasks.listIterator();
 		while(iter.hasNext()){
@@ -74,14 +83,14 @@ public class Retriever {
 				Log.w(Retriever.class.getSimpleName(), "Leif: Thread cancelled!");
 			}
 		}
-		
+
 		tasks.clear();
 	}
 
 	protected static void threadFinished(){
 		threads--;
 	}
-	
+
 	/**
 	 * 
 	 * @return Number of running background threads.
@@ -89,8 +98,8 @@ public class Retriever {
 	public static int threadsRunning(){
 		return threads;
 	}
-	
-	
+
+
 	/**
 	 * @deprecated
 	 * Retrieves the latest articles in the RSS "Beslut i korthet" from riksdagen.se
@@ -101,7 +110,7 @@ public class Retriever {
 		//threads++;
 		new FeedTitlesAsyncTask(act).execute("");
 	}
-	
+
 	/**
 	 * @deprecated
 	 * Retrieves the short text of an article.
@@ -113,13 +122,5 @@ public class Retriever {
 		//threads++;
 		new TextAsyncTask(tview, year, articleid).execute("");
 	}
-	
-	/**
-	 * Motioner and propositioner. Not betänkanden!
-	 * 
-	 * @param year	"2012" or "2012/13"
-	 * @param docNum
-	 * @return
-	 */
-	
+
 }

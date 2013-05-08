@@ -151,7 +151,9 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 			skip(parser);
 		}
 		
+		parser.next();
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokuppgift");
+		
 		
 		if(motion){
 			return new Motion(intressenter, textURL, rm, beteckning, subtype, title, subtitle, uts, kammaren, utskottet);
@@ -193,11 +195,9 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 			}
 			
 			listr.add(new Intressent(name, party, role, personId));
-			
 		}
 		
 		parser.require(XmlPullParser.END_TAG, xmlns, "dokintressent");
-		
 		return null;
 	}
 	

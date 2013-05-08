@@ -14,7 +14,7 @@ public class Motion extends Moprosition {
 			String subtype, String title, String subtitle, 
 			Utskott uts, String kammaren, String utskottet){
 		
-		super(textURL, rm, beteckning, title, uts);
+		super(textURL, rm, beteckning, title, uts, true);
 		this.intressenter = intressenter;
 		this.subtype = subtype;
 		this.subtitle = subtitle;
