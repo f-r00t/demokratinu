@@ -1,4 +1,3 @@
-
 package org.group13.pocketpolitics.control;
 
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 public class FrontPageActivity extends Activity implements ArtActivityInterface {
 
-
 	private ListView listViewArticles;
 	private ArrayList<Article> articleList = new ArrayList<Article>();
 
@@ -36,20 +34,21 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_front_page);
-		listViewArticles =  ( ListView ) findViewById(R.id.article_list);
-		listViewArticles.setOnItemClickListener(new OnItemClickListener(){
+		listViewArticles = (ListView) findViewById(R.id.article_list);
+		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				//Code goes here
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// Code goes here
 				Toast.makeText(getApplicationContext(),
-					      "Click ListItem Number " + position, Toast.LENGTH_LONG)
-					      .show();
-				
+						"Click ListItem Number " + position, Toast.LENGTH_LONG)
+						.show();
+
 			}
 		});
 
-		//Replace this with the factory later, really ugly code incoming:
+		// Replace this with the factory later, really ugly code incoming:
 
 		Article a = new Article();
 		a.setTitle("Artikel A");
@@ -70,10 +69,9 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		articleList.add(c);
 
 		setAdapter();
-		
+
 		getMoreArticles();
 	}
-
 
 	@Override
 	public void addArticles(List<Article> arts) {
@@ -81,41 +79,40 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		setAdapter();
 	}
 
-	private void getMoreArticles(){
-		/*ConnectivityManager conMgr = (ConnectivityManager)
-				getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo netwInfo = conMgr.getActiveNetworkInfo();
-		
-		if(netwInfo != null && netwInfo.isConnected()){*/
-		if(Retriever.isConnected(this)){
-			//new ArticleFromFeed().execute("");
+	private void getMoreArticles() {
+		/*
+		 * ConnectivityManager conMgr = (ConnectivityManager)
+		 * getSystemService(Context.CONNECTIVITY_SERVICE); NetworkInfo netwInfo
+		 * = conMgr.getActiveNetworkInfo();
+		 * 
+		 * if(netwInfo != null && netwInfo.isConnected()){
+		 */
+		if (Retriever.isConnected(this)) {
+			// new ArticleFromFeed().execute("");
 			Retriever.retrieveRssArticleTitles(this);
 		}
 	}
 
-	private void setAdapter(){
+	private void setAdapter() {
 		listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
 	}
-
 
 	@Override
 	public void addArticles(QueryResult qres) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void articlesCancelled(QueryResult qres) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	@Override
 	public void onArticlesPreExecute() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
