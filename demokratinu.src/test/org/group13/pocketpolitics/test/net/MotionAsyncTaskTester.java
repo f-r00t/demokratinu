@@ -68,6 +68,12 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 		
 		if(result.motion){
 			Motion mot = (Motion) result;
+			if(mot.subtype!=null){
+				Log.i(this.getClass().getSimpleName(), "Leif: subtype "+ mot.subtype);
+			} else {
+				Log.e(this.getClass().getSimpleName(), "Leif: subtype Null!");
+			}
+			
 			if(mot.intressenter==null){
 				Log.e(this.getClass().getSimpleName(), "Leif: Intressenter Null!");
 				fail();

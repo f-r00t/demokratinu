@@ -71,8 +71,6 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 				continue;
 			}
 			
-			Log.i(this.getClass().getSimpleName(), "Leif: iterated in <dokument> loop "+ parser.getName());
-			
 			if( "rm".equals(parser.getName())){
 				rm = this.readString(parser, "rm", xmlns);
 				if(!rm.equals(this.year)){
@@ -117,6 +115,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 		
 		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokintressent");
+		
 		if(motion){
 			intressenter = this.parseIntressenter(parser);
 		} else {
@@ -128,8 +127,9 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 		
 		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
+		
 		if(motion){
-			parser.next();
+			while(parser.next()!=XmlPullParser.START_TAG);
 			parser.require(XmlPullParser.START_TAG, xmlns, "forslag");
 			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 				if(parser.getEventType()!=XmlPullParser.START_TAG){
@@ -146,16 +146,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 			}
 			parser.require(XmlPullParser.END_TAG, xmlns, "forslag");
 			
-			parser.next();
-			while(parser.getEventType() != XmlPullParser.END_TAG){
-				String name = "";
-				if(parser.getEventType()==XmlPullParser.START_TAG){
-					name = parser.getName();
-				}
-				Log.w(this.getClass().getSimpleName(), "Leif: in @.readFeed(): Skipped a tag <"+name+">");
-				skip(parser);
-				parser.next();
-			}
+			while(parser.next()!=XmlPullParser.END_TAG);
 			
 			parser.require(XmlPullParser.END_TAG, xmlns, "dokforslag");
 		} else {
@@ -183,8 +174,9 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 			}
 			
 			parser.require(XmlPullParser.START_TAG, xmlns, "intressent");
+			//Log.i(this.getClass().getSimpleName(), "Leif: in parseIntressenter: entering <intressent>");
 			
-			int personId = -1;
+			String personId = null;
 			String name = null;
 			String party = null;
 			String role = null;
@@ -201,17 +193,19 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 				} else if("partibet".equals(parser.getName())){
 					party = this.readString(parser, "partibet", xmlns);
 				} else if("intressent_id".equals(parser.getName())){
-					personId = Integer.parseInt(this.readString(parser, "intressent_id", xmlns));
+					personId = this.readString(parser, "intressent_id", xmlns);
 				} else {
 					skip(parser);
 				}
 			}
 			
+			//Log.i(this.getClass().getSimpleName(), "Leif: in parseIntr(): "+name);
+			
 			listr.add(new Intressent(name, party, role, personId));
 		}
 		
 		parser.require(XmlPullParser.END_TAG, xmlns, "dokintressent");
-		return null;
+		return listr;
 	}
 	
 	protected static String translate(String year, String docNum){
