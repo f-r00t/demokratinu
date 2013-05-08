@@ -110,7 +110,43 @@ class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 			skip(parser);
 		}
 		
-		parser.require(XmlPullParser.START_TAG, xmlns, "");
+		String utskottet;
+		String kammaren;
+		
+		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
+		if(motion){
+			parser.next();
+			parser.require(XmlPullParser.START_TAG, xmlns, "forslag");
+			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
+				if(parser.getEventType()!=XmlPullParser.START_TAG){
+					continue;
+				}
+				
+				if("utskottet".equals(parser.getName())){
+					utskottet = this.readString(parser, "utskottet", xmlns);
+				} else if("kammaren".equals(parser.getName())){
+					kammaren = this.readString(parser, "kammaren", xmlns);
+				}
+			}
+			parser.require(XmlPullParser.END_TAG, xmlns, "forslag");
+			
+			parser.next();
+			while(parser.getEventType() != XmlPullParser.END_TAG){
+				String name = "";
+				if(parser.getEventType()==XmlPullParser.START_TAG){
+					name = parser.getName();
+				}
+				Log.w(this.getClass().getSimpleName(), "Leif: in @.readFeed(): Skipped a tag <"+name+">");
+				skip(parser);
+				parser.next();
+			}
+			
+			parser.require(XmlPullParser.END_TAG, xmlns, "dokforslag");
+		} else {
+			skip(parser);
+		}
+		
+		parser.require(XmlPullParser.START_TAG, xmlns, "dokuppgift");
 		
 		// TODO Auto-generated method stub
 		return null;
