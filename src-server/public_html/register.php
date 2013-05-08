@@ -6,7 +6,7 @@ if (isset($_GET['email']) && isset($_GET['pass']) {
 	require_once("../includes/dbcx.php");
     $dbh = dbcx();
           
-    $email = trim($_GET['email']);
+    $username = trim($_GET['email']);
     $pass = $_GET['pass'];
             
     $sql = "SELECT password FROM users WHERE email = :email";
