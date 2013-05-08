@@ -64,7 +64,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 		// Log.i(this.getClass().getSimpleName(), "Leif: entering <utskottsforslag>");
 		
 		parser.next();
-		if(parser.getName().equals("dokument")){
+		if("dokument".equals(parser.getName())){
 			// Log.i(this.getClass().getSimpleName(), "Leif: entering <dokument>");
 			if (!parseDokument(parser)){
 				Log.w(this.getClass().getSimpleName(), "Leif: Wrong dokument retrieved!");
@@ -95,7 +95,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
 					continue;
 				}
 				
-				if(parser.getName().equals("utskottsforslag")){
+				if("utskottsforslag".equals(parser.getName())){
 					// Log.i(this.getClass().getSimpleName(), "Leif: Entering <utskottsforslag>");
 					UtskottsForslag out = parseForslag(parser);
 					if(out!=null){

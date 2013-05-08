@@ -17,6 +17,7 @@ import android.util.Log;
 public class Retriever {
 
 	private static int threads=0;
+	@SuppressWarnings("rawtypes")
 	private static List<AsyncTask> tasks = new ArrayList<AsyncTask>();
 	
 	public static boolean isConnected(Context ctx){
@@ -64,7 +65,8 @@ public class Retriever {
 		task.execute();
 	}
 	
-	public static void cancelAllTasks(){
+		public static void cancelAllTasks(){
+		@SuppressWarnings("rawtypes")
 		ListIterator<AsyncTask> iter = tasks.listIterator();
 		while(iter.hasNext()){
 			if(iter!=null && !iter.next().isCancelled()){
