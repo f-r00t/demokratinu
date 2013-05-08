@@ -1,5 +1,7 @@
 package org.group13.pocketpolitics.control;
 
-public class MotionActivity {
+import android.app.Activity;
+
+public class MotionActivity extends Activity{
 
 }
