@@ -17,7 +17,7 @@ public abstract class Moprosition {
 	private String text;
 	
 
-	Moprosition(String textURL, String rm, String beteckning, String title, Utskott uts){
+	protected Moprosition(String textURL, String rm, String beteckning, String title, Utskott uts){
 		
 		this.textURL = textURL;
 		this.beteckning = beteckning;

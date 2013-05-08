@@ -1,21 +1,26 @@
 package org.group13.pocketpolitics.net;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.group13.pocketpolitics.model.Intressent;
+import org.group13.pocketpolitics.model.Moprosition;
+import org.group13.pocketpolitics.model.Motion;
+import org.group13.pocketpolitics.model.Proposition;
 import org.group13.pocketpolitics.model.Utskott;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
+class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 
 	private final static String URL = "http:/data.riksdagen.se/dokumentstatus/";
 	private final static String xmlns = null;
 	
 	
-	//private final ActivityNetInterface<OutClass> act;
+	//private final ActivityNetInterface<Moprosition> act;
 	private final String dokId;
 	private final String year;
 	private final String docNum;
@@ -26,7 +31,7 @@ class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 	 * @param year	"2012/13"
 	 * @param code	"Ub354" or "73"
 	 */
-	MotionAsyncTask(ActivityNetInterface<OutClass> act, String year, String docNum){
+	MotionAsyncTask(ActivityNetInterface<Moprosition> act, String year, String docNum){
 		super(act);
 		//this.act=act;
 		this.dokId = translate(year, docNum);
@@ -37,27 +42,27 @@ class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 	
 	
 	@Override
-	protected OutClass doInBackground(Void... arg0) {
+	protected Moprosition doInBackground(Void... arg0) {
 		String url = URL+this.dokId;
 		return retrieve(url, null);
 	}
 
 	@Override
-	protected OutClass readFeed(XmlPullParser parser)
+	protected Moprosition readFeed(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokumentstatus");
 		
-		String beteckning;
-		String rm;
-		Intressent[] intressenter;
-		String textURL;
+		String beteckning = null;
+		String rm = null;
+		List<Intressent> intressenter = null;
+		String textURL = null;
 		boolean motion = true;
 		
-		String subtype;
-		String title;
-		String subtitle;
-		Utskott uts;
+		String subtype = null;
+		String title = null;
+		String subtitle = null;
+		Utskott uts = Utskott.NULL;
 		
 		parser.next();
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokument");
@@ -106,13 +111,13 @@ class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 		if(motion){
 			intressenter = this.parseIntressenter(parser);
 		} else {
-			intressenter = null;
 			skip(parser);
 		}
 		
-		String utskottet;
-		String kammaren;
+		String utskottet = null;
+		String kammaren = null;
 		
+		parser.next();
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
 		if(motion){
 			parser.next();
@@ -148,15 +153,53 @@ class MotionAsyncTask<OutClass> extends XmlAsyncTask< Void, Integer, OutClass> {
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokuppgift");
 		
-		// TODO Auto-generated method stub
-		return null;
+		if(motion){
+			return new Motion(intressenter, textURL, rm, beteckning, subtype, title, subtitle, uts, kammaren, utskottet);
+		}
+		return new Proposition(textURL, rm, beteckning, title, uts);
 	}
 	
-	private Intressent[] parseIntressenter(XmlPullParser parser){
-		//TODO
+	private List<Intressent> parseIntressenter(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, xmlns, "dokintressent");
+		
+		List<Intressent> listr = new ArrayList<Intressent>();
+		
+		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
+			if(parser.getEventType()!=XmlPullParser.START_TAG){
+				continue;
+			}
+			
+			parser.require(XmlPullParser.START_TAG, xmlns, "intressent");
+			
+			int personId = -1;
+			String name = null;
+			String party = null;
+			String role = null;
+			
+			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
+				if(parser.getEventType()!=XmlPullParser.START_TAG){
+					continue;
+				}
+				
+				if("roll".equals(parser.getName())){
+					role = this.readString(parser, "roll", xmlns);
+				} else if("namn".equals(parser.getName())){
+					name = this.readString(parser, "namn", xmlns);
+				} else if("partibet".equals(parser.getName())){
+					party = this.readString(parser, "partibet", xmlns);
+				} else if("intressent_id".equals(parser.getName())){
+					personId = Integer.parseInt(this.readString(parser, "intressent_id", xmlns));
+				}
+			}
+			
+			listr.add(new Intressent(name, party, role, personId));
+			
+		}
+		
+		parser.require(XmlPullParser.END_TAG, xmlns, "dokintressent");
+		
 		return null;
 	}
-	
 	
 	protected static String translate(String year, String docNum){
 		String ret = "";
