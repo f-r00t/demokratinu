@@ -29,7 +29,7 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 				Log.i(this.getClass().getSimpleName(), "Leif: Thread slept another 500 ms. Number extra threads: "+Retriever.threadsRunning());
 			}
 			
-			if(i>totalWait*2){
+			if(i>=totalWait*2){
 				Retriever.cancelAllTasks();
 				Log.w(this.getClass().getSimpleName(), "Leif: Cancelled after ca "+((double)i)/2+" secs");
 			} else {

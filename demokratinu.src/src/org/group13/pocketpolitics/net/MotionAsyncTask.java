@@ -16,7 +16,7 @@ import android.util.Log;
 
 class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 
-	private final static String URL = "http:/data.riksdagen.se/dokumentstatus/";
+	private final static String URL = "http://data.riksdagen.se/dokumentstatus/";
 	private final static String xmlns = null;
 	
 	
@@ -71,6 +71,8 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 				continue;
 			}
 			
+			Log.i(this.getClass().getSimpleName(), "Leif: iterated in <dokument> loop "+ parser.getName());
+			
 			if( "rm".equals(parser.getName())){
 				rm = this.readString(parser, "rm", xmlns);
 				if(!rm.equals(this.year)){
@@ -94,19 +96,26 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 				subtype = this.readString(parser, "subtyp", xmlns);
 			} else if( "organ".equals(parser.getName())){
 				String org = this.readString(parser, "organ", xmlns);
-				uts = Utskott.valueOf(org);
+				if(!motion){
+					org+="U";
+				}
+				uts = Utskott.findUtskott(org);
 			} else if( "titel".equals(parser.getName())){
 				title = this.readString(parser, "titel", xmlns);
 			} else if( "subtitel".equals(parser.getName())){
 				subtitle = this.readString(parser, "subtitel", xmlns);
 			} else if( "dokument_url_text".equals(parser.getName())){
 				textURL = this.readString(parser, "dokument_url_text", xmlns);
+			} else {
+				skip(parser);
 			}
 		}
 		
+		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokaktivitet");
 		skip(parser);
 		
+		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokintressent");
 		if(motion){
 			intressenter = this.parseIntressenter(parser);
@@ -117,7 +126,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 		String utskottet = null;
 		String kammaren = null;
 		
-		parser.next();
+		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
 		if(motion){
 			parser.next();
@@ -131,6 +140,8 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 					utskottet = this.readString(parser, "utskottet", xmlns);
 				} else if("kammaren".equals(parser.getName())){
 					kammaren = this.readString(parser, "kammaren", xmlns);
+				} else {
+					skip(parser);
 				}
 			}
 			parser.require(XmlPullParser.END_TAG, xmlns, "forslag");
@@ -151,7 +162,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 			skip(parser);
 		}
 		
-		parser.next();
+		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokuppgift");
 		
 		
@@ -191,6 +202,8 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 					party = this.readString(parser, "partibet", xmlns);
 				} else if("intressent_id".equals(parser.getName())){
 					personId = Integer.parseInt(this.readString(parser, "intressent_id", xmlns));
+				} else {
+					skip(parser);
 				}
 			}
 			
