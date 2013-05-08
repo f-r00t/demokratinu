@@ -1,6 +1,11 @@
 package org.group13.pocketpolitics.test.net;
 
+import java.util.Iterator;
+
+import org.group13.pocketpolitics.model.Intressent;
 import org.group13.pocketpolitics.model.Moprosition;
+import org.group13.pocketpolitics.model.Motion;
+import org.group13.pocketpolitics.model.Proposition;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 
@@ -39,29 +44,52 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 	}
 	
 	private void atestMotion(){
-		//TODO
+		Retriever.retrieveMoprosition(this, "2012/13", "A1");
 	}
 	
 	private void atestProposition(){
-		//TODO
+		Retriever.retrieveMoprosition(this, "2012/13", "73");
 	}
 
 	@Override
 	public void onPreExecute() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void onSuccess(Moprosition result) {
-		// TODO Auto-generated method stub
 		
+		if(result==null){
+			Log.e(this.getClass().getSimpleName(), "Leif: null result! Not success!");
+			fail();
+		}
+		
+		Log.w(this.getClass().getSimpleName(), "Leif: Thread returned: "+result.beteckning);
+		Log.w(this.getClass().getSimpleName(), "Leif: Text URL: "+result.textURL);
+		
+		if(result.motion){
+			Motion mot = (Motion) result;
+			if(mot.intressenter==null){
+				Log.e(this.getClass().getSimpleName(), "Leif: Intressenter Null!");
+				fail();
+			} else {
+				Iterator<Intressent> it = mot.intressenter.iterator();
+				while(it.hasNext()){
+					Log.i(this.getClass().getSimpleName(), "Leif: Intressent "+ it.next().name);
+				}
+			}
+			
+		} else {
+			Proposition prop = (Proposition) result;
+			if(prop!=null){
+				Log.i(this.getClass().getSimpleName(), "Leif: Successful Proposition conversion.");
+			}
+		}
 	}
 
 	@Override
 	public void onFailure(String message) {
-		// TODO Auto-generated method stub
-		
+		Log.e(this.getClass().getSimpleName(), "Leif: Failure: "+message);
+		fail();
 	}
 	
 }

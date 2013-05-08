@@ -66,7 +66,12 @@ public class Retriever {
 		task.execute();
 	}
 	
-	
+	/**
+	 * 
+	 * @param act 		Interface for updating GUI
+	 * @param year		"2012/13"
+	 * @param beteckning	"Ub354" or "73"
+	 */
 	public static void retrieveMoprosition(ActivityNetInterface<Moprosition> act, String year,  String beteckning){
 		threads++;
 		MotionAsyncTask task = new MotionAsyncTask(act, year, beteckning);
