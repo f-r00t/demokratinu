@@ -16,7 +16,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition, Moprosition> {
+class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 
 	private final static String URL = "http://data.riksdagen.se/dokumentstatus/";
 	private final static String xmlns = null;

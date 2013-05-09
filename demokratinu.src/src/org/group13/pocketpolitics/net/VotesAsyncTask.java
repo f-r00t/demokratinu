@@ -12,7 +12,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class VotesAsyncTask extends XmlAsyncTask<Article, Integer, String> {
+public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 
 	private final String URL = "http://data.riksdagen.se/utskottsforslag/";
 	
