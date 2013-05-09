@@ -84,6 +84,20 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 				}
 			}
 			
+			String text = mot.getText();
+			if(text!=null){
+				
+				int print = 25;
+				String appe = "...";
+				if(print>text.length()){
+					print = text.length();
+					appe="";
+				}
+				Log.i(this.getClass().getSimpleName(), "Leif: Text: "+text.substring(0, print)+appe);
+			} else {
+				Log.e(this.getClass().getSimpleName(), "Leif: Text null!");
+			}
+			
 		} else {
 			Proposition prop = (Proposition) result;
 			if(prop!=null){
