@@ -16,8 +16,6 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 
 	private final int totalWait = 20;
 	
-	private Moprosition half;
-	
 	public void testStarter(){
 		atestMotion();
 		atestProposition();
@@ -65,15 +63,6 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 			fail();
 		}
 
-		if(half == result){
-			Log.w(this.getClass().getSimpleName(), "Leif: half == result, ie same object");
-
-		} else if(half.equals(result)){
-			Log.w(this.getClass().getSimpleName(), "Leif: half clone of result");
-		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: half is unrelated to result");
-		}
-		
 		Log.w(this.getClass().getSimpleName(), "Leif: Thread returned: "+result.beteckning);
 		Log.w(this.getClass().getSimpleName(), "Leif: Text URL: "+result.textURL);
 		
