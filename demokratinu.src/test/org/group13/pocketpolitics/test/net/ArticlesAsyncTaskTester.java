@@ -82,7 +82,7 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 	}
 
 	@Override
-	public void onProgressUpdate(QueryResult halfFinished) {
+	public void onProgressUpdate(Integer procent) {
 		// TODO Auto-generated method stub
 		
 	}

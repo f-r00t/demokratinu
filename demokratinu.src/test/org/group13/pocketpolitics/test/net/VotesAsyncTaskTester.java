@@ -95,7 +95,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	}
 
 	@Override
-	public void onProgressUpdate(String halfFinished) {
+	public void onProgressUpdate(Integer procent) {
 		// TODO Auto-generated method stub
 		
 	}

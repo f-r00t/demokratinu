@@ -50,13 +50,6 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 	}
 	
 	@Override
-	protected void onProgressUpdate(Moprosition... noText){
-		if (noText!=null && noText[0] != null){
-			act.onProgressUpdate(noText[0]);
-		}
-	}
-
-	@Override
 	protected Moprosition readFeed(XmlPullParser parser)
 			throws XmlPullParserException, IOException {
 		
@@ -171,8 +164,6 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		} else {
 			ret = new Proposition(textURL, rm, beteckning, title, uts);
 		}
-		
-		publishProgress(ret);
 		
 		retrieveText(ret);
 		

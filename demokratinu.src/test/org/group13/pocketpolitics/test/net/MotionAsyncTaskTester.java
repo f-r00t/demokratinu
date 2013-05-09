@@ -124,9 +124,9 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 	}
 
 	@Override
-	public void onProgressUpdate(Moprosition halfFinished) {
-		half = halfFinished;
-		Log.w(this.getClass().getSimpleName(), "Leif: half returned "+half.beteckning);
+	public void onProgressUpdate(Integer procent) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
