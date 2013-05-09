@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="PocketPolitics">
+    <style name="PocketPolitics" parent="android:Theme">
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowTitleSize">64dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/TitleBackground</item>
+    </style>
+    
+    <style name="TitleBackground">
+        <item name="android:background">@drawable/titlebar_gradient</item>
     </style>
     
 </resources>
