@@ -102,8 +102,8 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 				title = this.readString(parser, "titel", xmlns);
 			} else if( "subtitel".equals(parser.getName())){
 				subtitle = this.readString(parser, "subtitel", xmlns);
-			} else if( "dokument_url_text".equals(parser.getName())){
-				textURL = this.readString(parser, "dokument_url_text", xmlns);
+			} else if( "dokument_url_html".equals(parser.getName())){
+				textURL = this.readString(parser, "dokument_url_html", xmlns);
 			} else {
 				skip(parser);
 			}
@@ -156,11 +156,22 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokuppgift");
 		
-		
+		Moprosition ret;
 		if(motion){
-			return new Motion(intressenter, textURL, rm, beteckning, subtype, title, subtitle, uts, kammaren, utskottet);
+			ret = new Motion(intressenter, textURL, rm, beteckning, subtype, title, subtitle, uts, kammaren, utskottet);
+		} else {
+			ret = new Proposition(textURL, rm, beteckning, title, uts);
 		}
-		return new Proposition(textURL, rm, beteckning, title, uts);
+		
+		retrieveText(ret);
+		
+		return ret;
+	}
+	
+	private boolean retrieveText(Moprosition mop){
+		
+		
+		return true;
 	}
 	
 	private List<Intressent> parseIntressenter(XmlPullParser parser) throws XmlPullParserException, IOException{
