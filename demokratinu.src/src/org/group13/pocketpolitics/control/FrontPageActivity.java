@@ -79,6 +79,8 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		setAdapter();
 
 		getMoreArticles();
+		
+		
 	}
 
 	@Override

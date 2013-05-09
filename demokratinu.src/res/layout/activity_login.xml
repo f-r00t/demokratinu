@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/prompt_password"
                 android:imeActionId="@+id/login"
-                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeActionLabel="@string/filler_passwordfield"
                 android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
                 android:maxLines="1"
@@ -40,7 +40,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/stay_logged_in_checkbox" />
-
+			<LinearLayout
+			    android:layout_height="wrap_content"
+			    android:layout_width="fill_parent"
+			    android:gravity="center">
+			<Button
+                android:id="@+id/register_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="16dp"
+                android:paddingLeft="32dp"
+                android:paddingRight="32dp"
+                android:text="@string/action_register" />
+             
+			 
             <Button
                 android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
@@ -49,7 +63,10 @@
                 android:layout_marginTop="16dp"
                 android:paddingLeft="32dp"
                 android:paddingRight="32dp"
-                android:text="@string/action_sign_in_register" />
+                android:text="@string/action_sign_in" />
+
+ </LinearLayout> 
+
         </LinearLayout>
     </ScrollView>
 

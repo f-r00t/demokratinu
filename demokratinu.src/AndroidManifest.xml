@@ -1,45 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.group13.pocketpolitics"
+<manifest package="org.group13.pocketpolitics"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="14" />
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    
+
     <application
-        
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
             android:name="org.group13.pocketpolitics.control.LoginActivity"
-            android:label="@string/app_name" android:theme="@style/PocketPolitics" android:icon="@drawable/ic_pocketpolitics">
+            android:icon="@drawable/ic_pocketpolitics"
+            android:label="@string/app_name"
+            android:theme="@style/PocketPolitics" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
-        <uses-library android:name="android.test.runner"/>
-        
+
+        <uses-library android:name="android.test.runner" />
+
         <activity
             android:name="org.group13.pocketpolitics.control.FrontPageActivity"
             android:label="@string/app_name" />
-        <activity android:name="org.group13.pocketpolitics.control.MotionActivity" android:label="@layout/activity_motion"></activity>
-        <activity android:label="@layout/activity_article" android:name="org.group13.pocketpolitics.control.ArticleActivity"></activity>
+        <activity
+            android:name="org.group13.pocketpolitics.control.MotionActivity"
+            android:label="@layout/activity_motion" >
+        </activity>
+        <activity
+            android:name="org.group13.pocketpolitics.control.ArticleActivity"
+            android:label="@layout/activity_article" >
+        </activity>
+        <activity
+            android:name="org.group13.pocketpolitics.control.RegistrationActivity"
+            android:label="@string/title_activity_registration"
+            android:parentActivityName="org.group13.pocketpolitics.control.LoginActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.group13.pocketpolitics.control.LoginActivity" />
+        </activity>
     </application>
-	
+
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.example.pocketpolitics"
-        android:label="Tests for PocketPolitics" />
-    
-    
+        android:label="Tests for PocketPolitics"
+        android:targetPackage="com.example.pocketpolitics" />
+
 </manifest>
