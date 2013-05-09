@@ -1,5 +1,6 @@
 package org.group13.pocketpolitics.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public abstract class LikeableItem {
 	// Temporary cunstructor
 	public LikeableItem() {
 		super();
+		replies=new ArrayList<Comment>();
 	}
 
 	/**
@@ -97,8 +99,10 @@ public abstract class LikeableItem {
 	/**
 	 * @return An array of all the replies this item has
 	 */
-	public Comment[] getReplies() {
-		return (Comment[]) this.replies.toArray();
+	public List<Comment> getReplies(){
+	//public Comment[] getReplies() {
+		//return (Comment[]) this.replies.toArray();
+		return replies;
 	}
 	
 	/**
