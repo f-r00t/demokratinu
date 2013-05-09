@@ -14,25 +14,9 @@ public class CommentTest extends AndroidTestCase{
 	}
 	
 	public void testCommentBuilder(){
-		Comment tree = create();
+		Comment tree = recur(4, 3, "Top of the Tree!");
 		
 		print(tree);
-	}
-	
-	private Comment create(){
-		
-		int level = 3;
-		int width = 4;
-		
-		Comment head = new Comment();
-		head.setAuthor("Master");
-		head.setContent("Top of the tree!");
-		
-		for(int i=0; i<width; i++){
-			head.reply(recur(level, width, "Sibling no "+i));
-		}
-		
-		return head;
 	}
 	
 	/**
