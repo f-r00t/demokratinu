@@ -1,5 +1,7 @@
 package org.group13.pocketpolitics.control;
 
+import org.group13.pocketpolitics.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 
