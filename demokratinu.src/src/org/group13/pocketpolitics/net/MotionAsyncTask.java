@@ -16,7 +16,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
+class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition, Moprosition> {
 
 	private final static String URL = "http://data.riksdagen.se/dokumentstatus/";
 	private final static String xmlns = null;
@@ -47,6 +47,13 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 	protected Moprosition doInBackground(Void... arg0) {
 		String url = URL+this.dokId;
 		return retrieve(url, null);
+	}
+	
+	@Override
+	protected void onProgressUpdate(Moprosition... noText){
+		if (noText!=null && noText[0] != null){
+			act.onProgressUpdate(noText[0]);
+		}
 	}
 
 	@Override
@@ -164,6 +171,8 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 		} else {
 			ret = new Proposition(textURL, rm, beteckning, title, uts);
 		}
+		
+		publishProgress(ret);
 		
 		retrieveText(ret);
 		

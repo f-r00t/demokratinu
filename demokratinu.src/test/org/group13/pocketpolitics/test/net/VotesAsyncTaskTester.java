@@ -93,4 +93,10 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 		Log.i(this.getClass().getSimpleName(), "Leif: Votes test commencing...");
 		
 	}
+
+	@Override
+	public void onProgressUpdate(String halfFinished) {
+		// TODO Auto-generated method stub
+		
+	}
 }
