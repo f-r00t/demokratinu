@@ -7,6 +7,8 @@ import org.group13.pocketpolitics.model.Comment;
 import android.test.AndroidTestCase;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 public class CommentTest extends AndroidTestCase{
 	
 	public CommentTest(){
@@ -14,9 +16,18 @@ public class CommentTest extends AndroidTestCase{
 	}
 	
 	public void testCommentBuilder(){
-		Comment tree = recur(4, 3, "Top of the Tree!");
+		int level = 2;
+		int width = 3;
 		
-		print(tree);
+		Comment tree = recur(level, width, "Top of the Tree!");
+		
+		//print(tree);
+		Log.w(this.getClass().getSimpleName(), "Leif: gson: "+gson(tree));
+	}
+	
+	private String gson(Comment tree){
+		Gson gs = new Gson();
+		return gs.toJson(tree);
 	}
 	
 	/**
