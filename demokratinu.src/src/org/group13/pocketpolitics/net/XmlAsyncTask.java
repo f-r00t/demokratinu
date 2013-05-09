@@ -76,7 +76,7 @@ public abstract class XmlAsyncTask<I, U, O> extends AsyncTask<I, U, O> {
 		return null;
 	}
 	
-	InputStream retrieveStream(String url){
+	protected InputStream retrieveStream(String url){
 
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpGet request = new HttpGet(url);

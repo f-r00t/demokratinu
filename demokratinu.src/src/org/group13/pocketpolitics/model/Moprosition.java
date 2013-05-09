@@ -26,6 +26,8 @@ public abstract class Moprosition {
 		this.rm = rm;
 		this.title = title;
 		this.uts = uts;
+		
+		text = null;
 	}
 	
 	public String getText() {

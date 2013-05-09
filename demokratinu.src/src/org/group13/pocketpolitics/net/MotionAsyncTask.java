@@ -1,6 +1,8 @@
 package org.group13.pocketpolitics.net;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -168,8 +170,38 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Integer, Moprosition> {
 		return ret;
 	}
 	
+	/**<p>Retrieves html-text for a motion or proposition.
+	 * <p>Källa: http://www.mkyong.com/java/how-to-convert-inputstream-to-string-in-java/
+	 * @param mop
+	 * @return
+	 */
 	private boolean retrieveText(Moprosition mop){
 		
+		BufferedReader bred = new BufferedReader( new InputStreamReader( retrieveStream(mop.textURL)));
+		StringBuilder sbuild = new StringBuilder();
+		
+		try {
+			String line;
+			while( (line = bred.readLine()) != null){
+				sbuild.append(line);
+			}
+		} catch (IOException e) {
+			Log.e(this.getClass().getSimpleName(), "Leif: in retrieveText(): Failed while reading!");
+			e.printStackTrace();
+			return false;
+		} finally {
+			if(bred!=null){
+				try {
+					bred.close();
+				} catch (IOException e) {
+					Log.w(this.getClass().getSimpleName(), "Leif: in retrieveText(): Failed at closing reader! Possible resource leak");
+					e.printStackTrace();
+					return false;
+				}
+			}
+		}
+		
+		mop.setText(sbuild.toString());
 		
 		return true;
 	}
