@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -31,9 +32,15 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
+		
+		
 		super.onCreate(savedInstanceState);
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_front_page);
+		
+		
+		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
 
@@ -49,7 +56,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		});
 
 		// Replace this with the factory later, really ugly code incoming:
-
+		/*
 		Article a = new Article();
 		a.setTitle("Artikel A");
 		a.setNbrOfLikes(1000);
@@ -67,6 +74,7 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 		c.setNbrOfLikes(3000);
 		c.setNbrOfDislikes(300);
 		articleList.add(c);
+		*/
 
 		setAdapter();
 
