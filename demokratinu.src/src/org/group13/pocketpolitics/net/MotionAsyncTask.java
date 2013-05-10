@@ -68,6 +68,10 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 
 		parser.next();
 		Document ddata = parseDokument(parser);
+		if(ddata == null){
+			return null;
+		}
+		
 		List<Proposer> intressenter = null;
 
 		while(parser.next()!=XmlPullParser.START_TAG);

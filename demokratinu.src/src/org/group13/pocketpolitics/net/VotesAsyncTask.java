@@ -178,7 +178,6 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 	private List<PartyVote> parseVotering(XmlPullParser parser) throws XmlPullParserException, IOException{
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "votering_sammanfattning_html");
-		
 		//Log.i(this.getClass().getSimpleName(), "Leif: Entering <votering_sammanfattning_html>");
 		
 		while(parser.nextTag() !=XmlPullParser.START_TAG){
@@ -193,6 +192,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "tr");
 		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <tr class=\"sakfragan\">");
+		
 		String attr = parser.getAttributeValue(xmlns, "class");
 		if(!"sakfragan".equals(attr)){
 			Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): <tr class=\"sakfragan\"> expected, found class=\""+attr+"\"");
@@ -218,38 +218,9 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 				skip(parser);
 			}
 			
-			parser.require(XmlPullParser.START_TAG, xmlns, "tr");
-			String party=null;
-			int yes = -1, no = -1, neutral = -1, absent = -1;
-			
-			while(parser.next()!=XmlPullParser.END_TAG){
-				if(parser.getEventType()!=XmlPullParser.START_TAG){
-					continue;
-				}
-				
-				parser.require(XmlPullParser.START_TAG, xmlns, "td");
-				attr = parser.getAttributeValue(xmlns, "class");
-				if(attr == null){
-					skip(parser);
-				} else if (attr.equals("parti")||attr.equals("totalt")){
-					party = this.readString(parser, "td", xmlns);
-				} else if(attr.equals("rost_ja")||attr.equals("summa_ja")){
-					yes = Integer.parseInt(this.readString(parser, "td", xmlns));
-				} else if(attr.equals("rost_nej")||attr.equals("summa_nej")){
-					no = Integer.parseInt(this.readString(parser, "td", xmlns));
-				} else if(attr.equals("rost_avstar")||attr.equals("summa_avstar")){
-					neutral = Integer.parseInt(this.readString(parser, "td", xmlns));
-				} else if (attr.equals("rost_franvarande")||attr.equals("summa_franvarande")){
-					absent = Integer.parseInt(this.readString(parser, "td", xmlns));
-				} else {
-					Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): attribute not recognized: <td class=\""+attr+"\">");
-					skip(parser);
-				}
-			}
-			
-			parser.require(XmlPullParser.END_TAG, xmlns, "tr");
-			if(party!=null){
-				partyVotes.add(new PartyVote(party, yes, no, neutral, absent));
+			PartyVote pv = parsePartyVote(parser);
+			if(pv!=null && pv.party!=null){
+				partyVotes.add(pv);
 			}
 		}
 		parser.require(XmlPullParser.END_TAG, xmlns, "table");
@@ -261,6 +232,40 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		parser.require(XmlPullParser.END_TAG, xmlns, "votering_sammanfattning_html");
 
 		return partyVotes;
+	}
+	
+	private PartyVote parsePartyVote(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, xmlns, "tr");
+		String party=null;
+		int yes = -1, no = -1, neutral = -1, absent = -1;
+		
+		while(parser.next()!=XmlPullParser.END_TAG){
+			if(parser.getEventType()!=XmlPullParser.START_TAG){
+				continue;
+			}
+			
+			parser.require(XmlPullParser.START_TAG, xmlns, "td");
+			String attr = parser.getAttributeValue(xmlns, "class");
+			if(attr == null){
+				skip(parser);
+			} else if (attr.equals("parti")||attr.equals("totalt")){
+				party = this.readString(parser, "td", xmlns);
+			} else if(attr.equals("rost_ja")||attr.equals("summa_ja")){
+				yes = Integer.parseInt(this.readString(parser, "td", xmlns));
+			} else if(attr.equals("rost_nej")||attr.equals("summa_nej")){
+				no = Integer.parseInt(this.readString(parser, "td", xmlns));
+			} else if(attr.equals("rost_avstar")||attr.equals("summa_avstar")){
+				neutral = Integer.parseInt(this.readString(parser, "td", xmlns));
+			} else if (attr.equals("rost_franvarande")||attr.equals("summa_franvarande")){
+				absent = Integer.parseInt(this.readString(parser, "td", xmlns));
+			} else {
+				Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): attribute not recognized: <td class=\""+attr+"\">");
+				skip(parser);
+			}
+		}
+		parser.require(XmlPullParser.END_TAG, xmlns, "tr");
+		
+		return new PartyVote(party, yes, no, neutral, absent);
 	}
 	
 	/**
