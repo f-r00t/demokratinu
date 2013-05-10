@@ -21,4 +21,24 @@ public class Motion extends Moprosition {
 		this.kammaren = kammaren;
 		this.utskottet = utskottet;
 	}
+
+	public List<Proposer> getIntressenter() {
+		return intressenter;
+	}
+
+	public String getSubtype() {
+		return subtype;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public String getKammaren() {
+		return kammaren;
+	}
+
+	public String getUtskottet() {
+		return utskottet;
+	}
 }
