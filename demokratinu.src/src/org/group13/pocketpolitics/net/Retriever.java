@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Moprosition;
-import org.group13.pocketpolitics.model.Utskott;
+import org.group13.pocketpolitics.model.Committee;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -47,7 +47,7 @@ public class Retriever {
 	 * 0 = sort after date (all issues); 
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
-	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, String dateFrom, String dateTo, int page, int sort, Utskott utskott){
+	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, String dateFrom, String dateTo, int page, int sort, Committee utskott){
 		threads++;
 		ArticlesAsyncTask task =new ArticlesAsyncTask(act);
 		tasks.add(task);

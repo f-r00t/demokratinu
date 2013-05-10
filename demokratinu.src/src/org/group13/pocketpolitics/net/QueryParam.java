@@ -1,6 +1,6 @@
 package org.group13.pocketpolitics.net;
 
-import org.group13.pocketpolitics.model.Utskott;
+import org.group13.pocketpolitics.model.Committee;
 
 import android.util.Log;
 
@@ -16,7 +16,7 @@ class QueryParam {
 	protected final String dateTo;
 	protected final String sort;
 	protected final int page;
-	protected final Utskott utskott;
+	protected final Committee utskott;
 	
 	/**
 	 * Class for making a query to data.riksdagen.se/sok/.
@@ -30,12 +30,12 @@ class QueryParam {
 	 * 0 = sort after date (all issues); 
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
-	QueryParam(String dateFrom, String dateTo, int page, int sort, Utskott utskott){
+	QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott){
 		this.dateFrom = dateFrom;
 		this.dateTo= dateTo;
 		
 		if(utskott==null){
-			this.utskott = Utskott.NULL;
+			this.utskott = Committee.NULL;
 		} else {
 			this.utskott = utskott;
 		}

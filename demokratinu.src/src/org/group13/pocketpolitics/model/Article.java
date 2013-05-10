@@ -18,7 +18,7 @@ public class Article extends LikeableItem {
 	private String beslutsdag;
 	private int beslutad;
 	
-	private List<UtskottsForslag> fors;
+	private List<CommitteeProposal> fors;
 	
 	
 	/**
@@ -56,7 +56,7 @@ public class Article extends LikeableItem {
 			String notisrubrik,
 			String beslutsdag,
 			int beslutad,
-			List<UtskottsForslag> fors) {
+			List<CommitteeProposal> fors) {
 		
 		super(content, date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
 		
@@ -153,11 +153,11 @@ public class Article extends LikeableItem {
 		this.beslutad = beslutad;
 	}
 
-	public List<UtskottsForslag> getFors() {
+	public List<CommitteeProposal> getFors() {
 		return fors;
 	}
 
-	public void setFors(List<UtskottsForslag> fors) {
+	public void setFors(List<CommitteeProposal> fors) {
 		this.fors = fors;
 	}
 

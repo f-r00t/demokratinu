@@ -6,11 +6,11 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.Intressent;
+import org.group13.pocketpolitics.model.Proposer;
 import org.group13.pocketpolitics.model.Moprosition;
 import org.group13.pocketpolitics.model.Motion;
 import org.group13.pocketpolitics.model.Proposition;
-import org.group13.pocketpolitics.model.Utskott;
+import org.group13.pocketpolitics.model.Committee;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -57,14 +57,14 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		
 		String beteckning = null;
 		String rm = null;
-		List<Intressent> intressenter = null;
+		List<Proposer> intressenter = null;
 		String textURL = null;
 		boolean motion = true;
 		
 		String subtype = null;
 		String title = null;
 		String subtitle = null;
-		Utskott uts = Utskott.NULL;
+		Committee uts = Committee.NULL;
 		
 		parser.next();
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokument");
@@ -99,7 +99,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 				if(!motion){
 					org+="U";
 				}
-				uts = Utskott.findUtskott(org);
+				uts = Committee.findUtskott(org);
 			} else if( "titel".equals(parser.getName())){
 				title = this.readString(parser, "titel", xmlns);
 			} else if( "subtitel".equals(parser.getName())){
@@ -206,10 +206,10 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		return true;
 	}
 	
-	private List<Intressent> parseIntressenter(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private List<Proposer> parseIntressenter(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokintressent");
 		
-		List<Intressent> listr = new ArrayList<Intressent>();
+		List<Proposer> listr = new ArrayList<Proposer>();
 		
 		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 			if(parser.getEventType()!=XmlPullParser.START_TAG){
@@ -244,7 +244,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 			
 			//Log.i(this.getClass().getSimpleName(), "Leif: in parseIntr(): "+name);
 			
-			listr.add(new Intressent(name, party, role, personId));
+			listr.add(new Proposer(name, party, role, personId));
 		}
 		
 		parser.require(XmlPullParser.END_TAG, xmlns, "dokintressent");

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.PartyVote;
-import org.group13.pocketpolitics.model.UtskottsForslag;
+import org.group13.pocketpolitics.model.CommitteeProposal;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -85,7 +85,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		}
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokutskottsforslag");
-		List<UtskottsForslag> lForslag = new ArrayList<UtskottsForslag>();
+		List<CommitteeProposal> lForslag = new ArrayList<CommitteeProposal>();
 		
 		if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("dokutskottsforslag")){
 			
@@ -97,7 +97,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 				
 				if("utskottsforslag".equals(parser.getName())){
 					// Log.i(this.getClass().getSimpleName(), "Leif: Entering <utskottsforslag>");
-					UtskottsForslag out = parseForslag(parser);
+					CommitteeProposal out = parseForslag(parser);
 					if(out!=null){
 						lForslag.add(out);
 					} else {
@@ -117,7 +117,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		return article.getId();
 	}
 	
-	private UtskottsForslag parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private CommitteeProposal parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
 		
 		int punkt = -1;
@@ -169,7 +169,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		parser.require(XmlPullParser.END_TAG, xmlns, "utskottsforslag");
 		
 		if(forslag!=null){
-			UtskottsForslag res = new UtskottsForslag(punkt, rubrik, forslag, voteXmlUrl, motParti, motForslag, vinnare, partyVotes);
+			CommitteeProposal res = new CommitteeProposal(punkt, rubrik, forslag, voteXmlUrl, motParti, motForslag, vinnare, partyVotes);
 			return res;
 		}
 		return null;

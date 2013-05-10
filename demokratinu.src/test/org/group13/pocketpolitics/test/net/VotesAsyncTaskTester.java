@@ -4,7 +4,7 @@ import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.PartyVote;
-import org.group13.pocketpolitics.model.UtskottsForslag;
+import org.group13.pocketpolitics.model.CommitteeProposal;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 
@@ -68,7 +68,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 		else {
 			Log.w(this.getClass().getSimpleName(), "Leif: Votes retrieved.");
 			
-			UtskottsForslag fors = testArt.getFors().get(0);
+			CommitteeProposal fors = testArt.getFors().get(0);
 			
 			Log.i(this.getClass().getSimpleName(), "Leif: " +fors.vinnare + " vann omröstningen");
 			ListIterator<PartyVote> iter = fors.voteItems.listIterator();

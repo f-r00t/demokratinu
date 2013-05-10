@@ -14,12 +14,12 @@ public abstract class Moprosition {
 	
 	public final boolean motion;
 
-	public final Utskott uts;
+	public final Committee uts;
 	
 	private String text;
 	
 
-	protected Moprosition(String textURL, String rm, String beteckning, String title, Utskott uts, boolean motion){
+	protected Moprosition(String textURL, String rm, String beteckning, String title, Committee uts, boolean motion){
 		this.motion = motion;
 		this.textURL = textURL;
 		this.beteckning = beteckning;

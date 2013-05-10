@@ -3,7 +3,7 @@ package org.group13.pocketpolitics.test.net;
 import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.Article;
-import org.group13.pocketpolitics.model.Utskott;
+import org.group13.pocketpolitics.model.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
@@ -28,7 +28,7 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 
 	public void testArticlesAsyncTask(){
 		for(int i=0; i<npages; i++){
-			Retriever.retrieveArticles(this, "", "2013-04-26", i+1, -1, Utskott.NULL);
+			Retriever.retrieveArticles(this, "", "2013-04-26", i+1, -1, Committee.NULL);
 			threads++;
 		}
 		
