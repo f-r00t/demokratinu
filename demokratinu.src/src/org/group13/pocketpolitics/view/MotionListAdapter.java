@@ -52,22 +52,13 @@ public class MotionListAdapter extends BaseAdapter {
 		View vi = convertView;
 
 		if (convertView == null) {
-			vi = inflater.inflate(R.layout.article_list_item, null);
+			vi = inflater.inflate(R.layout.article_list_item, null); //Change this once proper layout has been implemented.
 		}
-		/*
+
 		// Sets the title text
-		TextView articleTitle = (TextView) vi.findViewById(R.id.articleTitle);
-		articleTitle.setText(motion.getTitle());
-
-		// Sets the number of likes
-		TextView textViewLikes = (TextView) vi.findViewById(R.id.TextViewLikes);
-		textViewLikes.setText(Integer.toString(motion.getNbrOfLikes()));
-
-		// Sets the number of dislikes
-		TextView textViewDislikes = (TextView) vi
-				.findViewById(R.id.TextViewDislikes);
-		textViewDislikes.setText(Integer.toString(motion.getNbrOfDislikes()));
-		*/
+		TextView motionTitle = (TextView) vi.findViewById(R.id.articleTitle); //Change this once proper layout has been implemented.
+		motionTitle.setText(motion.getTitle());
+		
 		return vi;
 	}
 
