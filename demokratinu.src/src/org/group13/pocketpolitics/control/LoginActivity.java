@@ -159,7 +159,7 @@ public class LoginActivity extends Activity {
 			focusView.requestFocus();
 		} else {
 			//authenticate();
-			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+			Intent intent = new Intent(getApplicationContext(), ArticleActivity.class);
 			startActivity(intent);
 		}
 	}
