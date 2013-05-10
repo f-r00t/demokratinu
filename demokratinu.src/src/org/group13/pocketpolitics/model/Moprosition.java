@@ -30,6 +30,30 @@ public abstract class Moprosition {
 		text = null;
 	}
 	
+	public String getBeteckning() {
+		return beteckning;
+	}
+
+	public String getRm() {
+		return rm;
+	}
+
+	public String getTextURL() {
+		return textURL;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public boolean isMotion() {
+		return motion;
+	}
+
+	public Committee getUts() {
+		return uts;
+	}
+
 	public String getText() {
 		return text;
 	}
