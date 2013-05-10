@@ -56,6 +56,21 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		}
 	}
 	
+	/**
+	 * This method is called by retrieve() after the xml parser is properly set up. It should return the expected result of the task.
+	 * @param parser
+	 * @return result of the task
+	 * @throws XmlPullParserException
+	 * @throws IOException
+	 */
+	protected abstract O readFeed(XmlPullParser parser) throws XmlPullParserException, IOException;
+	
+	/**
+	 * Handles the stream and sets up xml parser. This method is dependent on readFeed() and returns whatever readFeed() returns.
+	 * @param url
+	 * @param in
+	 * @return result of the task
+	 */
 	protected O retrieve(String url, I in){
 		InputStream instr = retrieveStream(url);
 
@@ -76,6 +91,11 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		return null;
 	}
 	
+	/**
+	 * Makes a query to the url and returns an input stream.
+	 * @param url Url to file ex "http://data.riksdagen.se/sok/"
+	 * @return InputStream to file
+	 */
 	protected InputStream retrieveStream(String url){
 
 		DefaultHttpClient client = new DefaultHttpClient();
@@ -105,7 +125,7 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 	}
 	
 	/**
-	 * Creates an XmlPullParser and calls .readFeed()
+	 * Creates an XmlPullParser and returns readFeed(). Closes the input stream.
 	 * <p>Källa: http://developer.android.com/training/basics/network-ops/xml.html#analyze
 	 * 
 	 * @param instr
@@ -126,8 +146,6 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		}
 
 	}
-	
-	protected abstract O readFeed(XmlPullParser parser) throws XmlPullParserException, IOException;
 	
 	protected String readString(XmlPullParser parser, String tag, String xmlns) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, tag);
