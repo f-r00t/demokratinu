@@ -27,6 +27,17 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 	private final String year;
 	private final String docNum;
 	
+	private class Document{
+		String beteckning = null;
+		String rm = null;
+		String textURL = null;
+		String subtype = null;
+		String title = null;
+		String subtitle = null;
+		Committee uts = Committee.NULL;
+		boolean motion = true;
+	}
+	
 	/**
 	 * 
 	 * @param act
@@ -55,61 +66,11 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokumentstatus");
 		
-		String beteckning = null;
-		String rm = null;
-		List<Proposer> intressenter = null;
-		String textURL = null;
-		boolean motion = true;
 		
-		String subtype = null;
-		String title = null;
-		String subtitle = null;
-		Committee uts = Committee.NULL;
+		List<Proposer> intressenter = null;
 		
 		parser.next();
-		parser.require(XmlPullParser.START_TAG, xmlns, "dokument");
-		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
-			if(parser.getEventType()!=XmlPullParser.START_TAG){
-				continue;
-			}
-			
-			if( "rm".equals(parser.getName())){
-				rm = this.readString(parser, "rm", xmlns);
-				if(!rm.equals(this.year)){
-					Log.w(this.getClass().getSimpleName(), "Leif: Expected year "+year+", found "+rm);
-					return null;
-				}
-				
-			} else if( "beteckning".equals(parser.getName())){
-				beteckning = this.readString(parser, "beteckning", xmlns);
-				if(!beteckning.equals(this.docNum)){
-					Log.w(this.getClass().getSimpleName(), "Leif: Expected beteckning "+docNum+", found "+beteckning);
-					return null;
-				}
-			} else if( "typ".equals(parser.getName())){
-				if("prop".equals( this.readString(parser, "typ", xmlns))){
-					motion = false;
-				} else {
-					motion = true;
-				}
-			} else if( "subtyp".equals(parser.getName())){
-				subtype = this.readString(parser, "subtyp", xmlns);
-			} else if( "organ".equals(parser.getName())){
-				String org = this.readString(parser, "organ", xmlns);
-				if(!motion){
-					org+="U";
-				}
-				uts = Committee.findUtskott(org);
-			} else if( "titel".equals(parser.getName())){
-				title = this.readString(parser, "titel", xmlns);
-			} else if( "subtitel".equals(parser.getName())){
-				subtitle = this.readString(parser, "subtitel", xmlns);
-			} else if( "dokument_url_html".equals(parser.getName())){
-				textURL = this.readString(parser, "dokument_url_html", xmlns);
-			} else {
-				skip(parser);
-			}
-		}
+		Document ddata = parseDokument(parser);
 		
 		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokaktivitet");
@@ -118,7 +79,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokintressent");
 		
-		if(motion){
+		if(ddata.motion){
 			intressenter = this.parseIntressenter(parser);
 		} else {
 			skip(parser);
@@ -130,7 +91,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		while(parser.next()!=XmlPullParser.START_TAG);
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
 		
-		if(motion){
+		if(ddata.motion){
 			while(parser.next()!=XmlPullParser.START_TAG);
 			parser.require(XmlPullParser.START_TAG, xmlns, "forslag");
 			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
@@ -159,15 +120,66 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokuppgift");
 		
 		Moprosition ret;
-		if(motion){
-			ret = new Motion(intressenter, textURL, rm, beteckning, subtype, title, subtitle, uts, kammaren, utskottet);
+		if(ddata.motion){
+			ret = new Motion(intressenter, ddata.textURL, ddata.rm, ddata.beteckning, ddata.subtype, ddata.title, ddata.subtitle, ddata.uts, kammaren, utskottet);
 		} else {
-			ret = new Proposition(textURL, rm, beteckning, title, uts);
+			ret = new Proposition(ddata.textURL, ddata.rm, ddata.beteckning, ddata.title, ddata.uts);
 		}
 		
 		retrieveText(ret);
 		
 		return ret;
+	}
+	
+	private Document parseDokument(XmlPullParser parser) throws XmlPullParserException, IOException{
+		parser.require(XmlPullParser.START_TAG, xmlns, "dokument");
+		
+		Document ddata = new Document();
+		
+		while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
+			if(parser.getEventType()!=XmlPullParser.START_TAG){
+				continue;
+			}
+			
+			if( "rm".equals(parser.getName())){
+				ddata.rm = this.readString(parser, "rm", xmlns);
+				if(!ddata.rm.equals(this.year)){
+					Log.w(this.getClass().getSimpleName(), "Leif: Expected year "+year+", found "+ddata.rm);
+					return null;
+				}
+				
+			} else if( "beteckning".equals(parser.getName())){
+				ddata.beteckning = this.readString(parser, "beteckning", xmlns);
+				if(!ddata.beteckning.equals(this.docNum)){
+					Log.w(this.getClass().getSimpleName(), "Leif: Expected beteckning "+docNum+", found "+ddata.beteckning);
+					return null;
+				}
+			} else if( "typ".equals(parser.getName())){
+				if("prop".equals( this.readString(parser, "typ", xmlns))){
+					ddata.motion = false;
+				} else {
+					ddata.motion = true;
+				}
+			} else if( "subtyp".equals(parser.getName())){
+				ddata.subtype = this.readString(parser, "subtyp", xmlns);
+			} else if( "organ".equals(parser.getName())){
+				String org = this.readString(parser, "organ", xmlns);
+				if(!ddata.motion){
+					org+="U";
+				}
+				ddata.uts = Committee.findUtskott(org);
+			} else if( "titel".equals(parser.getName())){
+				ddata.title = this.readString(parser, "titel", xmlns);
+			} else if( "subtitel".equals(parser.getName())){
+				ddata.subtitle = this.readString(parser, "subtitel", xmlns);
+			} else if( "dokument_url_html".equals(parser.getName())){
+				ddata.textURL = this.readString(parser, "dokument_url_html", xmlns);
+			} else {
+				skip(parser);
+			}
+		}
+		
+		return ddata;
 	}
 	
 	/**<p>Retrieves html-text for a motion or proposition.
