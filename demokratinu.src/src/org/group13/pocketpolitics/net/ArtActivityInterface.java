@@ -9,7 +9,7 @@ import org.group13.pocketpolitics.model.Article;
  * @author Leif
  *
  */
-public interface ArtActivityInterface {
+interface ArtActivityInterface {
 
 	public void onArticlesPreExecute();
 	

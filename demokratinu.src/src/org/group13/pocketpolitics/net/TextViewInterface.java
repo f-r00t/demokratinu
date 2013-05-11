@@ -4,7 +4,7 @@ package org.group13.pocketpolitics.net;
  * @author Leif
  *
  */
-public interface TextViewInterface {
+interface TextViewInterface {
 
 	public void setText(String text);
 }

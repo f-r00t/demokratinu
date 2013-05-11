@@ -111,10 +111,10 @@ public class Retriever {
 	 * @param update True if want to update the RSS (access the server anew)
 	 * @return A list of titles for articles
 	 */
-	public static void retrieveRssArticleTitles(ArtActivityInterface act){
+	/*public static void retrieveRssArticleTitles(ArtActivityInterface act){
 		//threads++;
 		new FeedTitlesAsyncTask(act).execute("");
-	}
+	}*/
 
 	/**
 	 * @deprecated
@@ -123,9 +123,9 @@ public class Retriever {
 	 * @param articleid ex Sku21
 	 * @return
 	 */
-	public static void retrieveText(TextViewInterface tview , String year, String articleid){
+	/*public static void retrieveText(TextViewInterface tview , String year, String articleid){
 		//threads++;
 		new TextAsyncTask(tview, year, articleid).execute("");
-	}
+	}*/
 
 }
