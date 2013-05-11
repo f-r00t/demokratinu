@@ -52,11 +52,11 @@ public class MotionListAdapter extends BaseAdapter {
 		View vi = convertView;
 
 		if (convertView == null) {
-			vi = inflater.inflate(R.layout.article_list_item, null); //Change this once proper layout has been implemented.
+			vi = inflater.inflate(R.layout.motion_list_item, null);
 		}
 
 		// Sets the title text
-		TextView motionTitle = (TextView) vi.findViewById(R.id.articleTitle); //Change this once proper layout has been implemented.
+		TextView motionTitle = (TextView) vi.findViewById(R.id.motionListItemTitle);
 		motionTitle.setText(motion.getTitle());
 		
 		return vi;
