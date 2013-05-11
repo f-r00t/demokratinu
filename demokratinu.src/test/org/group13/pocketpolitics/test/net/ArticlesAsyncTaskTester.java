@@ -56,16 +56,16 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 			return;
 		}
 		
-		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask. Page no "+qres.thisPage+ " just finished.");
+		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask. Page no "+qres.getThisPage()+ " just finished.");
 		
-		Log.i(this.getClass().getSimpleName(), "Leif: QueryResults sidor="+qres.totalPages+". Artiklar på denna sida: "+qres.arts.size());
+		Log.i(this.getClass().getSimpleName(), "Leif: QueryResults sidor="+qres.getTotalPages()+". Artiklar på denna sida: "+qres.getArts().size());
 		
-		ListIterator<Article> it = qres.arts.listIterator();
+		ListIterator<Article> it = qres.getArts().listIterator();
 		int is=0;
 		while(it.hasNext() && is++<show){
 			Article a = it.next();
 			
-			Log.i(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask["+qres.thisPage + "] Id: "+a.getId()+" Beslutsdatum "+a.getBeslutsdag());
+			Log.i(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask["+qres.getThisPage() + "] Id: "+a.getId()+" Beslutsdatum "+a.getBeslutsdag());
 		}
 		
 	}

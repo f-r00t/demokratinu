@@ -6,10 +6,10 @@ import org.group13.pocketpolitics.model.Article;
 
 
 public class QueryResult {
-	public final int thisPage;
-	public final int totalPages;
-	public final int totalTraffar;
-	public final List<Article> arts;
+	private final int thisPage;
+	private final int totalPages;
+	private final int totalTraffar;
+	private final List<Article> arts;
 	
 	/**
 	 * 
@@ -23,6 +23,22 @@ public class QueryResult {
 		this.totalPages = totalPages;
 		this.thisPage = thisPage;
 		this.totalTraffar = totalTraffar;
+	}
+
+	public int getThisPage() {
+		return thisPage;
+	}
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public int getTotalTraffar() {
+		return totalTraffar;
+	}
+
+	public List<Article> getArts() {
+		return arts;
 	}
 
 }

@@ -20,13 +20,13 @@ import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.R.id;
 import org.group13.pocketpolitics.R.layout;
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.ArtActivityInterface;
 import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
-public class FrontPageActivity extends Activity implements ActivityNetInterface {
+public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
 	private ListView listViewArticles;
 	private ArrayList<Article> articleList = new ArrayList<Article>();
@@ -76,31 +76,16 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface 
 		c.setNbrOfDislikes(300);
 		articleList.add(c);
 		*/
+		
+		orderPage(1);
 
 		setAdapter();
-
-		getMoreArticles();
-		
 		
 	}
-
-	@Override
-	public void addArticles(List<Article> arts) {
-		articleList.addAll(arts);
-		setAdapter();
-	}
-
-	private void getMoreArticles() {
-		/*
-		 * ConnectivityManager conMgr = (ConnectivityManager)
-		 * getSystemService(Context.CONNECTIVITY_SERVICE); NetworkInfo netwInfo
-		 * = conMgr.getActiveNetworkInfo();
-		 * 
-		 * if(netwInfo != null && netwInfo.isConnected()){
-		 */
-		if (Retriever.isConnected(this)) {
-			// new ArticleFromFeed().execute("");
-			Retriever.retrieveRssArticleTitles(this);
+	
+	private void orderPage(int p){
+		if(Retriever.isConnected(this)){
+			Retriever.retrieveArticles(this, "", "", p, -1, Committee.Arbetsmarknad);
 		}
 	}
 
@@ -121,14 +106,15 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface 
 	}
 
 	@Override
-	public void onSuccess(Object result) {
-		// TODO Auto-generated method stub
-		
+	public void onSuccess(QueryResult result) {
+		Log.i(this.getClass().getSimpleName(),"PocketDebug: Recieved page no "+result.getThisPage());
+		articleList.addAll(result.getArts());
+		setAdapter();
 	}
 
 	@Override
 	public void onFailure(String message) {
-		// TODO Auto-generated method stub
+		Log.w(this.getClass().getSimpleName(),"PocketDebug: Recieve articles failed: "+message);
 		
 	}
 
