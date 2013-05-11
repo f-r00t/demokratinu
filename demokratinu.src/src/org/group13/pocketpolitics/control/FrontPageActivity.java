@@ -20,12 +20,13 @@ import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.R.id;
 import org.group13.pocketpolitics.R.layout;
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.ArtActivityInterface;
 import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
-public class FrontPageActivity extends Activity implements ArtActivityInterface {
+public class FrontPageActivity extends Activity implements ActivityNetInterface {
 
 	private ListView listViewArticles;
 	private ArrayList<Article> articleList = new ArrayList<Article>();
@@ -108,21 +109,27 @@ public class FrontPageActivity extends Activity implements ArtActivityInterface 
 	}
 
 	@Override
-	public void addArticles(QueryResult qres) {
+	public void onPreExecute() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void articlesCancelled(QueryResult qres) {
+	public void onProgressUpdate(Integer procent) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
-	public void onArticlesPreExecute() {
+	public void onSuccess(Object result) {
 		// TODO Auto-generated method stub
+		
+	}
 
+	@Override
+	public void onFailure(String message) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
