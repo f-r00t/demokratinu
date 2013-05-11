@@ -219,7 +219,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 			}
 			
 			PartyVote pv = parsePartyVote(parser);
-			if(pv!=null && pv.party!=null){
+			if(pv!=null && pv.getParty()!=null){
 				partyVotes.add(pv);
 			}
 		}

@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Motion extends Moprosition {
 	
-	public final List<Proposer> intressenter;
-	public final String subtype;
-	public final String subtitle;
-	public final String kammaren;
-	public final String utskottet;
+	private final List<Proposer> intressenter;
+	private final String subtype;
+	private final String subtitle;
+	private final String kammaren;
+	private final String utskottet;
 
 	public Motion(List<Proposer> intressenter, String textURL, String rm, String beteckning, 
 			String subtype, String title, String subtitle, 

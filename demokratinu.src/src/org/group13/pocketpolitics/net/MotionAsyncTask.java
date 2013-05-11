@@ -208,7 +208,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 	 */
 	private boolean retrieveText(Moprosition mop){
 
-		BufferedReader bred = new BufferedReader( new InputStreamReader( retrieveStream(mop.textURL)));
+		BufferedReader bred = new BufferedReader( new InputStreamReader( retrieveStream(mop.getTextURL())));
 		StringBuilder sbuild = new StringBuilder();
 
 		try {

@@ -2,11 +2,11 @@ package org.group13.pocketpolitics.model;
 
 public class PartyVote {
 
-	public final String party;
-	public final int yes;
-	public final int no;
-	public final int neutral;
-	public final int absent;
+	private final String party;
+	private final int yes;
+	private final int no;
+	private final int neutral;
+	private final int absent;
 	
 	public PartyVote(String party, int yes, int no, int neutral, int absent){
 		this.party = party;
@@ -14,5 +14,25 @@ public class PartyVote {
 		this.yes = yes;
 		this.neutral = neutral;
 		this.absent = absent;
+	}
+
+	public String getParty() {
+		return party;
+	}
+
+	public int getYes() {
+		return yes;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public int getNeutral() {
+		return neutral;
+	}
+
+	public int getAbsent() {
+		return absent;
 	}
 }

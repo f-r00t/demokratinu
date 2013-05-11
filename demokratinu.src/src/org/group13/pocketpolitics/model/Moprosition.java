@@ -7,16 +7,16 @@ package org.group13.pocketpolitics.model;
  */
 public abstract class Moprosition {
 	
-	public final String beteckning;
-	public final String rm;
-	public final String textURL;
-	public final String title;
+	private final String beteckning;
+	private final String rm;
+	private final String textURL;
+	private final String title;
 	
-	public final boolean motion;
+	private final boolean motion;
 
-	public final Committee uts;
+	private final Committee uts;
 	
-	private String text;
+	private String text;	//this String is set afterwards
 	
 
 	protected Moprosition(String textURL, String rm, String beteckning, String title, Committee uts, boolean motion){

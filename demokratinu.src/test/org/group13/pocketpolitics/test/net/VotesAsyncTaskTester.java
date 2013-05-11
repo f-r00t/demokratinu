@@ -70,8 +70,8 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 			
 			CommitteeProposal fors = testArt.getFors().get(0);
 			
-			Log.i(this.getClass().getSimpleName(), "Leif: " +fors.vinnare + " vann omröstningen");
-			ListIterator<PartyVote> iter = fors.voteItems.listIterator();
+			Log.i(this.getClass().getSimpleName(), "Leif: " +fors.getVinnare() + " vann omröstningen");
+			ListIterator<PartyVote> iter = fors.getVoteItems().listIterator();
 			while(iter.hasNext()){
 				this.printPartyVote(iter.next());
 			}
@@ -85,7 +85,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	}
 	
 	private void printPartyVote(PartyVote vit){
-		Log.i(this.getClass().getSimpleName(), "Leif:   "+vit.party+": " + vit.yes + " ja, " + vit.no + " nej, "+ vit.neutral + " avstår, " + vit.absent + " frånvarande");
+		Log.i(this.getClass().getSimpleName(), "Leif:   "+vit.getParty()+": " + vit.getYes() + " ja, " + vit.getNo() + " nej, "+ vit.getNeutral() + " avstår, " + vit.getAbsent() + " frånvarande");
 	}
 
 	@Override

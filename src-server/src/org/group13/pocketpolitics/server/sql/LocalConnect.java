@@ -67,11 +67,12 @@ public class LocalConnect{
 	}
 	
 	private static String[] readFromFile(String path){
+		BufferedReader bfr=null;
 		try {
 			String[] str = new String[2];
 			
 			FileInputStream fs = new FileInputStream(path);
-			BufferedReader bfr = new BufferedReader(new InputStreamReader(fs, "UTF-8"));
+			bfr = new BufferedReader(new InputStreamReader(fs, "UTF-8"));
 			str[0] = bfr.readLine();
 			str[1] = bfr.readLine();
 			return str;
@@ -85,6 +86,15 @@ public class LocalConnect{
 		} catch (IOException e) {
 			System.out.println("in LocalConnector: Error: IOException");
 			e.printStackTrace();
+		} finally {
+			try {
+				if(bfr!=null){
+					bfr.close();
+				}
+			} catch (IOException e) {
+				System.out.println("in LocalConnector: Error: IOException when closing!");
+				e.printStackTrace();
+			}
 		}
 		
 		return null;

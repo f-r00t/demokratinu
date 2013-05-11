@@ -63,24 +63,24 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 			fail();
 		}
 
-		Log.w(this.getClass().getSimpleName(), "Leif: Thread returned: "+result.beteckning);
-		Log.w(this.getClass().getSimpleName(), "Leif: Text URL: "+result.textURL);
+		Log.w(this.getClass().getSimpleName(), "Leif: Thread returned: "+result.getBeteckning());
+		Log.w(this.getClass().getSimpleName(), "Leif: Text URL: "+result.getTextURL());
 		
-		if(result.motion){
+		if(result.isMotion()){
 			Motion mot = (Motion) result;
-			if(mot.subtype!=null){
-				Log.i(this.getClass().getSimpleName(), "Leif: subtype "+ mot.subtype);
+			if(mot.getSubtype()!=null){
+				Log.i(this.getClass().getSimpleName(), "Leif: subtype "+ mot.getSubtype());
 			} else {
 				Log.e(this.getClass().getSimpleName(), "Leif: subtype Null!");
 			}
 			
-			if(mot.intressenter==null){
+			if(mot.getIntressenter()==null){
 				Log.e(this.getClass().getSimpleName(), "Leif: Intressenter Null!");
 				fail();
 			} else {
-				Iterator<Proposer> it = mot.intressenter.iterator();
+				Iterator<Proposer> it = mot.getIntressenter().iterator();
 				while(it.hasNext()){
-					Log.i(this.getClass().getSimpleName(), "Leif: Intressent "+ it.next().name);
+					Log.i(this.getClass().getSimpleName(), "Leif: Intressent "+ it.next().getName());
 				}
 			}
 			

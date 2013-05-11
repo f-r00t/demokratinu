@@ -13,19 +13,18 @@ import android.util.Log;
  */
 public class CommitteeProposal {
 	
-	public final String moprositionParsed;	// "2012/13:Ub354" -> "[[2012%2F13]:[Ub354]]"
+	private final String moprositionParsed;	// "2012/13:Ub354" -> "[[2012%2F13]:[Ub354]]"
+	private final int nr;
+	private final int motForslag;
 	
-	public final int nr;
-	public final int motForslag;
+	private final String title;
+	private final String forslag;
+	private final String voteXmlUrl;
+	private final String motParti;
 	
-	public final String title;
-	public final String forslag;
-	public final String voteXmlUrl;
-	public final String motParti;
+	private final String vinnare;
 	
-	public final String vinnare;
-	
-	public final List<PartyVote> voteItems;
+	private final List<PartyVote> voteItems;
 	
 	public CommitteeProposal(int punkt, String rubrik, String forslag, String xmlUrl, 
 			String motParti, int motForslag, String vinnare, List<PartyVote> voteItems){
@@ -81,5 +80,39 @@ public class CommitteeProposal {
 		}
 	}
 	
-	
+	public String getMoprositionParsed() {
+		return moprositionParsed;
+	}
+
+	public int getNr() {
+		return nr;
+	}
+
+	public int getMotForslag() {
+		return motForslag;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getForslag() {
+		return forslag;
+	}
+
+	public String getVoteXmlUrl() {
+		return voteXmlUrl;
+	}
+
+	public String getMotParti() {
+		return motParti;
+	}
+
+	public String getVinnare() {
+		return vinnare;
+	}
+
+	public List<PartyVote> getVoteItems() {
+		return voteItems;
+	}
 }
