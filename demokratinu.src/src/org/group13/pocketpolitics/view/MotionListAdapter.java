@@ -29,14 +29,12 @@ public class MotionListAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return items.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		return items.get(arg0);
 	}
 
 	@Override
