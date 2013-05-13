@@ -6,7 +6,8 @@ header("HTTP/1.0 404 Not Found"); // Makes this not show up in google searches e
 
 if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	
-	require_once("dbcx.php");/*
+	require_once("dbcx.php");
+	/*
     $dbh = dbcx();
           
 	$email = trim($_GET['email']);
