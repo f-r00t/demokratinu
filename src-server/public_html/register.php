@@ -6,7 +6,7 @@
 
 if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	
-	//require_once("dbcx.php");
+	require_once("dbcx.php");
 	/*
     $dbh = dbcx();
           
