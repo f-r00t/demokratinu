@@ -5,7 +5,7 @@
 header("HTTP/1.0 404 Not Found"); // Makes this not show up in google searches etc
 
 if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
-	
+	/*
 	require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
           
@@ -43,7 +43,7 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	}
 	else {
 		echo "0"; // Either the username or email was already taken
-	}
+	}*/echo "1";
 }
 else {
 	echo "Error"; // Should never happen
