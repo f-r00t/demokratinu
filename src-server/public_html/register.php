@@ -8,8 +8,8 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	
 	require_once("dbcx.php");
 	
-    $dbh = dbcx();
-    /*      
+    //$dbh = dbcx();
+         
 	$email = trim($_GET['email']);
 	$username = trim($_GET['user']);
     $pass = $_GET['pass'];	  
@@ -44,7 +44,7 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	}
 	else {
 		echo "0"; // Either the username or email was already taken
-	}*/
+	}
 }
 else {
 	echo "Error"; // Should never happen
