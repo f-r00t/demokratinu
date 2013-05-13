@@ -10,9 +10,9 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	$settings = array(
 	'phptype'  => 'mysql',
     'hostspec' => 'localhost',
-    'database' => '',
-    'username' => '',
-    'password' => ''
+    'database' => 'pocketpolitics_test',
+    'username' => 'hasselmannen',
+    'password' => 'banan'
 	);
 
 	function dbcx() {
