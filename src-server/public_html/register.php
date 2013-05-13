@@ -26,7 +26,7 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 		}
 	}
 	
-    if (status != "0") {
+    if ($status != "0") {
 		$salt = uniqid('', true);
         $pass = crypt($pass, '$6$' . $salt . '$');
 		
