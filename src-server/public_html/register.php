@@ -6,10 +6,25 @@
 
 if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	
-	require_once("dbcx.php");
 	
-    $dbh = dbcx();
-          
+	$settings = array(
+	'phptype'  => 'mysql',
+    'hostspec' => 'localhost',
+    'database' => 'pocketpolitics_test',
+    'username' => 'hasselmannen',
+    'password' => 'banan'
+	);
+
+	
+		$dsnstr = "{$settings['phptype']}:host={$settings['hostspec']};dbname={$settings['database']}";
+		$dbuser = $settings['username'];
+		$dbpass = $settings['password'];
+		
+		$db = new PDO($dsnstr, $dbuser, $dbpass);
+	
+
+
+	
 	$email = trim($_GET['email']);
 	$username = trim($_GET['user']);
     $pass = $_GET['pass'];	  
