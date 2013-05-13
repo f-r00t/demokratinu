@@ -6,24 +6,8 @@
 
 if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	
-	
-	$settings = array(
-	'phptype'  => 'mysql',
-    'hostspec' => 'localhost',
-    'database' => 'pocketpolitics_test',
-    'username' => 'hasselmannen',
-    'password' => 'banan'
-	);
-
-	
-		$dsnstr = "{$settings['phptype']}:host={$settings['hostspec']};dbname={$settings['database']}";
-		$dbuser = $settings['username'];
-		$dbpass = $settings['password'];
-		
-		$db = new PDO($dsnstr, $dbuser, $dbpass);
-	
-
-
+	require_once("../../www-includes/dbcx.php");
+    $dbh = dbcx();
 	
 	$email = trim($_GET['email']);
 	$username = trim($_GET['user']);
@@ -32,6 +16,8 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	$sql = "SELECT username, email FROM users";
 	$stmt = $dbh->prepare($sql);
     $stmt->execute();
+	
+	$status = "1";
 	
 	while($dbcollected = $stmt->fetch()) {
         if ($dbcollected['username'] == $username) {
@@ -42,7 +28,7 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 		}
 	}
 	
-    if ($status != "0") {
+    if ($status == "1") {
 		$salt = uniqid('', true);
         $pass = crypt($pass, '$6$' . $salt . '$');
 		
