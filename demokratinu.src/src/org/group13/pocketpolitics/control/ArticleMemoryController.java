@@ -21,11 +21,15 @@ public class ArticleMemoryController {
 	
 	public static int retrievedPage(QueryResult result){
 		checkInstance();
-		INSTANCE.articles.addAll(result.getArts());
-		if(result.getThisPage() != ++INSTANCE.lastPage){
-			Log.w(ArticleMemoryController.class.getSimpleName(), "PocketDebug: wrong papge count! internally: "+INSTANCE.lastPage+", riksdag count: "+result.getThisPage());
+		
+		if(result.getThisPage() != 1+INSTANCE.lastPage){
+			Log.w(ArticleMemoryController.class.getSimpleName(), "PocketDebug: wrong papge count! internally: "+INSTANCE.lastPage+", retrieved: "+result.getThisPage());
 			return -1;
 		}
+		
+		
+		INSTANCE.lastPage++;
+		INSTANCE.articles.addAll(result.getArts());
 		return result.getThisPage();
 	}
 	
