@@ -11,6 +11,11 @@ import org.group13.pocketpolitics.net.QueryResult;
 
 import android.util.Log;
 
+/**
+ * Singleton class which remembers the retrieved Articles and what page to retrieve next.
+ * @author Leif
+ *
+ */
 public class ArticleMemoryController {
 	private static ArticleMemoryController INSTANCE;
 	
@@ -36,6 +41,7 @@ public class ArticleMemoryController {
 	public static int nextPage(){
 		checkInstance();
 		if(INSTANCE.lastPage==INSTANCE.totalPages){
+			Log.w(ArticleMemoryController.class.getSimpleName(), "PocketDebug: Reached last page: "+INSTANCE.totalPages);
 			return -1;
 		}
 		return INSTANCE.lastPage+1;

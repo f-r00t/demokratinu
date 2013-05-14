@@ -54,6 +54,10 @@ public class Retriever {
 		retrieveArticles(act, new QueryParam(f, page));
 	}
 	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, QueryParam qp){
+		if(qp.page==-1){
+			return;
+		}
+		
 		threads++;
 		ArticlesAsyncTask task =new ArticlesAsyncTask(act);
 		tasks.add(task);
