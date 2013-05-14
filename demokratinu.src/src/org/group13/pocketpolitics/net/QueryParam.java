@@ -26,11 +26,11 @@ public class QueryParam {
 	 * @param sort		Sort results: default = sort after date (only closed issues);
 	 * 0 = sort after date (all issues);  
 	 */
-	QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott) {
+	public QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott) {
 		this(new Filter(dateFrom, dateTo, sort, utskott), page);
 	}
 	
-	QueryParam(Filter f, int page){
+	public QueryParam(Filter f, int page){
 		this.filter = f;
 		if(page <1){
 			Log.w(this.getClass().getSimpleName(), "Leif: bad page number: "+page);

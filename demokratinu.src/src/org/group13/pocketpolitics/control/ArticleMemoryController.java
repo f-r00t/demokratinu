@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.Committee;
 import org.group13.pocketpolitics.net.Filter;
+import org.group13.pocketpolitics.net.QueryParam;
 import org.group13.pocketpolitics.net.QueryResult;
 
 import android.util.Log;
@@ -29,12 +31,29 @@ public class ArticleMemoryController {
 	
 	public static int nextPage(){
 		checkInstance();
+		if(INSTANCE.lastPage==INSTANCE.totalPages){
+			return -1;
+		}
 		return INSTANCE.lastPage+1;
+	}
+	
+	public static QueryParam nextQuery(){
+		checkInstance();
+		int np = nextPage();
+		if(np==-1){
+			return null;
+		}
+		return new QueryParam(INSTANCE.filter, np);
 	}
 	
 	public static int totalPages(){
 		checkInstance();
 		return INSTANCE.totalPages;
+	}
+	
+	public static Filter filter(){
+		checkInstance();
+		return INSTANCE.filter;
 	}
 	
 	public static List<Article> articles(){
@@ -67,7 +86,7 @@ public class ArticleMemoryController {
 		articles = new ArrayList<Article>();
 		lastPage=0;
 		totalPages = -1;
-		filter = null;
+		filter = new Filter("", "", -1, Committee.NULL);
 	}
 	
 	private static void checkInstance(){

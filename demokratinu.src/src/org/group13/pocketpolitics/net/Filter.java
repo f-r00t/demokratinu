@@ -22,7 +22,7 @@ public class Filter {
 	 * 0 = sort after date (all issues);  
 	 */
 
-	Filter(String dateFrom, String dateTo, int sort, Committee utskott){
+	public Filter(String dateFrom, String dateTo, int sort, Committee utskott){
 		this.dateFrom = dateFrom;
 		this.dateTo= dateTo;
 		this.sortint = sort;

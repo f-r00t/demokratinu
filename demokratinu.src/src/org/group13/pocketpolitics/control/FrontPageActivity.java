@@ -83,15 +83,14 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		articleList.add(c);
 		*/
 		
-		orderPage(1);
+		orderNextPage();
 
 		setAdapter();
-		
 	}
 	
-	private void orderPage(int p){
+	private void orderNextPage(){
 		if(Retriever.isConnected(this)){
-			Retriever.retrieveArticles(this, "", "", p, -1, Committee.Arbetsmarknad);
+			Retriever.retrieveArticles(this, ArticleMemoryController.nextQuery());
 		}
 	}
 
@@ -114,6 +113,8 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	@Override
 	public void onSuccess(QueryResult result) {
 		Log.i(this.getClass().getSimpleName(),"PocketDebug: Recieved page no "+result.getThisPage());
+		
+		ArticleMemoryController.retrievedPage(result);
 		articleList.addAll(result.getArts());
 		setAdapter();
 	}
