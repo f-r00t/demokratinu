@@ -9,5 +9,7 @@
     <style name="TitleBackground">
         <item name="android:background">@drawable/titlebar_gradient</item>
     </style>
+    <string name="TextSizeSmall">10dp</string>
+    <string name="TextSizeTitle">20dp</string>
     
 </resources>

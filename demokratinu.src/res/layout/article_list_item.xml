@@ -20,7 +20,7 @@
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
                     android:text="@string/title_item"
-                    android:textSize="@dimen/textsizetitle" />
+                    android:textSize="@string/TextSizeTitle" />
 
                 <LinearLayout
                     android:id="@+id/LinearLayoutArticleMenu"
@@ -51,7 +51,7 @@
                             android:layout_gravity="center"
                             android:text="999"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/smallText" />
+                            android:textSize="@string/TextSizeSmall" />
 
                     </LinearLayout>
 
@@ -75,7 +75,7 @@
                             android:layout_gravity="center"
                             android:text="999"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/smallText" />
+                            android:textSize="@string/TextSizeSmall" />
 
                     </LinearLayout>
 
@@ -100,7 +100,7 @@
                             android:layout_gravity="center"
                             android:text="@string/title_detailedViewDescription"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/smallText" />
+                            android:textSize="@string/TextSizeSmall" />
 
                     </LinearLayout>
             </LinearLayout>
