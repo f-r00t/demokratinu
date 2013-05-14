@@ -29,19 +29,18 @@ import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
+	public static final String ARTICLE_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
+	
 	private ListView listViewArticles;
 	private ArrayList<Article> articleList = new ArrayList<Article>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
-		
 		super.onCreate(savedInstanceState);
 		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_front_page);
-		
-		
 		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
@@ -56,6 +55,9 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 				Intent intent = new Intent(getApplicationContext(), 
 						ArticleActivity.class).putExtra("Article",articleList.get(position));
+				//TODO 
+				//ska vara rätt siffra! inte bara 123
+				intent.putExtra(ARTICLE_SENT, "123");
 				startActivity(intent);
 			}
 		});
