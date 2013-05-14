@@ -27,6 +27,11 @@ public class ArticleMemoryController {
 		return result.getThisPage();
 	}
 	
+	public static int nextPage(){
+		checkInstance();
+		return INSTANCE.lastPage+1;
+	}
+	
 	public static int totalPages(){
 		checkInstance();
 		return INSTANCE.totalPages;
@@ -55,6 +60,8 @@ public class ArticleMemoryController {
 		}
 		return null;
 	}
+	
+	///////////////////////////////////////////////////////////
 	
 	private ArticleMemoryController(){
 		articles = new ArrayList<Article>();
