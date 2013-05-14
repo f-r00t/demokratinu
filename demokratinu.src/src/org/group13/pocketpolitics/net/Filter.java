@@ -40,4 +40,26 @@ public class Filter {
 			this.sort="beslutsdag";
 		}
 	}
+	
+	@Override
+	public boolean equals(Object o){
+		Filter f = (Filter) o;
+		if(!f.dateFrom.equals(this.dateFrom)){
+			return false;
+		} else if(!f.dateTo.equals(this.dateTo)){
+			return false;
+		} else if(f.sortint!=this.sortint){
+			return false;
+		} else if(!f.utskott.equals(this.utskott)){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public static boolean testEquals(){
+		QueryParam qp = new QueryParam("hej", "123", 0, 0, Committee.Civil);
+		Filter f = new Filter("hej", "123", 0, Committee.Civil);
+		return f.equals(qp);
+	}
 }
