@@ -63,6 +63,6 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:label="Tests for PocketPolitics"
-        android:targetPackage="org.group13.pocketpolitics.test" />
+        android:targetPackage="org.group13.pocketpolitics" />
 
 </manifest>
