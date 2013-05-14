@@ -1,10 +1,10 @@
 package org.group13.pocketpolitics.view;
 
 import java.util.ArrayList;
-
-import org.group13.pocketpolitics.model.Article;
+import java.util.List;
 
 import org.group13.pocketpolitics.R;
+import org.group13.pocketpolitics.model.Article;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,9 +22,9 @@ import android.widget.TextView;
 public class ArticleListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
-	ArrayList<Article> items;
+	List<Article> items;
 
-	public ArticleListAdapter(Activity context, ArrayList<Article> items) {
+	public ArticleListAdapter(Activity context, List<Article> items) {
 		super();
 
 		this.items = items;

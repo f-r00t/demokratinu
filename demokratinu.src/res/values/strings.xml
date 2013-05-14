@@ -12,5 +12,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="stay_logged_in_checkbox">Förbli inloggad</string>
     <string name="title_activity_registration">RegistrationActivity</string>
+    <string name="title_acitivty_motion">Motion</string>
+    <string name="Article">title_activity_article</string>
+    <string name="title_activity_article">Article</string>
+    <string name="title_activity_motion">Motion</string>
 
 </resources>

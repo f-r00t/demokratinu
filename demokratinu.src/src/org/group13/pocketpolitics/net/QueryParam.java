@@ -10,13 +10,10 @@ import android.util.Log;
  * @author Leif
  *
  */
-class QueryParam {
+public class QueryParam {
 
-	protected final String dateFrom;
-	protected final String dateTo;
-	protected final String sort;
 	protected final int page;
-	protected final Committee utskott;
+	protected final Filter filter;
 	
 	/**
 	 * Class for making a query to data.riksdagen.se/sok/.
@@ -27,36 +24,18 @@ class QueryParam {
 	 * @param dateTo	Search for articles up to this date, leave empty "" for no restriction
 	 * @param page		Get result page, default 1
 	 * @param sort		Sort results: default = sort after date (only closed issues);
-	 * 0 = sort after date (all issues); 
-	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
+	 * 0 = sort after date (all issues);  
 	 */
-	QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott){
-		this.dateFrom = dateFrom;
-		this.dateTo= dateTo;
-		
-		if(utskott==null){
-			this.utskott = Committee.NULL;
-		} else {
-			this.utskott = utskott;
-		}
-		
-		
-		
+	public QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott) {
+		this(new Filter(dateFrom, dateTo, sort, utskott), page);
+	}
+	
+	public QueryParam(Filter f, int page){
+		this.filter = f;
 		if(page <1){
 			Log.w(this.getClass().getSimpleName(), "Leif: bad page number: "+page);
 			page=1;
 		}
 		this.page = page;
-		
-		if(sort==1){
-			this.sort="rel";
-		}
-		else if(sort==0){
-			this.sort="datum";
-		}
-		else{
-			this.sort="beslutsdag";
-			
-		}
 	}
 }
