@@ -7,69 +7,102 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical" >
-
-                <ImageButton
-                    android:id="@+id/ImageButton15"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@null"
-                    android:contentDescription="@string/descUpArrow"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/greenarrow" />
-
-                <TextView
-                    android:id="@+id/TextViewLikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/title_upvotes"
-                    android:textSize="8sp" />
-
-                <ImageButton
-                    android:id="@+id/ImageButton14"
-                    android:layout_width="20dp"
-                    android:layout_height="5dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@null"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/neutral" />
-
-                <TextView
-                    android:id="@+id/TextViewDislikes"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/title_downvotes"
-                    android:textSize="8sp" />
-
-                <ImageButton
-                    android:id="@+id/ImageButton13"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:background="@null"
-                    android:cropToPadding="false"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/downarrow" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/articleTitle"
-                    android:layout_width="216dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="320dp"
+                    android:layout_height="64dp"
                     android:layout_gravity="center"
+                    android:gravity="center_vertical"
+                    android:lines="1"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
-                    android:text="@string/title_item" />
+                    android:text="@string/title_item"
+                    android:textSize="@dimen/textsizetitle" />
+
+                <LinearLayout
+                    android:id="@+id/LinearLayoutArticleMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/article_menu_gradient"
+                    android:gravity="center"
+                    android:padding="5dp"
+                    android:visibility="visible" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical" >
+
+                        <ImageButton
+                            android:id="@+id/likeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_uparrow" />
+                        
+                        <TextView
+                            android:id="@+id/TextViewLikes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="999"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/smallText" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical" >
+
+                        <ImageButton
+                            android:id="@+id/dislikeButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:src="@drawable/ic_downarrow" />
+                        
+                        <TextView
+                            android:id="@+id/TextViewDislikes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="999"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/smallText" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:orientation="vertical" >
+
+                        <ImageButton
+                            android:id="@+id/detailedViewButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/desc_detailedViewButton"
+                            android:src="@drawable/ic_dots" />
+                        
+                        <TextView
+                            android:id="@+id/detailedViewDescription"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/title_detailedViewDescription"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/smallText" />
+
+                    </LinearLayout>
             </LinearLayout>
-  </LinearLayout>
+
+  </LinearLayout>  </LinearLayout>
