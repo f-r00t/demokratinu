@@ -55,7 +55,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 						.show();
 
 				Intent intent = new Intent(getApplicationContext(), 
-						ArticleActivity.class).putExtra("article",articleList.get(position));
+						ArticleActivity.class).putExtra("Article",articleList.get(position));
 				startActivity(intent);
 			}
 		});
