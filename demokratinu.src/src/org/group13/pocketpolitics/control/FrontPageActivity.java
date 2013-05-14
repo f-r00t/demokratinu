@@ -32,7 +32,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
 	
 	private ListView listViewArticles;
-	private ArrayList<Article> articleList = new ArrayList<Article>();
+	private List<Article> articleList = new ArrayList<Article>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -115,7 +115,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		Log.i(this.getClass().getSimpleName(),"PocketDebug: Recieved page no "+result.getThisPage());
 		
 		ArticleMemoryController.retrievedPage(result);
-		articleList.addAll(result.getArts());
+		articleList=ArticleMemoryController.articles();
 		setAdapter();
 	}
 
