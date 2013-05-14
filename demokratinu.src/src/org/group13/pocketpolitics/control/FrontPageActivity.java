@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -53,6 +54,9 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 						"Click ListItem Number " + position, Toast.LENGTH_LONG)
 						.show();
 
+				Intent intent = new Intent(getApplicationContext(), 
+						ArticleActivity.class).putExtra("Article",articleList.get(position));
+				startActivity(intent);
 			}
 		});
 

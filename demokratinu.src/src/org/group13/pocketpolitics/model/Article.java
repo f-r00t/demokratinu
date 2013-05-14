@@ -1,9 +1,11 @@
 package org.group13.pocketpolitics.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Article extends LikeableItem {
+@SuppressWarnings("serial")
+public class Article extends LikeableItem implements Serializable  {
 
 	private String title;
 	private String beteckning;

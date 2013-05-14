@@ -1,8 +1,7 @@
 package org.group13.pocketpolitics.model;
 
+import java.util.ArrayList;
 import java.util.List;
-
-
 
 import android.util.Log;
 
@@ -13,7 +12,7 @@ import android.util.Log;
  */
 public class CommitteeProposal {
 	
-	private final String moprositionParsed;	// "2012/13:Ub354" -> "[[2012%2F13]:[Ub354]]"
+	//private final String moprositionParsed;	// "2012/13:Ub354" -> "[[2012/13]:[Ub354]]"
 	private final int nr;
 	private final int motForslag;
 	
@@ -25,6 +24,8 @@ public class CommitteeProposal {
 	private final String vinnare;
 	
 	private final List<PartyVote> voteItems;
+	private final List<String> moprIds;
+	private final List<String> moprYrs;
 	
 	public CommitteeProposal(int punkt, String rubrik, String forslag, String xmlUrl, 
 			String motParti, int motForslag, String vinnare, List<PartyVote> voteItems){
@@ -40,11 +41,14 @@ public class CommitteeProposal {
 		
 		this.voteItems=voteItems;
 		
+		this.moprIds = new ArrayList<String>();
+		this.moprYrs = new ArrayList<String>();
+		
 		//parse motions
 		// parse string this.forslag -> motion codes
 		{
 			
-			String build="";
+			//String build="";
 			String temp=forslag;
 			int slash =0;
 			
@@ -55,18 +59,21 @@ public class CommitteeProposal {
 					String primitiveYear = temp.substring(slash-4, slash+3);
 					
 					//String webYear = primitiveYear.replace("/", "%2F");
-					build+=temp.substring(0, slash-4)+"[[" + primitiveYear+"]:[";
+					//build+=temp.substring(0, slash-4)+"[[" + primitiveYear+"]:[";
 					
 					temp=temp.substring(slash+4);
 					
 					String[] strs = temp.split("[.,\\s]",2);
 					
-					String number = strs[0];
+					String id = strs[0];
 					temp = " "+strs[1];
 					
-					build+=number+"]]";
+					//build+=id+"]]";
 					
 					slash = temp.indexOf("/");
+					
+					moprYrs.add(primitiveYear);
+					moprIds.add(id);
 				}
 			} catch (StringIndexOutOfBoundsException e){
 				Log.e(this.getClass().getSimpleName(), "Leif: String index out of bounds Exception!!!");
@@ -76,13 +83,13 @@ public class CommitteeProposal {
 			//Log.w(this.getClass().getSimpleName(), "Leif: build: "+build);
 			//Log.i(this.getClass().getSimpleName(), "Leif: forslag: "+forslag);
 			
-			this.moprositionParsed = build;
+			//this.moprositionParsed = build;
 		}
 	}
 	
-	public String getMoprositionParsed() {
+	/*public String getMoprositionParsed() {
 		return moprositionParsed;
-	}
+	}*/
 
 	public int getNr() {
 		return nr;
@@ -115,4 +122,13 @@ public class CommitteeProposal {
 	public List<PartyVote> getVoteItems() {
 		return voteItems;
 	}
+	
+	public List<String> getMoprIds() {
+		return moprIds;
+	}
+
+	public List<String> getMoprYrs() {
+		return moprYrs;
+	}
+
 }

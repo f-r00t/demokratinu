@@ -2,13 +2,13 @@
 
 // TODO: Check values for valid emails/usernames/passwords
 
-header("HTTP/1.0 404 Not Found"); // Makes this not show up in google searches etc
+//header("HTTP/1.0 404 Not Found"); // Makes this not show up in google searches etc
 
-if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass']) {
+if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 	
 	require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
-          
+	
 	$email = trim($_GET['email']);
 	$username = trim($_GET['user']);
     $pass = $_GET['pass'];	  
@@ -16,6 +16,8 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass']) {
 	$sql = "SELECT username, email FROM users";
 	$stmt = $dbh->prepare($sql);
     $stmt->execute();
+	
+	$status = "1";
 	
 	while($dbcollected = $stmt->fetch()) {
         if ($dbcollected['username'] == $username) {
@@ -26,7 +28,7 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass']) {
 		}
 	}
 	
-    if (status != "0") {
+    if ($status == "1") {
 		$salt = uniqid('', true);
         $pass = crypt($pass, '$6$' . $salt . '$');
 		
