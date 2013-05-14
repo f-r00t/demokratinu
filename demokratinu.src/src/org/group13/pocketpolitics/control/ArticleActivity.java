@@ -25,6 +25,8 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article);
 		
+		orderVotings();
+		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
 		titleTextView.setText("Bazinga!");
 	}
