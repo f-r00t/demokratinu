@@ -2,17 +2,14 @@ package org.group13.pocketpolitics.net;
 
 import org.group13.pocketpolitics.model.Committee;
 
-import android.util.Log;
+public class Filter {
 
-
-/**
- * Class for making a query to data.riksdagen.se/sok/.
- * @author Leif
- *
- */
-class QueryParam extends Filter {
-
-	protected final int page;
+	protected final String dateFrom;
+	protected final String dateTo;
+	protected final String sort;
+	protected final int sortint;
+	
+	protected final Committee utskott;
 	
 	/**
 	 * Class for making a query to data.riksdagen.se/sok/.
@@ -21,17 +18,26 @@ class QueryParam extends Filter {
 	 * 
 	 * @param dateFrom  Search for articles after this date, leave empty "" for no restriction
 	 * @param dateTo	Search for articles up to this date, leave empty "" for no restriction
-	 * @param page		Get result page, default 1
 	 * @param sort		Sort results: default = sort after date (only closed issues);
 	 * 0 = sort after date (all issues);  
 	 */
-	QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott) {
-		super(dateFrom, dateTo, sort, utskott);
-		
-		if(page <1){
-			Log.w(this.getClass().getSimpleName(), "Leif: bad page number: "+page);
-			page=1;
+
+	Filter(String dateFrom, String dateTo, int sort, Committee utskott){
+		this.dateFrom = dateFrom;
+		this.dateTo= dateTo;
+		this.sortint = sort;
+
+		if(utskott==null){
+			this.utskott = Committee.NULL;
+		} else {
+			this.utskott = utskott;
 		}
-		this.page = page;
+		
+		if(sort==0){
+			this.sort="datum";
+		}
+		else{
+			this.sort="beslutsdag";
+		}
 	}
 }
