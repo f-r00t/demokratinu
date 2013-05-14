@@ -39,6 +39,9 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		listViewMotions.setAdapter(new MotionListAdapter(this, motionList));
 	}*/
 
+	/**
+	 * Retrives the CommitteeProposals for the article and their respective votes
+	 */
 	private void orderVotings(){
 		if(Retriever.isConnected(this)){
 			Retriever.retrieveVotes(this, article);
