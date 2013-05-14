@@ -27,8 +27,7 @@ class QueryParam {
 	 * @param dateTo	Search for articles up to this date, leave empty "" for no restriction
 	 * @param page		Get result page, default 1
 	 * @param sort		Sort results: default = sort after date (only closed issues);
-	 * 0 = sort after date (all issues); 
-	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
+	 * 0 = sort after date (all issues);  
 	 */
 	QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott){
 		this.dateFrom = dateFrom;
@@ -48,10 +47,7 @@ class QueryParam {
 		}
 		this.page = page;
 		
-		if(sort==1){
-			this.sort="rel";
-		}
-		else if(sort==0){
+		if(sort==0){
 			this.sort="datum";
 		}
 		else{
