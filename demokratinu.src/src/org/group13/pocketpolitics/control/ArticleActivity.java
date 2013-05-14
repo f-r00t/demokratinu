@@ -24,6 +24,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article);
+		article = (Article) getIntent().getSerializableExtra("Article");
 		
 		orderVotings();
 		
