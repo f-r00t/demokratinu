@@ -29,7 +29,7 @@ import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
-	public static final String ARTICLE_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
+	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
 	
 	private ListView listViewArticles;
 	private ArrayList<Article> articleList = new ArrayList<Article>();
@@ -57,7 +57,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 						ArticleActivity.class).putExtra("Article",articleList.get(position));
 				//TODO 
 				//ska vara rätt siffra! inte bara 123
-				intent.putExtra(ARTICLE_SENT, "123");
+				intent.putExtra(ARTICLE_NUM_SENT, 123);
 				startActivity(intent);
 			}
 		});

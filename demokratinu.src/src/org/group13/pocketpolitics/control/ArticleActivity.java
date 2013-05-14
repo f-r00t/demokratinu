@@ -24,7 +24,10 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article);
-		article = (Article) getIntent().getSerializableExtra("Article");
+		//article = (Article) getIntent().getSerializableExtra("Article");
+		
+		int ix = getIntent().getIntExtra(FrontPageActivity.ARTICLE_NUM_SENT, -1);
+		article = ArticleMemoryController.article(ix);
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
