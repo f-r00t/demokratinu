@@ -10,9 +10,10 @@ import android.util.Log;
  * @author Leif
  *
  */
-class QueryParam extends Filter {
+public class QueryParam {
 
 	protected final int page;
+	protected final Filter filter;
 	
 	/**
 	 * Class for making a query to data.riksdagen.se/sok/.
@@ -26,8 +27,11 @@ class QueryParam extends Filter {
 	 * 0 = sort after date (all issues);  
 	 */
 	QueryParam(String dateFrom, String dateTo, int page, int sort, Committee utskott) {
-		super(dateFrom, dateTo, sort, utskott);
-		
+		this(new Filter(dateFrom, dateTo, sort, utskott), page);
+	}
+	
+	QueryParam(Filter f, int page){
+		this.filter = f;
 		if(page <1){
 			Log.w(this.getClass().getSimpleName(), "Leif: bad page number: "+page);
 			page=1;

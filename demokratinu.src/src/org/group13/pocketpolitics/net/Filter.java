@@ -56,10 +56,4 @@ public class Filter {
 		
 		return true;
 	}
-	
-	public static boolean testEquals(){
-		QueryParam qp = new QueryParam("hej", "123", 0, 0, Committee.Civil);
-		Filter f = new Filter("hej", "123", 0, Committee.Civil);
-		return f.equals(qp);
-	}
 }
