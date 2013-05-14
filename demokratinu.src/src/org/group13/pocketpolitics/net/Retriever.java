@@ -48,10 +48,16 @@ public class Retriever {
 	 * 1 = sort after relevance (all issues). Relevance is determined by data.Riksdagen.se 
 	 */
 	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, String dateFrom, String dateTo, int page, int sort, Committee utskott){
+		retrieveArticles(act, new Filter(dateFrom, dateTo, sort, utskott), page);
+	}
+	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, Filter f, int page){
+		retrieveArticles(act, new QueryParam(f, page));
+	}
+	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, QueryParam qp){
 		threads++;
 		ArticlesAsyncTask task =new ArticlesAsyncTask(act);
 		tasks.add(task);
-		task.execute(new QueryParam(dateFrom, dateTo, page, sort, utskott));
+		task.execute(qp);
 	}
 
 	/**
