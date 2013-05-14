@@ -15,6 +15,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
             android:name="org.group13.pocketpolitics.control.LoginActivity"
             android:icon="@drawable/ic_pocketpolitics"
@@ -32,14 +33,23 @@
         <activity
             android:name="org.group13.pocketpolitics.control.FrontPageActivity"
             android:label="@string/app_name" />
-        <activity
-            android:name="org.group13.pocketpolitics.control.MotionActivity"
-            android:label="@layout/activity_motion" >
-        </activity>
+        
         <activity
             android:name="org.group13.pocketpolitics.control.ArticleActivity"
             android:label="@layout/activity_article" >
+            <meta-data 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.group13.pocketpolitics.control.FrontPageActivity"/>
         </activity>
+        
+        <activity
+            android:name="org.group13.pocketpolitics.control.MotionActivity"
+            android:label="@layout/activity_motion" >
+            <meta-data 
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="org.group13.pocketpolitics.control.ArticleActivity"/>
+        </activity>
+        
         <activity
             android:name="org.group13.pocketpolitics.control.RegistrationActivity"
             android:label="@string/title_activity_registration"
@@ -53,6 +63,6 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:label="Tests for PocketPolitics"
-        android:targetPackage="com.example.pocketpolitics" />
+        android:targetPackage="org.group13.pocketpolitics.test" />
 
 </manifest>
