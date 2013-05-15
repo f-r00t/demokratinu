@@ -7,6 +7,9 @@ import java.util.ListIterator;
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Moprosition;
 import org.group13.pocketpolitics.model.Committee;
+import org.group13.pocketpolitics.net.data.Filter;
+import org.group13.pocketpolitics.net.data.QueryParam;
+import org.group13.pocketpolitics.net.data.QueryResult;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

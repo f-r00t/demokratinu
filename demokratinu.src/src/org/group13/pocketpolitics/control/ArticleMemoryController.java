@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Committee;
-import org.group13.pocketpolitics.net.Filter;
-import org.group13.pocketpolitics.net.QueryParam;
-import org.group13.pocketpolitics.net.QueryResult;
+import org.group13.pocketpolitics.net.data.Filter;
+import org.group13.pocketpolitics.net.data.QueryParam;
+import org.group13.pocketpolitics.net.data.QueryResult;
 
 import android.util.Log;
 

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.net.data.QueryParam;
+import org.group13.pocketpolitics.net.data.QueryResult;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

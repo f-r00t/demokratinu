@@ -5,8 +5,8 @@ import java.util.ListIterator;
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.net.data.QueryResult;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
