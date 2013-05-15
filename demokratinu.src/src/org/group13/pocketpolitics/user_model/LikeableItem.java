@@ -1,8 +1,9 @@
-package org.group13.pocketpolitics.model;
+package org.group13.pocketpolitics.user_model;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 public abstract class LikeableItem {
 

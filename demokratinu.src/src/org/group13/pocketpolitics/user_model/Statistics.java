@@ -1,6 +1,8 @@
-package org.group13.pocketpolitics.model;
+package org.group13.pocketpolitics.user_model;
 
 import java.util.HashMap;
+
+import org.group13.pocketpolitics.model.Party;
 
 public class Statistics {
 
