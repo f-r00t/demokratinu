@@ -2,12 +2,10 @@
 
 // TODO: Check values for valid emails/usernames/passwords
 
-$status = "1";
-
 if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 
 	require_once("../../www-includes/dbcx.php");
-        $dbh = dbcx();
+    $dbh = dbcx();
 
 	$email = trim($_GET['email']);
 	$username = trim($_GET['user']);
@@ -26,7 +24,7 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 		}
 	}
 	
-    if ($status == "1") {
+    if ($status != "1") {
 		$salt = uniqid('', true);
         $pass = crypt($pass, '$6$' . $salt . '$');
 		
@@ -38,7 +36,13 @@ if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
 		$stmt->bindParam(":email", $email);
 		$stmt->bindParam(":password", $pass);
 		$stmt->execute();
+		
+		$status = "1";
 	}
 }
+else {
+    $status = "0";
+}
+
 echo $status;
 ?>
