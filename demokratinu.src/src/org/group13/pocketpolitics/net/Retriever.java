@@ -23,7 +23,7 @@ public class Retriever {
 
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
-			Log.e(Retriever.class.getSimpleName(),"Leif: in Connected: Context null error");
+			Log.e(Retriever.class.getSimpleName(),"PocketDebug: in Connected: Context null error");
 			return false;
 		}
 
@@ -91,7 +91,7 @@ public class Retriever {
 		while(iter.hasNext()){
 			if(iter!=null && !iter.next().isCancelled()){
 				iter.next().cancel(true);
-				Log.w(Retriever.class.getSimpleName(), "Leif: Thread cancelled!");
+				Log.w(Retriever.class.getSimpleName(), "PocketDebug: Thread cancelled!");
 			}
 		}
 

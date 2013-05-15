@@ -29,7 +29,7 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		if(act!=null){
 			act.onPreExecute();
 		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in @.onPreExecute Activity is null");
 			this.cancel(true);
 		}
 	}
@@ -40,7 +40,7 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		if(act!=null){
 			act.onSuccess(res);
 		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPostExecute Activity is null");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in @.onPostExecute Activity is null");
 			act.onFailure("! Null returned!");
 		}
 	}
@@ -52,7 +52,7 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		if(act!=null){
 			act.onFailure("! Cancelled!");
 		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onCancelled Activity is null");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in @.onCancelled Activity is null");
 		}
 	}
 	
@@ -79,11 +79,11 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 			
 			return parsedXml;
 		} catch (XmlPullParserException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieve() caught XmlPullParserException",e);
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieve() caught XmlPullParserException",e);
 			e.printStackTrace();
 			this.cancel(true);
 		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieve() caught IOException",e);
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieve() caught IOException",e);
 			e.printStackTrace();
 			this.cancel(true);
 		}
@@ -107,17 +107,17 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 			final int statusCode = response.getStatusLine().getStatusCode();
 
 			if(statusCode != HttpStatus.SC_OK){
-				Log.w(this.getClass().getSimpleName(), "Leif: in .retrieveStream(): Error "+statusCode+" for URL "+url);
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: in .retrieveStream(): Error "+statusCode+" for URL "+url);
 				return null;
 			}
 			HttpEntity responseEntity = response.getEntity();
 			return responseEntity.getContent();
 		} catch (ClientProtocolException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieveStream(): Error ClientProtocolException for URL "+url, e);
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieveStream(): Error ClientProtocolException for URL "+url, e);
 			e.printStackTrace();
 		} catch (IOException e) {
 			request.abort();
-			Log.e(this.getClass().getSimpleName(), "Leif: in .retrieveStream(): Error IOException for URL "+url, e);
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieveStream(): Error IOException for URL "+url, e);
 			e.printStackTrace();
 		}
 
@@ -153,10 +153,10 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 		if(parser.next() == XmlPullParser.TEXT){
 			result = parser.getText();
 			parser.nextTag();
-			//Log.i(this.getClass().getSimpleName(), "Leif: in readString(...) reading <"+tag+">, finds "+result);
+			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in readString(...) reading <"+tag+">, finds "+result);
 		}
 		else{
-			//Log.w(this.getClass().getSimpleName(), "Leif: in readString(): Didn't find text for <"+tag+">");
+			//Log.w(this.getClass().getSimpleName(), "PocketDebug: in readString(): Didn't find text for <"+tag+">");
 			//throw new IllegalStateException();
 			//result = null;
 		}
@@ -166,7 +166,7 @@ public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 
 	protected void skip(XmlPullParser parser) throws XmlPullParserException, IOException{
 		if(parser.getEventType() != XmlPullParser.START_TAG){
-			Log.e(this.getClass().getSimpleName(), "Leif: in .skip(): Expected start tag!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .skip(): Expected start tag!");
 			throw new IllegalStateException();
 		}
 		int depth = 1;

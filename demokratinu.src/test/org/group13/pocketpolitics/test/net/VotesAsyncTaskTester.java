@@ -31,7 +31,7 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 				threads = Retriever.threadsRunning();
 				Thread.sleep(500);
 				i++;
-				Log.i(this.getClass().getSimpleName(), "Leif: Thread slept another 500 ms. Number extra threads: "+threads);
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread slept another 500 ms. Number extra threads: "+threads);
 				
 				if(i>totalWait*2){
 					cancelled = true;
@@ -41,14 +41,14 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 			}while(threads>0);
 			
 			if(cancelled){
-				Log.w(this.getClass().getSimpleName(), "Leif: Cancelled after ca "+((double)i)/2+" secs");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: Cancelled after ca "+((double)i)/2+" secs");
 			} else {
-				Log.w(this.getClass().getSimpleName(), "Leif: Total time to retrieve votes for 1 article: ca "+((double)i)/2+" secs");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: Total time to retrieve votes for 1 article: ca "+((double)i)/2+" secs");
 			}
 			
 			
 		} catch(InterruptedException e) {
-			Log.w(this.getClass().getSimpleName(), "Leif: Interruption occured!");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: Interruption occured!");
 			fail();
 		}
 		
@@ -57,20 +57,20 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	@Override
 	public void onSuccess(String id) {
 		if(id==null || !testArt.getId().equals(id)){
-			Log.e(this.getClass().getSimpleName(), "Leif: in @.onSuccess(): id null, something went wrong!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in @.onSuccess(): id null, something went wrong!");
 			fail();
 		}
 		
 		if(testArt.getFors()==null){
-			Log.e(this.getClass().getSimpleName(), "Leif: in @.onSuccess(): .getFors() null, something went wrong!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in @.onSuccess(): .getFors() null, something went wrong!");
 			fail();
 		}
 		else {
-			Log.w(this.getClass().getSimpleName(), "Leif: Votes retrieved.");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved.");
 			
 			CommitteeProposal fors = testArt.getFors().get(0);
 			
-			Log.i(this.getClass().getSimpleName(), "Leif: " +fors.getVinnare() + " vann omröstningen");
+			Log.i(this.getClass().getSimpleName(), "PocketDebug: " +fors.getVinnare() + " vann omröstningen");
 			ListIterator<PartyVote> iter = fors.getVoteItems().listIterator();
 			while(iter.hasNext()){
 				this.printPartyVote(iter.next());
@@ -80,17 +80,17 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	
 	@Override
 	public void onFailure(String message) {
-		Log.e(this.getClass().getSimpleName(), "Leif: Votes failed: "+message);
+		Log.e(this.getClass().getSimpleName(), "PocketDebug: Votes failed: "+message);
 		fail();
 	}
 	
 	private void printPartyVote(PartyVote vit){
-		Log.i(this.getClass().getSimpleName(), "Leif:   "+vit.getParty()+": " + vit.getYes() + " ja, " + vit.getNo() + " nej, "+ vit.getNeutral() + " avstår, " + vit.getAbsent() + " frånvarande");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug:   "+vit.getParty()+": " + vit.getYes() + " ja, " + vit.getNo() + " nej, "+ vit.getNeutral() + " avstår, " + vit.getAbsent() + " frånvarande");
 	}
 
 	@Override
 	public void onPreExecute() {
-		Log.i(this.getClass().getSimpleName(), "Leif: Votes test commencing...");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes test commencing...");
 		
 	}
 

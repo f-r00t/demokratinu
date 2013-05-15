@@ -163,14 +163,14 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 			if( "rm".equals(parser.getName())){
 				ddata.rm = this.readString(parser, "rm", xmlns);
 				if(!ddata.rm.equals(this.year)){
-					Log.w(this.getClass().getSimpleName(), "Leif: Expected year "+year+", found "+ddata.rm);
+					Log.w(this.getClass().getSimpleName(), "PocketDebug: Expected year "+year+", found "+ddata.rm);
 					return null;
 				}
 
 			} else if( "beteckning".equals(parser.getName())){
 				ddata.beteckning = this.readString(parser, "beteckning", xmlns);
 				if(!ddata.beteckning.equals(this.docNum)){
-					Log.w(this.getClass().getSimpleName(), "Leif: Expected beteckning "+docNum+", found "+ddata.beteckning);
+					Log.w(this.getClass().getSimpleName(), "PocketDebug: Expected beteckning "+docNum+", found "+ddata.beteckning);
 					return null;
 				}
 			} else if( "typ".equals(parser.getName())){
@@ -217,7 +217,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 				sbuild.append(line);
 			}
 		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: in retrieveText(): Failed while reading!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in retrieveText(): Failed while reading!");
 			e.printStackTrace();
 			return false;
 		} finally {
@@ -225,7 +225,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 				try {
 					bred.close();
 				} catch (IOException e) {
-					Log.w(this.getClass().getSimpleName(), "Leif: in retrieveText(): Failed at closing reader! Possible resource leak");
+					Log.w(this.getClass().getSimpleName(), "PocketDebug: in retrieveText(): Failed at closing reader! Possible resource leak");
 					e.printStackTrace();
 					return false;
 				}
@@ -248,7 +248,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 			}
 
 			parser.require(XmlPullParser.START_TAG, xmlns, "intressent");
-			//Log.i(this.getClass().getSimpleName(), "Leif: in parseIntressenter: entering <intressent>");
+			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in parseIntressenter: entering <intressent>");
 
 			String personId = null;
 			String name = null;
@@ -273,7 +273,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 				}
 			}
 
-			//Log.i(this.getClass().getSimpleName(), "Leif: in parseIntr(): "+name);
+			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in parseIntr(): "+name);
 
 			listr.add(new Proposer(name, party, role, personId));
 		}
@@ -295,7 +295,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 			int pyear = Integer.parseInt(temp[1]);
 
 			if( pyear != (iyear+1)%100){
-				Log.e(MotionAsyncTask.class.getSimpleName(), "Leif: Years entered don't match! "+year);
+				Log.e(MotionAsyncTask.class.getSimpleName(), "PocketDebug: Years entered don't match! "+year);
 				return null;
 			}
 		}
@@ -321,7 +321,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		}
 		ret+=docNum;
 
-		//Log.i(MotionAsyncTask.class.getSimpleName(), "Leif: Returning "+ret+" for "+year+":"+docNum);
+		//Log.i(MotionAsyncTask.class.getSimpleName(), "PocketDebug: Returning "+ret+" for "+year+":"+docNum);
 		return ret;
 	}
 

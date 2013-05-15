@@ -33,7 +33,7 @@ public class QueryParam {
 	public QueryParam(Filter f, int page){
 		this.filter = f;
 		if(page <1){
-			Log.w(this.getClass().getSimpleName(), "Leif: bad page number: "+page);
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: bad page number: "+page);
 			page=1;
 		}
 		this.page = page;
