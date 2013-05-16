@@ -51,6 +51,7 @@ public class ArticleMemoryController {
 		checkInstance();
 		int np = nextPage();
 		if(np==-1){
+			//Last page
 			return null;
 		}
 		return new QueryParam(INSTANCE.filter, np);
@@ -76,10 +77,7 @@ public class ArticleMemoryController {
 		if(f.equals(INSTANCE.filter)){
 			return;
 		}
-		INSTANCE.filter = f;
-		INSTANCE.articles.clear();
-		INSTANCE.lastPage = 0;
-		INSTANCE.totalPages = -1;
+		reset(INSTANCE, f);
 	}
 	
 	public static Article article(int ix){
@@ -92,11 +90,18 @@ public class ArticleMemoryController {
 	
 	///////////////////////////////////////////////////////////
 	
+
 	private ArticleMemoryController(){
 		articles = new ArrayList<Article>();
-		lastPage=0;
-		totalPages = -1;
 		filter = new Filter("", "", -1, Committee.NULL);
+		reset(this, filter);
+	}
+	
+	private static void reset(ArticleMemoryController inst, Filter f){
+		inst.filter = f;
+		inst.articles.clear();
+		inst.lastPage = 0;
+		inst.totalPages = -1;
 	}
 	
 	private static void checkInstance(){

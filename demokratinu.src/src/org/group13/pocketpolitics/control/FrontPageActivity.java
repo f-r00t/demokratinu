@@ -30,18 +30,27 @@ import org.group13.pocketpolitics.view.ArticleListAdapter;
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
 	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
-	
+
 	private ListView listViewArticles;
 	private List<Article> articleList = new ArrayList<Article>();
 
 	@Override
+	protected void onResume(){
+
+		orderNextPage();
+
+		setAdapter();
+
+	}
+
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
-		
+
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_front_page);
-		
+
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
 
@@ -61,33 +70,10 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 				startActivity(intent);
 			}
 		});
-
-		// Replace this with the factory later, really ugly code incoming:
-		/*
-		Article a = new Article();
-		a.setTitle("Artikel A");
-		a.setNbrOfLikes(1000);
-		a.setNbrOfDislikes(100);
-		articleList.add(a);
-
-		Article b = new Article();
-		b.setTitle("Artikel B");
-		b.setNbrOfLikes(2000);
-		b.setNbrOfDislikes(200);
-		articleList.add(b);
-
-		Article c = new Article();
-		c.setTitle("Artikel C");
-		c.setNbrOfLikes(3000);
-		c.setNbrOfDislikes(300);
-		articleList.add(c);
-		*/
-		
-		orderNextPage();
-
-		setAdapter();
 	}
-	
+
+
+
 	private void orderNextPage(){
 		if(Retriever.isConnected(this)){
 			Retriever.retrieveArticles(this, ArticleMemoryController.nextQuery());
@@ -101,19 +87,19 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	@Override
 	public void onPreExecute() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onProgressUpdate(Integer procent) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onSuccess(QueryResult result) {
 		Log.i(this.getClass().getSimpleName(),"PocketDebug: Recieved page no "+result.getThisPage());
-		
+
 		ArticleMemoryController.retrievedPage(result);
 		articleList=ArticleMemoryController.articles();
 		setAdapter();
@@ -122,7 +108,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	@Override
 	public void onFailure(String message) {
 		Log.w(this.getClass().getSimpleName(),"PocketDebug: Recieve articles failed: "+message);
-		
+
 	}
 
 }
