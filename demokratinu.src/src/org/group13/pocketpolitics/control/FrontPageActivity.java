@@ -23,8 +23,8 @@ import org.group13.pocketpolitics.R.layout;
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.net.data.QueryResult;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {

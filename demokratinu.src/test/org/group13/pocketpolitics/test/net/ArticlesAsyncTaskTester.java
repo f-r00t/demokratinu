@@ -5,8 +5,8 @@ import java.util.ListIterator;
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.QueryResult;
 import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.net.data.QueryResult;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -36,14 +36,14 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 			int i = 0;
 			for( ; i<totalwait*2 && finished!=npages; i++){
 				Thread.sleep(500);
-				Log.i(this.getClass().getSimpleName(), "Leif: Slept another 500 ms. Number extra threads: "+threads);
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: Slept another 500 ms. Number extra threads: "+threads);
 			}
-			Log.i(this.getClass().getSimpleName(), "Leif: Total time to retrieve "+npages+ " pages: ca "+((double)i)/2+" secs"); 
+			Log.i(this.getClass().getSimpleName(), "PocketDebug: Total time to retrieve "+npages+ " pages: ca "+((double)i)/2+" secs"); 
 		} catch (InterruptedException e) {
-			Log.e(this.getClass().getSimpleName(), "Leif: error: interruption");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: error: interruption");
 			e.printStackTrace();
 		}
-		Log.i(this.getClass().getSimpleName(), "Leif: Thread finished sleeping");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread finished sleeping");
 	}
 	@Override
 	public void onSuccess(QueryResult qres) {
@@ -51,21 +51,21 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 		finished++;
 		
 		if(qres == null){
-			Log.e(this.getClass().getSimpleName(), "Leif: Something went wrong! QueryResult is null!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: Something went wrong! QueryResult is null!");
 			fail();
 			return;
 		}
 		
-		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask. Page no "+qres.getThisPage()+ " just finished.");
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: testing ArticlesAsyncTask. Page no "+qres.getThisPage()+ " just finished.");
 		
-		Log.i(this.getClass().getSimpleName(), "Leif: QueryResults sidor="+qres.getTotalPages()+". Artiklar på denna sida: "+qres.getArts().size());
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: QueryResults sidor="+qres.getTotalPages()+". Artiklar på denna sida: "+qres.getArts().size());
 		
 		ListIterator<Article> it = qres.getArts().listIterator();
 		int is=0;
 		while(it.hasNext() && is++<show){
 			Article a = it.next();
 			
-			Log.i(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask["+qres.getThisPage() + "] Id: "+a.getId()+" Beslutsdatum "+a.getBeslutsdag());
+			Log.i(this.getClass().getSimpleName(), "PocketDebug: testing ArticlesAsyncTask["+qres.getThisPage() + "] Id: "+a.getId()+" Beslutsdatum "+a.getBeslutsdag());
 		}
 		
 	}
@@ -73,7 +73,7 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 	public void onFailure(String message) {
 		threads--;
 		finished++;
-		Log.w(this.getClass().getSimpleName(), "Leif testing ArticlesAsyncTask: Failed "+message);
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: testing ArticlesAsyncTask: Failed "+message);
 	}
 	@Override
 	public void onPreExecute() {

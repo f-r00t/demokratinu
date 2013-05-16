@@ -1,5 +1,4 @@
 <?php
-header("HTTP/1.0 404 Not Found"); // Makes this not show up in google searches etc
 
 if (isset($_GET['email']) && isset($_GET['pass'])) {
 	
@@ -16,13 +15,15 @@ if (isset($_GET['email']) && isset($_GET['pass'])) {
     $dbcollected = $stmt->fetch();
     
     if ($dbcollected['password'] != crypt($pass, $dbcollected['password'])) {
-        echo "0"; // Wrong email/pass
+        $status = "0"; // Wrong email/pass
     }
     else {
-	    echo "1"; // Success
+	    $status = "1"; // Success
     }
 }
 else {
-	echo "Error"; // Should never happen
+	$status = "0";
 }
+
+echo $status;
 ?>

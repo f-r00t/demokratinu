@@ -3,6 +3,7 @@ package org.group13.pocketpolitics.net;
 import java.util.List;
 
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.net.data.QueryResult;
 
 /**
  * @deprecated

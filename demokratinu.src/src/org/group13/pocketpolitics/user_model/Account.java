@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.model;
+package org.group13.pocketpolitics.user_model;
 
 public class Account {
 	

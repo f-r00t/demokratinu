@@ -1,7 +1,8 @@
-package org.group13.pocketpolitics.model;
+package org.group13.pocketpolitics.user_model;
 
 import java.util.Date;
 import java.util.List;
+
 
 public class Comment extends LikeableItem {
 	

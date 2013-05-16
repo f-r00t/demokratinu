@@ -7,6 +7,9 @@ import java.util.ListIterator;
 import org.group13.pocketpolitics.model.Article;
 import org.group13.pocketpolitics.model.Moprosition;
 import org.group13.pocketpolitics.model.Committee;
+import org.group13.pocketpolitics.net.data.Filter;
+import org.group13.pocketpolitics.net.data.QueryParam;
+import org.group13.pocketpolitics.net.data.QueryResult;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -23,7 +26,7 @@ public class Retriever {
 
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
-			Log.e(Retriever.class.getSimpleName(),"Leif: in Connected: Context null error");
+			Log.e(Retriever.class.getSimpleName(),"PocketDebug: in Connected: Context null error");
 			return false;
 		}
 
@@ -95,7 +98,7 @@ public class Retriever {
 		while(iter.hasNext()){
 			if(iter!=null && !iter.next().isCancelled()){
 				iter.next().cancel(true);
-				Log.w(Retriever.class.getSimpleName(), "Leif: Thread cancelled!");
+				Log.w(Retriever.class.getSimpleName(), "PocketDebug: Thread cancelled!");
 			}
 		}
 

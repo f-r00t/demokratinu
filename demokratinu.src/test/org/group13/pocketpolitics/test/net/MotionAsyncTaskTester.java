@@ -26,18 +26,18 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 			while(Retriever.threadsRunning()>0 && i<2*totalWait){
 				Thread.sleep(500);
 				i++;
-				Log.i(this.getClass().getSimpleName(), "Leif: Thread slept another 500 ms. Number extra threads: "+Retriever.threadsRunning());
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread slept another 500 ms. Number extra threads: "+Retriever.threadsRunning());
 			}
 			
 			if(i>=totalWait*2){
 				Retriever.cancelAllTasks();
-				Log.w(this.getClass().getSimpleName(), "Leif: Cancelled after ca "+((double)i)/2+" secs");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: Cancelled after ca "+((double)i)/2+" secs");
 			} else {
-				Log.w(this.getClass().getSimpleName(), "Leif: Total time to retruieve 1 motion and 1 proposition: ca "+((double)i)/2+" secs");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: Total time to retruieve 1 motion and 1 proposition: ca "+((double)i)/2+" secs");
 			}
 			
 		} catch (InterruptedException e) {
-			Log.w(this.getClass().getSimpleName(), "Leif: Interruption occured!");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: Interruption occured!");
 			e.printStackTrace();
 			fail();
 		}
@@ -59,28 +59,28 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 	public void onSuccess(Moprosition result) {
 		
 		if(result==null){
-			Log.e(this.getClass().getSimpleName(), "Leif: null result! Not success!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: null result! Not success!");
 			fail();
 		}
 
-		Log.w(this.getClass().getSimpleName(), "Leif: Thread returned: "+result.getBeteckning());
-		Log.w(this.getClass().getSimpleName(), "Leif: Text URL: "+result.getTextURL());
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: Thread returned: "+result.getBeteckning());
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: Text URL: "+result.getTextURL());
 		
 		if(result.isMotion()){
 			Motion mot = (Motion) result;
 			if(mot.getSubtype()!=null){
-				Log.i(this.getClass().getSimpleName(), "Leif: subtype "+ mot.getSubtype());
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: subtype "+ mot.getSubtype());
 			} else {
-				Log.e(this.getClass().getSimpleName(), "Leif: subtype Null!");
+				Log.e(this.getClass().getSimpleName(), "PocketDebug: subtype Null!");
 			}
 			
 			if(mot.getIntressenter()==null){
-				Log.e(this.getClass().getSimpleName(), "Leif: Intressenter Null!");
+				Log.e(this.getClass().getSimpleName(), "PocketDebug: Intressenter Null!");
 				fail();
 			} else {
 				Iterator<Proposer> it = mot.getIntressenter().iterator();
 				while(it.hasNext()){
-					Log.i(this.getClass().getSimpleName(), "Leif: Intressent "+ it.next().getName());
+					Log.i(this.getClass().getSimpleName(), "PocketDebug: Intressent "+ it.next().getName());
 				}
 			}
 			
@@ -93,22 +93,22 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 					print = text.length();
 					appe="";
 				}
-				Log.i(this.getClass().getSimpleName(), "Leif: Text: "+text.substring(0, print)+appe);
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: Text: "+text.substring(0, print)+appe);
 			} else {
-				Log.e(this.getClass().getSimpleName(), "Leif: Text null!");
+				Log.e(this.getClass().getSimpleName(), "PocketDebug: Text null!");
 			}
 			
 		} else {
 			Proposition prop = (Proposition) result;
 			if(prop!=null){
-				Log.i(this.getClass().getSimpleName(), "Leif: Successful Proposition conversion.");
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: Successful Proposition conversion.");
 			}
 		}
 	}
 
 	@Override
 	public void onFailure(String message) {
-		Log.e(this.getClass().getSimpleName(), "Leif: Failure: "+message);
+		Log.e(this.getClass().getSimpleName(), "PocketDebug: Failure: "+message);
 		fail();
 	}
 

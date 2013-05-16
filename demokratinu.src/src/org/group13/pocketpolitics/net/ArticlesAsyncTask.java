@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Locale;
 
 import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.net.data.QueryParam;
+import org.group13.pocketpolitics.net.data.QueryResult;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -51,7 +53,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 		int totalPages = Integer.parseInt(parser.getAttributeValue(xmlns, "sidor"));
 		int totalTraffar = Integer.parseInt(parser.getAttributeValue(xmlns, "traffar"));
 		
-		Log.i(this.getClass().getSimpleName(), "Leif: attributes gathered. sida="+thisPage+" sidor="+totalPages+" traffar="+totalTraffar);
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: attributes gathered. sida="+thisPage+" sidor="+totalPages+" traffar="+totalTraffar);
 		
 		while(parser.next() != XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -59,11 +61,11 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 			}
 			String name = parser.getName();
 			if (name.equals("traff")){
-				//Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <traff>");
+				//Log.i(this.getClass().getSimpleName(), "PocketDebug: in readFeed(Xml...): entering <traff>");
 				traffarList.add(readTraff(parser));
 			}
 			else if(name.equals("trafflista")){
-				//Log.i(this.getClass().getSimpleName(), "Leif: in readFeed(Xml...): entering <trafflista>");
+				//Log.i(this.getClass().getSimpleName(), "PocketDebug: in readFeed(Xml...): entering <trafflista>");
 				continue;
 			}
 			else{
@@ -86,7 +88,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 				continue;
 			}
 			String name = parser.getName();
-			//Log.i(this.getClass().getSimpleName(), "Leif: in readTraff: looking at <"+name+">");
+			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in readTraff: looking at <"+name+">");
 			
 			if(name.equals("traffnummer")){ 
 				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer", xmlns)));
@@ -100,9 +102,9 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 				art.setRm(readString(parser, "rm", xmlns));
 			} else if(name.equals("relaterat_id")){ 
 				
-				//Log.i(this.getClass().getSimpleName(), "Leif: relaterat_id läses...");
+				//Log.i(this.getClass().getSimpleName(), "PocketDebug: relaterat_id läses...");
 				art.setRelaterat_id(readString(parser, "relaterat_id", xmlns));
-				//Log.w(this.getClass().getSimpleName(), "Leif: relaterat_id läst: "+art.getRelaterat_id());
+				//Log.w(this.getClass().getSimpleName(), "PocketDebug: relaterat_id läst: "+art.getRelaterat_id());
 				
 			} else if(name.equals("beteckning")){ 
 				art.setBeteckning(readString(parser, "beteckning", xmlns));
@@ -115,7 +117,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 				try {
 					d=  format.parse(read).doubleValue();
 				} catch (ParseException e) {
-					Log.e(this.getClass().getSimpleName(), "Leif: reading <score>, Format exception: "+read);
+					Log.e(this.getClass().getSimpleName(), "PocketDebug: reading <score>, Format exception: "+read);
 					e.printStackTrace();
 				}
 				art.setScore(d);

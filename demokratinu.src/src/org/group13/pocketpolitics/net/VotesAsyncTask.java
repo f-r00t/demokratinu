@@ -40,12 +40,12 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		if(act!=null){
 			act.onPreExecute();
 		} else {
-			Log.w(this.getClass().getSimpleName(), "Leif: in @.onPreExecute Activity is null");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in @.onPreExecute Activity is null");
 			this.cancel(true);
 		}
 		
 		if(article == null || article.getId() == null){
-			Log.e(this.getClass().getSimpleName(), "Leif: in @.onPreExecute: Article is null or has no id!");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in @.onPreExecute: Article is null or has no id!");
 			this.cancel(true);
 		}
 	}
@@ -61,26 +61,26 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 	protected String readFeed(XmlPullParser parser) throws XmlPullParserException,IOException {
 
 		parser.require(XmlPullParser.START_TAG, xmlns, "utskottsforslag");
-		// Log.i(this.getClass().getSimpleName(), "Leif: entering <utskottsforslag>");
+		// Log.i(this.getClass().getSimpleName(), "PocketDebug: entering <utskottsforslag>");
 		
 		parser.next();
 		if("dokument".equals(parser.getName())){
-			// Log.i(this.getClass().getSimpleName(), "Leif: entering <dokument>");
+			// Log.i(this.getClass().getSimpleName(), "PocketDebug: entering <dokument>");
 			if (!parseDokument(parser)){
-				Log.w(this.getClass().getSimpleName(), "Leif: Wrong dokument retrieved!");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: Wrong dokument retrieved!");
 				return null;
 			}
 		} else {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error, tag <dokument> expected, got <" + parser.getName()+">");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: Error, tag <dokument> expected, got <" + parser.getName()+">");
 			return null;
 		}
 		
 		
 		
 		while(parser.next()!=XmlPullParser.START_TAG && !this.isCancelled()){
-			//Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped a tag of type: "+parser.getEventType());
+			//Log.w(this.getClass().getSimpleName(), "PocketDebug: in readFeed: skipped a tag of type: "+parser.getEventType());
 			if(parser.getEventType()==XmlPullParser.END_TAG){
-				Log.w(this.getClass().getSimpleName(), "Leif: in readFeed: skipped an END_TAG!");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: in readFeed: skipped an END_TAG!");
 			}
 		}
 		
@@ -89,27 +89,27 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		
 		if(parser.getEventType()==XmlPullParser.START_TAG && parser.getName().equals("dokutskottsforslag")){
 			
-			// Log.i(this.getClass().getSimpleName(), "Leif: Entered <dokutskottsforslag>");
+			// Log.i(this.getClass().getSimpleName(), "PocketDebug: Entered <dokutskottsforslag>");
 			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
 				if(parser.getEventType()!=XmlPullParser.START_TAG) {
 					continue;
 				}
 				
 				if("utskottsforslag".equals(parser.getName())){
-					// Log.i(this.getClass().getSimpleName(), "Leif: Entering <utskottsforslag>");
+					// Log.i(this.getClass().getSimpleName(), "PocketDebug: Entering <utskottsforslag>");
 					CommitteeProposal out = parseForslag(parser);
 					if(out!=null){
 						lForslag.add(out);
 					} else {
-						Log.w(this.getClass().getSimpleName(), "Leif: in .readFeed(): UtskottsForslag null!");
+						Log.w(this.getClass().getSimpleName(), "PocketDebug: in .readFeed(): UtskottsForslag null!");
 					}
 				} else {
-					Log.w(this.getClass().getSimpleName(), "Leif: in .readFeed: expected <utskottsforslag>, found <"+parser.getName() +">");
+					Log.w(this.getClass().getSimpleName(), "PocketDebug: in .readFeed: expected <utskottsforslag>, found <"+parser.getName() +">");
 					skip(parser);
 				}
 			}
 		} else {
-			Log.e(this.getClass().getSimpleName(), "Leif: Error, tag <dokutskottsforslag> expected, got <" + parser.getName()+">");
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: Error, tag <dokutskottsforslag> expected, got <" + parser.getName()+">");
 			return null;
 		}
 		
@@ -149,22 +149,22 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 			} else if("votering_url_xml".equals(name)){
 				voteXmlUrl = this.readString(parser, "votering_url_xml", xmlns);
 				
-				//Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Found url xml:"+voteXmlUrl);
+				//Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseForslag(): Found url xml:"+voteXmlUrl);
 				
 			} else if("vinnare".equals(name)){
 				vinnare = this.readString(parser, "vinnare", xmlns);
 			} else if("votering_sammanfattning_html".equals(name)){
 				partyVotes = this.parseVotering(parser);
 				
-				//Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag(): Finished parsing the html votes table.");
+				//Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseForslag(): Finished parsing the html votes table.");
 				
 			} else {
 				this.skip(parser);
 			}
 			
 		}
-		// Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag: event type " + parser.getEventType());
-		// Log.i(this.getClass().getSimpleName(), "Leif: in .parseForslag: tag name <" + parser.getName() + ">");
+		// Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseForslag: event type " + parser.getEventType());
+		// Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseForslag: tag name <" + parser.getName() + ">");
 		
 		parser.require(XmlPullParser.END_TAG, xmlns, "utskottsforslag");
 		
@@ -178,7 +178,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 	private List<PartyVote> parseVotering(XmlPullParser parser) throws XmlPullParserException, IOException{
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "votering_sammanfattning_html");
-		//Log.i(this.getClass().getSimpleName(), "Leif: Entering <votering_sammanfattning_html>");
+		//Log.i(this.getClass().getSimpleName(), "PocketDebug: Entering <votering_sammanfattning_html>");
 		
 		while(parser.nextTag() !=XmlPullParser.START_TAG){
 			if(parser.getEventType()==XmlPullParser.END_TAG && "votering_sammanfattning_html".equals(parser.getName())){
@@ -187,24 +187,24 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 		}
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "table");
-		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <table>");
+		// Log.i(this.getClass().getSimpleName(), "PocketDebug: Entering <table>");
 		while(parser.nextTag() !=XmlPullParser.START_TAG);
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "tr");
-		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <tr class=\"sakfragan\">");
+		// Log.i(this.getClass().getSimpleName(), "PocketDebug: Entering <tr class=\"sakfragan\">");
 		
 		String attr = parser.getAttributeValue(xmlns, "class");
 		if(!"sakfragan".equals(attr)){
-			Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): <tr class=\"sakfragan\"> expected, found class=\""+attr+"\"");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in .parseVotering(): <tr class=\"sakfragan\"> expected, found class=\""+attr+"\"");
 		}
 		this.skip(parser);
 		while(parser.nextTag() !=XmlPullParser.START_TAG && !this.isCancelled());
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "tr");
-		// Log.i(this.getClass().getSimpleName(), "Leif: Entering <tr class=\"vottabellrubrik\">");
+		// Log.i(this.getClass().getSimpleName(), "PocketDebug: Entering <tr class=\"vottabellrubrik\">");
 		attr = parser.getAttributeValue(xmlns, "class");
 		if(!"vottabellrubik".equals(attr)){
-			Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): <tr class=\"vottabellrubik\"> expected, found class=\""+attr+"\"");
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in .parseVotering(): <tr class=\"vottabellrubik\"> expected, found class=\""+attr+"\"");
 		}
 		this.skip(parser);
 		
@@ -259,7 +259,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 			} else if (attr.equals("rost_franvarande")||attr.equals("summa_franvarande")){
 				absent = Integer.parseInt(this.readString(parser, "td", xmlns));
 			} else {
-				Log.w(this.getClass().getSimpleName(), "Leif: in .parseVotering(): attribute not recognized: <td class=\""+attr+"\">");
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: in .parseVotering(): attribute not recognized: <td class=\""+attr+"\">");
 				skip(parser);
 			}
 		}
@@ -284,7 +284,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 				continue;
 			}
 			String name = parser.getName();
-			//Log.i(this.getClass().getSimpleName(), "Leif: in .parseDokument(): looking at <" + name + ">");
+			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseDokument(): looking at <" + name + ">");
 			
 			if(name.equals("dok_id")){
 				correct = this.readString(parser, "dok_id", xmlns).equals(this.article.getId());
@@ -293,7 +293,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 			}
 		}
 		parser.require(XmlPullParser.END_TAG, xmlns, "dokument");
-		//Log.i(this.getClass().getSimpleName(), "Leif: in .parseDokument(): looking at </"+parser.getName()+">");
+		//Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseDokument(): looking at </"+parser.getName()+">");
 		
 		return correct;
 	}
