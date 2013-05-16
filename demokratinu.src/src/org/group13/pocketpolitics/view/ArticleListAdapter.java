@@ -40,9 +40,7 @@ public class ArticleListAdapter extends BaseAdapter {
 		View vi = convertView;
 		
 		if (convertView == null) {
-			Log.d("asdf","convertView == null");
 			vi = inflater.inflate(R.layout.article_list_item, null);
-			Log.d("asdf","convertView == " + vi.toString());
 		}
 		// Sets the title text
 		TextView articleTitle = (TextView) vi.findViewById(R.id.articleTitle);
