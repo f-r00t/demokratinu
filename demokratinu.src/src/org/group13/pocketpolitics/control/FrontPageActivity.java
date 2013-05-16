@@ -3,11 +3,16 @@ package org.group13.pocketpolitics.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.group13.pocketpolitics.R;
+import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.net.ActivityNetInterface;
+import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.net.data.QueryParam;
+import org.group13.pocketpolitics.net.data.QueryResult;
+import org.group13.pocketpolitics.view.ArticleListAdapter;
+
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,16 +21,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.R.id;
-import org.group13.pocketpolitics.R.layout;
-import org.group13.pocketpolitics.model.riksdag.Article;
-import org.group13.pocketpolitics.model.riksdag.Committee;
-import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.Retriever;
-import org.group13.pocketpolitics.net.data.QueryResult;
-import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
@@ -36,11 +31,11 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 	@Override
 	protected void onResume(){
-
-		orderNextPage();
-
-		setAdapter();
-
+		if(ArticleMemoryController.articles().isEmpty()){
+			orderNextPage();
+			setAdapter();
+		}
+		
 	}
 
 	@Override
@@ -63,20 +58,21 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 						.show();
 
 				Intent intent = new Intent(getApplicationContext(), 
-						ArticleActivity.class).putExtra("Article",articleList.get(position));
+						ArticleActivity.class).putExtra(ARTICLE_NUM_SENT, articleList.get(position));
 				//TODO 
-				//ska vara rätt siffra! inte bara 123
-				intent.putExtra(ARTICLE_NUM_SENT, 123);
+				// fungerar det?
 				startActivity(intent);
 			}
 		});
 	}
 
-
-
 	private void orderNextPage(){
 		if(Retriever.isConnected(this)){
-			Retriever.retrieveArticles(this, ArticleMemoryController.nextQuery());
+			QueryParam qpar = ArticleMemoryController.nextQuery();
+			if(qpar !=null){
+				Retriever.retrieveArticles(this, qpar);
+			}
+			
 		}
 	}
 
@@ -86,7 +82,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 	@Override
 	public void onPreExecute() {
-		// TODO Auto-generated method stub
+		// TODO Skapa snurrande hjul någonstans i guit
 
 	}
 

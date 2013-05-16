@@ -28,6 +28,9 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		int ix = getIntent().getIntExtra(FrontPageActivity.ARTICLE_NUM_SENT, -1);
 		article = ArticleMemoryController.article(ix);
+		if(article == null){
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onCreate(): article null at position "+ix);
+		}
 		
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
