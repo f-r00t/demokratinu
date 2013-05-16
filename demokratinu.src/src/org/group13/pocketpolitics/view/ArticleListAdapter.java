@@ -8,6 +8,7 @@ import org.group13.pocketpolitics.model.riksdag.Article;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,22 +38,15 @@ public class ArticleListAdapter extends BaseAdapter {
 
 		Article article = items.get(position);
 		View vi = convertView;
-
+		
 		if (convertView == null) {
+			Log.d("asdf","convertView == null");
 			vi = inflater.inflate(R.layout.article_list_item, null);
+			Log.d("asdf","convertView == " + vi.toString());
 		}
 		// Sets the title text
 		TextView articleTitle = (TextView) vi.findViewById(R.id.articleTitle);
 		articleTitle.setText(article.getTitle());
-
-		// Sets the number of likes
-		TextView textViewLikes = (TextView) vi.findViewById(R.id.TextViewLikes);
-		textViewLikes.setText(Integer.toString(article.getNbrOfLikes()));
-
-		// Sets the number of dislikes
-		TextView textViewDislikes = (TextView) vi
-				.findViewById(R.id.TextViewDislikes);
-		textViewDislikes.setText(Integer.toString(article.getNbrOfDislikes()));
 
 		return vi;
 	}

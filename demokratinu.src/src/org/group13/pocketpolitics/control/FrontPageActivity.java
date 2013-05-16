@@ -31,18 +31,18 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 	@Override
 	protected void onResume(){
+		super.onResume();
 		if(ArticleMemoryController.articles().isEmpty()){
 			orderNextPage();
-			setAdapter();
+			//setAdapter();
 		}
-		
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
+		
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_front_page);
 
