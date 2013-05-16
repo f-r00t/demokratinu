@@ -8,15 +8,15 @@
 
     <ImageButton
         android:id="@+id/attention_button"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/greenarrow" />
 
     <TextView
         android:id="@+id/articleTitle"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:clickable="true"
+        android:gravity="center_vertical"
         android:paddingLeft="4dp"
         android:paddingRight="8dp"
         android:text="@string/title_item"

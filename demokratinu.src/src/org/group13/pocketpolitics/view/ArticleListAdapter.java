@@ -46,6 +46,9 @@ public class ArticleListAdapter extends BaseAdapter {
 		TextView articleTitle = (TextView) vi.findViewById(R.id.articleTitle);
 		articleTitle.setText(article.getTitle());
 
+		// This is so that the list items will still be clickable
+		vi.findViewById(R.id.attention_button).setFocusable(false);
+		
 		return vi;
 	}
 

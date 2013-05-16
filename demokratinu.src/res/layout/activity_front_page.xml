@@ -22,7 +22,9 @@
         <ListView
             android:id="@+id/article_list"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true" >
         </ListView>
     </LinearLayout>
 
