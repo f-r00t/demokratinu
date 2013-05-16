@@ -49,24 +49,25 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
 		
-		prefs = this.getSharedPreferences("com.example.pocketpolitics", 0);
+		prefs = this.getSharedPreferences("org.group13.pocketpolitics", 0);
 		
 		//Editor editor = prefs.edit();
-		//editor.putBoolean("com.example.pocketpolitics.stayloggedin", false);
+		//editor.putBoolean("org.group13.pocketpolitics.stayloggedin", false);
 		//editor.apply();
 /*
-		if (prefs.getBoolean("com.example.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
+		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
 			
-			String uname = prefs.getString("com.example.politics.username", "");
-			String pass = prefs.getString("com.example.pocketpolitics.password", "");
+			email = prefs.getString("org.group13.pocketpolitics.email", "");
+			pass = prefs.getString("org.group13.pocketpolitics.password", "");
 			
-			if (SomeNetClass.getInstance.authenticate(this, uname, pass)) {
+			if (SomeNetClass.getInstance.authenticate(this, email, pass)) {
 			
 				intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+				startActivity(intent);
+				finish();
 			}
 		}
-		startActivity(intent);
-		finish();
+		
 */
 
 		// Set up the login form.
@@ -161,6 +162,7 @@ public class LoginActivity extends Activity {
 			//authenticate();
 			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			startActivity(intent);
+			finish();
 		}
 	}
 }
