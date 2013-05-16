@@ -36,7 +36,7 @@
         
         <activity
             android:name="org.group13.pocketpolitics.control.ArticleActivity"
-            android:label="@layout/activity_article" >
+            android:label="@string/label_activity_article" >
             <meta-data 
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.group13.pocketpolitics.control.FrontPageActivity"/>
@@ -44,7 +44,7 @@
         
         <activity
             android:name="org.group13.pocketpolitics.control.MotionActivity"
-            android:label="@layout/activity_motion" >
+            android:label="@string/label_activity_motion" >
             <meta-data 
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="org.group13.pocketpolitics.control.ArticleActivity"/>
@@ -52,7 +52,7 @@
         
         <activity
             android:name="org.group13.pocketpolitics.control.RegistrationActivity"
-            android:label="@string/title_activity_registration"
+            android:label="@string/label_activity_registration"
             android:parentActivityName="org.group13.pocketpolitics.control.LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

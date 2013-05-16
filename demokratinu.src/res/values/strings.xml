@@ -4,11 +4,6 @@
     <string name="app_name">PocketPolitics</string>
     <string name="action_settings">Edit settings</string>
     
-    <string name="title_activity_main">Welcome dear user to MainActivity</string>
-    <string name="title_activity_registration">RegistrationActivity</string>
-    <string name="title_activity_article">Article</string>
-    <string name="title_activity_motion">Motion</string>
-    
     <string name="stay_logged_in_checkbox">Förbli inloggad</string>
     
     <string name="hello_world">Hello world!</string>
@@ -17,5 +12,9 @@
     <string name="title_item">Votering Barnen i afrika får fortsatt svält</string>
     <string name="title_downvotes">271</string>
     <string name="descPartyIcon">Vänsterpartiet</string>
+    
+    <string name="desc_detailed_view_button">Något ska stå här? Descriptive view button.</string>
+    <string name="title_detailed_view_description">Något ska stå här? Title detailed view description</string>
+    
     
 </resources>
