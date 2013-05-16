@@ -34,7 +34,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		super.onResume();
 		if(ArticleMemoryController.articles().isEmpty()){
 			orderNextPage();
-			//setAdapter();
+			setAdapter();
 		}
 	}
 
