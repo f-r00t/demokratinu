@@ -30,11 +30,11 @@ import android.widget.TextView;
 public class LoginActivity extends Activity {
 
 	// Values for email and password at the time of the login attempt.
-	private String username;
+	private String email;
 	private String password;
 
 	// UI references.
-	private EditText usernameView;
+	private EditText emailView;
 	private EditText passwordView;
 
 	// 
@@ -70,7 +70,7 @@ public class LoginActivity extends Activity {
 */
 
 		// Set up the login form.
-		usernameView = (EditText) findViewById(R.id.email);
+		emailView = (EditText) findViewById(R.id.email);
 
 		passwordView = (EditText) findViewById(R.id.password);
 		passwordView
@@ -121,11 +121,11 @@ public class LoginActivity extends Activity {
 	public void attemptLogin() {
 
 		// Reset errors.
-		usernameView.setError(null);
+		emailView.setError(null);
 		passwordView.setError(null);
 
 		// Store values at the time of the login attempt.
-		username = usernameView.getText().toString();
+		email = emailView.getText().toString();
 		password = passwordView.getText().toString();
 
 		boolean cancel = false;
@@ -143,13 +143,13 @@ public class LoginActivity extends Activity {
 		}
 
 		// Check for a valid email address.
-		if (TextUtils.isEmpty(username)) {
-			usernameView.setError(getString(R.string.error_field_required));
-			focusView = usernameView;
+		if (TextUtils.isEmpty(email)) {
+			emailView.setError(getString(R.string.error_field_required));
+			focusView = emailView;
 			cancel = true;
-		} else /if (username.length() < 3) {
-			usernameView.setError(getString(R.string.error_invalid_email));
-			focusView = usernameView;
+		} else if (email.length() < 3) {
+			emailView.setError(getString(R.string.error_invalid_email));
+			focusView = emailView;
 			cancel = true;
 		}
 */

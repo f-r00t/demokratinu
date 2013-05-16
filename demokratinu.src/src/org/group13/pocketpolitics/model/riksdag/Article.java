@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.group13.pocketpolitics.user_model.Comment;
-import org.group13.pocketpolitics.user_model.LikeableItem;
+import org.group13.pocketpolitics.model.user.Comment;
+import org.group13.pocketpolitics.model.user.LikeableItem;
 
 @SuppressWarnings("serial")
 public class Article extends LikeableItem implements Serializable  {

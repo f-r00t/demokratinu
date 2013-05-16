@@ -2,7 +2,7 @@ package org.group13.pocketpolitics.test.model;
 
 import java.util.List;
 
-import org.group13.pocketpolitics.user_model.Comment;
+import org.group13.pocketpolitics.model.user.Comment;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
