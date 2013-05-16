@@ -4,12 +4,12 @@ import org.group13.pocketpolitics.model.Committee;
 
 public class Filter {
 
-	protected final String dateFrom;
-	protected final String dateTo;
-	protected final String sort;
-	protected final int sortint;
+	private final String dateFrom;
+	private final String dateTo;
+	private final String sort;
+	private final int sortint;
 	
-	protected final Committee utskott;
+	private final Committee utskott;
 	
 	/**
 	 * Class for making a query to data.riksdagen.se/sok/.
@@ -55,5 +55,25 @@ public class Filter {
 		}
 		
 		return true;
+	}
+
+	public String getDateFrom() {
+		return dateFrom;
+	}
+
+	public String getDateTo() {
+		return dateTo;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public int getSortint() {
+		return sortint;
+	}
+
+	public Committee getUtskott() {
+		return utskott;
 	}
 }
