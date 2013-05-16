@@ -1,6 +1,6 @@
 package org.group13.pocketpolitics.net.data;
 
-import org.group13.pocketpolitics.model.Committee;
+import org.group13.pocketpolitics.model.riksdag.Committee;
 
 import android.util.Log;
 

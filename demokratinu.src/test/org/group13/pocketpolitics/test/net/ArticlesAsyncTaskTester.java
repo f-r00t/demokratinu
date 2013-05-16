@@ -2,8 +2,8 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
-import org.group13.pocketpolitics.model.Article;
-import org.group13.pocketpolitics.model.Committee;
+import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 import org.group13.pocketpolitics.net.data.QueryResult;

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.riksdag.Article;
 
 import android.os.AsyncTask;
 

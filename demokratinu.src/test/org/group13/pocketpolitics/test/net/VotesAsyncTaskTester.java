@@ -2,9 +2,9 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
-import org.group13.pocketpolitics.model.Article;
-import org.group13.pocketpolitics.model.PartyVote;
-import org.group13.pocketpolitics.model.CommitteeProposal;
+import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
+import org.group13.pocketpolitics.model.riksdag.PartyVote;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 

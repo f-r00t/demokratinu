@@ -3,8 +3,8 @@ package org.group13.pocketpolitics.control;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.Article;
-import org.group13.pocketpolitics.model.Committee;
+import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Committee;
 import org.group13.pocketpolitics.net.data.Filter;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;

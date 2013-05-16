@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.group13.pocketpolitics.model.Article;
-import org.group13.pocketpolitics.model.Moprosition;
-import org.group13.pocketpolitics.model.Committee;
+import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Committee;
+import org.group13.pocketpolitics.model.riksdag.Moprosition;
 import org.group13.pocketpolitics.net.data.Filter;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;
@@ -57,7 +57,7 @@ public class Retriever {
 		retrieveArticles(act, new QueryParam(f, page));
 	}
 	public static void retrieveArticles(ActivityNetInterface<QueryResult> act, QueryParam qp){
-		if(qp.page==-1){
+		if(qp.getPage()==-1){
 			return;
 		}
 		

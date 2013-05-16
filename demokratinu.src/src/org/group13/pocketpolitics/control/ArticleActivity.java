@@ -1,7 +1,7 @@
 package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.riksdag.Article;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 

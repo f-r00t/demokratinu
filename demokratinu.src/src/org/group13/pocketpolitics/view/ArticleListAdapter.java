@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.riksdag.Article;
 
 import android.app.Activity;
 import android.content.Context;

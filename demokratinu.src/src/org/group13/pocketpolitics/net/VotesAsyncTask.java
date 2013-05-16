@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.Article;
-import org.group13.pocketpolitics.model.PartyVote;
-import org.group13.pocketpolitics.model.CommitteeProposal;
+import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
+import org.group13.pocketpolitics.model.riksdag.PartyVote;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 

@@ -2,7 +2,7 @@ package org.group13.pocketpolitics.user_model;
 
 import java.util.HashMap;
 
-import org.group13.pocketpolitics.model.Party;
+import org.group13.pocketpolitics.model.riksdag.Party;
 
 public class Statistics {
 

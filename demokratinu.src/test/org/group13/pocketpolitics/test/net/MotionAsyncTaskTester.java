@@ -2,10 +2,10 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.Iterator;
 
-import org.group13.pocketpolitics.model.Proposer;
-import org.group13.pocketpolitics.model.Moprosition;
-import org.group13.pocketpolitics.model.Motion;
-import org.group13.pocketpolitics.model.Proposition;
+import org.group13.pocketpolitics.model.riksdag.Moprosition;
+import org.group13.pocketpolitics.model.riksdag.Motion;
+import org.group13.pocketpolitics.model.riksdag.Proposer;
+import org.group13.pocketpolitics.model.riksdag.Proposition;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 

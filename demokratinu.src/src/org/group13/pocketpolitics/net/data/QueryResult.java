@@ -2,7 +2,7 @@ package org.group13.pocketpolitics.net.data;
 
 import java.util.List;
 
-import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.riksdag.Article;
 
 
 public class QueryResult {
@@ -18,7 +18,7 @@ public class QueryResult {
 	 * @param thisPage
 	 * @param totalTraffar 
 	 */
-	QueryResult(List<Article> arts, int totalPages, int thisPage, int totalTraffar){
+	public QueryResult(List<Article> arts, int totalPages, int thisPage, int totalTraffar){
 		this.arts = arts;
 		this.totalPages = totalPages;
 		this.thisPage = thisPage;

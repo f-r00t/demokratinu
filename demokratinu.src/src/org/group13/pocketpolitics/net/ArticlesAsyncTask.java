@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.group13.pocketpolitics.model.Article;
+import org.group13.pocketpolitics.model.riksdag.Article;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;
 import org.xmlpull.v1.XmlPullParser;
@@ -40,7 +40,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 		
 		QueryParam qpar = params[0];
 		
-		String url = QUERY + "&datum=" + qpar.filter.getDateFrom() + "&tom=" + qpar.filter.getDateTo() + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.filter.sort + "&org="+qpar.filter.utskott.getQueryName();
+		String url = QUERY + "&datum=" + qpar.getFilter().getDateFrom() + "&tom=" + qpar.getFilter().getDateTo() + "&p=" + qpar.getPage() + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.getFilter().getSort() + "&org="+qpar.getFilter().getUtskott().getQueryName();
 		return retrieve(url, qpar);
 	}
 	
