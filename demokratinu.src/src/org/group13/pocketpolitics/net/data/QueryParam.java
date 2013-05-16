@@ -12,8 +12,8 @@ import android.util.Log;
  */
 public class QueryParam {
 
-	protected final int page;
-	protected final Filter filter;
+	private final int page;
+	private final Filter filter;
 	
 	/**
 	 * Class for making a query to data.riksdagen.se/sok/.
@@ -37,5 +37,13 @@ public class QueryParam {
 			//page=1;
 		}
 		this.page = page;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public Filter getFilter() {
+		return filter;
 	}
 }

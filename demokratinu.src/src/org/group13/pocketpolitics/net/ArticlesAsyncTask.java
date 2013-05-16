@@ -40,7 +40,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 		
 		QueryParam qpar = params[0];
 		
-		String url = QUERY + "&datum=" + qpar.filter.dateFrom + "&tom=" + qpar.filter.dateTo + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.filter.sort + "&org="+qpar.filter.utskott.getQueryName();
+		String url = QUERY + "&datum=" + qpar.filter.getDateFrom() + "&tom=" + qpar.filter.getDateTo() + "&p=" + qpar.page + "&sz=" + ARTICLES_PER_PAGE + "&sort="+qpar.filter.sort + "&org="+qpar.filter.utskott.getQueryName();
 		return retrieve(url, qpar);
 	}
 	
