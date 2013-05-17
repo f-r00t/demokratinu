@@ -15,4 +15,12 @@ public class Article extends LikeableItem {
 		
 		this.agenda = agenda;
 	}
+
+	public Agenda getAgenda() {
+		return agenda;
+	}
+
+	public void setAgenda(Agenda agenda) {
+		this.agenda = agenda;
+	}
 }
