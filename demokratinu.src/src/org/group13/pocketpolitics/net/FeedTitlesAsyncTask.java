@@ -42,13 +42,14 @@ class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Agenda>> {
 
 		Iterator<String> iter = titles.listIterator();
 		while(iter.hasNext() && !this.isCancelled()){
+			/*
 			Agenda a = new Agenda();
 			String total= iter.next();
 			
 			String[] title = total.split("\\(");
 			a.setTitle(title[0]);
 			a.setBeteckning((title[1].split("\\)")[0]));
-			arts.add(a);
+			arts.add(a);*/
 		}
 
 		return arts;
