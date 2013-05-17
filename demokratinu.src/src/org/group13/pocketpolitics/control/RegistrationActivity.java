@@ -97,7 +97,7 @@ public class RegistrationActivity extends Activity {
 			cancel = true;
 		}
 		else if (username.length() < 2) {
-			usernameView.setError(R.string.error_invalid_username);
+			usernameView.setError(getString(R.string.error_invalid_username));
 			focusView = usernameView;
 			cancel = true;
 		}
