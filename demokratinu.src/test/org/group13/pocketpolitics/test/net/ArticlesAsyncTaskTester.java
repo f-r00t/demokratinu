@@ -2,7 +2,7 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Committee;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
@@ -60,10 +60,10 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 		
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: QueryResults sidor="+qres.getTotalPages()+". Artiklar på denna sida: "+qres.getArts().size());
 		
-		ListIterator<Article> it = qres.getArts().listIterator();
+		ListIterator<Agenda> it = qres.getArts().listIterator();
 		int is=0;
 		while(it.hasNext() && is++<show){
-			Article a = it.next();
+			Agenda a = it.next();
 			
 			Log.i(this.getClass().getSimpleName(), "PocketDebug: testing ArticlesAsyncTask["+qres.getThisPage() + "] Id: "+a.getId()+" Beslutsdatum "+a.getBeslutsdag());
 		}

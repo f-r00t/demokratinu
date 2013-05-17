@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Committee;
 import org.group13.pocketpolitics.model.riksdag.Moprosition;
 import org.group13.pocketpolitics.net.data.Filter;
@@ -72,7 +72,7 @@ public class Retriever {
 	 * @param act		Interface for updating GUI
 	 * @param article	Adds voting data to this article. The article object itself gets updated. The returning string only holds the id of the same article.  
 	 */
-	public static void retrieveVotes(ActivityNetInterface<String> act, Article article){
+	public static void retrieveVotes(ActivityNetInterface<String> act, Agenda article){
 		threads++;
 		VotesAsyncTask task =new VotesAsyncTask(act, article);
 		tasks.add(task);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,9 +23,9 @@ import android.widget.TextView;
 public class ArticleListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
-	List<Article> items;
+	List<Agenda> items;
 
-	public ArticleListAdapter(Activity context, List<Article> items) {
+	public ArticleListAdapter(Activity context, List<Agenda> items) {
 		super();
 
 		this.items = items;
@@ -36,7 +36,7 @@ public class ArticleListAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
-		Article article = items.get(position);
+		Agenda article = items.get(position);
 		View vi = convertView;
 		
 		if (convertView == null) {

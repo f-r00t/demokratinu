@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 import org.group13.pocketpolitics.net.data.QueryParam;
@@ -27,7 +27,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
 
 	private ListView listViewArticles;
-	private List<Article> articleList = new ArrayList<Article>();
+	private List<Agenda> articleList = new ArrayList<Agenda>();
 
 	@Override
 	protected void onResume(){
@@ -58,7 +58,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 						.show();
 
 				Intent intent = new Intent(getApplicationContext(), 
-						ArticleActivity.class).putExtra(ARTICLE_NUM_SENT, articleList.get(position));
+						ArticleActivity.class).putExtra(ARTICLE_NUM_SENT, position);
 				//TODO 
 				// fungerar det?
 				startActivity(intent);

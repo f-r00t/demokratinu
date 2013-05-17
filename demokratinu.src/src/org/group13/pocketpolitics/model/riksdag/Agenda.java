@@ -8,10 +8,11 @@ import org.group13.pocketpolitics.model.user.Comment;
 import org.group13.pocketpolitics.model.user.LikeableItem;
 
 @SuppressWarnings("serial")
-public class Article extends LikeableItem implements Serializable  {
+public class Agenda {
 
-	private String title;
 	private String beteckning;
+	private String title;
+	private String summary;
 	
 	private int traffnummer;
 	private String datum;
@@ -48,9 +49,7 @@ public class Article extends LikeableItem implements Serializable  {
 	 * @param beslutsdag
 	 * @param beslutad
 	 */
-	public Article(String content, Date date, boolean isHidden, int opinion,
-			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, 
-			String title, 
+	public Agenda(String title, 
 			String beteckning,
 			int traffnummer,
 			String datum,
@@ -62,8 +61,6 @@ public class Article extends LikeableItem implements Serializable  {
 			String beslutsdag,
 			int beslutad,
 			List<CommitteeProposal> fors) {
-		
-		super(content, date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
 		
 		this.title = title;
 		this.beteckning = beteckning;
@@ -82,7 +79,7 @@ public class Article extends LikeableItem implements Serializable  {
 	}
 	
 	// Temporary constructor
-	public Article() {
+	public Agenda() {
 		super();
 	}
 	
@@ -196,5 +193,13 @@ public class Article extends LikeableItem implements Serializable  {
 	 */
 	public void setBeteckning(String beteckning) {
 		this.beteckning = beteckning;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 }

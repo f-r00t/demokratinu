@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 
 import android.os.AsyncTask;
 
@@ -22,7 +22,7 @@ import com.sun.syndication.io.XmlReader;
  * @author Leif
  *
  */
-class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
+class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Agenda>> {
 
 	private static final String FEED_URL = "http://www.riksdagen.se/sv/Debatter--beslut/?rss=true&type=biksmall";
 
@@ -35,14 +35,14 @@ class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 	}
 
 	@Override
-	protected List<Article> doInBackground(String... strings){
+	protected List<Agenda> doInBackground(String... strings){
 
 		List<String> titles = getArticleTitles();
-		List<Article> arts = new ArrayList<Article>();
+		List<Agenda> arts = new ArrayList<Agenda>();
 
 		Iterator<String> iter = titles.listIterator();
 		while(iter.hasNext() && !this.isCancelled()){
-			Article a = new Article();
+			Agenda a = new Agenda();
 			String total= iter.next();
 			
 			String[] title = total.split("\\(");
@@ -60,13 +60,13 @@ class FeedTitlesAsyncTask extends AsyncTask<String, Integer, List<Article>> {
 	}
 
 	@Override
-	protected void onPostExecute(List<Article> result){
+	protected void onPostExecute(List<Agenda> result){
 		// eller bara returnera string? Vill gärna lägga in länkar i Article från Dokumentlista.xml...
 		act.addArticles(result);
 	}
 
 	@Override
-	protected void onCancelled(List<Article> result){
+	protected void onCancelled(List<Agenda> result){
 
 	}
 

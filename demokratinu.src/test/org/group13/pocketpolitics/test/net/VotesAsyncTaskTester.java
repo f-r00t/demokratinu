@@ -2,7 +2,7 @@ package org.group13.pocketpolitics.test.net;
 
 import java.util.ListIterator;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 import org.group13.pocketpolitics.model.riksdag.PartyVote;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
@@ -14,11 +14,11 @@ import android.util.Log;
 public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNetInterface<String>{
 
 	private final int totalWait = 20;	//secs
-	private Article testArt;
+	private Agenda testArt;
 	
 	public void testVotes(){
 		
-		this.testArt = new Article();
+		this.testArt = new Agenda();
 		testArt.setId("H001UbU5");
 		
 		Retriever.retrieveVotes(this, testArt);

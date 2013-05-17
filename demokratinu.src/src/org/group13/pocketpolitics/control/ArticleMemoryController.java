@@ -3,7 +3,7 @@ package org.group13.pocketpolitics.control;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Committee;
 import org.group13.pocketpolitics.net.data.Filter;
 import org.group13.pocketpolitics.net.data.QueryParam;
@@ -19,7 +19,7 @@ import android.util.Log;
 public class ArticleMemoryController {
 	private static ArticleMemoryController INSTANCE;
 	
-	private List<Article> articles;
+	private List<Agenda> articles;
 	private Filter filter;
 	private int lastPage;
 	private int totalPages;
@@ -67,7 +67,7 @@ public class ArticleMemoryController {
 		return INSTANCE.filter;
 	}
 	
-	public static List<Article> articles(){
+	public static List<Agenda> articles(){
 		checkInstance();
 		return INSTANCE.articles;
 	}
@@ -80,7 +80,7 @@ public class ArticleMemoryController {
 		reset(INSTANCE, f);
 	}
 	
-	public static Article article(int ix){
+	public static Agenda article(int ix){
 		checkInstance();
 		if(ix < INSTANCE.articles.size() && ix>-1){
 			return INSTANCE.articles.get(ix);
@@ -92,7 +92,7 @@ public class ArticleMemoryController {
 	
 
 	private ArticleMemoryController(){
-		articles = new ArrayList<Article>();
+		articles = new ArrayList<Agenda>();
 		filter = new Filter("", "", -1, Committee.NULL);
 		reset(this, filter);
 	}

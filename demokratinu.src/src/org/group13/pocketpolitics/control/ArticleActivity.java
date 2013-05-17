@@ -1,7 +1,7 @@
 package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.net.ActivityNetInterface;
 import org.group13.pocketpolitics.net.Retriever;
 
@@ -18,7 +18,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private ListView listViewMotions;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
-	private Article article;
+	private Agenda article;
 	
 	public void onCreate(Bundle savedInstanceState) {
 

@@ -15,7 +15,7 @@ public abstract class LikeableItem {
 	private Date date;
 	private List<Comment> replies;
 
-	public LikeableItem(String content, Date date, boolean isHidden,
+	public LikeableItem(Date date, boolean isHidden,
 			int opinion, int nbrOfLikes, int nbrOfDislikes, List<Comment> replies) {
 		this.content = content;
 		this.date = date;

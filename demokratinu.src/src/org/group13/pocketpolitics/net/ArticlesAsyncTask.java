@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;
 import org.xmlpull.v1.XmlPullParser;
@@ -46,7 +46,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 	
 	@Override
 	protected QueryResult readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
-		List<Article> traffarList = new ArrayList<Article>();
+		List<Agenda> traffarList = new ArrayList<Agenda>();
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "sok");
 		int thisPage = Integer.parseInt(parser.getAttributeValue(xmlns, "sida"));
@@ -78,10 +78,10 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 		return qres;
 	}
 	
-	private Article readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private Agenda readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "traff");
 		
-		Article art = new Article();
+		Agenda art = new Agenda();
 		
 		while(parser.next()!= XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -124,7 +124,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 			} else if(name.equals("notisrubrik")){ 
 				art.setNotisrubrik(readString(parser, "notisrubrik", xmlns));
 			} else if(name.equals("notis")){ 
-				art.setContent((readString(parser, "notis", xmlns)));
+				art.setSummary((readString(parser, "notis", xmlns)));
 			} else if(name.equals("beslutsdag")){ 
 				art.setBeslutsdag(readString(parser, "beslutsdag", xmlns));
 			} else if(name.equals("beslutad")){
