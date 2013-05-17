@@ -26,17 +26,9 @@ public class Agenda {
 	
 	private List<CommitteeProposal> fors;
 	
-	
 	/**
 	 * Ett betänkande
 	 * 
-	 * @param content
-	 * @param date
-	 * @param isHidden
-	 * @param opinion
-	 * @param nbrOfLikes
-	 * @param nbrOfDislikes
-	 * @param replies
 	 * @param title
 	 * @param beteckning	beteckning: "UbU5"
 	 * @param traffnummer
@@ -49,17 +41,9 @@ public class Agenda {
 	 * @param beslutsdag
 	 * @param beslutad
 	 */
-	public Agenda(String title, 
-			String beteckning,
-			int traffnummer,
-			String datum,
-			String id,
-			String rm,
-			String relaterat_id,
-			double score,
-			String notisrubrik,
-			String beslutsdag,
-			int beslutad,
+	public Agenda(String title, String beteckning, int traffnummer,
+			String datum, String id, String rm, String relaterat_id,
+			double score, String notisrubrik, String beslutsdag, int beslutad,
 			List<CommitteeProposal> fors) {
 		
 		this.title = title;
@@ -80,7 +64,6 @@ public class Agenda {
 	
 	// Temporary constructor
 	public Agenda() {
-		super();
 	}
 	
 	public int getTraffnummer() {
