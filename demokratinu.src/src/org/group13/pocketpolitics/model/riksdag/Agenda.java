@@ -8,16 +8,13 @@ import org.group13.pocketpolitics.model.user.Comment;
 import org.group13.pocketpolitics.model.user.LikeableItem;
 
 @SuppressWarnings("serial")
-public class Agenda {
+public class Agenda extends Document{
 
-	private String beteckning;
-	private String title;
 	private String summary;
 	
 	private int traffnummer;
 	private String datum;
 	private String id;
-	private String rm;
 	private String relaterat_id;
 	private double score;
 	private String notisrubrik;
@@ -45,14 +42,11 @@ public class Agenda {
 			String datum, String id, String rm, String relaterat_id,
 			double score, String notisrubrik, String beslutsdag, int beslutad,
 			List<CommitteeProposal> fors) {
-		
-		this.title = title;
-		this.beteckning = beteckning;
+		super(beteckning, rm, title);
 		
 		this.traffnummer = traffnummer;
 		this.datum = datum;
 		this.id = id;
-		this.rm = rm;
 		this.relaterat_id =relaterat_id;
 		this.score=score;
 		this.notisrubrik=notisrubrik;
@@ -60,10 +54,6 @@ public class Agenda {
 		this.beslutad=beslutad;
 		
 		this.fors=fors;
-	}
-	
-	// Temporary constructor
-	public Agenda() {
 	}
 	
 	public int getTraffnummer() {
@@ -88,14 +78,6 @@ public class Agenda {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getRm() {
-		return rm;
-	}
-
-	public void setRm(String rm) {
-		this.rm = rm;
 	}
 
 	public String getRelaterat_id() {
@@ -146,37 +128,6 @@ public class Agenda {
 		this.fors = fors;
 	}
 
-
-
-	/**
-	 * @return The title (shorter description) of the article
-	 */
-	public String getTitle() {
-		return title;
-	}
-
-	/**
-	 * @param title The title (shorter description) of the article
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	/**
-	 * 
-	 * @return The document id of this article on the Riksdag database.
-	 */
-	public String getBeteckning() {
-		return beteckning;
-	}
-	
-	/**
-	 * 
-	 * @param beteckning The document id of this article on the Riksdag database.
-	 */
-	public void setBeteckning(String beteckning) {
-		this.beteckning = beteckning;
-	}
 
 	public String getSummary() {
 		return summary;
