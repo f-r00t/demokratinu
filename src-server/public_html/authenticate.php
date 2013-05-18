@@ -1,14 +1,16 @@
 <?php
 
-if (isset($_GET['email']) && isset($_GET['pass'])) {
+$return = "";
+
+if (isset($_POST['email']) && isset($_POST['pass'])) {
 	
 	require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
           
-    $email = trim($_GET['email']);
-    $pass = $_GET['pass'];
+    $email = trim($_POST['email']);
+    $pass = $_POST['pass'];
             
-    $sql = "SELECT password FROM users WHERE email = :email";
+    $sql = "SELECT password, username FROM users WHERE email = :email";
     $stmt = $dbh->prepare($sql);
     $stmt->bindParam(":email", $email);
     $stmt->execute();
@@ -18,7 +20,9 @@ if (isset($_GET['email']) && isset($_GET['pass'])) {
         $status = "0"; // Wrong email/pass
     }
     else {
-	    $status = "1"; // Success
+	    $status = "1\n"; // Success
+	    
+	    $return = '{"username" : "' . $dbcollected['username'] . '"}';
     }
 }
 else {
@@ -26,4 +30,5 @@ else {
 }
 
 echo $status;
+echo $return;
 ?>
