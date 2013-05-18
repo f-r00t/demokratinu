@@ -2,6 +2,7 @@ package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
+import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
 
@@ -70,7 +71,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	 * Retrives the CommitteeProposals for the article and their respective votes
 	 */
 	private void orderVotings(){
-		if(Retriever.isConnected(this)){
+		if(Connected.isConnected(this)){
 			Retriever.retrieveVotes(this, article);
 		}
 	}

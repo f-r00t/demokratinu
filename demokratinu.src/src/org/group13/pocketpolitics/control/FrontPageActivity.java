@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
+import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
@@ -67,7 +68,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	}
 
 	private void orderNextPage(){
-		if(Retriever.isConnected(this)){
+		if(Connected.isConnected(this)){
 			QueryParam qpar = ArticleMemoryController.nextQuery();
 			if(qpar !=null){
 				Retriever.retrieveArticles(this, qpar);
