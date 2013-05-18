@@ -20,6 +20,7 @@ public class Agenda extends Document{
 	/**
 	 * Ett betänkande
 	 * 
+	 * @param summary Text
 	 * @param title
 	 * @param beteckning	beteckning: "UbU5"
 	 * @param traffnummer
