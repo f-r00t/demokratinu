@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;
 import org.xmlpull.v1.XmlPullParser;
@@ -46,7 +46,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 	
 	@Override
 	protected QueryResult readFeed(XmlPullParser parser) throws XmlPullParserException, IOException{
-		List<Article> traffarList = new ArrayList<Article>();
+		List<Agenda> traffarList = new ArrayList<Agenda>();
 		
 		parser.require(XmlPullParser.START_TAG, xmlns, "sok");
 		int thisPage = Integer.parseInt(parser.getAttributeValue(xmlns, "sida"));
@@ -78,10 +78,23 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 		return qres;
 	}
 	
-	private Article readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
+	private Agenda readTraff(XmlPullParser parser) throws XmlPullParserException, IOException{
 		parser.require(XmlPullParser.START_TAG, xmlns, "traff");
 		
-		Article art = new Article();
+		//Agenda art = new Agenda();
+		String beteckning="";
+		String rm="";
+		String title="";
+		
+		String summary="";
+		int traffnummer=-1;
+		String datum="";
+		String id="";
+		String relaterat_id="";
+		double score=-1;
+		String notisrubrik="";
+		String beslutsdag="";
+		int beslutad=-1;
 		
 		while(parser.next()!= XmlPullParser.END_TAG){
 			if(parser.getEventType() != XmlPullParser.START_TAG){
@@ -91,23 +104,23 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in readTraff: looking at <"+name+">");
 			
 			if(name.equals("traffnummer")){ 
-				art.setTraffnummer(Integer.parseInt(readString(parser, "traffnummer", xmlns)));
+				traffnummer=(Integer.parseInt(readString(parser, "traffnummer", xmlns)));
 			} else if(name.equals("datum")){ 
-				art.setDatum(readString(parser, "datum", xmlns));
+				datum=(readString(parser, "datum", xmlns));
 			} else if(name.equals("id")){ 
-				art.setId(readString(parser, "id", xmlns));
+				id=(readString(parser, "id", xmlns));
 			} else if(name.equals("titel")){ 
-				art.setTitle(readString(parser, "titel", xmlns));
+				title=(readString(parser, "titel", xmlns));
 			} else if(name.equals("rm")){ 
-				art.setRm(readString(parser, "rm", xmlns));
+				rm=(readString(parser, "rm", xmlns));
 			} else if(name.equals("relaterat_id")){ 
 				
 				//Log.i(this.getClass().getSimpleName(), "PocketDebug: relaterat_id läses...");
-				art.setRelaterat_id(readString(parser, "relaterat_id", xmlns));
+				relaterat_id=(readString(parser, "relaterat_id", xmlns));
 				//Log.w(this.getClass().getSimpleName(), "PocketDebug: relaterat_id läst: "+art.getRelaterat_id());
 				
 			} else if(name.equals("beteckning")){ 
-				art.setBeteckning(readString(parser, "beteckning", xmlns));
+				beteckning=(readString(parser, "beteckning", xmlns));
 			} else if(name.equals("score")){
 				
 				//Källa: http://stackoverflow.com/questions/4323599/best-way-to-parsedouble-with-comma-as-decimal-separator
@@ -120,21 +133,23 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 					Log.e(this.getClass().getSimpleName(), "PocketDebug: reading <score>, Format exception: "+read);
 					e.printStackTrace();
 				}
-				art.setScore(d);
+				score=d;
 			} else if(name.equals("notisrubrik")){ 
-				art.setNotisrubrik(readString(parser, "notisrubrik", xmlns));
+				notisrubrik=(readString(parser, "notisrubrik", xmlns));
 			} else if(name.equals("notis")){ 
-				art.setContent((readString(parser, "notis", xmlns)));
+				summary=((readString(parser, "notis", xmlns)));
 			} else if(name.equals("beslutsdag")){ 
-				art.setBeslutsdag(readString(parser, "beslutsdag", xmlns));
+				beslutsdag=(readString(parser, "beslutsdag", xmlns));
 			} else if(name.equals("beslutad")){
-				art.setBeslutad(Integer.parseInt(readString(parser, "beslutad", xmlns)));
+				beslutad=(Integer.parseInt(readString(parser, "beslutad", xmlns)));
 			} else{
 				skip(parser);
 			}
 		}
 		
-		return art;
+		return new Agenda(summary, title, beteckning, traffnummer, 
+				datum, id, rm, relaterat_id,
+				score, notisrubrik, beslutsdag, beslutad, null);
 	}
 	
 	

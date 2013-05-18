@@ -186,7 +186,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 				if(!ddata.motion){
 					org+="U";
 				}
-				ddata.uts = Committee.findUtskott(org);
+				ddata.uts = Committee.findCommittee(org);
 			} else if( "titel".equals(parser.getName())){
 				ddata.title = this.readString(parser, "titel", xmlns);
 			} else if( "subtitel".equals(parser.getName())){

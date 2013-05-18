@@ -7,11 +7,13 @@ import java.util.List;
 public class Comment extends LikeableItem {
 	
 	private String author;
+	private String content;
 	
 	public Comment(String content, Date date, boolean isHidden, int opinion,
 			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, String author) {
-		super(content, date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
+		super(date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
 		this.author = author;
+		this.content = content;
 		
 	}
 	
@@ -32,5 +34,13 @@ public class Comment extends LikeableItem {
 	 */
 	public void setAuthor(String author) {
 		this.author = author;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 import org.group13.pocketpolitics.model.riksdag.PartyVote;
 import org.xmlpull.v1.XmlPullParser;
@@ -12,13 +12,13 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Log;
 
-public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
+public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 
 	private final String URL = "http://data.riksdagen.se/utskottsforslag/";
 	
 	private final String xmlns = null;
 	
-	private final Article article;
+	private final Agenda article;
 	
 	//private final String dokCode;	//H001...
 	//private final String motionId;
@@ -29,7 +29,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 	 * @param act	Interface updating the GUI
 	 * @param article The article to find votes for. It is updated dynamically
 	 */
-	VotesAsyncTask(ActivityNetInterface<String> act, Article article){
+	VotesAsyncTask(ActivityNetInterface<String> act, Agenda article){
 		super(act);
 		this.article = article;
 		//this.act = act;
@@ -51,7 +51,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Article, String> {
 	}
 	
 	@Override
-	protected String doInBackground(Article... params) {
+	protected String doInBackground(Agenda... params) {
 		
 		String url = URL+article.getId();
 		return retrieve(url, article);

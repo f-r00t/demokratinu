@@ -3,7 +3,7 @@ package org.group13.pocketpolitics.view;
 import java.util.ArrayList;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Motion;
 
 import android.app.Activity;

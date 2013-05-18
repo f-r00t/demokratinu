@@ -2,14 +2,14 @@ package org.group13.pocketpolitics.net.data;
 
 import java.util.List;
 
-import org.group13.pocketpolitics.model.riksdag.Article;
+import org.group13.pocketpolitics.model.riksdag.Agenda;
 
 
 public class QueryResult {
 	private final int thisPage;
 	private final int totalPages;
 	private final int totalTraffar;
-	private final List<Article> arts;
+	private final List<Agenda> arts;
 	
 	/**
 	 * 
@@ -18,7 +18,7 @@ public class QueryResult {
 	 * @param thisPage
 	 * @param totalTraffar 
 	 */
-	public QueryResult(List<Article> arts, int totalPages, int thisPage, int totalTraffar){
+	public QueryResult(List<Agenda> arts, int totalPages, int thisPage, int totalTraffar){
 		this.arts = arts;
 		this.totalPages = totalPages;
 		this.thisPage = thisPage;
@@ -37,7 +37,7 @@ public class QueryResult {
 		return totalTraffar;
 	}
 
-	public List<Article> getArts() {
+	public List<Agenda> getArts() {
 		return arts;
 	}
 

@@ -5,12 +5,9 @@ package org.group13.pocketpolitics.model.riksdag;
  * @author Leif
  *
  */
-public abstract class Moprosition {
+public abstract class Moprosition extends Document{
 	
-	private final String beteckning;
-	private final String rm;
 	private final String textURL;
-	private final String title;
 	
 	private final boolean motion;
 
@@ -20,30 +17,16 @@ public abstract class Moprosition {
 	
 
 	protected Moprosition(String textURL, String rm, String beteckning, String title, Committee uts, boolean motion){
+		super(beteckning, rm, title);
 		this.motion = motion;
 		this.textURL = textURL;
-		this.beteckning = beteckning;
-		this.rm = rm;
-		this.title = title;
 		this.uts = uts;
 		
 		text = null;
 	}
-	
-	public String getBeteckning() {
-		return beteckning;
-	}
-
-	public String getRm() {
-		return rm;
-	}
 
 	public String getTextURL() {
 		return textURL;
-	}
-
-	public String getTitle() {
-		return title;
 	}
 
 	public boolean isMotion() {

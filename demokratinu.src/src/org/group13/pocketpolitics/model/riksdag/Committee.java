@@ -39,7 +39,7 @@ public enum Committee {
 	 * @param org
 	 * @return
 	 */
-	public static Committee findUtskott(String org){
+	public static Committee findCommittee(String org){
 		
 		if("FöU".equals(org)){
 			return Committee.Foersvar;
