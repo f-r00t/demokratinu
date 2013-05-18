@@ -1,12 +1,12 @@
 <?php
 
-if (isset($_GET['email']) && isset($_GET['pass'])) {
+if (isset($_POST['email']) && isset($_POST['pass'])) {
 	
 	require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
           
-    $email = trim($_GET['email']);
-    $pass = $_GET['pass'];
+    $email = trim($_POST['email']);
+    $pass = $_POST['pass'];
             
     $sql = "SELECT password FROM users WHERE email = :email";
     $stmt = $dbh->prepare($sql);

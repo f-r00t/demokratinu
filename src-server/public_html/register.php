@@ -2,14 +2,14 @@
 
 // TODO: Check values for valid emails/usernames/passwords
 
-if (isset($_GET['email']) && isset($_GET['user']) && isset($_GET['pass'])) {
+if (isset($_POST['email']) && isset($_POST['user']) && isset($_POST['pass'])) {
 
 	require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
 
-	$email = trim($_GET['email']);
-	$username = trim($_GET['user']);
-    $pass = $_GET['pass'];	  
+	$email = trim($_POST['email']);
+	$username = trim($_POST['user']);
+    $pass = $_POST['pass'];	  
 	
 	$sql = "SELECT username, email FROM users";
 	$stmt = $dbh->prepare($sql);
