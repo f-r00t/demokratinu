@@ -18,8 +18,8 @@ public class VotesAsyncTaskTester extends AndroidTestCase implements ActivityNet
 	
 	public void testVotes(){
 		
-		this.testArt = new Agenda();
-		testArt.setId("H001UbU5");
+		this.testArt = new Agenda(null, null, null, 0, null, "H001UbU5", null, null, -1, null, null, -1, null);
+		//testArt.setId("H001UbU5");
 		
 		Retriever.retrieveVotes(this, testArt);
 		int threads;
