@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
-import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.Retriever;
 import org.group13.pocketpolitics.net.data.QueryParam;
 import org.group13.pocketpolitics.net.data.QueryResult;
+import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
+import org.group13.pocketpolitics.net.riksdag.Retriever;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 import android.app.Activity;

@@ -2,8 +2,8 @@ package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
-import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
+import org.group13.pocketpolitics.net.riksdag.Retriever;
 
 import android.app.Activity;
 import android.os.Bundle;

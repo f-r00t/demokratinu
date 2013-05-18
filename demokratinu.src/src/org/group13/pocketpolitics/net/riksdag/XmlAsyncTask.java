@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.net;
+package org.group13.pocketpolitics.net.riksdag;
 
 import java.io.IOException;
 import java.io.InputStream;

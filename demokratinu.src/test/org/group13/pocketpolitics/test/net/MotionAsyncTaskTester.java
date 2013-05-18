@@ -6,8 +6,8 @@ import org.group13.pocketpolitics.model.riksdag.Moprosition;
 import org.group13.pocketpolitics.model.riksdag.Motion;
 import org.group13.pocketpolitics.model.riksdag.Proposer;
 import org.group13.pocketpolitics.model.riksdag.Proposition;
-import org.group13.pocketpolitics.net.ActivityNetInterface;
-import org.group13.pocketpolitics.net.Retriever;
+import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
+import org.group13.pocketpolitics.net.riksdag.Retriever;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
