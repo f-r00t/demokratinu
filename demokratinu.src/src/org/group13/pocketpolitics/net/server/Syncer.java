@@ -8,7 +8,8 @@ public class Syncer {
 	
 	public static void register(Account newUser){
 		checkInstance();
-		// TODO
+		PostAsyncTask task = new PostAsyncTask(newUser, ServerUrl.Register);
+		task.execute();
 	}
 	
 	
