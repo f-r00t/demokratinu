@@ -2,7 +2,9 @@
 
 // TODO: Check values for valid emails/usernames/passwords
 
-$status = "1";
+$success = "true";
+$userExists = "false";
+$emailExists = "false";
 
 if (isset($_POST['email']) && isset($_POST['user']) && isset($_POST['pass'])) {
 
@@ -19,14 +21,16 @@ if (isset($_POST['email']) && isset($_POST['user']) && isset($_POST['pass'])) {
 	
 	while($dbcollected = $stmt->fetch()) {
         if ($dbcollected['username'] == $username) {
-			$status = "0";
+			$usernameExists = "true";
+			$success = "false";
 		}
 		if ($dbcollected['email'] == $email) {
-			$status = "0";
+			$emailExists = "true";
+			$success = "false";
 		}
 	}
 	
-    if ($status != "0") {
+    if ($success != "false") {
 		$salt = uniqid('', true);
         $pass = crypt($pass, '$6$' . $salt . '$');
 		
@@ -38,13 +42,11 @@ if (isset($_POST['email']) && isset($_POST['user']) && isset($_POST['pass'])) {
 		$stmt->bindParam(":email", $email);
 		$stmt->bindParam(":password", $pass);
 		$stmt->execute();
-		
-		$status = "1";
 	}
 }
 else {
-    $status = "0";
+    $success = "0";
 }
 
-echo $status;
+echo "{'success' : '{$success}', 'emailExists' : '{$emailExists}', 'userExists' : '{$userExists}'}"
 ?>
