@@ -1,10 +1,13 @@
 package org.group13.pocketpolitics.net.server;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -15,8 +18,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.group13.pocketpolitics.model.user.Account;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
-class PostAsyncTask extends AsyncTask<Void, Integer, String> {
+class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	
 	private Account user;
 	private String url;
@@ -29,18 +33,25 @@ class PostAsyncTask extends AsyncTask<Void, Integer, String> {
 	}
 	
 	@Override
-	protected String doInBackground(Void... params) {
+	protected HttpEntity doInBackground(Void... params) {
 		HttpResponse r = post(new ArrayList<NameValuePair>());
-		return r.getEntity().toString();
+		return r.getEntity();
 	}
 	
 	@Override
-	protected void onPostExecute(String msg){
-		act.messageReturned(msg);
-	}
-	
-	protected String url(){
-		return url;
+	protected void onPostExecute(HttpEntity msg){
+		List<String> listr = new ArrayList<String>();
+		try {
+			InputStream instr = msg.getContent();
+			
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		act.messageReturned(listr);
 	}
 	
 	/**<p>Calls the url specified in method url(). Adds user data to the POST.
@@ -54,11 +65,19 @@ class PostAsyncTask extends AsyncTask<Void, Integer, String> {
 		data.add(new BasicNameValuePair("pass",user.getPassword()));
 		
 		HttpClient hclient = new DefaultHttpClient();
-		HttpPost hpost = new HttpPost( url() );
+		HttpPost hpost = new HttpPost( this.url );
 		
 		try {
 			hpost.setEntity(new UrlEncodedFormEntity(data));
+
 			HttpResponse response = hclient.execute(hpost);
+			final int statusCode = response.getStatusLine().getStatusCode();
+
+			if(statusCode != HttpStatus.SC_OK){
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: in .post(): Error "+statusCode+" for URL "+this.url);
+				return null;
+			}
+			
 			return response;
 		} catch (ClientProtocolException e){
 			// TODO Auto-generated catch block

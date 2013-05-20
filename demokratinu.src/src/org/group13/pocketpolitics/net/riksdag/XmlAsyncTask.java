@@ -16,7 +16,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
+abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 
 	protected final ActivityNetInterface<O> act;
 	

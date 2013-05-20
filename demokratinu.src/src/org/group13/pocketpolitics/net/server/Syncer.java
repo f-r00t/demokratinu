@@ -6,9 +6,9 @@ public class Syncer {
 
 	private static Syncer INSTANCE;
 	
-	public static void register(Account newUser){
+	public static void register(ServerInterface activity, Account newUser){
 		checkInstance();
-		PostAsyncTask task = new PostAsyncTask(newUser, ServerUrl.Register);
+		PostAsyncTask task = new PostAsyncTask(activity, newUser, ServerUrl.Register);
 		task.execute();
 	}
 	
