@@ -20,16 +20,23 @@ class PostAsyncTask extends AsyncTask<Void, Integer, String> {
 	
 	private Account user;
 	private String url;
+	private ServerInterface act;
 	
-	PostAsyncTask(Account user, ServerUrl surl){
+	PostAsyncTask(ServerInterface act, Account user, ServerUrl surl){
 		this.user = user;
 		this.url = surl.getUrl();
+		this.act = act;
 	}
 	
 	@Override
 	protected String doInBackground(Void... params) {
 		HttpResponse r = post(new ArrayList<NameValuePair>());
 		return r.getEntity().toString();
+	}
+	
+	@Override
+	protected void onPostExecute(String msg){
+		act.messageReturned(msg);
 	}
 	
 	protected String url(){
