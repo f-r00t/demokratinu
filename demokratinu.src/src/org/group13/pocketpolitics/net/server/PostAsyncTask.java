@@ -21,9 +21,9 @@ class PostAsyncTask extends AsyncTask<Void, Integer, String> {
 	private Account user;
 	private String url;
 	
-	PostAsyncTask(Account user, String url){
-		this.user=user;
-		this.url=url;
+	PostAsyncTask(Account user, ServerUrl surl){
+		this.user = user;
+		this.url = surl.getUrl();
 	}
 	
 	@Override
