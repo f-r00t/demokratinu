@@ -2,6 +2,8 @@
 
 // TODO: Check values for valid emails/usernames/passwords
 
+$status = "1";
+
 if (isset($_POST['email']) && isset($_POST['user']) && isset($_POST['pass'])) {
 
 	require_once("../../www-includes/dbcx.php");
@@ -24,7 +26,7 @@ if (isset($_POST['email']) && isset($_POST['user']) && isset($_POST['pass'])) {
 		}
 	}
 	
-    if ($status != "1") {
+    if ($status != "0") {
 		$salt = uniqid('', true);
         $pass = crypt($pass, '$6$' . $salt . '$');
 		
