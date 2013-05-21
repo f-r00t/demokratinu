@@ -1,7 +1,10 @@
 package org.group13.pocketpolitics.control;
 
+import java.util.List;
+
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
+import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
@@ -18,6 +21,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private TextView titleTextView;
 	private TextView textTextView;
 	private ListView listViewMotions;
+	private List<CommitteeProposal> listComPro;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
 	private Agenda article;
@@ -40,7 +44,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
 		titleTextView.setText(article.getTitle());
-		
+			
 		textTextView = (TextView)findViewById(R.id.activityArticleText);
 		textTextView.setText(article.getSummary());
 	}
@@ -101,6 +105,10 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	@Override
 	public void onSuccess(String result) {
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
+		listComPro =  article.getFors();
+		
+		Log.i("Viking",""+listComPro.size());
+		
 		
 	}
 
