@@ -27,7 +27,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	}
 	
 	public void testGson(){
-		Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+ PostAsyncTask.testGson());
+		//Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+ PostAsyncTask.testGson());
 	}
 	
 	public void testRegister(){

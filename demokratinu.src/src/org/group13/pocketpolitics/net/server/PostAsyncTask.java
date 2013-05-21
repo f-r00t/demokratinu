@@ -24,7 +24,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 
 class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	
