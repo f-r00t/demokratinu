@@ -23,7 +23,7 @@ import org.group13.pocketpolitics.model.user.Account;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.google.gson.JsonArray;
+import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 
 class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
@@ -90,12 +90,12 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	private void respond(String json){
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: in respond() json: "+json);
 		
-		JsonParser jpar = new JsonParser();
+		Gson g = new Gson();
 		
 		switch(this.oper){
 		case Register:
-			//JsonArray results = jpar.parse(json).get
-			act.registrationReturned(false, false, false);
+			RegistrationResult rr = g.fromJson(json, RegistrationResult.class);
+			act.registrationReturned(rr.success, rr.userExists , rr.emailExists);
 			break;
 		case Authenticate:
 			//act.messageReturned(listr);
@@ -138,7 +138,15 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		return null;
 	}
 
-	private class RegistrationResult{
+	public static String testGson(){
+		String ret="";
+		Gson g = new Gson();
+		ret = g.toJson(new RegistrationResult(true, false, false));
+		
+		return ret;
+	}
+	
+	private static class RegistrationResult{
 		private final boolean success;		
 		private final boolean emailExists;
 		private final boolean userExists;
@@ -147,17 +155,6 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			this.success=success;
 			this.emailExists=emailExists;
 			this.userExists=userExists;
-		}
-		public boolean isSuccess() {
-			return success;
-		}
-
-		public boolean isEmailExists() {
-			return emailExists;
-		}
-
-		public boolean isUserExists() {
-			return userExists;
 		}
 
 	}
