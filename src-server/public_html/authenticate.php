@@ -1,6 +1,7 @@
 <?php
 
-$return = "";
+$success = "true";
+$username = "";
 
 if (isset($_POST['email']) && isset($_POST['pass'])) {
 	
@@ -17,18 +18,15 @@ if (isset($_POST['email']) && isset($_POST['pass'])) {
     $dbcollected = $stmt->fetch();
     
     if ($dbcollected['password'] != crypt($pass, $dbcollected['password'])) {
-        $status = "0"; // Wrong email/pass
+        $success = "false"; // Wrong email/pass
     }
     else {
-	    $status = "1\n"; // Success
-	    
-	    $return = '{"username" : "' . $dbcollected['username'] . '"}';
+	    $username = htmlentities($dbcollected['username']);
     }
 }
 else {
-	$status = "0";
+	$success = "false";
 }
 
-echo $status;
-echo $return;
+echo "{'success' : '{$success}', 'username' : '{$username}'}";
 ?>
