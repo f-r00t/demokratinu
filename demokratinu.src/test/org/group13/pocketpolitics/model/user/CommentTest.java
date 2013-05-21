@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.model;
+package org.group13.pocketpolitics.model.user;
 
 import java.util.List;
 
@@ -59,6 +59,7 @@ public class CommentTest extends AndroidTestCase{
 	 * recursive print
 	 * @param head
 	 */
+	@SuppressWarnings("unused")
 	private void print(Comment head){
 		
 		Log.i(this.getClass().getSimpleName(), "Leif: comment au "+head.getAuthor());
