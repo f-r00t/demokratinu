@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
 	private TextView titleTextView;
+	private TextView textTextView;
 	private ListView listViewMotions;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
@@ -37,8 +38,8 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		orderVotings();
 		
-		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
-		titleTextView.setText(article.getTitle());
+		textTextView = (TextView)findViewById(R.id.activityArticleText);
+		textTextView.setText(article.getSummary());
 	}
 	
 	/*
