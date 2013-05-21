@@ -1,6 +1,7 @@
 package org.group13.pocketpolitics.model.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,9 +66,10 @@ public class ArticleGsonTester extends AndroidTestCase{
 			return null;
 		}
 		
-		Comment ret = new Comment();
-		ret.setAuthor("Level "+level);
-		ret.setContent(content);
+		//public Comment(String content, Date date, boolean isHidden, int opinion,
+		//int nbrOfLikes, int nbrOfDislikes, List<Comment> replies, String author) {
+		
+		Comment ret = new Comment(content, null, false, 0, 100, 58, null, "Level "+level);
 		
 		for(int i=0; i<width; i++){
 			Comment sub = recur(level-1, width, "Sibling no "+i);

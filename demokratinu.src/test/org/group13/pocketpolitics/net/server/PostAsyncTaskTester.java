@@ -37,7 +37,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		uname = generate(8);
 		passwd = generate(12);
 		
-		Syncer.register(this, new Account(email, uname, passwd));
+		Account.set(email, uname, passwd);
+		Syncer.register(this);
 		
 		this.finished=false;
 		

@@ -1,7 +1,5 @@
 package org.group13.pocketpolitics.net;
 
-import org.group13.pocketpolitics.net.riksdag.Retriever;
-
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -11,7 +9,7 @@ public class Connected {
 
 	public static boolean isConnected(Context ctx){
 		if(ctx == null){
-			Log.e(Retriever.class.getSimpleName(),"PocketDebug: in Connected: Context null error");
+			Log.e(Connected.class.getSimpleName(),"PocketDebug: in Connected: Context null error");
 			return false;
 		}
 

@@ -6,15 +6,15 @@ public class Syncer {
 
 	private static Syncer INSTANCE;
 	
-	public static void register(ServerInterface activity, Account newUser){
+	public static void register(ServerInterface activity){
 		checkInstance();
-		PostAsyncTask task = new PostAsyncTask(activity, newUser, ServerOperation.Register);
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.Register);
 		task.execute();
 	}
 	
-	public static void authenticate(ServerInterface activity, Account submitted){
+	public static void authenticate(ServerInterface activity){
 		checkInstance();
-		PostAsyncTask task = new PostAsyncTask(activity, submitted, ServerOperation.Authenticate);
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.Authenticate);
 		task.execute();
 	}
 	

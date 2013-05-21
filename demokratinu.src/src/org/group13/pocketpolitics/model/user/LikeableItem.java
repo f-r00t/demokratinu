@@ -1,52 +1,39 @@
 package org.group13.pocketpolitics.model.user;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+abstract class LikeableItem {
 
-
-public abstract class LikeableItem {
-
-	private int opinion;
-	private int nbrOfLikes;
-	private int nbrOfDislikes;
+	private int myOpinion;
+	private int totalLikes;
+	private int totalDislikes;
 	private boolean isHidden;
-	private Date date;
-	private List<Comment> replies;
+	
 
-	public LikeableItem(Date date, boolean isHidden,
-			int opinion, int nbrOfLikes, int nbrOfDislikes, List<Comment> replies) {
-		this.date = date;
+	LikeableItem(boolean isHidden, int myOpinion, int totalLikes, int totalDislikes) {
+		
 		this.isHidden = isHidden;
-		this.opinion = opinion;
-		this.nbrOfLikes = nbrOfLikes;
-		this.nbrOfDislikes = nbrOfDislikes;
-		this.replies = replies;
+		this.myOpinion = myOpinion;
+		this.totalLikes = totalLikes;
+		this.totalDislikes = totalDislikes;
+		
 	}
 	
-	// Temporary cunstructor
-	public LikeableItem() {
-		super();
-		replies=new ArrayList<Comment>();
-	}
-
 	/**
 	 * Sets this item to be liked for the current user (If it was previously liked it will now be neutral)
 	 */
 	public void like() {
-		switch(opinion) {
+		switch(myOpinion) {
 			case -1:
-				nbrOfDislikes--;
-				nbrOfLikes++;
-				opinion = 1;
+				totalDislikes--;
+				totalLikes++;
+				myOpinion = 1;
 				break;
 			case 1:
-				nbrOfLikes--;
-				opinion = 0;
+				totalLikes--;
+				myOpinion = 0;
 				break;
 			default:
-				nbrOfLikes++;
-				opinion = 1;
+				totalLikes++;
+				myOpinion = 1;
 				break;
 		}
 	}
@@ -55,19 +42,19 @@ public abstract class LikeableItem {
 	 * Sets this item to be disliked for the current user (If it was previously disliked it will now be neutral)
 	 */
 	public void dislike() {
-		switch(opinion) {
+		switch(myOpinion) {
 			case -1:
-				nbrOfDislikes--;
-				opinion = 0;
+				totalDislikes--;
+				myOpinion = 0;
 				break;
 			case 1:
-				nbrOfLikes--;
-				nbrOfDislikes++;
-				opinion = -1;
+				totalLikes--;
+				totalDislikes++;
+				myOpinion = -1;
 				break;
 			default:
-				nbrOfDislikes++;
-				opinion = -1;
+				totalDislikes++;
+				myOpinion = -1;
 				break;
 		}
 	}
@@ -88,75 +75,49 @@ public abstract class LikeableItem {
 		return isHidden;
 	}
 	
-	/**
-	 * @param comment The reply to this item
-	 */
-	public void reply(Comment comment) {
-		this.replies.add(comment);
-	}
+	
 	
 	/**
-	 * @return An array of all the replies this item has
+	 * @return The users myOpinion of this item (Like = 1, Dislike = -1, Default = 0)
 	 */
-	public List<Comment> getReplies(){
-	//public Comment[] getReplies() {
-		//return (Comment[]) this.replies.toArray();
-		return replies;
-	}
-	
-	/**
-	 * @return The users opinion of this item (Like = 1, Dislike = -1, Default = 0)
-	 */
-	public int getOpinion() {
-		return opinion;
+	public int getmyOpinion() {
+		return myOpinion;
 	}
 
 	/**
-	 * @param opinion The users opinion of this item (Like = 1, Dislike = -1, Default = 0)
+	 * @param myOpinion The users myOpinion of this item (Like = 1, Dislike = -1, Default = 0)
 	 */
-	public void setOpinion(int opinion) {
-		this.opinion = opinion;
+	public void setmyOpinion(int myOpinion) {
+		this.myOpinion = myOpinion;
 	}
 
 	/**
 	 * @return Total number of likes this item has
 	 */
-	public int getNbrOfLikes() {
-		return nbrOfLikes;
+	public int gettotalLikes() {
+		return totalLikes;
 	}
 
 	/**
-	 * @param nbrOfLikes Total number of likes this item has
+	 * @param totalLikes Total number of likes this item has
 	 */
-	public void setNbrOfLikes(int nbrOfLikes) {
-		this.nbrOfLikes = nbrOfLikes;
+	public void settotalLikes(int totalLikes) {
+		this.totalLikes = totalLikes;
 	}
 
 	/**
 	 * @return Total number of dislikes this item has
 	 */
-	public int getNbrOfDislikes() {
-		return nbrOfDislikes;
+	public int gettotalDislikes() {
+		return totalDislikes;
 	}
 
 	/**
-	 * @param nbrOfDislikes Total number of dislikes this item has
+	 * @param totalDislikes Total number of dislikes this item has
 	 */
-	public void setNbrOfDislikes(int nbrOfDislikes) {
-		this.nbrOfDislikes = nbrOfDislikes;
+	public void settotalDislikes(int totalDislikes) {
+		this.totalDislikes = totalDislikes;
 	}
 
-	/**
-	 * @return The date this item was first created
-	 */
-	public Date getDate() {
-		return date;
-	}
-
-	/**
-	 * @param date The date this item was first created
-	 */
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
 }
