@@ -1,6 +1,6 @@
 package org.group13.pocketpolitics.model.user;
 
-public abstract class LikeableItem {
+abstract class LikeableItem {
 
 	private int myOpinion;
 	private int totalLikes;
@@ -8,7 +8,7 @@ public abstract class LikeableItem {
 	private boolean isHidden;
 	
 
-	public LikeableItem(boolean isHidden, int myOpinion, int totalLikes, int totalDislikes) {
+	LikeableItem(boolean isHidden, int myOpinion, int totalLikes, int totalDislikes) {
 		
 		this.isHidden = isHidden;
 		this.myOpinion = myOpinion;
