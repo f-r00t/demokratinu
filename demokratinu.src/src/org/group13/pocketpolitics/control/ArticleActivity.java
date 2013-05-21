@@ -38,7 +38,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		orderVotings();
 		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
-		titleTextView.setText("Bazinga!");
+		titleTextView.setText(article.getTitle());
 	}
 	
 	/*
