@@ -54,10 +54,10 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// Code goes here
-				Toast.makeText(getApplicationContext(),
+				/*Toast.makeText(getApplicationContext(),
 						"Click ListItem Number " + position, Toast.LENGTH_LONG)
 						.show();
-
+				*/
 				Intent intent = new Intent(getApplicationContext(), 
 						ArticleActivity.class).putExtra(ARTICLE_NUM_SENT, position);
 				//TODO 
