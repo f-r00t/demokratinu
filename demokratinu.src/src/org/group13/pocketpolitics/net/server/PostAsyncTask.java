@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -69,16 +70,26 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 				}
 			}
 		}
-		respond(listr);
+		
+		if(listr.size()>1){
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onPostExecute(): retrieved stringlist has "+listr.size()+" lines.");
+			ListIterator<String> iter = listr.listIterator();
+			while(iter.hasNext()){
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: "+iter.next());
+			}
+		}
+		respond(listr.get(0));
 	}
 	
-	private void respond(List<String> listr){
+	private void respond(String json){
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: in respond() json: "+json);
+		
 		switch(this.oper){
 		case Register:
-			act.messageReturned(listr);
+			act.registrationReturned(false, false, false);
 			break;
 		case Authenticate:
-			act.messageReturned(listr);
+			//act.messageReturned(listr);
 			break;
 		}
 	}
