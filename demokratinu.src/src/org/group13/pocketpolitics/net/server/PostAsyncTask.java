@@ -71,14 +71,17 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			}
 		}
 		
-		if(listr.size()>1){
+		if(!"".equals(listr.get(0).trim())){
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onPostExecute(): ignored first line: "+listr.get(0));
+		}
+		if(listr.size()>2){
 			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onPostExecute(): retrieved stringlist has "+listr.size()+" lines.");
 			ListIterator<String> iter = listr.listIterator();
 			while(iter.hasNext()){
 				Log.i(this.getClass().getSimpleName(), "PocketDebug: "+iter.next());
 			}
 		}
-		respond(listr.get(0));
+		respond(listr.get(1));
 	}
 	
 	private void respond(String json){

@@ -20,7 +20,14 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	private String uname;
 	private String passwd;
 	
+	private int testsOnThisObject;
+	
+	public PostAsyncTaskTester(){
+		testsOnThisObject=0;
+	}
+	
 	public void testRegister(){
+		testsOnThisObject++;
 		
 		email = generate(5)+"@chalmers.se";
 		uname = generate(8);
@@ -31,7 +38,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		this.finished=false;
 		
 		try {
-			while(!finished){
+			while(!finished && testsOnThisObject<2){
 				Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread waited another 500 ms");
 				Thread.sleep(500);
 			}
@@ -41,6 +48,9 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 			e.printStackTrace();
 		}
 		
+		if(this.testsOnThisObject>1){
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: several tests runnning on this object simulatneously! "+this.testsOnThisObject+" Test aborted.");
+		}
 	}
 	
 	@Override
@@ -76,7 +86,6 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		
 	}
 	
-
 	private String generate(int W){
 		String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
 		Random r = new Random();
