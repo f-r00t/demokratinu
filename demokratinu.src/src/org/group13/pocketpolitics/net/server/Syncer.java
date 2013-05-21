@@ -12,12 +12,21 @@ public class Syncer {
 		task.execute();
 	}
 	
+	public static void authenticate(ServerInterface activity, Account submitted){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, submitted, ServerUrl.Authenticate);
+		task.execute();
+	}
+	
 	
 	////////////////////////////////////////////
 	private Syncer(){
 		
 	}
 	
+	/**
+	 * Unessecary? Doesn't need to be singleton, only static...
+	 */
 	private static void checkInstance(){
 		if(INSTANCE==null){
 			INSTANCE=new Syncer();
