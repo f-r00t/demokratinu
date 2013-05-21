@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.net.data;
+package org.group13.pocketpolitics.net.riksdag.data;
 
 import org.group13.pocketpolitics.model.riksdag.Committee;
 

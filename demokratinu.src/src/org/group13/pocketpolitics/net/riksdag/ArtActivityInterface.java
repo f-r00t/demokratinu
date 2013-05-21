@@ -3,7 +3,7 @@ package org.group13.pocketpolitics.net.riksdag;
 import java.util.List;
 
 import org.group13.pocketpolitics.model.riksdag.Agenda;
-import org.group13.pocketpolitics.net.data.QueryResult;
+import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 
 /**
  * @deprecated

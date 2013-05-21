@@ -4,9 +4,9 @@ import java.util.ListIterator;
 
 import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Committee;
-import org.group13.pocketpolitics.net.data.QueryResult;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
+import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 
 import android.test.AndroidTestCase;
 import android.util.Log;

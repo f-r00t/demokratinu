@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Committee;
-import org.group13.pocketpolitics.net.data.Filter;
-import org.group13.pocketpolitics.net.data.QueryParam;
-import org.group13.pocketpolitics.net.data.QueryResult;
+import org.group13.pocketpolitics.net.riksdag.data.Filter;
+import org.group13.pocketpolitics.net.riksdag.data.QueryParam;
+import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 
 import android.util.Log;
 
