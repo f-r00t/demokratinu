@@ -10,13 +10,13 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 
-public class CommentTest extends AndroidTestCase{
+public class ArticleGsonTester extends AndroidTestCase{
 	
-	public CommentTest(){
+	public ArticleGsonTester(){
 		super();
 	}
 	
-	public void atestArticleBuilder(){
+	public void testArticleDataGson(){
 		
 		List<Comment> listc = new ArrayList<Comment>();
 		
@@ -35,11 +35,11 @@ public class CommentTest extends AndroidTestCase{
 		//printArticleData(d);
 		
 		Gson g = new Gson();
-		String json = g.toJson(d.getReplies().get(0));
+		String json = g.toJson(d);
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: Gson from ArticleData: "+json);
 	}
 	
-	public void testCommentBuilder(){
+	public void atestCommentBuilder(){
 		int level = 2;
 		int width = 3;
 		
