@@ -8,13 +8,13 @@ public class Syncer {
 	
 	public static void register(ServerInterface activity, Account newUser){
 		checkInstance();
-		PostAsyncTask task = new PostAsyncTask(activity, newUser, ServerUrl.Register);
+		PostAsyncTask task = new PostAsyncTask(activity, newUser, ServerOperation.Register);
 		task.execute();
 	}
 	
 	public static void authenticate(ServerInterface activity, Account submitted){
 		checkInstance();
-		PostAsyncTask task = new PostAsyncTask(activity, submitted, ServerUrl.Authenticate);
+		PostAsyncTask task = new PostAsyncTask(activity, submitted, ServerOperation.Authenticate);
 		task.execute();
 	}
 	

@@ -24,13 +24,13 @@ import android.util.Log;
 
 class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	
-	private Account user;
-	private String url;
-	private ServerInterface act;
+	private final Account user;
+	private final ServerOperation oper;
+	private final ServerInterface act;
 	
-	PostAsyncTask(ServerInterface act, Account user, ServerUrl surl){
+	PostAsyncTask(ServerInterface act, Account user, ServerOperation surl){
 		this.user = user;
-		this.url = surl.getUrl();
+		this.oper = surl;
 		this.act = act;
 	}
 	
@@ -69,7 +69,18 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 				}
 			}
 		}
-		act.messageReturned(listr);
+		respond(listr);
+	}
+	
+	private void respond(List<String> listr){
+		switch(this.oper){
+		case Register:
+			act.messageReturned(listr);
+			break;
+		case Authenticate:
+			act.messageReturned(listr);
+			break;
+		}
 	}
 	
 	/**<p>Calls the url specified in method url(). Adds user data to the POST.
@@ -83,7 +94,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		data.add(new BasicNameValuePair("pass",user.getPassword()));
 		
 		HttpClient hclient = new DefaultHttpClient();
-		HttpPost hpost = new HttpPost( this.url );
+		HttpPost hpost = new HttpPost( this.oper.getUrl() );
 		
 		try {
 			hpost.setEntity(new UrlEncodedFormEntity(data));
@@ -92,7 +103,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			final int statusCode = response.getStatusLine().getStatusCode();
 
 			if(statusCode != HttpStatus.SC_OK){
-				Log.w(this.getClass().getSimpleName(), "PocketDebug: in .post(): Error "+statusCode+" for URL "+this.url);
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: in .post(): Error "+statusCode+" for URL "+this.oper.getUrl());
 				return null;
 			}
 			
