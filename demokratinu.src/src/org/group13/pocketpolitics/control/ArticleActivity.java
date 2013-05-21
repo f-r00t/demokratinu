@@ -38,6 +38,9 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		orderVotings();
 		
+		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
+		titleTextView.setText(article.getTitle());
+		
 		textTextView = (TextView)findViewById(R.id.activityArticleText);
 		textTextView.setText(article.getSummary());
 	}
