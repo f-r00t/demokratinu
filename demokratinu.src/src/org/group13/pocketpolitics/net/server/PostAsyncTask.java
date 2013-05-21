@@ -23,6 +23,9 @@ import org.group13.pocketpolitics.model.user.Account;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+
 class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	
 	private final Account user;
@@ -87,8 +90,11 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	private void respond(String json){
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: in respond() json: "+json);
 		
+		JsonParser jpar = new JsonParser();
+		
 		switch(this.oper){
 		case Register:
+			//JsonArray results = jpar.parse(json).get
 			act.registrationReturned(false, false, false);
 			break;
 		case Authenticate:
@@ -132,6 +138,28 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		return null;
 	}
 
-	
+	private class RegistrationResult{
+		private final boolean success;		
+		private final boolean emailExists;
+		private final boolean userExists;
+		
+		RegistrationResult(boolean success, boolean emailExists, boolean userExists){
+			this.success=success;
+			this.emailExists=emailExists;
+			this.userExists=userExists;
+		}
+		public boolean isSuccess() {
+			return success;
+		}
+
+		public boolean isEmailExists() {
+			return emailExists;
+		}
+
+		public boolean isUserExists() {
+			return userExists;
+		}
+
+	}
 
 }
