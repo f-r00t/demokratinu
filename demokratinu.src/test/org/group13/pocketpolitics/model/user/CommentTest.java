@@ -1,8 +1,9 @@
 package org.group13.pocketpolitics.model.user;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-
-import org.group13.pocketpolitics.model.user.Comment;
+import java.util.Map;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -15,13 +16,27 @@ public class CommentTest extends AndroidTestCase{
 		super();
 	}
 	
-	public void testArticleBuilder(){
+	public void atestArticleBuilder(){
 		
-		Article a = new Article(null, null);
+		List<Comment> listc = new ArrayList<Comment>();
 		
-		for(int i=1; i<8; i++){
-			
+		for(int i=0; i<5; i++){
+			listc.add(recur(i%2+1, 2,"top "+i));
 		}
+		ArticleData d = new ArticleData(listc);
+		Map<String, UserOpinion> m = new HashMap<String, UserOpinion>();
+		
+		for(int i=0; i<5; i++){
+			m.put("H001UbU5#"+(i+1), new UserOpinion(337-2*i, 152+i, 2*(i%2)-1));
+		}
+		
+		d.setCpmap(m);
+		
+		//printArticleData(d);
+		
+		Gson g = new Gson();
+		String json = g.toJson(d.getReplies().get(0));
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: Gson from ArticleData: "+json);
 	}
 	
 	public void testCommentBuilder(){
@@ -31,7 +46,7 @@ public class CommentTest extends AndroidTestCase{
 		Comment tree = recur(level, width, "Top of the Tree!");
 		
 		//print(tree);
-		Log.w(this.getClass().getSimpleName(), "Leif: gson: "+gson(tree));
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+gson(tree));
 	}
 	
 	private String gson(Comment tree){
@@ -68,16 +83,23 @@ public class CommentTest extends AndroidTestCase{
 	 * recursive print
 	 * @param head
 	 */
-	@SuppressWarnings("unused")
 	private void print(Comment head){
 		
-		Log.i(this.getClass().getSimpleName(), "Leif: comment au "+head.getAuthor());
-		Log.i(this.getClass().getSimpleName(), "Leif: comment cont "+head.getContent());
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: comment author "+head.getAuthor());
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: comment content "+head.getContent());
 		
 		List<Comment> children = head.getReplies();
 		for(Comment c : children){
 			print(c);
 		}
+	}
+	
+	private void printArticleData(ArticleData d){
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: ArticleData");
+		for(Comment c : d.getReplies()){
+			print(c);
+		}
+		
 	}
 
 }

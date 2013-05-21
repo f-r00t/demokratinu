@@ -11,13 +11,11 @@ public abstract class LikeableItem {
 	private int nbrOfLikes;
 	private int nbrOfDislikes;
 	private boolean isHidden;
-	private String content;
 	private Date date;
 	private List<Comment> replies;
 
 	public LikeableItem(Date date, boolean isHidden,
 			int opinion, int nbrOfLikes, int nbrOfDislikes, List<Comment> replies) {
-		this.content = content;
 		this.date = date;
 		this.isHidden = isHidden;
 		this.opinion = opinion;
@@ -146,20 +144,6 @@ public abstract class LikeableItem {
 	 */
 	public void setNbrOfDislikes(int nbrOfDislikes) {
 		this.nbrOfDislikes = nbrOfDislikes;
-	}
-
-	/**
-	 * @return The content text of this item
-	 */
-	public String getContent() {
-		return content;
-	}
-
-	/**
-	 * @param content The content text of this item
-	 */
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 	/**
