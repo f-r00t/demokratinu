@@ -15,6 +15,15 @@ public class CommentTest extends AndroidTestCase{
 		super();
 	}
 	
+	public void testArticleBuilder(){
+		
+		Article a = new Article(null, null);
+		
+		for(int i=1; i<8; i++){
+			
+		}
+	}
+	
 	public void testCommentBuilder(){
 		int level = 2;
 		int width = 3;

@@ -1,17 +1,14 @@
 package org.group13.pocketpolitics.model.user;
 
-import java.util.Date;
-import java.util.List;
-
 import org.group13.pocketpolitics.model.riksdag.Agenda;
 
 public class Article {
 
 	private Agenda agenda;
-	private ArticleReplies areplies;
+	private ArticleData data;
 	
-	Article(Agenda agenda, List<Comment> replies){
-		this.areplies = new ArticleReplies(replies);
+	Article(Agenda agenda, ArticleData data){
+		this.data = data;
 		this.agenda = agenda;
 	}
 
@@ -22,17 +19,14 @@ public class Article {
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
 	}
-	
-	public List<Comment> getReplies(){
-		return this.areplies.replies;
+
+	public ArticleData getData() {
+		return data;
+	}
+
+	public void setData(ArticleData data) {
+		this.data = data;
 	}
 	
-	private static class ArticleReplies{
-		private List<Comment> replies;
-		//private int opinion;
-		
-		ArticleReplies(List<Comment> replies){
-			this.replies = replies;
-		}
-	}
+	
 }
