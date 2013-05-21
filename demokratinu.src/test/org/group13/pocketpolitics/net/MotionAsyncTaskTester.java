@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.test.net;
+package org.group13.pocketpolitics.net;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.test.net;
+package org.group13.pocketpolitics.net.server;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +24,10 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	public PostAsyncTaskTester(){
 		testsOnThisObject=0;
+	}
+	
+	public void testGson(){
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+ PostAsyncTask.testGson());
 	}
 	
 	public void testRegister(){

@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.test.model;
+package org.group13.pocketpolitics.model;
 
 import java.util.List;
 

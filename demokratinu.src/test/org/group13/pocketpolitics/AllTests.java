@@ -1,4 +1,4 @@
-package org.group13.pocketpolitics.test;
+package org.group13.pocketpolitics;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
