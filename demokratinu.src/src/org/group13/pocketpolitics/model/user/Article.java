@@ -5,14 +5,13 @@ import java.util.List;
 
 import org.group13.pocketpolitics.model.riksdag.Agenda;
 
-public class Article extends LikeableItem {
+public class Article {
 
 	private Agenda agenda;
+	private ArticleReplies areplies;
 	
-	Article(Agenda agenda, Date date, boolean isHidden, int opinion,
-			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies){
-		super(date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
-		
+	Article(Agenda agenda, List<Comment> replies){
+		this.areplies = new ArticleReplies(replies);
 		this.agenda = agenda;
 	}
 
@@ -22,5 +21,18 @@ public class Article extends LikeableItem {
 
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
+	}
+	
+	public List<Comment> getReplies(){
+		return this.areplies.replies;
+	}
+	
+	private static class ArticleReplies{
+		private List<Comment> replies;
+		//private int opinion;
+		
+		ArticleReplies(List<Comment> replies){
+			this.replies = replies;
+		}
 	}
 }
