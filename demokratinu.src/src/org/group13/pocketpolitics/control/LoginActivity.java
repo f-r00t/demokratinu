@@ -1,22 +1,17 @@
 package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.R.id;
-import org.group13.pocketpolitics.R.layout;
-import org.group13.pocketpolitics.R.menu;
 import org.group13.pocketpolitics.model.user.Account;
+import org.group13.pocketpolitics.model.user.ArticleData;
+import org.group13.pocketpolitics.net.server.ServerInterface;
+import org.group13.pocketpolitics.net.server.ServerOperation;
+import org.group13.pocketpolitics.net.server.Syncer;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -30,7 +25,7 @@ import android.widget.TextView;
  * Activity which displays a login screen to the user, offering registration as
  * well.
  */
-public class LoginActivity extends Activity {
+public class LoginActivity extends Activity implements ServerInterface{
 
 	// Values for email and password at the time of the login attempt.
 	private String email;
@@ -121,7 +116,7 @@ public class LoginActivity extends Activity {
 	 * If there are form errors (invalid email, missing fields, etc.), the
 	 * errors are presented and no actual login attempt is made.
 	 */
-	public void attemptLogin() {
+	private void attemptLogin() {
 
 		// Reset errors.
 		emailView.setError(null);
@@ -161,10 +156,26 @@ public class LoginActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			//authenticate();
-			
+			authenticate();
+		}
+	}
+	
+	/**
+	 * Order authentication from the server in order to login.
+	 */
+	private void authenticate(){
+		Account.set(email, null, password);
+		Syncer.authenticate(this);
+	}
+	
+
+	@Override
+	public void authenticateReturned(boolean succeded, String username) {
+		if(succeded){
+			Account.set(email, username, password);
+
 			stayLoggedInBox = (CheckBox) this.findViewById(R.id.stay_logged_in_checkbox);
-			
+
 			if (stayLoggedInBox.isChecked()) {
 				editor.putBoolean("org.group13.pocketpolitics.stayloggedin", true);
 				editor.putString("org.group13.pocketpolitics.email", email);
@@ -174,6 +185,38 @@ public class LoginActivity extends Activity {
 			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			startActivity(intent);
 			finish();
+		} else {
+			// TODO Toaster? Login failed: wrong email/password
 		}
 	}
+	
+	@Override
+	public void operationFailed(ServerOperation oper) {
+		// TODO Login failed: network error, try again please.
+		
+	}
+
+	@Override
+	public void registrationReturned(boolean succeded, boolean unameExists,
+			boolean emailExists) {
+		// ignore
+	}
+
+	@Override
+	public void postOpinionReturned(boolean succeded) {
+		// ignore
+		
+	}
+
+	@Override
+	public void postCommentReturned(boolean succeded) {
+		// ignore
+		
+	}
+
+	@Override
+	public void getArticleDataReturned(ArticleData data) {
+		// ignore
+	}
+
 }

@@ -113,7 +113,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	}
 	
 	@Override
-	public void authenticateReturned(boolean succeded) {
+	public void authenticateReturned(boolean succeded, String username) {
 		// TODO Auto-generated method stub
 		
 	}

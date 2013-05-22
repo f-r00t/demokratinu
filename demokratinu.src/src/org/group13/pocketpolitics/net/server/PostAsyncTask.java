@@ -87,7 +87,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			act.registrationReturned(rr.success, rr.userExists , rr.emailExists);
 			break;
 		case Authenticate:
-			act.authenticateReturned(rr.success);
+			act.authenticateReturned(rr.success, rr.username);
 			if(rr.success){
 				//Account.set(email, username, password)
 				// TODO set username
