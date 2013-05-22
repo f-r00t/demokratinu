@@ -1,10 +1,9 @@
 package org.group13.pocketpolitics.view;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Agenda;
-import org.group13.pocketpolitics.model.riksdag.Motion;
+import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,9 +16,9 @@ import android.widget.TextView;
 public class CommitteeProposalListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
-	ArrayList<Motion> items;
+	List<CommitteeProposal> items;
 
-	public CommitteeProposalListAdapter(Activity context, ArrayList<Motion> items) {
+	public CommitteeProposalListAdapter(Activity context, List<CommitteeProposal> items) {
 		super();
 
 		this.items = items;
@@ -46,17 +45,20 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
 
-		Motion motion = items.get(position);
+		CommitteeProposal committeProposal = items.get(position);
 		View vi = convertView;
-/*
+
 		if (convertView == null) {
 			vi = inflater.inflate(R.layout.committee_proposal_list_item, null);
 		}
 
 		// Sets the title text
-		TextView motionTitle = (TextView) vi.findViewById(R.id.committeProposalListItemTitle);
-		motionTitle.setText(motion.getTitle());
-		*/
+		TextView committeProposalTitle = (TextView) vi.findViewById(R.id.committeeProposalListItemTitle);
+		committeProposalTitle.setText(committeProposal.getTitle());
+
+		TextView committeProposalText = (TextView) vi.findViewById(R.id.committeeProposalListItemText);
+		committeProposalText.setText(committeProposal.getForslag());
+
 		return vi;
 	}
 
