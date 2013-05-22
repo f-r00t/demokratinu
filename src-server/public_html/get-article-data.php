@@ -1,7 +1,7 @@
 <?php
 
 $success = "true";
-$agenda = "";
+$article = "";
 $cp = array();
 $replies = array();
 $replyStrings = array();
@@ -10,20 +10,20 @@ function addReply($parent, $child) {
     $pattern = '/\'replies\'\s\:\s\[(.?)\]/';
     preg_match($pattern, $parent, $match);
     if ($match[1] != "") {
-        return $parent = preg_replace($pattern, ("'replies' : [{$match[1]}, {$child}]"), $parent);
+        return $parent = preg_replace($pattern, ("'replies' : [{$child}, {$match[1]}]"), $parent);
     }
-    return $parent = preg_replace($pattern, ("'replies' : [{$match[1]}" . $child . "]"), $parent);
+    return $parent = preg_replace($pattern, ("'replies' : [{$child}]"), $parent);
     
 }
 
-if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['agenda'])) {
+if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['article'])) {
     
     require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
           
     $email = trim($_POST['email']);
     $pass = $_POST['pass'];
-    $agenda = trim($_POST['agenda']);
+    $article = trim($_POST['article']);
             
     $sql = "SELECT password FROM users WHERE email = :email";
     $stmt = $dbh->prepare($sql);
@@ -35,10 +35,10 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['agenda'])) 
         $success = "false"; // Wrong email/pass
     }
     else {
-    $agenda = "{$agenda}_%";
-        $sql = "SELECT * FROM comments WHERE id LIKE :agenda";
+    $article = "{$article}_%";
+        $sql = "SELECT * FROM comments WHERE id LIKE :article";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(":agenda", $agenda);
+        $stmt->bindParam(":article", $article);
         $stmt->execute();
         
         while ($dbcollected = $stmt->fetch()) {
@@ -51,9 +51,9 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['agenda'])) 
         }
         
     
-        $sql = "SELECT * FROM votes WHERE issue LIKE :agenda";
+        $sql = "SELECT * FROM votes WHERE issue LIKE :article";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(":agenda", $agenda);
+        $stmt->bindParam(":article", $article);
         $stmt->execute();
         
         while($dbcollected = $stmt->fetch()) {
@@ -123,7 +123,7 @@ if ($success == "true") {
     $numberOfItems = count($replies);
     $i = 0;
     
-    $firstPattern = '/^' . trim($_POST['agenda']) . '\/\d?$/';
+    $firstPattern = '/^' . trim($_POST['article']) . '\/\d?$/';
     $lastPattern = '/(\/\d?$)/';
     
     foreach ($replies as $key => $value) {
