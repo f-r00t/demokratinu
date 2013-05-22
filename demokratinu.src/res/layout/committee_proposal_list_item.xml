@@ -13,17 +13,21 @@
                     android:id="@+id/committeeProposalListItemTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:paddingLeft="4dp"
-                    android:paddingRight="4dp"
+                    android:layout_margin="15dp"
                     android:text="@string/committeProposalListItemTitleText"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textColor="#242424"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/committeeProposalListItemText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/committeeProposalListItemText" />
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:text="@string/committeeProposalListItemText"
+                    android:textColor="#242424" />
 
             </LinearLayout>
 
