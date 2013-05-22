@@ -1,7 +1,5 @@
 package org.group13.pocketpolitics.net.server;
 
-import org.group13.pocketpolitics.model.user.Account;
-
 public class Syncer {
 
 	private static Syncer INSTANCE;
@@ -18,6 +16,23 @@ public class Syncer {
 		task.execute();
 	}
 	
+	public static void postOpinion(ServerInterface activity, String issue, int opinion){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.PostOpinion, issue, ""+opinion);
+		task.execute();
+	}
+	
+	public static void postComment(ServerInterface activity, String parentId, String content){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.PostComment, parentId, content);
+		task.execute();
+	}
+	
+	public static void getArticleData(ServerInterface activity, String articleId){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.GetArticleData, articleId);
+		task.execute();
+	}
 	
 	////////////////////////////////////////////
 	private Syncer(){

@@ -50,7 +50,7 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 		//Set text
 		TextView committeProposalText = (TextView) vi.findViewById(R.id.committeeProposalListItemText);
 		committeProposalText.setText(committeProposal.getForslag());
-		
+
 		return vi;
 	}	
 	

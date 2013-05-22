@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
+import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
@@ -13,9 +14,15 @@ import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -31,22 +38,23 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	private List<Agenda> articleList = new ArrayList<Agenda>();
 
 	@Override
-	protected void onResume(){
+	protected void onResume() {
 		super.onResume();
+		Log.e("testing", "1");
 		if(ArticleMemoryController.articles().isEmpty()){
 			orderNextPage();
 			setAdapter();
+			Log.e("testing", "2");
 		}
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
+		Log.e("testing", "3");
 		super.onCreate(savedInstanceState);
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_front_page);
-
+		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
 
@@ -67,6 +75,40 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		});
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.menu_logout:
+	            logout();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	public void logout() {
+		SharedPreferences prefs = this.getSharedPreferences("org.group13.pocketpolitics", 0);
+		Editor editor = prefs.edit();
+		editor.putBoolean("org.group13.pocketpolitics.stayloggedin", false);
+		editor.putString("org.group13.pocketpolitics.email", "");
+		editor.putString("org.group13.pocketpolitics.password", "");
+		editor.apply();
+		
+		ArticleMemoryController.flush();
+		
+		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+		startActivity(intent);
+		finish();
+	}
+	
 	private void orderNextPage(){
 		if(Connected.isConnected(this)){
 			QueryParam qpar = ArticleMemoryController.nextQuery();

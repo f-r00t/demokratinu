@@ -9,9 +9,9 @@ public class Account {
 	private String password;
 	
 	private Account(String email, String username, String password) {
-		INSTANCE.email = email;
-		INSTANCE.username = username;
-		INSTANCE.password = password;
+		this.email = email;
+		this.username = username;
+		this.password = password;
 	}
 	
 	private static void checkInstance(){

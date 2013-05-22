@@ -4,4 +4,6 @@
     <string name="label_activity_registration">RegistrationActivity</string>
     <string name="label_activity_article">Article</string>
     <string name="label_activity_motion">Motion</string>
+    
+    <string name="menu_logout">Logga ut</string>
 </resources>

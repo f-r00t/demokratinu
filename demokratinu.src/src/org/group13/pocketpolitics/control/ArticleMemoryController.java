@@ -88,6 +88,10 @@ public class ArticleMemoryController {
 		return null;
 	}
 	
+	public static void flush(){
+		INSTANCE=null;
+	}
+	
 	///////////////////////////////////////////////////////////
 	
 
