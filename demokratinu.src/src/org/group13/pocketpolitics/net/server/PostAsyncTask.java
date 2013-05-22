@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -88,10 +87,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			break;
 		case Authenticate:
 			act.authenticateReturned(rr.success, rr.username);
-			if(rr.success){
-				//Account.set(email, username, password)
-				// TODO set username
-			}
+			// Account is updated in LoginActivity
 			break;
 		case GetArticleData:
 			act.getArticleDataReturned(g.fromJson(json, ArticleData.class));
