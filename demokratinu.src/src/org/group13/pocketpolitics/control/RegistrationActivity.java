@@ -1,21 +1,22 @@
 package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.R.layout;
-import org.group13.pocketpolitics.R.menu;
+import org.group13.pocketpolitics.model.user.Account;
+import org.group13.pocketpolitics.model.user.ArticleData;
+import org.group13.pocketpolitics.net.server.ServerInterface;
+import org.group13.pocketpolitics.net.server.Syncer;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.EditText;
-import android.support.v4.app.NavUtils;
-import android.text.TextUtils;
 
-public class RegistrationActivity extends Activity {
+public class RegistrationActivity extends Activity implements ServerInterface{
 
 	// Registration values
 	private String username;
@@ -131,13 +132,59 @@ public class RegistrationActivity extends Activity {
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			// if (Retriever.register()) {
-				Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
-				startActivity(intent);
-				finish();
-			//}
+			Account.set(email, username, password);
+			Syncer.register(this);
 		}
 
 	}
+
+	
+
+	@Override
+	public void registrationReturned(boolean succeded, boolean unameExists,
+			boolean emailExists) {
+		if(succeded){
+			
+			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+			startActivity(intent);
+			finish();
+		} else {
+			if(unameExists){
+				
+			}
+			if(emailExists){
+				
+			}
+			// TODO grafisk feedback på registrering
+		}		
+	}
+	
+	@Override
+	public void operationFailed(String oper) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void authenticateReturned(boolean succeded, String username) {
+		// ignore
+	}
+	
+	@Override
+	public void postOpinionReturned(boolean succeded) {
+		// ignore
+	}
+
+	@Override
+	public void postCommentReturned(boolean succeded) {
+		// ignore
+	}
+
+	@Override
+	public void getArticleDataReturned(ArticleData data) {
+		// ignore
+	}
+
+	
 
 }
