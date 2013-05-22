@@ -1,6 +1,5 @@
 package org.group13.pocketpolitics.net.server;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
