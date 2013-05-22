@@ -36,17 +36,17 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	@Override
 	protected void onResume() {
 		super.onResume();
-		Log.e("testing", "1");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: testing 1");
 		if(ArticleMemoryController.articles().isEmpty()){
 			orderNextPage();
 			setAdapter();
-			Log.e("testing", "2");
+			Log.i(this.getClass().getSimpleName(), "PocketDebug: testing 2");
 		}
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.e("testing", "3");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: testing 3");
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_front_page);

@@ -191,7 +191,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		return null;
 	}
 
-	public static String testGson(){
+	static String testGson(){
 		String ret="";
 		Gson g = new Gson();
 		ret = g.toJson(new PostResult(true, false, false));
