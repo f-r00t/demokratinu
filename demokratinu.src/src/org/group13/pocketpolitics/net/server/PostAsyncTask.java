@@ -48,7 +48,30 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	
 	@Override
 	protected HttpEntity doInBackground(Void... params) {
-		HttpResponse r = post(new ArrayList<NameValuePair>());
+		List<NameValuePair> postData =new ArrayList<NameValuePair>();
+		
+		switch(this.oper){
+		case Authenticate:
+			break;
+		case GetArticleData:
+			postData.add(new BasicNameValuePair("article", this.postId));
+			break;
+		case PostComment:
+			postData.add(new BasicNameValuePair("parentId", this.postId));
+			postData.add(new BasicNameValuePair("content", this.extra));
+			break;
+		case PostOpinion:
+			postData.add(new BasicNameValuePair("issue", this.postId));
+			postData.add(new BasicNameValuePair("opinion", this.extra));
+			break;
+		case Register:
+			break;
+		default:
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in doInBckg(): Operation not recognized: "+this.oper.name());
+			break;
+		}
+		
+		HttpResponse r = post(postData);
 		return r.getEntity();
 	}
 	
@@ -115,6 +138,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		case PostOpinion:
 			break;
 		default:
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in respond(): Operation not recognized: "+this.oper.name());
 			break;
 		}
 	}
