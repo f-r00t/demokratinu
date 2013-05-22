@@ -122,10 +122,10 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: in respond() json: "+json);
 		
 		Gson g = new Gson();
+		PostResult rr = g.fromJson(json, PostResult.class);
 		
 		switch(this.oper){
 		case Register:
-			RegistrationResult rr = g.fromJson(json, RegistrationResult.class);
 			act.registrationReturned(rr.success, rr.userExists , rr.emailExists);
 			break;
 		case Authenticate:
@@ -136,6 +136,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		case PostComment:
 			break;
 		case PostOpinion:
+			
 			break;
 		default:
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: in respond(): Operation not recognized: "+this.oper.name());
@@ -181,20 +182,22 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	public static String testGson(){
 		String ret="";
 		Gson g = new Gson();
-		ret = g.toJson(new RegistrationResult(true, false, false));
+		ret = g.toJson(new PostResult(true, false, false));
 		
 		return ret;
 	}
 	
-	private static class RegistrationResult{
+	private static class PostResult{
 		private final boolean success;		
 		private final boolean emailExists;
 		private final boolean userExists;
+		private final String username;
 		
-		RegistrationResult(boolean success, boolean emailExists, boolean userExists){
+		PostResult(boolean success, boolean emailExists, boolean userExists){
 			this.success=success;
 			this.emailExists=emailExists;
 			this.userExists=userExists;
+			this.username=null;
 		}
 
 	}
