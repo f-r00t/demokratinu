@@ -1,18 +1,14 @@
 package org.group13.pocketpolitics.model.user;
 
-import java.util.Date;
-import java.util.List;
-
 import org.group13.pocketpolitics.model.riksdag.Agenda;
 
-public class Article extends LikeableItem {
+public class Article {
 
 	private Agenda agenda;
+	private ArticleData data;
 	
-	Article(Agenda agenda, Date date, boolean isHidden, int opinion,
-			int nbrOfLikes, int nbrOfDislikes, List<Comment> replies){
-		super(date, isHidden, opinion, nbrOfLikes, nbrOfDislikes, replies);
-		
+	Article(Agenda agenda, ArticleData data){
+		this.data = data;
 		this.agenda = agenda;
 	}
 
@@ -23,4 +19,14 @@ public class Article extends LikeableItem {
 	public void setAgenda(Agenda agenda) {
 		this.agenda = agenda;
 	}
+
+	public ArticleData getData() {
+		return data;
+	}
+
+	public void setData(ArticleData data) {
+		this.data = data;
+	}
+	
+	
 }

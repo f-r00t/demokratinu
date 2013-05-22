@@ -27,12 +27,10 @@ import com.google.gson.Gson;
 
 class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	
-	private final Account user;
 	private final ServerOperation oper;
 	private final ServerInterface act;
 	
-	PostAsyncTask(ServerInterface act, Account user, ServerOperation surl){
-		this.user = user;
+	PostAsyncTask(ServerInterface act, ServerOperation surl){
 		this.oper = surl;
 		this.act = act;
 	}
@@ -108,9 +106,9 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	 * @return
 	 */
 	protected HttpResponse post(List<NameValuePair> data){
-		data.add(new BasicNameValuePair("email",user.getEmail()));
-		data.add(new BasicNameValuePair("user",user.getUsername()));
-		data.add(new BasicNameValuePair("pass",user.getPassword()));
+		data.add(new BasicNameValuePair("email",Account.getEmail()));
+		data.add(new BasicNameValuePair("user",Account.getUsername()));
+		data.add(new BasicNameValuePair("pass",Account.getPassword()));
 		
 		HttpClient hclient = new DefaultHttpClient();
 		HttpPost hpost = new HttpPost( this.oper.getUrl() );
