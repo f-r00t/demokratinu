@@ -13,7 +13,7 @@ public interface ServerInterface {
 	public void getArticleDataReturned(ArticleData data);
 	
 	/**
-	 * Something went wrong in network
+	 * Something went wrong in network operation
 	 * @param oper
 	 */
 	public void operationFailed(String oper);
