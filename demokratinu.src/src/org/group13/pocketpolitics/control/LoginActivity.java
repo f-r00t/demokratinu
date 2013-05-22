@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -21,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -48,7 +50,12 @@ public class LoginActivity extends Activity implements ServerInterface{
 		prefs = this.getSharedPreferences("org.group13.pocketpolitics", Context.MODE_PRIVATE);
 		editor = prefs.edit();
 		
-		authenticate();
+		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
+			email = prefs.getString("org.group13.pocketpolitics.email", "");
+			password = prefs.getString("org.group13.pocketpolitics.password", "");
+			authenticate();
+		}	
+		
 		
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_login);
@@ -86,7 +93,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+						intent = new Intent(getApplicationContext(), RegistrationActivity.class);
 						startActivity(intent);
 					}
 				});
@@ -116,7 +123,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 
 		boolean cancel = false;
 		View focusView = null;
-/*
+
 		// Check for a valid password.
 		if (TextUtils.isEmpty(password)) {
 			passwordView.setError(getString(R.string.error_field_required));
@@ -138,7 +145,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 			focusView = emailView;
 			cancel = true;
 		}
-*/
+
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
@@ -152,12 +159,6 @@ public class LoginActivity extends Activity implements ServerInterface{
 	 * Order authentication from the server in order to login.
 	 */
 	private void authenticate() {
-		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
-			
-			email = prefs.getString("org.group13.pocketpolitics.email", "");
-			password = prefs.getString("org.group13.pocketpolitics.password", "");
-		}	
-		
 		Account.set(email, null, password);
 		Syncer.authenticate(this);
 	}
@@ -171,19 +172,19 @@ public class LoginActivity extends Activity implements ServerInterface{
 			stayLoggedInBox = (CheckBox) this.findViewById(R.id.stay_logged_in_checkbox);
 
 			if (stayLoggedInBox.isChecked()) {
-				Log.e("testing","checked " + email);
 				editor.putBoolean("org.group13.pocketpolitics.stayloggedin", true);
 				editor.putString("org.group13.pocketpolitics.email", email);
 				editor.putString("org.group13.pocketpolitics.password", password);
 				editor.commit();
-				Log.e("testing",prefs.getString("org.group13.pocketpolitics.email", ""));
 			}
 			
-			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+			intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			startActivity(intent);
 			finish();
 		} else {
-			// TODO Toaster? Login failed: wrong email/password
+			Toast.makeText(getApplicationContext(),
+					"Felaktig e-post eller lösenord", Toast.LENGTH_LONG)
+					.show();
 		}
 	}
 	
