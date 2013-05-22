@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
+import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
@@ -97,6 +98,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		editor.commit();
 		
 		ArticleMemoryController.flush();
+		Account.set("", "", "");
 		
 		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
 		startActivity(intent);
