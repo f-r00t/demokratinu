@@ -26,13 +26,13 @@ import android.util.Log;
 import com.google.gson.Gson;
 
 class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
-	
+
 	private final ServerOperation oper;
 	private final ServerInterface act;
-	
+
 	private final String postId;
 	private final String extra;
-	
+
 	PostAsyncTask(ServerInterface act, ServerOperation surl, String postId, String extra){
 		this.oper = surl;
 		this.act = act;
@@ -45,11 +45,11 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	PostAsyncTask(ServerInterface act, ServerOperation surl){
 		this(act, surl, null, null);
 	}
-	
+
 	@Override
 	protected HttpEntity doInBackground(Void... params) {
 		List<NameValuePair> postData =new ArrayList<NameValuePair>();
-		
+
 		switch(this.oper){
 		case Authenticate:
 			break;
@@ -70,11 +70,46 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: in doInBckg(): Operation not recognized: "+this.oper.name());
 			break;
 		}
-		
+
 		HttpResponse r = post(postData);
 		return r.getEntity();
 	}
-	
+
+	private void respond(String json){
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: in respond() json: "+json);
+
+		Gson g = new Gson();
+		PostResult rr = g.fromJson(json, PostResult.class);
+
+		switch(this.oper){
+		case Register:
+			act.registrationReturned(rr.success, rr.userExists , rr.emailExists);
+			break;
+		case Authenticate:
+			act.authenticateReturned(rr.success);
+			if(rr.success){
+				//Account.set(email, username, password)
+				// TODO set username
+			}
+			break;
+		case GetArticleData:
+			break;
+		case PostComment:
+			break;
+		case PostOpinion:
+			act.postOpinionReturned(rr.success);
+			break;
+		default:
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in respond(): Operation not recognized: "+this.oper.name());
+			break;
+		}
+	}
+
+	@Override
+	protected void onCancelled(){
+		act.operationFailed(this.oper);
+	}
+
 	@Override
 	protected void onPostExecute(HttpEntity msg){
 		List<String> listr = new ArrayList<String>();
@@ -82,12 +117,12 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		try {
 			InputStream instr = msg.getContent();
 			brd = new BufferedReader(new InputStreamReader(instr));
-			
+
 			String line;
 			while((line = brd.readLine())!=null){
 				listr.add(line);
 			}
-			
+
 		} catch (IllegalStateException e) {
 			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onPostExecute(): Illegal state exception"+e);
 			e.printStackTrace();
@@ -104,7 +139,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 				}
 			}
 		}
-		
+
 		if(!"".equals(listr.get(0).trim())){
 			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onPostExecute(): ignored first line: "+listr.get(0));
 		}
@@ -117,33 +152,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		}
 		respond(listr.get(1));
 	}
-	
-	private void respond(String json){
-		Log.w(this.getClass().getSimpleName(), "PocketDebug: in respond() json: "+json);
-		
-		Gson g = new Gson();
-		PostResult rr = g.fromJson(json, PostResult.class);
-		
-		switch(this.oper){
-		case Register:
-			act.registrationReturned(rr.success, rr.userExists , rr.emailExists);
-			break;
-		case Authenticate:
-			//act.messageReturned(listr);
-			break;
-		case GetArticleData:
-			break;
-		case PostComment:
-			break;
-		case PostOpinion:
-			act.postOpinionReturned(rr.success);
-			break;
-		default:
-			Log.e(this.getClass().getSimpleName(), "PocketDebug: in respond(): Operation not recognized: "+this.oper.name());
-			break;
-		}
-	}
-	
+
 	/**<p>Calls the url specified in method url(). Adds user data to the POST.
 	 * <p>Källa: http://www.androidsnippets.com/executing-a-http-post-request-with-httpclient
 	 * @param data List of data posted in the request other than user data
@@ -153,10 +162,10 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		data.add(new BasicNameValuePair("email",Account.getEmail()));
 		data.add(new BasicNameValuePair("user",Account.getUsername()));
 		data.add(new BasicNameValuePair("pass",Account.getPassword()));
-		
+
 		HttpClient hclient = new DefaultHttpClient();
 		HttpPost hpost = new HttpPost( this.oper.getUrl() );
-		
+
 		try {
 			hpost.setEntity(new UrlEncodedFormEntity(data));
 
@@ -167,7 +176,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 				Log.w(this.getClass().getSimpleName(), "PocketDebug: in .post(): Error "+statusCode+" for URL "+this.oper.getUrl());
 				return null;
 			}
-			
+
 			return response;
 		} catch (ClientProtocolException e){
 			// TODO Auto-generated catch block
@@ -183,16 +192,16 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		String ret="";
 		Gson g = new Gson();
 		ret = g.toJson(new PostResult(true, false, false));
-		
+
 		return ret;
 	}
-	
+
 	private static class PostResult{
 		private final boolean success;		
 		private final boolean emailExists;
 		private final boolean userExists;
 		private final String username;
-		
+
 		PostResult(boolean success, boolean emailExists, boolean userExists){
 			this.success=success;
 			this.emailExists=emailExists;

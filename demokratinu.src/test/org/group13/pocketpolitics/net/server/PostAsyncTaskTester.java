@@ -24,6 +24,12 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	public PostAsyncTaskTester(){
 		testsOnThisObject=0;
+		
+		email = generate(5)+"@chalmers.se";
+		uname = generate(8);
+		passwd = generate(12);
+		
+		Account.set(email, uname, passwd);
 	}
 	
 	//////////////////////////////////////////////////////////
@@ -31,7 +37,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	public void testPostOpinion(){
 		testsOnThisObject++;
 		
-		Syncer.postOpinion(this, "H001UbU5", 1);
+		Syncer.postOpinion(this, "H001UbU5_Debug", 1);
 		
 		waitTillReturn();
 	}
@@ -39,11 +45,6 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	public void atestRegister(){
 		testsOnThisObject++;
 		
-		email = generate(5)+"@chalmers.se";
-		uname = generate(8);
-		passwd = generate(12);
-		
-		Account.set(email, uname, passwd);
 		Syncer.register(this);
 		
 		waitTillReturn();
@@ -124,8 +125,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 
 	@Override
 	public void operationFailed(ServerOperation oper) {
-		// TODO Auto-generated method stub
-		
+		Log.e(this.getClass().getSimpleName(), "PocketDebug: Operation failed! " +oper.name());
+		fail();
 	}
 	
 	/////////////////////////////////////////////////////
