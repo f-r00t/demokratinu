@@ -30,6 +30,14 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		//Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+ PostAsyncTask.testGson());
 	}
 	
+	public void testPostOpinion(){
+		testsOnThisObject++;
+		
+		Syncer.postOpinion(this, "H001UbU5", 1);
+		
+		waitTillReturn();
+	}
+	
 	public void testRegister(){
 		testsOnThisObject++;
 		
@@ -40,19 +48,23 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		Account.set(email, uname, passwd);
 		Syncer.register(this);
 		
+		waitTillReturn();
+	}
+	
+	private void waitTillReturn(){
 		this.finished=false;
-		
+
 		try {
 			while(!finished && testsOnThisObject<2){
 				Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread waited another 500 ms");
 				Thread.sleep(500);
 			}
-			
+
 		} catch (InterruptedException e) {
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: Interruption error!");
 			e.printStackTrace();
 		}
-		
+
 		if(this.testsOnThisObject>1){
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: several tests runnning on this object simulatneously! "+this.testsOnThisObject+" Test aborted.");
 		}
@@ -91,20 +103,12 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		
 	}
 	
-	private String generate(int W){
-		String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
-		Random r = new Random();
-		String gen = "";
-		for(int jx = 0; jx<W; jx++){
-			gen+=chars.charAt(r.nextInt(chars.length()));
-		}
-		return gen;
-	}
-
 	@Override
 	public void postOpinionReturned(boolean succeded) {
-		// TODO Auto-generated method stub
-		
+		this.finished = true;
+		if(succeded){
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: postOpinion succeded!");
+		}
 	}
 
 	@Override
@@ -123,6 +127,17 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	public void operationFailed(ServerOperation oper) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+
+	public static String generate(int W){
+		String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
+		Random r = new Random();
+		String gen = "";
+		for(int jx = 0; jx<W; jx++){
+			gen+=chars.charAt(r.nextInt(chars.length()));
+		}
+		return gen;
 	}
 
 }
