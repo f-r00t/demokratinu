@@ -48,7 +48,7 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 
 		Motion motion = items.get(position);
 		View vi = convertView;
-
+/*
 		if (convertView == null) {
 			vi = inflater.inflate(R.layout.committee_proposal_list_item, null);
 		}
@@ -56,7 +56,7 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 		// Sets the title text
 		TextView motionTitle = (TextView) vi.findViewById(R.id.committeProposalListItemTitle);
 		motionTitle.setText(motion.getTitle());
-		
+		*/
 		return vi;
 	}
 
