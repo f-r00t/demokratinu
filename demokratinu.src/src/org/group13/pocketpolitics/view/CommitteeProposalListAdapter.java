@@ -1,9 +1,8 @@
 package org.group13.pocketpolitics.view;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 
 import android.app.Activity;
@@ -17,9 +16,9 @@ import android.widget.TextView;
 public class CommitteeProposalListAdapter extends BaseAdapter {
 
 	LayoutInflater inflater;
-	ArrayList<CommitteeProposal> items;
+	List<CommitteeProposal> items;
 
-	public CommitteeProposalListAdapter(Activity context, ArrayList<CommitteeProposal> items) {
+	public CommitteeProposalListAdapter(Activity context, List<CommitteeProposal> items) {
 		super();
 
 		this.items = items;
@@ -56,10 +55,10 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 		// Sets the title text
 		TextView committeProposalTitle = (TextView) vi.findViewById(R.id.committeeProposalListItemTitle);
 		committeProposalTitle.setText(committeProposal.getTitle());
-		
+
 		TextView committeProposalText = (TextView) vi.findViewById(R.id.committeeProposalListItemText);
 		committeProposalText.setText(committeProposal.getForslag());
-		
+
 		return vi;
 	}
 

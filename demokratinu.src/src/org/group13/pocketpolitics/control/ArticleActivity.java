@@ -1,5 +1,6 @@
 package org.group13.pocketpolitics.control;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
@@ -8,6 +9,8 @@ import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
+import org.group13.pocketpolitics.view.ArticleListAdapter;
+import org.group13.pocketpolitics.view.CommitteeProposalListAdapter;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,16 +19,19 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
 	private TextView titleTextView;
 	private TextView textTextView;
 	private ListView listViewMotions;
+	private ListView listViewCommitteeProposal;
 	private List<CommitteeProposal> listComPro;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
 	private Agenda article;
-	
+
+
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
@@ -41,6 +47,8 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		
 		orderVotings();
+		
+		listViewCommitteeProposal = (ListView) findViewById(R.id.article_list);
 		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
 		titleTextView.setText(article.getTitle());
@@ -111,5 +119,8 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		
 	}
-
+	
+	private void setAdapter() {
+		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this, listComPro));
+	}
 }
