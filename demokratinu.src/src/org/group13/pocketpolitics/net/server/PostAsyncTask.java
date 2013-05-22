@@ -182,10 +182,10 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 
 			return response;
 		} catch (ClientProtocolException e){
-			// TODO Auto-generated catch block
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: ClientProtocolException "+e);
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: IOException "+e);
 			e.printStackTrace();
 		}
 		return null;

@@ -114,7 +114,6 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 
 	@Override
 	public void onProgressUpdate(Integer procent) {
-		// TODO Auto-generated method stub
 		
 	}
 	

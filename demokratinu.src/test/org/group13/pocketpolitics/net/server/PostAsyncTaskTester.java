@@ -114,7 +114,13 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	@Override
 	public void authenticateReturned(boolean succeded, String username) {
-		// TODO Auto-generated method stub
+		this.finished = true;
+		if(succeded){
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: authenticate succeded!");
+		} else {
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: authenticate failed!");
+			fail();
+		}
 		
 	}
 	

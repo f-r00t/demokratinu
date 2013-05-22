@@ -19,6 +19,7 @@ import android.util.Log;
 public class ArticleMemoryController {
 	private static ArticleMemoryController INSTANCE;
 	
+	// TODO Make ArticleMemCtrl should handle Articles, not Agendas
 	private List<Agenda> articles;
 	private Filter filter;
 	private int lastPage;

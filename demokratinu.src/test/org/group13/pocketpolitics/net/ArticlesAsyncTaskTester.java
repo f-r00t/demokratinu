@@ -77,13 +77,11 @@ public class ArticlesAsyncTaskTester extends AndroidTestCase implements Activity
 	}
 	@Override
 	public void onPreExecute() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void onProgressUpdate(Integer procent) {
-		// TODO Auto-generated method stub
 		
 	}
 }

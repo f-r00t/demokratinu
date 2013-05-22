@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Agenda;
-import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
@@ -14,7 +13,6 @@ import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -24,11 +22,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
@@ -68,8 +64,6 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 				*/
 				Intent intent = new Intent(getApplicationContext(), 
 						ArticleActivity.class).putExtra(ARTICLE_NUM_SENT, position);
-				//TODO 
-				// fungerar det?
 				startActivity(intent);
 			}
 		});
@@ -131,8 +125,6 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 	@Override
 	public void onProgressUpdate(Integer procent) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
