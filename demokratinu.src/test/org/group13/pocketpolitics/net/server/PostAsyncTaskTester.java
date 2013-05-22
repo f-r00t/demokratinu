@@ -26,6 +26,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		testsOnThisObject=0;
 	}
 	
+	//////////////////////////////////////////////////////////
+	
 	public void testGson(){
 		//Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+ PostAsyncTask.testGson());
 	}
@@ -50,6 +52,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		
 		waitTillReturn();
 	}
+	
+	/////////////////////////////////////////////////////
 	
 	private void waitTillReturn(){
 		this.finished=false;
@@ -108,6 +112,9 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		this.finished = true;
 		if(succeded){
 			Log.w(this.getClass().getSimpleName(), "PocketDebug: postOpinion succeded!");
+		} else {
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: postOpinion failed!");
+			fail();
 		}
 	}
 
@@ -129,6 +136,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		
 	}
 	
+	/////////////////////////////////////////////////////
 
 	public static String generate(int W){
 		String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
