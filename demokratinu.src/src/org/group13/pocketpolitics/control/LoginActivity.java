@@ -7,10 +7,13 @@ import org.group13.pocketpolitics.net.server.ServerInterface;
 import org.group13.pocketpolitics.net.server.Syncer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -42,30 +46,22 @@ public class LoginActivity extends Activity implements ServerInterface{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		/*requestWindowFeature(Window.FEATURE_NO_TITLE);*/
+		
+		prefs = this.getSharedPreferences("org.group13.pocketpolitics", Context.MODE_PRIVATE);
+		editor = prefs.edit();
+		
+		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
+			email = prefs.getString("org.group13.pocketpolitics.email", "");
+			password = prefs.getString("org.group13.pocketpolitics.password", "");
+			authenticate();
+		}	
+		
+		
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_login);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
 		
-		prefs = this.getSharedPreferences("org.group13.pocketpolitics", 0);
-		editor = prefs.edit();
 		
-
-		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
-			
-			email = prefs.getString("org.group13.pocketpolitics.email", "");
-			password = prefs.getString("org.group13.pocketpolitics.password", "");
-			
-			//if (SomeNetClass.getInstance.authenticate(this, email, pass)) {
-			
-				intent = new Intent(getApplicationContext(), FrontPageActivity.class);
-				startActivity(intent);
-				finish();
-			//}
-		}
-		
-
-
 		// Set up the login form.
 		emailView = (EditText) findViewById(R.id.email);
 
@@ -97,7 +93,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						Intent intent = new Intent(getApplicationContext(), RegistrationActivity.class);
+						intent = new Intent(getApplicationContext(), RegistrationActivity.class);
 						startActivity(intent);
 					}
 				});
@@ -127,7 +123,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 
 		boolean cancel = false;
 		View focusView = null;
-/*
+
 		// Check for a valid password.
 		if (TextUtils.isEmpty(password)) {
 			passwordView.setError(getString(R.string.error_field_required));
@@ -149,7 +145,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 			focusView = emailView;
 			cancel = true;
 		}
-*/
+
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
@@ -162,15 +158,15 @@ public class LoginActivity extends Activity implements ServerInterface{
 	/**
 	 * Order authentication from the server in order to login.
 	 */
-	private void authenticate(){
+	private void authenticate() {
 		Account.set(email, null, password);
 		Syncer.authenticate(this);
 	}
 	
 
 	@Override
-	public void authenticateReturned(boolean succeded, String username) {
-		if(succeded){
+	public void authenticateReturned(boolean succeeded, String username) {
+		if(succeeded){
 			Account.set(email, username, password);
 
 			stayLoggedInBox = (CheckBox) this.findViewById(R.id.stay_logged_in_checkbox);
@@ -179,13 +175,16 @@ public class LoginActivity extends Activity implements ServerInterface{
 				editor.putBoolean("org.group13.pocketpolitics.stayloggedin", true);
 				editor.putString("org.group13.pocketpolitics.email", email);
 				editor.putString("org.group13.pocketpolitics.password", password);
+				editor.commit();
 			}
 			
-			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
+			intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			startActivity(intent);
 			finish();
 		} else {
-			// TODO Toaster? Login failed: wrong email/password
+			Toast.makeText(getApplicationContext(),
+					"Felaktig e-post eller lösenord", Toast.LENGTH_LONG)
+					.show();
 		}
 	}
 	

@@ -94,7 +94,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		editor.putBoolean("org.group13.pocketpolitics.stayloggedin", false);
 		editor.putString("org.group13.pocketpolitics.email", "");
 		editor.putString("org.group13.pocketpolitics.password", "");
-		editor.apply();
+		editor.commit();
 		
 		ArticleMemoryController.flush();
 		
