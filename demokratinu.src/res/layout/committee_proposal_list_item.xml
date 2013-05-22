@@ -1,7 +1,7 @@
-<LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" 
-            xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/committee_proposal_list_item"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" >
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -48,7 +48,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		orderVotings();
 		
-		listViewCommitteeProposal = (ListView) findViewById(R.id.article_list);
+		listViewCommitteeProposal = (ListView) findViewById(R.id.detailViewVotesList);
 		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
 		titleTextView.setText(article.getTitle());
@@ -115,12 +115,12 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
 		listComPro =  article.getFors();
 		
-		Log.i("Viking",""+listComPro.size());
-		
-		
+		setAdapter();
 	}
 	
 	private void setAdapter() {
-		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this, listComPro));
+		Log.i("Viking","Before setAdapter");
+		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this.getApplicationContext(), listComPro));
+		Log.i("Viking","After setAdapter");
 	}
 }
