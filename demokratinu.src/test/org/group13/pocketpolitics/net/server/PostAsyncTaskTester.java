@@ -36,7 +36,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		waitTillReturn();
 	}
 	
-	public void testRegister(){
+	public void atestRegister(){
 		testsOnThisObject++;
 		
 		email = generate(5)+"@chalmers.se";

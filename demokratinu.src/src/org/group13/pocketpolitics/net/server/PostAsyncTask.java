@@ -136,7 +136,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		case PostComment:
 			break;
 		case PostOpinion:
-			
+			act.postOpinionReturned(rr.success);
 			break;
 		default:
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: in respond(): Operation not recognized: "+this.oper.name());
@@ -177,6 +177,14 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public static String testGson(){
+		String ret="";
+		Gson g = new Gson();
+		ret = g.toJson(new PostResult(true, false, false));
+		
+		return ret;
 	}
 	
 	private static class PostResult{

@@ -1,7 +1,5 @@
 package org.group13.pocketpolitics.net.server;
 
-import java.util.List;
-
 import org.group13.pocketpolitics.model.user.ArticleData;
 
 public interface ServerInterface {
