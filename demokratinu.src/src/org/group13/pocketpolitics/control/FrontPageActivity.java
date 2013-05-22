@@ -16,6 +16,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -44,9 +46,8 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 		super.onCreate(savedInstanceState);
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_front_page);
-
+		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
 
@@ -67,6 +68,12 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		});
 	}
 
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+	
 	private void orderNextPage(){
 		if(Connected.isConnected(this)){
 			QueryParam qpar = ArticleMemoryController.nextQuery();
