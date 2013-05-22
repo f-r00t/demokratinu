@@ -147,8 +147,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	}
 
 	@Override
-	public void operationFailed(ServerOperation oper) {
-		Log.e(this.getClass().getSimpleName(), "PocketDebug: Operation failed! " +oper.name());
+	public void operationFailed(String oper) {
+		Log.e(this.getClass().getSimpleName(), "PocketDebug: Operation failed! " +oper);
 		fail();
 	}
 	

@@ -4,7 +4,6 @@ import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.model.user.ArticleData;
 import org.group13.pocketpolitics.net.server.ServerInterface;
-import org.group13.pocketpolitics.net.server.ServerOperation;
 import org.group13.pocketpolitics.net.server.Syncer;
 
 import android.app.Activity;
@@ -191,7 +190,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 	}
 	
 	@Override
-	public void operationFailed(ServerOperation oper) {
+	public void operationFailed(String oper) {
 		// TODO Login failed: network error, try again please.
 		
 	}

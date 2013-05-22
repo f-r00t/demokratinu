@@ -110,7 +110,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 
 	@Override
 	protected void onCancelled(){
-		act.operationFailed(this.oper);
+		act.operationFailed(this.oper.name());
 	}
 
 	@Override

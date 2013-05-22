@@ -12,5 +12,9 @@ public interface ServerInterface {
 	public void postCommentReturned(boolean succeded);
 	public void getArticleDataReturned(ArticleData data);
 	
-	public void operationFailed(ServerOperation oper);
+	/**
+	 * Something went wrong in network
+	 * @param oper
+	 */
+	public void operationFailed(String oper);
 }
