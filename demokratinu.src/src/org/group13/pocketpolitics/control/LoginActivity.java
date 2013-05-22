@@ -7,10 +7,12 @@ import org.group13.pocketpolitics.net.server.ServerInterface;
 import org.group13.pocketpolitics.net.server.Syncer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
@@ -42,30 +44,17 @@ public class LoginActivity extends Activity implements ServerInterface{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		/*requestWindowFeature(Window.FEATURE_NO_TITLE);*/
+		
+		prefs = this.getSharedPreferences("org.group13.pocketpolitics", Context.MODE_PRIVATE);
+		editor = prefs.edit();
+		
+		authenticate();
+		
 		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_login);
 		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
 		
-		prefs = this.getSharedPreferences("org.group13.pocketpolitics", 0);
-		editor = prefs.edit();
 		
-
-		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
-			
-			email = prefs.getString("org.group13.pocketpolitics.email", "");
-			password = prefs.getString("org.group13.pocketpolitics.password", "");
-			
-			//if (SomeNetClass.getInstance.authenticate(this, email, pass)) {
-			
-				intent = new Intent(getApplicationContext(), FrontPageActivity.class);
-				startActivity(intent);
-				finish();
-			//}
-		}
-		
-
-
 		// Set up the login form.
 		emailView = (EditText) findViewById(R.id.email);
 
@@ -162,23 +151,32 @@ public class LoginActivity extends Activity implements ServerInterface{
 	/**
 	 * Order authentication from the server in order to login.
 	 */
-	private void authenticate(){
+	private void authenticate() {
+		if (prefs.getBoolean("org.group13.pocketpolitics.stayloggedin", false)) {// if StayLoggedIn
+			
+			email = prefs.getString("org.group13.pocketpolitics.email", "");
+			password = prefs.getString("org.group13.pocketpolitics.password", "");
+		}	
+		
 		Account.set(email, null, password);
 		Syncer.authenticate(this);
 	}
 	
 
 	@Override
-	public void authenticateReturned(boolean succeded, String username) {
-		if(succeded){
+	public void authenticateReturned(boolean succeeded, String username) {
+		if(succeeded){
 			Account.set(email, username, password);
 
 			stayLoggedInBox = (CheckBox) this.findViewById(R.id.stay_logged_in_checkbox);
 
 			if (stayLoggedInBox.isChecked()) {
+				Log.e("testing","checked " + email);
 				editor.putBoolean("org.group13.pocketpolitics.stayloggedin", true);
 				editor.putString("org.group13.pocketpolitics.email", email);
 				editor.putString("org.group13.pocketpolitics.password", password);
+				editor.commit();
+				Log.e("testing",prefs.getString("org.group13.pocketpolitics.email", ""));
 			}
 			
 			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
