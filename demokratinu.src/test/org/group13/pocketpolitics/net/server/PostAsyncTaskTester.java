@@ -14,36 +14,47 @@ import android.util.Log;
 
 public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterface{
 
-	private boolean finished;
+	private final int sleep = 200;
 	
-	private String email;
-	private String uname;
-	private String passwd;
+	private boolean finished;
 	
 	private int testsOnThisObject;
 	
 	public PostAsyncTaskTester(){
 		testsOnThisObject=0;
 		
-		email = generate(5)+"@chalmers.se";
-		uname = generate(8);
-		passwd = generate(12);
-		
-		Account.set(email, uname, passwd);
 	}
 	
 	//////////////////////////////////////////////////////////
 	
+	public void atestPostComment(){
+		testsOnThisObject++;
+		Account.set("debug@chalmers.se", "debug", "debug");
+		
+		Syncer.postComment(this, "H001UbU5_Debug/1", "Commenting H001UbU5_Debug, writing "+generate(3)+" "+generate(8));
+		
+		this.waitTillReturn();
+	}
+	
 	public void testPostOpinion(){
 		testsOnThisObject++;
 		
-		Syncer.postOpinion(this, "H001UbU5_Debug", 1);
+		Account.set("debug@chalmers.se", "debug", "debug");
+		
+		Syncer.postOpinion(this, "H001UbU5_Debug/1/30", 1);
 		
 		waitTillReturn();
 	}
 	
 	public void atestRegister(){
 		testsOnThisObject++;
+		
+		String email = generate(5)+"@chalmers.se";
+		String uname = generate(8);
+		String passwd = generate(12);
+		
+		Account.set(email, uname, passwd);
+		//Account.set("debug@chalmers.se", "debug", "debug");
 		
 		Syncer.register(this);
 		
@@ -57,8 +68,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 
 		try {
 			while(!finished && testsOnThisObject<2){
-				Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread waited another 500 ms");
-				Thread.sleep(500);
+				Log.i(this.getClass().getSimpleName(), "PocketDebug: Thread waited another "+this.sleep+" ms");
+				Thread.sleep(this.sleep);
 			}
 
 		} catch (InterruptedException e) {
@@ -81,10 +92,10 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		} else {
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: registration failed!");
 			if(unameExists){
-				Log.w(this.getClass().getSimpleName(), "PocketDebug: username exists: "+uname);
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: username exists: "+Account.getUsername());
 			}
 			if(emailExists){
-				Log.w(this.getClass().getSimpleName(), "PocketDebug: email exists: "+email);
+				Log.w(this.getClass().getSimpleName(), "PocketDebug: email exists: "+Account.getEmail());
 			}
 			if(!(emailExists || unameExists)){
 				Log.e(this.getClass().getSimpleName(), "PocketDebug: registration failed without reason!");
@@ -113,8 +124,13 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 
 	@Override
 	public void postCommentReturned(boolean succeded) {
-		// TODO Auto-generated method stub
-		
+		this.finished = true;
+		if(succeded){
+			Log.w(this.getClass().getSimpleName(), "PocketDebug: postComment succeded!");
+		} else {
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: postComment failed!");
+			fail();
+		}
 	}
 
 	@Override

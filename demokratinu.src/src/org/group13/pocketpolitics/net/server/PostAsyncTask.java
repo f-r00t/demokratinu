@@ -95,6 +95,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		case GetArticleData:
 			break;
 		case PostComment:
+			act.postCommentReturned(rr.success);
 			break;
 		case PostOpinion:
 			act.postOpinionReturned(rr.success);
