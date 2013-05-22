@@ -1,6 +1,6 @@
 package org.group13.pocketpolitics.net.server;
 
-enum ServerOperation {
+public enum ServerOperation {
 	Register("http://fruktnet.no-ip.org/pocketpolitics/register.php"),
 	Authenticate("http://fruktnet.no-ip.org/pocketpolitics/authenticate.php"),
 	PostOpinion("http://fruktnet.no-ip.org/pocketpolitics/post-opinion.php"),
@@ -12,7 +12,7 @@ enum ServerOperation {
 		this.url=url;
 	}
 	
-	public String getUrl(){
+	protected String getUrl(){
 		return url;
 	}
 }

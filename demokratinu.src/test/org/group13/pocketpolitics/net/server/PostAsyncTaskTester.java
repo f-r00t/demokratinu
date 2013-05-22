@@ -5,6 +5,7 @@ import java.util.ListIterator;
 import java.util.Random;
 
 import org.group13.pocketpolitics.model.user.Account;
+import org.group13.pocketpolitics.model.user.ArticleData;
 import org.group13.pocketpolitics.net.server.ServerInterface;
 import org.group13.pocketpolitics.net.server.Syncer;
 
@@ -98,6 +99,30 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 			gen+=chars.charAt(r.nextInt(chars.length()));
 		}
 		return gen;
+	}
+
+	@Override
+	public void postOpinionReturned(boolean succeded) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void postCommentReturned(boolean succeded) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getArticleDataReturned(boolean succeded, ArticleData data) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void operationFailed(ServerOperation oper) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

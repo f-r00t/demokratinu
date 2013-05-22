@@ -16,6 +16,23 @@ public class Syncer {
 		task.execute();
 	}
 	
+	public static void postOpinion(ServerInterface activity, String issue, int opinion){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.PostOpinion);
+		task.execute();
+	}
+	
+	public static void postComment(ServerInterface activity, String parentId, String content){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.PostComment);
+		task.execute();
+	}
+	
+	public static void getArticleData(ServerInterface activity, String articleId){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.GetArticleData);
+		task.execute();
+	}
 	
 	////////////////////////////////////////////
 	private Syncer(){
