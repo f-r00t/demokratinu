@@ -1,17 +1,16 @@
 <?php
-// TODO: currently not checking wether the actual issue is a legit one
 
 $success = "true";
 
-if (isset($_GET['email']) && isset($_GET['pass']) && isset($_GET['issue']) && isset($_GET['opinion'])) {
+if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['parentId']) && isset($_POST['content'])) {
     
     require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
           
-    $email = trim($_GET['email']);
-    $pass = $_GET['pass'];
-	$issue = trim($_GET['issue']);
-	$opinion = trim($_GET['opinion']);
+    $email = trim($_POST['email']);
+    $pass = $_POST['pass'];
+    $parentId = trim($_POST['parentId']);
+    $content = trim($_POST['content']);
             
     $sql = "SELECT password FROM users WHERE email = :email";
     $stmt = $dbh->prepare($sql);
@@ -22,38 +21,29 @@ if (isset($_GET['email']) && isset($_GET['pass']) && isset($_GET['issue']) && is
     if ($dbcollected['password'] != crypt($pass, $dbcollected['password'])) {
         $success = "false"; // Wrong email/pass
     }
-	else if ($opinion != "1" && $opinion != "0" && $opinion != "-1") {
-		$success = "false"; // Shouldn't happen, someone has manipulated the client
-	}
     else {
-		$sql = "SELECT * FROM votes WHERE issue = :issue";
-		$stmt = $dbh->prepare($sql);
-		$stmt->bindParam(":issue", $issue);
-		$stmt->execute();
-		$dbcollected = $stmt->fetch();
-	
-		if (empty($dbcollected)) {
-			$sql = "INSERT INTO votes (voter, issue, opinion) VALUES (:email, :issue, :opinion)";
-			$stmt = $dbh->prepare($sql);
-			$stmt->bindParam(":issue", $issue);
-			$stmt->bindParam(":email", $email);
-			$stmt->bindParam(":opinion", $opinion);
-			$stmt->execute();
-		}
-		else {
-			$sql = "UPDATE votes SET opinion = :opinion WHERE voter = :email AND issue = :issue";
-			$stmt = $dbh->prepare($sql);
-			$stmt->bindParam(":issue", $issue);
-			$stmt->bindParam(":email", $email);
-			$stmt->bindParam(":opinion", $opinion);
-			$stmt->execute();
-		}
-	
-        $sql = "SELECT * FROM votes WHERE issue LIKE :agenda";
+        $sqlParentId = $parentId . "%";
+    
+        $sql = "SELECT * FROM comments WHERE id LIKE :parentId";
         $stmt = $dbh->prepare($sql);
-        $stmt->bindParam(":agenda", $agenda);
+        $stmt->bindParam(":parentId", $sqlParentId);
         $stmt->execute();
-		$dbcollected = $stmt->fetch();
+        
+        $pattern = '/(\/\d?$)/';
+        $siblings = 0;
+        while ($dbcollected = $stmt->fetch()) {
+            if (preg_replace($pattern, "", $dbcollected['id']) == $parentId) {
+                $siblings++;
+            }
+        }
+        $id = $parentId . "/" . $siblings;
+    
+        $sql = "INSERT INTO comments (id, author, content, date) VALUES (:id, :author, :content, NOW())";
+        $stmt = $dbh->prepare($sql);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":author", $email);
+        $stmt->bindParam(":content", $content);
+        $stmt->execute();
     }
 }
 else {
