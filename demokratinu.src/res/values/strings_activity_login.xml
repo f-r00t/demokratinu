@@ -3,7 +3,7 @@
     <string name="title_activity_login">Logga in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Användarnamn</string>
+    <string name="prompt_email">E-post</string>
     <string name="prompt_password">Lösenord</string>
     <string name="action_register"><b>Registrera</b></string>
     <string name="action_sign_in">Logga in</string>
