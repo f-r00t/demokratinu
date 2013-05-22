@@ -135,7 +135,6 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 			Account.set(email, username, password);
 			Syncer.register(this);
 		}
-
 	}
 
 	
