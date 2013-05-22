@@ -10,12 +10,22 @@
                 android:orientation="vertical" >
 
                 <TextView
-                    android:id="@+id/motionListItemTitle"
-                    android:layout_width="216dp"
+                    android:id="@+id/committeeProposalListItemTitle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:paddingLeft="4dp"
                     android:paddingRight="4dp"
-                    android:text="@string/title_item" />
+                    android:text="@string/committeProposalListItemTitleText"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/committeeProposalListItemText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/committeeProposalListItemText" />
+
             </LinearLayout>
+
+
   </LinearLayout>

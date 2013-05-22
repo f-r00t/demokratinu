@@ -54,7 +54,7 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 		}
 
 		// Sets the title text
-		TextView motionTitle = (TextView) vi.findViewById(R.id.motionListItemTitle);
+		TextView motionTitle = (TextView) vi.findViewById(R.id.committeProposalListItemTitle);
 		motionTitle.setText(motion.getTitle());
 		
 		return vi;
