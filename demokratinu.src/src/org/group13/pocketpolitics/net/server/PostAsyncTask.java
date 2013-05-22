@@ -178,14 +178,6 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		}
 		return null;
 	}
-
-	public static String testGson(){
-		String ret="";
-		Gson g = new Gson();
-		ret = g.toJson(new PostResult(true, false, false));
-		
-		return ret;
-	}
 	
 	private static class PostResult{
 		private final boolean success;		

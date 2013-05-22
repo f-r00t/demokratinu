@@ -6,7 +6,7 @@ import org.group13.pocketpolitics.model.user.ArticleData;
 
 public interface ServerInterface {
 
-	public void messageReturned(List<String> msg);
+	public void authenticateReturned(boolean succeded);
 	
 	public void registrationReturned(boolean succeded, boolean unameExists, boolean emailExists);
 	

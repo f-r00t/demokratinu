@@ -28,10 +28,6 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	//////////////////////////////////////////////////////////
 	
-	public void testGson(){
-		//Log.w(this.getClass().getSimpleName(), "PocketDebug: gson: "+ PostAsyncTask.testGson());
-	}
-	
 	public void testPostOpinion(){
 		testsOnThisObject++;
 		
@@ -73,16 +69,6 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: several tests runnning on this object simulatneously! "+this.testsOnThisObject+" Test aborted.");
 		}
 	}
-	
-	@Override
-	public void messageReturned(List<String> msg) {
-		this.finished=true;
-		Log.w(this.getClass().getSimpleName(), "PocketDebug: Message returned: ");
-		ListIterator<String> iter = msg.listIterator();
-		while(iter.hasNext()){
-			Log.i(this.getClass().getSimpleName(), "PocketDebug: "+iter.next());
-		}
-	}
 
 	@Override
 	public void registrationReturned(boolean succeded, boolean unameExists,
@@ -104,6 +90,12 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 				fail();
 			}
 		}
+		
+	}
+	
+	@Override
+	public void authenticateReturned(boolean succeded) {
+		// TODO Auto-generated method stub
 		
 	}
 	
@@ -147,5 +139,4 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		}
 		return gen;
 	}
-
 }
