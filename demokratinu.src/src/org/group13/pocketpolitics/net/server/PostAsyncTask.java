@@ -19,6 +19,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.group13.pocketpolitics.model.user.Account;
+import org.group13.pocketpolitics.model.user.ArticleData;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -93,6 +94,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			}
 			break;
 		case GetArticleData:
+			act.getArticleDataReturned(g.fromJson(json, ArticleData.class));
 			break;
 		case PostComment:
 			act.postCommentReturned(rr.success);

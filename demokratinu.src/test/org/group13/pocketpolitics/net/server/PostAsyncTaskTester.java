@@ -1,13 +1,11 @@
 package org.group13.pocketpolitics.net.server;
 
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 
 import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.model.user.ArticleData;
-import org.group13.pocketpolitics.net.server.ServerInterface;
-import org.group13.pocketpolitics.net.server.Syncer;
+import org.group13.pocketpolitics.model.user.Comment;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -27,16 +25,25 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	//////////////////////////////////////////////////////////
 	
-	public void atestPostComment(){
+	public void testGetArticleData(){
 		testsOnThisObject++;
 		Account.set("debug@chalmers.se", "debug", "debug");
 		
-		Syncer.postComment(this, "H001UbU5_Debug/1", "Commenting H001UbU5_Debug, writing "+generate(3)+" "+generate(8));
+		Syncer.getArticleData(this, "H001UbU5_Debug");
 		
 		this.waitTillReturn();
 	}
 	
-	public void testPostOpinion(){
+	public void atestPostComment(){
+		testsOnThisObject++;
+		Account.set("debug@chalmers.se", "debug", "debug");
+		
+		Syncer.postComment(this, "H001UbU5_Debug/150", "Commenting H001UbU5_Debug, writing "+generate(3)+" "+generate(8));
+		
+		this.waitTillReturn();
+	}
+	
+	public void atestPostOpinion(){
 		testsOnThisObject++;
 		
 		Account.set("debug@chalmers.se", "debug", "debug");
@@ -134,9 +141,9 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	}
 
 	@Override
-	public void getArticleDataReturned(boolean succeded, ArticleData data) {
-		// TODO Auto-generated method stub
-		
+	public void getArticleDataReturned(ArticleData data) {
+		this.finished = true;
+		printComments(data.getReplies());
 	}
 
 	@Override
@@ -147,6 +154,13 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	/////////////////////////////////////////////////////
 
+	public static void printComments(List<Comment> clist){
+		for(Comment c:clist){
+			Log.i(PostAsyncTaskTester.class.getSimpleName(), "PocketDebug: "+c.getContent());
+			printComments(c.getReplies());
+		}
+	}
+	
 	public static String generate(int W){
 		String chars = "QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm0123456789";
 		Random r = new Random();

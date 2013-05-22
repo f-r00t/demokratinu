@@ -10,7 +10,7 @@ public interface ServerInterface {
 	
 	public void postOpinionReturned(boolean succeded);
 	public void postCommentReturned(boolean succeded);
-	public void getArticleDataReturned(boolean succeded, ArticleData data);
+	public void getArticleDataReturned(ArticleData data);
 	
 	public void operationFailed(ServerOperation oper);
 }
