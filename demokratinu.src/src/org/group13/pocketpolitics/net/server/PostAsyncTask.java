@@ -115,15 +115,18 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 
 	@Override
 	protected void onPostExecute(HttpEntity msg){
-		List<String> listr = new ArrayList<String>();
+		//List<String> listr = new ArrayList<String>();
 		BufferedReader brd=null;
+		StringBuilder sbuild = new StringBuilder();
+		
 		try {
 			InputStream instr = msg.getContent();
 			brd = new BufferedReader(new InputStreamReader(instr));
 
 			String line;
 			while((line = brd.readLine())!=null){
-				listr.add(line);
+				//listr.add(line);
+				sbuild.append(line);
 			}
 
 		} catch (IllegalStateException e) {
@@ -143,7 +146,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			}
 		}
 
-		if(!"".equals(listr.get(0).trim())){
+		/*if(!"".equals(listr.get(0).trim())){
 			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onPostExecute(): ignored first line: "+listr.get(0));
 		}
 		if(listr.size()>2){
@@ -153,7 +156,8 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 				Log.i(this.getClass().getSimpleName(), "PocketDebug: "+iter.next());
 			}
 		}
-		respond(listr.get(1));
+		respond(listr.get(1));*/
+		respond(sbuild.toString());
 	}
 
 	/**<p>Calls the url specified in method url(). Adds user data to the POST.

@@ -9,6 +9,7 @@ public class Comment extends LikeableItem {
 	
 	private String author;
 	private String content;
+	private String commentId;
 	private Date date;
 	private List<Comment> replies;
 	
@@ -74,5 +75,13 @@ public class Comment extends LikeableItem {
 	 */
 	public void setDate(Date date) {
 		this.date = date;
+	}
+
+	public String getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(String commentId) {
+		this.commentId = commentId;
 	}
 }
