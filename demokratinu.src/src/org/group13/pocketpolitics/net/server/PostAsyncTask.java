@@ -30,9 +30,20 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 	private final ServerOperation oper;
 	private final ServerInterface act;
 	
-	PostAsyncTask(ServerInterface act, ServerOperation surl){
+	private final String postId;
+	private final String extra;
+	
+	PostAsyncTask(ServerInterface act, ServerOperation surl, String postId, String extra){
 		this.oper = surl;
 		this.act = act;
+		this.postId = postId;
+		this.extra = extra;
+	}
+	PostAsyncTask(ServerInterface act, ServerOperation surl, String postId){
+		this(act, surl, postId, null);
+	}
+	PostAsyncTask(ServerInterface act, ServerOperation surl){
+		this(act, surl, null, null);
 	}
 	
 	@Override
@@ -96,6 +107,14 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			break;
 		case Authenticate:
 			//act.messageReturned(listr);
+			break;
+		case GetArticleData:
+			break;
+		case PostComment:
+			break;
+		case PostOpinion:
+			break;
+		default:
 			break;
 		}
 	}
