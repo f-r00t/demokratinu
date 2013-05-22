@@ -3,15 +3,15 @@
 
 $success = "true";
 
-if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['issue']) && isset($_POST['opinion'])) {
+if (isset($_GET['email']) && isset($_GET['pass']) && isset($_GET['issue']) && isset($_GET['opinion'])) {
     
     require_once("../../www-includes/dbcx.php");
     $dbh = dbcx();
           
-    $email = trim($_POST['email']);
-    $pass = $_POST['pass'];
-	$issue = trim($_POST['issue']);
-	$opinion = trim($_POST['opinion']);
+    $email = trim($_GET['email']);
+    $pass = $_GET['pass'];
+	$issue = trim($_GET['issue']);
+	$opinion = trim($_GET['opinion']);
             
     $sql = "SELECT password FROM users WHERE email = :email";
     $stmt = $dbh->prepare($sql);
