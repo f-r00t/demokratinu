@@ -12,6 +12,6 @@
     <string name="error_invalid_password">För kort lösenord</string>
     <string name="error_incorrect_password">Inkorrekt lösenord</string>
     <string name="error_field_required">Fältet måste fyllas i</string>
-    <string name="filler_passwordfield">What</string>
+    <string name="filler_passwordfield">Logga in</string>
 
 </resources>

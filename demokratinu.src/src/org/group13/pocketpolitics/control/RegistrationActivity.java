@@ -7,14 +7,22 @@ import org.group13.pocketpolitics.net.server.ServerInterface;
 import org.group13.pocketpolitics.net.server.Syncer;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class RegistrationActivity extends Activity implements ServerInterface{
 
@@ -22,11 +30,13 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	private String username;
 	private String email;
 	private String password;
+	private String passwordAgain;
 	
 	// UI references
 	private EditText usernameView;
 	private EditText emailView;
 	private EditText passwordView;
+	private EditText passwordAgainView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +45,23 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 		// Show the Up button in the action bar.
 		setupActionBar();
 
+		usernameView = (EditText) findViewById(R.id.reg_username_field);
+		emailView = (EditText) findViewById(R.id.reg_email_field);
+
+		passwordView = (EditText) findViewById(R.id.reg_password_field);
+		passwordAgainView = (EditText) findViewById(R.id.reg_password_again_field);
+		passwordAgainView
+				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+					@Override
+					public boolean onEditorAction(TextView textView, int id,
+							KeyEvent keyEvent) {
+						if (id == R.id.register || id == EditorInfo.IME_NULL) {
+							attemptRegister();
+							return true;
+						}
+						return false;
+					}
+				});
 		findViewById(R.id.buttonSendRegistration).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
@@ -51,13 +78,6 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.registration, menu);
-		return true;
 	}
 
 	@Override
@@ -78,28 +98,26 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	}
 
 	public void attemptRegister() {
+		
 		// Reset errors.
 		emailView.setError(null);
 		passwordView.setError(null);
 		usernameView.setError(null);
+		passwordAgainView.setError(null);
 
 		// Store values at the time of the login attempt.
 		email = emailView.getText().toString().trim();
 		password = passwordView.getText().toString();
 		username = usernameView.getText().toString().trim();
+		passwordAgain = passwordAgainView.getText().toString();
 
 		boolean cancel = false;
 		View focusView = null;
 		
-		// Check for valid username.
-		if (TextUtils.isEmpty(username)) {
-			usernameView.setError(getString(R.string.error_field_required));
-			focusView = usernameView;
-			cancel = true;
-		}
-		else if (username.length() < 2) {
-			usernameView.setError(getString(R.string.error_invalid_username));
-			focusView = usernameView;
+		// Check if passwords match.
+		if (!passwordAgain.equals(password)) {
+			passwordAgainView.setError(getString(R.string.passwords_dont_match));
+			focusView = passwordAgainView;
 			cancel = true;
 		}
 		
@@ -127,6 +145,18 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 			cancel = true;
 		}
 		
+		// Check for valid username.
+				if (TextUtils.isEmpty(username)) {
+					usernameView.setError(getString(R.string.error_field_required));
+					focusView = usernameView;
+					cancel = true;
+				}
+				else if (username.length() < 2) {
+					usernameView.setError(getString(R.string.error_invalid_username));
+					focusView = usernameView;
+					cancel = true;
+				}
+		
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
@@ -140,21 +170,39 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	
 
 	@Override
-	public void registrationReturned(boolean succeded, boolean unameExists,
+	public void registrationReturned(boolean succeeded, boolean unameExists,
 			boolean emailExists) {
-		if(succeded){
+		if(succeeded){
+			CheckBox checkbox = (CheckBox) this.findViewById(R.id.reg_stay_logged_in_checkbox);
+			
+			 if (checkbox.isChecked()) {
+				 SharedPreferences prefs = this.getSharedPreferences("org.group13.pocketpolitics", Context.MODE_PRIVATE);
+				 Editor editor = prefs.edit();
+				 
+				 editor.putBoolean("org.group13.pocketpolitics.stayloggedin", true);
+				 editor.putString("org.group13.pocketpolitics.email", email);
+				 editor.putString("org.group13.pocketpolitics.password", password);
+				 editor.commit();
+			 }
 			
 			Intent intent = new Intent(getApplicationContext(), FrontPageActivity.class);
 			startActivity(intent);
 			finish();
+			
+			Toast.makeText(getApplicationContext(),
+					"Du är nu registrerad!", Toast.LENGTH_LONG)
+					.show();
 		} else {
-			if(unameExists){
-				
+			View focusView = null;
+			if (emailExists) {
+				this.emailView.setError(getString(R.string.email_taken));
+				focusView = emailView;
 			}
-			if(emailExists){
-				
+			if (unameExists) {
+				this.usernameView.setError(getString(R.string.username_taken));
+				focusView = usernameView;
 			}
-			// TODO grafisk feedback på registrering
+			focusView.requestFocus();
 		}		
 	}
 	

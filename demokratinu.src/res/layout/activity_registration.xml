@@ -13,7 +13,7 @@
             android:orientation="vertical" >
 
             <EditText
-                android:id="@+id/EditTextUsername"
+                android:id="@+id/reg_username_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/usernameHint"
@@ -22,7 +22,7 @@
                 android:singleLine="true" />
 
             <EditText
-                android:id="@+id/EditTextEMailAddress"
+                android:id="@+id/reg_email_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/hintEmailAddress"
@@ -34,7 +34,7 @@
                 android:singleLine="true" />
             
                         <EditText
-                            android:id="@+id/EditTextPassword"
+                            android:id="@+id/reg_password_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/hintPassword"
@@ -43,13 +43,23 @@
                             android:singleLine="true" />
                         
                                     <EditText
-                            android:id="@+id/EditTextPasswordRepeat"
+                            android:id="@+id/reg_password_again_field"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/hintPasswordRepeat"
                             android:inputType="textPassword"
+                            android:imeActionId="@+id/register"
+			                android:imeActionLabel="@string/filler_reg_passwordagainfield"
+			                android:imeOptions="actionUnspecified"
+                
                             android:maxLines="1"
                             android:singleLine="true" />
+
+                                    <CheckBox
+                                        android:id="@+id/reg_stay_logged_in_checkbox"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/stay_logged_in_checkbox" />
 
                                     <Button
                                         android:id="@+id/buttonSendRegistration"
