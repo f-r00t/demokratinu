@@ -146,7 +146,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	@Override
 	public void onFailure(String message) {
 		Log.w(this.getClass().getSimpleName(),"PocketDebug: Recieve articles failed: "+message);
-
+		progressBar.setVisibility(View.GONE);
 	}
 
 }

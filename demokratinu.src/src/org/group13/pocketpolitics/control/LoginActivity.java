@@ -39,6 +39,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 	private EditText emailView;
 	private EditText passwordView;
 	private CheckBox stayLoggedInBox;
+	private View progressBar;
 	
 	private SharedPreferences prefs;
 	private Intent intent;
@@ -161,6 +162,8 @@ public class LoginActivity extends Activity implements ServerInterface{
 	 */
 	private void authenticate() {
 		if(Connected.isConnected(this)){
+			progressBar = findViewById(R.id.loginProgressContainer);
+			progressBar.setVisibility(View.VISIBLE);
 			Account.set(email, null, password);
 			Syncer.authenticate(this);
 		} else {
@@ -172,6 +175,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 	@Override
 	public void authenticateReturned(boolean succeeded, String username) {
 		if(succeeded){
+			progressBar.setVisibility(View.GONE);
 			Account.set(email, username, password);
 
 			stayLoggedInBox = (CheckBox) this.findViewById(R.id.stay_logged_in_checkbox);
@@ -196,7 +200,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 	@Override
 	public void operationFailed(String oper) {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: operation failed: "+oper);
-		
+		progressBar.setVisibility(View.GONE);
 	}
 
 	@Override
