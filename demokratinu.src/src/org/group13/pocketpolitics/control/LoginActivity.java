@@ -167,15 +167,18 @@ public class LoginActivity extends Activity implements ServerInterface{
 			Account.set(email, null, password);
 			Syncer.authenticate(this);
 		} else {
-			// TODO show toast no connection found
+			Toast.makeText(getApplicationContext(),
+					"Hittade ingen anslutning", Toast.LENGTH_LONG)
+					.show();
 		}
 	}
 	
 
 	@Override
 	public void authenticateReturned(boolean succeeded, String username) {
+		progressBar.setVisibility(View.GONE);
+		
 		if(succeeded){
-			progressBar.setVisibility(View.GONE);
 			Account.set(email, username, password);
 
 			stayLoggedInBox = (CheckBox) this.findViewById(R.id.stay_logged_in_checkbox);
@@ -201,6 +204,10 @@ public class LoginActivity extends Activity implements ServerInterface{
 	public void operationFailed(String oper) {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: operation failed: "+oper);
 		progressBar.setVisibility(View.GONE);
+		
+		Toast.makeText(getApplicationContext(),
+				"Inloggningen misslyckades, försök igen.", Toast.LENGTH_LONG)
+				.show();
 	}
 
 	@Override
