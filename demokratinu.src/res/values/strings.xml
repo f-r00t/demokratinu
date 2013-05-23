@@ -17,6 +17,7 @@
     <string name="title_detailed_view_description">Något ska stå här? Title detailed view description</string>
     <string name="committeeProposalListItemText">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet diam eros, sed congue erat. Sed iaculis consequat felis vitae blandit. Pellentesque vitae pulvinar eros. Fusce mauris dolor, laoreet eget consectetur non, ultricies ultricies metus. Curabitur placerat nunc a felis eleifend non scelerisque nisl ultrices. Cras a orci est, sit amet ultricies ligula. Phasellus vel nibh in nulla cursus dictum non quis metus. Sed sit amet sagittis ipsum. Etiam vel erat nisl. Curabitur at sollicitudin nunc. Cras rutrum semper felis, non feugiat sapien iaculis non. "</string>
     <string name="committeProposalListItemTitleText">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
-    
+    <string name="title_reg">Registrera</string>
+    <string name="proposal_title">#FF00FF</string>
     
 </resources>

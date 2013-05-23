@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
+    android:background="#FFFFFF"
     android:gravity="center_vertical"
     android:orientation="horizontal" >
 
@@ -10,16 +11,19 @@
         android:id="@+id/attention_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/greenarrow" />
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_attentionbutton" />
 
     <TextView
         android:id="@+id/articleTitle"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
+        android:minLines="3"
         android:paddingLeft="4dp"
         android:paddingRight="8dp"
         android:text="@string/title_item"
+        android:textColor="#242424"
         android:textSize="15sp" />
 
 </LinearLayout>

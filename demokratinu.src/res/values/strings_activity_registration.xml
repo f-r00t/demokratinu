@@ -10,4 +10,5 @@
     <string name="email_taken">E-post upptaget</string>
     <string name="filler_reg_passwordagainfield">Registrera</string>
     <string name="passwords_dont_match">Lösenorden matchar inte</string>
+    
 </resources>

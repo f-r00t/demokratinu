@@ -33,7 +33,7 @@
         <activity
             android:name="org.group13.pocketpolitics.control.FrontPageActivity"
             android:label="@string/app_name"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTop" android:theme="@style/PocketPolitics" android:icon="@drawable/ic_pocketpolitics"/>
         
         <activity
             android:name="org.group13.pocketpolitics.control.ArticleActivity"

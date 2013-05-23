@@ -23,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -50,10 +51,11 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: testing 3");
+		
 		super.onCreate(savedInstanceState);
-		
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_front_page);
-		
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
 		progressBar = findViewById(R.id.progressBarContainer);
 		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
