@@ -190,7 +190,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 	
 	@Override
 	public void operationFailed(String oper) {
-		// TODO Login failed: network error, try again please.
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: operation failed: "+oper);
 		
 	}
 
