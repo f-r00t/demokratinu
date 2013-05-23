@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.user.Account;
+import org.group13.pocketpolitics.model.user.Article;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
@@ -14,7 +14,6 @@ import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -24,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -34,7 +32,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
 
 	private ListView listViewArticles;
-	private List<Agenda> articleList = new ArrayList<Agenda>();
+	private List<Article> articleList = new ArrayList<Article>();
 	
 	private View progressBar;
 

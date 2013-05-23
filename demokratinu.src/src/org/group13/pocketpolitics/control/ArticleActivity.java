@@ -1,15 +1,13 @@
 package org.group13.pocketpolitics.control;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
-import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
+import org.group13.pocketpolitics.model.user.Article;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
-import org.group13.pocketpolitics.view.ArticleListAdapter;
 import org.group13.pocketpolitics.view.CommitteeProposalListAdapter;
 
 import android.app.Activity;
@@ -20,7 +18,6 @@ import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
 	private TextView titleTextView;
@@ -30,7 +27,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private List<CommitteeProposal> listComPro;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
-	private Agenda article;
+	private Article article;
 
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,10 +49,10 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		listViewCommitteeProposal = (ExpandableListView) findViewById(R.id.detailViewVotesList);
 		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
-		titleTextView.setText(article.getTitle());
+		titleTextView.setText(article.getAgenda().getTitle());
 			
 		textTextView = (TextView)findViewById(R.id.activityArticleText);
-		textTextView.setText(article.getSummary());
+		textTextView.setText(article.getAgenda().getSummary());
 	}
 	
 	/*
@@ -89,7 +86,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	 */
 	private void orderVotings(){
 		if(Connected.isConnected(this)){
-			Retriever.retrieveVotes(this, article);
+			Retriever.retrieveVotes(this, article.getAgenda());
 		}
 	}
 	
@@ -114,7 +111,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	@Override
 	public void onSuccess(String result) {
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
-		listComPro =  article.getFors();
+		listComPro =  article.getAgenda().getFors();
 		
 		setAdapter();
 	}
