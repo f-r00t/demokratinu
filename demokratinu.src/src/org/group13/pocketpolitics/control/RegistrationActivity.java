@@ -38,6 +38,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	private EditText emailView;
 	private EditText passwordView;
 	private EditText passwordAgainView;
+	private View progressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,8 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 		// Show the Up button in the action bar.
 		setupActionBar();
 
+		progressBar = findViewById(R.id.progressBarContainer);
+		
 		usernameView = (EditText) findViewById(R.id.reg_username_field);
 		emailView = (EditText) findViewById(R.id.reg_email_field);
 
@@ -164,6 +167,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 			focusView.requestFocus();
 		} else {
 			if(Connected.isConnected(this)){
+				progressBar.setVisibility(View.VISIBLE);
 				Account.set(email, username, password);
 				Syncer.register(this);
 			} else {
@@ -179,6 +183,8 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	public void registrationReturned(boolean succeeded, boolean unameExists,
 			boolean emailExists) {
 		if(succeeded){
+			progressBar.setVisibility(View.GONE);
+			
 			CheckBox checkbox = (CheckBox) this.findViewById(R.id.reg_stay_logged_in_checkbox);
 			
 			 if (checkbox.isChecked()) {
@@ -214,8 +220,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	
 	@Override
 	public void operationFailed(String oper) {
-		// TODO Auto-generated method stub
-		
+		progressBar.setVisibility(View.GONE);
 	}
 
 	@Override

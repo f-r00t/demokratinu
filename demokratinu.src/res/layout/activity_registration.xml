@@ -69,5 +69,5 @@
             
             </LinearLayout>
             </ScrollView>
-            
+            <include layout="@layout/progress_bar" />
 </merge>

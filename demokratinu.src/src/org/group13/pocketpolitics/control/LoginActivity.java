@@ -49,6 +49,12 @@ public class LoginActivity extends Activity implements ServerInterface{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		setContentView(R.layout.activity_login);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
+		
+		progressBar = findViewById(R.id.progressBarContainer);
+		
 		prefs = this.getSharedPreferences("org.group13.pocketpolitics", Context.MODE_PRIVATE);
 		editor = prefs.edit();
 		
@@ -57,11 +63,6 @@ public class LoginActivity extends Activity implements ServerInterface{
 			password = prefs.getString("org.group13.pocketpolitics.password", "");
 			authenticate();
 		}	
-		
-		
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
-		setContentView(R.layout.activity_login);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
 		
 		
 		// Set up the login form.
@@ -162,7 +163,6 @@ public class LoginActivity extends Activity implements ServerInterface{
 	 */
 	private void authenticate() {
 		if(Connected.isConnected(this)){
-			progressBar = findViewById(R.id.loginProgressContainer);
 			progressBar.setVisibility(View.VISIBLE);
 			Account.set(email, null, password);
 			Syncer.authenticate(this);

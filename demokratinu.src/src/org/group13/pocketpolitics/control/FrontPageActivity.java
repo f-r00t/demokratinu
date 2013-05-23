@@ -54,7 +54,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		
 		setContentView(R.layout.activity_front_page);
 		
-		progressBar = findViewById(R.id.frontPageProgressContainer);
+		progressBar = findViewById(R.id.progressBarContainer);
 		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
