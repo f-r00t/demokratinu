@@ -21,32 +21,28 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 
 	public CommitteeProposalListAdapter(Context context, List<CommitteeProposal> items) {
 		super();
-		Log.i("Viking","super");
 		
 		this.items = items;
-		Log.i("Viking","items");
+
 		this.inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		Log.i("Viking","inflater");
+		Log.i("Viking","In adapter: "+items.size());
 	}
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		Log.i("Viking","getVeiw");
 		CommitteeProposal committeProposal = items.get(position);
 		View vi = convertView;
 
-		Log.i("Viking","if");
+
 		if (convertView == null) {
 			vi = inflater.inflate(R.layout.committee_proposal_list_item, null);
 		}
 
-		Log.i("Viking","title");
 		// Sets the title text
 		TextView committeProposalTitle = (TextView) vi.findViewById(R.id.committeeProposalListItemTitle);
 		committeProposalTitle.setText(committeProposal.getTitle());
 		
-		Log.i("Viking","text");
 		//Set text
 		TextView committeProposalText = (TextView) vi.findViewById(R.id.committeeProposalListItemText);
 		committeProposalText.setText(committeProposal.getForslag());
@@ -56,20 +52,17 @@ public class CommitteeProposalListAdapter extends BaseAdapter {
 	
 	@Override
 	public int getCount() {
-		Log.i("Viking","getCount()");
 		return items.size();
 		
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		Log.i("Viking","getItem(int arg0)");
 		return items.get(arg0);
 	}
 
 	@Override
 	public long getItemId(int arg0) {
-		Log.i("Viking","getItemId(int arg0)");
 		return 0;
 	}
 
