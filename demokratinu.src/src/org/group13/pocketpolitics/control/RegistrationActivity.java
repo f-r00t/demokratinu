@@ -171,7 +171,9 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 				Account.set(email, username, password);
 				Syncer.register(this);
 			} else {
-				// TODO show toast no connection found
+				Toast.makeText(getApplicationContext(),
+						"Hittade ingen anslutning", Toast.LENGTH_LONG)
+						.show();
 			}
 			
 		}
@@ -182,9 +184,9 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	@Override
 	public void registrationReturned(boolean succeeded, boolean unameExists,
 			boolean emailExists) {
+		progressBar.setVisibility(View.GONE);
+		
 		if(succeeded){
-			progressBar.setVisibility(View.GONE);
-			
 			CheckBox checkbox = (CheckBox) this.findViewById(R.id.reg_stay_logged_in_checkbox);
 			
 			 if (checkbox.isChecked()) {
@@ -221,6 +223,10 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	@Override
 	public void operationFailed(String oper) {
 		progressBar.setVisibility(View.GONE);
+		
+		Toast.makeText(getApplicationContext(),
+				"Registreringen misslyckades. Försök igen", Toast.LENGTH_LONG)
+				.show();
 	}
 
 	@Override
