@@ -77,10 +77,6 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		titleTextView.setText(title);
 	}
 
-	/*private void setAdapter() {
-		listViewMotions.setAdapter(new MotionListAdapter(this, motionList));
-	}*/
-
 	/**
 	 * Retrives the CommitteeProposals for the article and their respective votes
 	 */
@@ -92,24 +88,26 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	
 	@Override
 	public void onPreExecute() {
-		// TODO Auto-generated method stub
+		// TODO snurrande hjul
 		
 	}
 
 	@Override
 	public void onProgressUpdate(Integer procent) {
-		// TODO Auto-generated method stub
+		// ignore, anropas i nuläget aldrig
 		
 	}
 
 	@Override
 	public void onFailure(String message) {
+		// TODO snurrande hjul
 		Log.w(this.getClass().getSimpleName(),"PocketDebug: Recieve articles failed: "+message);
 		
 	}
 
 	@Override
 	public void onSuccess(String result) {
+		// TODO snurrande hjul
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
 		listComPro =  article.getAgenda().getFors();
 		
