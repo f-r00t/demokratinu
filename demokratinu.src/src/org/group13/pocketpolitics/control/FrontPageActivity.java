@@ -14,6 +14,7 @@ import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
 import org.group13.pocketpolitics.view.ArticleListAdapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -23,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
@@ -33,6 +35,8 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 	private ListView listViewArticles;
 	private List<Agenda> articleList = new ArrayList<Agenda>();
+	
+	private View progressBar;
 
 	@Override
 	protected void onResume() {
@@ -51,6 +55,8 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_front_page);
+		
+		progressBar = findViewById(R.id.frontPageProgressContainer);
 		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
 		listViewArticles.setOnItemClickListener(new OnItemClickListener() {
@@ -121,10 +127,9 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 
 	@Override
 	public void onPreExecute() {
-		// TODO Skapa snurrande hjul någonstans i guit
-
+		progressBar.setVisibility(View.VISIBLE);
 	}
-
+	
 	@Override
 	public void onProgressUpdate(Integer procent) {
 	}
@@ -133,6 +138,8 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 	public void onSuccess(QueryResult result) {
 		Log.i(this.getClass().getSimpleName(),"PocketDebug: Recieved page no "+result.getThisPage());
 
+		progressBar.setVisibility(View.GONE);
+		
 		ArticleMemoryController.retrievedPage(result);
 		articleList=ArticleMemoryController.articles();
 		setAdapter();

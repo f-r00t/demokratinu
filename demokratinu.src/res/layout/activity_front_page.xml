@@ -10,6 +10,21 @@
     tools:context=".FrontPageActivity" >
 
     <LinearLayout
+        android:id="@+id/frontPageProgressContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <ProgressBar
+        android:id="@+id/frontPageProgressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    
+    <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,5 +42,4 @@
             android:clickable="true" >
         </ListView>
     </LinearLayout>
-
 </RelativeLayout>
