@@ -17,7 +17,7 @@ import android.util.Log;
  * @author Leif
  *
  */
-public class ArticleMemoryController {
+class ArticleMemoryController {
 	private static ArticleMemoryController INSTANCE;
 	
 	// TODO Make ArticleMemCtrl should handle Articles, not Articles

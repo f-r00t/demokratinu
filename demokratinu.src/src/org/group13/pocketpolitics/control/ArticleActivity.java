@@ -24,7 +24,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private TextView textTextView;
 	private ListView listViewMotions;
 	private ExpandableListView listViewCommitteeProposal;
-	private List<CommitteeProposal> listComPro;
+	//private List<CommitteeProposal> listComPro;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
 	private Article article;
@@ -109,12 +109,13 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	public void onSuccess(String result) {
 		// TODO snurrande hjul
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
-		listComPro =  article.getAgenda().getFors();
+		//listComPro =  article.getAgenda().getFors();
 		
 		setAdapter();
 	}
 	
 	private void setAdapter() {
+		List<CommitteeProposal> listComPro = article.getAgenda().getFors();
 		Log.i("Viking","Before setAdapter: "+listComPro.size());
 		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this.getApplicationContext(), listComPro));
 	}
