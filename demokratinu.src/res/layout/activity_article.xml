@@ -30,10 +30,10 @@
         android:layout_margin="15dp"
         android:text="Riksdagen sa nej till motioner från allmänna motionstiden 2012 om familjerätt. Motionerna handlar om utredningar om faderskap, talerätt i mål om fastställande av faderskap, föräldraskap vid assisterad befruktning, adoption, översyn av vårdnadsreglerna, riskbedömningar vid vårdnadstvister, fler än två vårdnadshavare, automatisk gemensam vårdnad för ogifta föräldrar, särskilt biträde för barn i vårdnadsmål, olovligt bortförda barn i internationella förhållanden, umgängesrätt för biologisk förälder, umgängesrätt för annan än biologisk förälder och tillsyn av överförmyndare. Andra motioner handlar om gode män, god man för ensamkommande flyktingbarn, införande av barnbalk, ersättning till vigselförrättare, tvångs- och barnäktenskap, så kallade flersamma förhållanden, ändringar i namnlagen, retroaktiva namnbyten, laglott, särkullbarns och efterlevande makes arvsrätt, arvsrätt för kusiner och registrering av testamenten." />
 
-    <ListView
+    <ExpandableListView
         android:id="@+id/detailViewVotesList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </ListView>
+        android:layout_height="wrap_content" >
+    </ExpandableListView>
 
 </LinearLayout></ScrollView>
