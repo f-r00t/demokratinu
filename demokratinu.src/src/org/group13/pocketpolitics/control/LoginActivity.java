@@ -3,6 +3,7 @@ package org.group13.pocketpolitics.control;
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.model.user.ArticleData;
+import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.server.ServerInterface;
 import org.group13.pocketpolitics.net.server.Syncer;
 
@@ -159,8 +160,12 @@ public class LoginActivity extends Activity implements ServerInterface{
 	 * Order authentication from the server in order to login.
 	 */
 	private void authenticate() {
-		Account.set(email, null, password);
-		Syncer.authenticate(this);
+		if(Connected.isConnected(this)){
+			Account.set(email, null, password);
+			Syncer.authenticate(this);
+		} else {
+			// TODO show toast no connection found
+		}
 	}
 	
 

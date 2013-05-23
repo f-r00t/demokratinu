@@ -3,6 +3,7 @@ package org.group13.pocketpolitics.control;
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.model.user.ArticleData;
+import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.server.ServerInterface;
 import org.group13.pocketpolitics.net.server.Syncer;
 
@@ -162,8 +163,13 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 			// form field with an error.
 			focusView.requestFocus();
 		} else {
-			Account.set(email, username, password);
-			Syncer.register(this);
+			if(Connected.isConnected(this)){
+				Account.set(email, username, password);
+				Syncer.register(this);
+			} else {
+				// TODO show toast no connection found
+			}
+			
 		}
 	}
 
