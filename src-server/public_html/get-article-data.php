@@ -41,14 +41,17 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['article']))
         $stmt->bindParam(":article", $article);
         $stmt->execute();
         
-        while ($dbcollected = $stmt->fetch()) {
-            $replies[$dbcollected['id']] = ["numberOfLikes" => 0,
+        while ($dbcollected = $stmt->fetch()) {       
+
+
+    $replies[$dbcollected['id']] = array("numberOfLikes" => 0,
                                             "numberOfDislikes" => 0,
                                             "ownOpinion" => 0,
                                             "author" => $dbcollected['author'],
                                             "content" => $dbcollected['content'],
-                                            "replies" => "[]"];
-        }
+                                            "replies" => "[]");
+       
+ }
         
     
         $sql = "SELECT * FROM votes WHERE issue LIKE :article";
@@ -59,9 +62,9 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['article']))
         while($dbcollected = $stmt->fetch()) {
             if (strpos($dbcollected['issue'], '#') !== false) {
                 if (!array_key_exists($dbcollected['issue'], $cp)) {
-                    $cp[$dbcollected['issue']] = ["numberOfLikes" => 0,
+                    $cp[$dbcollected['issue']] = array("numberOfLikes" => 0,
                                                   "numberOfDislikes" => 0,
-                                                  "ownOpinion" => 0];
+                                                  "ownOpinion" => 0);
                 }
             
                 if ($dbcollected['opinion'] == "1") {
@@ -140,12 +143,15 @@ if ($success == "true") {
             $replyStrings[$keyParent] = addReply($replyStrings[$keyParent], $replyStrings[$key]);
         }
     }
-    
+    $i = 0;
     array_reverse($replyStrings);
-    
     foreach ($replyStrings as $key => $value) {
         if (preg_match($firstPattern, $key)) {
-            echo $replyStrings[$key];
+if ($i > 0) {
+echo ", ";
+}  
+          echo $replyStrings[$key];
+$i++;
         }
     }
     
