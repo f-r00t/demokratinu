@@ -7,7 +7,7 @@ public class Article {
 	private Agenda agenda;
 	private ArticleData data;
 	
-	Article(Agenda agenda, ArticleData data){
+	public Article(Agenda agenda, ArticleData data){
 		this.data = data;
 		this.agenda = agenda;
 	}

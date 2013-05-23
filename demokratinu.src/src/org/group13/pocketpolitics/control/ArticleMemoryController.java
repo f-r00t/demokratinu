@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.group13.pocketpolitics.model.riksdag.Agenda;
 import org.group13.pocketpolitics.model.riksdag.Committee;
+import org.group13.pocketpolitics.model.user.Article;
 import org.group13.pocketpolitics.net.riksdag.data.Filter;
 import org.group13.pocketpolitics.net.riksdag.data.QueryParam;
 import org.group13.pocketpolitics.net.riksdag.data.QueryResult;
@@ -19,8 +20,8 @@ import android.util.Log;
 public class ArticleMemoryController {
 	private static ArticleMemoryController INSTANCE;
 	
-	// TODO Make ArticleMemCtrl should handle Articles, not Agendas
-	private List<Agenda> articles;
+	// TODO Make ArticleMemCtrl should handle Articles, not Articles
+	private List<Article> articles;
 	private Filter filter;
 	private int lastPage;
 	private int totalPages;
@@ -35,7 +36,11 @@ public class ArticleMemoryController {
 		
 		
 		INSTANCE.lastPage++;
-		INSTANCE.articles.addAll(result.getArts());
+		List<Agenda> resulta = result.getArts();
+		for(Agenda ag : resulta){
+			INSTANCE.articles.add(new Article(ag, null));
+		}
+		//INSTANCE.articles.addAll(result.getArts());
 		return result.getThisPage();
 	}
 	
@@ -68,7 +73,7 @@ public class ArticleMemoryController {
 		return INSTANCE.filter;
 	}
 	
-	public static List<Agenda> articles(){
+	public static List<Article> articles(){
 		checkInstance();
 		return INSTANCE.articles;
 	}
@@ -81,7 +86,7 @@ public class ArticleMemoryController {
 		reset(INSTANCE, f);
 	}
 	
-	public static Agenda article(int ix){
+	public static Article article(int ix){
 		checkInstance();
 		if(ix < INSTANCE.articles.size() && ix>-1){
 			return INSTANCE.articles.get(ix);
@@ -97,7 +102,7 @@ public class ArticleMemoryController {
 	
 
 	private ArticleMemoryController(){
-		articles = new ArrayList<Agenda>();
+		articles = new ArrayList<Article>();
 		filter = new Filter("", "", -1, Committee.NULL);
 		reset(this, filter);
 	}
