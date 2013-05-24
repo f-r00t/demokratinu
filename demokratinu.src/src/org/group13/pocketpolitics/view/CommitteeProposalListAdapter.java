@@ -69,6 +69,7 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 		// indent the child element a bit
 		row.setPadding(20, 0, 0, 0);
+		notifyDataSetChanged();
 		return row;
 	}
 
@@ -107,6 +108,7 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 		row.setTypeface(Typeface.DEFAULT_BOLD);
 		row.setTextSize(16);
 		row.setText(listTopics.get(groupPosition));
+		notifyDataSetChanged();
 		return row;
 	}
 
