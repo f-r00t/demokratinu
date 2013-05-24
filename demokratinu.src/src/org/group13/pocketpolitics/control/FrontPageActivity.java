@@ -53,9 +53,9 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: testing 3");
 		
 		super.onCreate(savedInstanceState);
-		//requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
 		setContentView(R.layout.activity_front_page);
-		//getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
+		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.pp_titlebar);
 		progressBar = findViewById(R.id.progressBarContainer);
 		
 		listViewArticles = (ListView) findViewById(R.id.article_list);
