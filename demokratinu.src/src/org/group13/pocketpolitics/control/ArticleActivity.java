@@ -117,6 +117,6 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private void setAdapter() {
 		List<CommitteeProposal> listComPro = article.getAgenda().getFors();
 		Log.i("Viking","Before setAdapter: "+listComPro.size());
-		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this.getApplicationContext(), listComPro));
+		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this, listComPro));
 	}
 }
