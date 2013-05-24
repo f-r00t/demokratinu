@@ -31,13 +31,17 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 		this.context = context;
 		
 		listTopics = new ArrayList<String>(items.size());
-		listNotes = new ArrayList<List<CommitteeProposal>>(items.size());
+		listNotes = new ArrayList<List<CommitteeProposal>>();
 		
 		for (CommitteeProposal element : items) {
 			listTopics.add(element.getTitle());
+			ArrayList<CommitteeProposal> elementList = new ArrayList<CommitteeProposal>();
+			elementList.add(element);
+			listNotes.add(elementList);
 		}
 		
-		listNotes.add(items);
+		Log.i("Viking","Size dim 1: "+listNotes.size());
+		Log.i("Viking","Size dim 2: "+listNotes.get(0).size());
 	}
 
 	@Override
@@ -69,7 +73,9 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 		// indent the child element a bit
 		row.setPadding(20, 0, 0, 0);
-		notifyDataSetChanged();
+		//notifyDataSetChanged();
+		
+		//Log.i("Viking","In child: "+getChild(groupPosition, childPosition).getForslag());
 		return row;
 	}
 
@@ -108,7 +114,9 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 		row.setTypeface(Typeface.DEFAULT_BOLD);
 		row.setTextSize(16);
 		row.setText(listTopics.get(groupPosition));
-		notifyDataSetChanged();
+		row.setPadding(45, 0, 0, 0);
+		//notifyDataSetChanged();
+		//Log.i("Viking","In parent: "+listTopics.get(groupPosition));
 		return row;
 	}
 
