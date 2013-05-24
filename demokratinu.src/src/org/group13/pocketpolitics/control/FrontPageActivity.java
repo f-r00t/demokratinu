@@ -103,7 +103,6 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		editor.putString("org.group13.pocketpolitics.password", "");
 		editor.commit();
 		
-		ArticleMemoryController.flush();
 		Account.set("", "", "");
 		
 		Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -117,7 +116,6 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 			if(qpar !=null){
 				Retriever.retrieveArticles(this, qpar);
 			}
-			
 		}
 	}
 
@@ -125,6 +123,12 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 		listViewArticles.setAdapter(new ArticleListAdapter(this, articleList));
 	}
 
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ArticleMemoryController.flush();
+	}
+	
 	@Override
 	public void onPreExecute() {
 		progressBar.setVisibility(View.VISIBLE);
