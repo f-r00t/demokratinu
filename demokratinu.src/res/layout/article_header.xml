@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+	 <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/activityArticleTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:text="Article Title"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activityArticleText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Riksdagen sa nej till motioner från allmänna motionstiden 2012 om familjerätt. Motionerna handlar om utredningar om faderskap, talerätt i mål om fastställande av faderskap, föräldraskap vid assisterad befruktning, adoption, översyn av vårdnadsreglerna, riskbedömningar vid vårdnadstvister, fler än två vårdnadshavare, automatisk gemensam vårdnad för ogifta föräldrar, särskilt biträde för barn i vårdnadsmål, olovligt bortförda barn i internationella förhållanden, umgängesrätt för biologisk förälder, umgängesrätt för annan än biologisk förälder och tillsyn av överförmyndare. Andra motioner handlar om gode män, god man för ensamkommande flyktingbarn, införande av barnbalk, ersättning till vigselförrättare, tvångs- och barnäktenskap, så kallade flersamma förhållanden, ändringar i namnlagen, retroaktiva namnbyten, laglott, särkullbarns och efterlevande makes arvsrätt, arvsrätt för kusiner och registrering av testamenten." />
+    
+</LinearLayout>

@@ -14,7 +14,9 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private TextView textTextView;
 	private ListView listViewMotions;
 	private ExpandableListView listViewCommitteeProposal;
+	private View articleHeader;
 	//private List<CommitteeProposal> listComPro;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
@@ -47,6 +50,9 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		orderVotings();
 		
 		listViewCommitteeProposal = (ExpandableListView) findViewById(R.id.detailViewVotesList);
+		LayoutInflater inflater = LayoutInflater.from(this);
+	    articleHeader = inflater.inflate(R.layout.article_header, null);
+	    listViewCommitteeProposal.addHeaderView(articleHeader);
 		
 		titleTextView = (TextView)findViewById(R.id.activityArticleTitle);
 		titleTextView.setText(article.getAgenda().getTitle());
