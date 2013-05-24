@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="label_activity_main">Welcome dear user to MainActivity</string>
-    <string name="label_activity_registration">RegistrationActivity</string>
+    <string name="label_activity_registration">Registrering</string>
     <string name="label_activity_article">Article</string>
     <string name="label_activity_motion">Motion</string>
     
