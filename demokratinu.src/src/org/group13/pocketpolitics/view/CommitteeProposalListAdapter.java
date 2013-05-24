@@ -13,7 +13,10 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
@@ -81,7 +84,14 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 			for (String element : moprIds) {
 				Button btn = new Button(context);
 				btn.setText(element);
-				//btn.setPadding(20, 0, 0, 0);
+				btn.setOnClickListener(new OnClickListener(){
+
+					@Override
+					public void onClick(View v) {
+						Log.i("Viking","Button was clicked!");
+					}
+					
+				});
 				cpListItemLayout.addView(btn, new LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 			}
