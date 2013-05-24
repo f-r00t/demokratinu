@@ -1,7 +1,6 @@
 package org.group13.pocketpolitics.model.user;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +95,7 @@ public class ArticleGsonTester extends AndroidTestCase{
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void printArticleData(ArticleData d){
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: ArticleData");
 		for(Comment c : d.getReplies()){
