@@ -1,6 +1,5 @@
 package org.group13.pocketpolitics.view;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.group13.pocketpolitics.R;
@@ -8,7 +7,6 @@ import org.group13.pocketpolitics.model.user.Article;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
