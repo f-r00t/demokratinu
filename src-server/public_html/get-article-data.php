@@ -77,7 +77,7 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['article']))
                     $cp[$dbcollected['issue']]['ownOpinion'] = $dbcollected['opinion'];
                 }
             }
-            else if (strpos($dbcollected['issue'], '/' !== false) && !empty($replies['issue'])) {
+            else if (strpos($dbcollected['issue'], '/') !== false && !empty($replies[$dbcollected['issue']])) {
                 if ($dbcollected['opinion'] == "1") {
                     $replies[$dbcollected['issue']]['numberOfLikes']++;
                 }
