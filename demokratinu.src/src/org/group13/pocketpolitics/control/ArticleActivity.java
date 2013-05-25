@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
 	
+	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.ArticleActivity.ARTICLE_NUM";
 	
 	private TextView titleTextView;
 	private TextView textTextView;
@@ -41,7 +42,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		setContentView(R.layout.activity_article);
 		//article = (Article) getIntent().getSerializableExtra("Article");
 		
-		int ix = getIntent().getIntExtra(FrontPageActivity.ARTICLE_NUM_SENT, -1);
+		int ix = getIntent().getIntExtra(ArticleActivity.ARTICLE_NUM_SENT, -1);
 		article = ArticleMemoryController.article(ix);
 		if(article == null){
 			Log.w(this.getClass().getSimpleName(), "PocketDebug: in onCreate(): article null at position "+ix);

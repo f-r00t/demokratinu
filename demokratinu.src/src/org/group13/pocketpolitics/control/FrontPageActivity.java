@@ -29,8 +29,6 @@ import android.widget.ListView;
 
 public class FrontPageActivity extends Activity implements ActivityNetInterface<QueryResult> {
 
-	public static final String ARTICLE_NUM_SENT = "org.group13.pocketpolitics.control.FrontPage.ARTICLE_NUM";
-
 	private ListView listViewArticles;
 	private List<Article> articleList = new ArrayList<Article>();
 	
@@ -69,7 +67,7 @@ public class FrontPageActivity extends Activity implements ActivityNetInterface<
 						.show();
 				*/
 				Intent intent = new Intent(getApplicationContext(), 
-						ArticleActivity.class).putExtra(ARTICLE_NUM_SENT, position);
+						ArticleActivity.class).putExtra(ArticleActivity.ARTICLE_NUM_SENT, position);
 				startActivity(intent);
 			}
 		});
