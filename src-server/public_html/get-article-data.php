@@ -7,7 +7,7 @@ $replies = array();
 $replyStrings = array();
 
 function addReply($parent, $child) {
-    $pattern = '/\'replies\'\s\:\s\[(.+?)\]/';
+    $pattern = '/\'replies\'\s\:\s\[(.+)\]/';
     preg_match($pattern, $parent, $match);
     if ($match[1] != "") {
         return $parent = preg_replace($pattern, ("'replies' : [{$child}, {$match[1]}]"), $parent);
