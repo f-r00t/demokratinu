@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
 	public static final String MOPR_YEAR_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_year";
@@ -21,6 +23,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private String year;
 	private String id;
 	private Moprosition mopr;
+	private ToggleButton likeBtn;
+	private ToggleButton dislikeBtn;
 	
 	//private TextView textTextView;
 	private WebView webView;
@@ -82,7 +86,32 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
 		
-		//webView.loadData(mopr.getText(), "text/html", "UTF-8");
+		likeBtn = (ToggleButton) findViewById(R.id.likeMoproBtn);
+	    dislikeBtn = (ToggleButton) findViewById(R.id.dislikeMoproBtn);
+	    
+	    OnClickListener changeChecker = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (v==likeBtn){
+					if (dislikeBtn.isChecked()){
+						dislikeBtn.setChecked(false);
+					}
+				} else if (v==dislikeBtn) {
+					if (likeBtn.isChecked()){
+						likeBtn.setChecked(false);
+					}
+				}
+				
+			}
+		};
+		
+	    likeBtn.setOnClickListener(changeChecker);
+	    dislikeBtn.setOnClickListener(changeChecker);
+	    
+		
+	    
+	    //webView.loadData(mopr.getText(), "text/html", "UTF-8");
 		
 		// this is also a net-operation, show progressindicator until text is displayed
 		webView.loadUrl(mopr.getTextURL());
@@ -91,6 +120,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		/*
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
 		textTextView.setText(Html.fromHtml(mopr.getText()));*/
+		
+		
 	}
 
 	@Override
@@ -104,5 +135,6 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		textTextView.setText("Inhämtandet misslyckas."); */
 		
 	}
-
 }
+
+
