@@ -30,7 +30,21 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
 		this.id = getIntent().getStringExtra(MoprositionActivity.MOPR_ID_SENT);
 		
+		if(isMotion(this.id)){
+			setTitle(getString(R.string.label_activity_motion));
+		} else {
+			setTitle(getString(R.string.label_activity_proposition));
+		}
+		
 		orderMoprosition();
+	}
+	
+	private static boolean isMotion(String id){
+		boolean motion = false;
+		if(id.matches("\\D+\\d*")){
+			motion = true;
+		}		
+		return motion;
 	}
 	
 	/**
