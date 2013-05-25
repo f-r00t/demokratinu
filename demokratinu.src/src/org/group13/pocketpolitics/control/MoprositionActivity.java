@@ -82,6 +82,9 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	public void onFailure(String message) {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: Retrieve moprosition failed: "+message);
 		// TODO snurrande hjul
+		textTextView = (TextView)findViewById(R.id.moprositionTextView);
+		textTextView.setText("Inhämtandet misslyckas.");
+		
 	}
 
 }
