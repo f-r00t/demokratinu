@@ -18,7 +18,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 	
 	private final String xmlns = null;
 	
-	private final Agenda article;
+	private final Agenda agenda;
 	
 	//private final String dokCode;	//H001...
 	//private final String motionId;
@@ -31,7 +31,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 	 */
 	VotesAsyncTask(ActivityNetInterface<String> act, Agenda article){
 		super(act);
-		this.article = article;
+		this.agenda = article;
 		//this.act = act;
 	}
 	
@@ -44,7 +44,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 			this.cancel(true);
 		}
 		
-		if(article == null || article.getId() == null){
+		if(agenda == null || agenda.getId() == null){
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: in @.onPreExecute: Article is null or has no id!");
 			this.cancel(true);
 		}
@@ -53,8 +53,8 @@ public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 	@Override
 	protected String doInBackground(Agenda... params) {
 		
-		String url = URL+article.getId();
-		return retrieve(url, article);
+		String url = URL+agenda.getId();
+		return retrieve(url, agenda);
 	}
 	
 	@Override
@@ -113,8 +113,8 @@ public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 			return null;
 		}
 		
-		article.setFors(lForslag);
-		return article.getId();
+		agenda.setFors(lForslag);
+		return agenda.getId();
 	}
 	
 	private CommitteeProposal parseForslag(XmlPullParser parser) throws XmlPullParserException, IOException{
@@ -287,7 +287,7 @@ public class VotesAsyncTask extends XmlAsyncTask<Agenda, String> {
 			//Log.i(this.getClass().getSimpleName(), "PocketDebug: in .parseDokument(): looking at <" + name + ">");
 			
 			if(name.equals("dok_id")){
-				correct = this.readString(parser, "dok_id", xmlns).equals(this.article.getId());
+				correct = this.readString(parser, "dok_id", xmlns).equals(this.agenda.getId());
 			} else {
 				skip(parser);
 			}
