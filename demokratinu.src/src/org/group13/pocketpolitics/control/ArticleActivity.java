@@ -22,6 +22,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
+	
+	public static final String MOPR_YEAR_SENT = "org.group13.pocketpolitics.control.sent_year";
+	public static final String MOPR_ID_SENT = "org.group13.pocketpolitics.control.sent_id";
+	
 	private TextView titleTextView;
 	private TextView textTextView;
 	private ListView listViewMotions;
