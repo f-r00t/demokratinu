@@ -35,6 +35,8 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		Account.set("debug@chalmers.se", "debug", "debug");
 		
 		Syncer.getOpinions(this, ISSUE);
+		
+		this.waitTillReturn();
 	}
 	
 	public void atestArticleDataGson(){
