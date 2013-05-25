@@ -25,6 +25,8 @@
     <string name="register_operation_failed">Registreringen misslyckades. Försök igen</string>
     <string name="error_invalid_username">För kort användarnamn</string>
     
+    <string name="action_forgot_password">Glömt lösenord</string>
+    
     <!-- Common strings -->
     <string name="error_invalid_password">För kort lösenord</string>
     <string name="error_invalid_email">Felaktig e-post</string>

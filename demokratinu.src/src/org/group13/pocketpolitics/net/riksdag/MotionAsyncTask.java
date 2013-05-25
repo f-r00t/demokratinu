@@ -120,6 +120,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 	 * @throws IOException 
 	 * @throws XmlPullParserException 
 	 */
+	@Deprecated
 	@SuppressWarnings("unused")
 	private String[] parseDokforslag(XmlPullParser parser, boolean motion) throws XmlPullParserException, IOException{
 		String[] strs = new String[]{"", ""};
@@ -223,6 +224,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 	 * @param mop
 	 * @return
 	 */
+	@Deprecated
 	@SuppressWarnings("unused")
 	private boolean retrieveText(Moprosition mop){
 

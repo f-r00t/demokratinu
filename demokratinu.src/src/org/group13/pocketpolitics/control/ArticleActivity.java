@@ -34,6 +34,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private Article article;
 
 
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
