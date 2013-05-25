@@ -9,7 +9,7 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['moprosition
           
     $email = trim($_POST['email']);
     $pass = $_POST['pass'];
-    $article = trim($_POST['moprosition']);
+    $moprosition = trim($_POST['moprosition']);
             
     $sql = "SELECT password FROM users WHERE email = :email";
     $stmt = $dbh->prepare($sql);
@@ -26,19 +26,19 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['moprosition
         $stmt->bindParam(":moprosition", $moprosition);
         $stmt->execute();
         
-        $moprositionOpinions = new array("totalLikes" => 0,
+        $moprositionOpinions = Array("totalLikes" => 0,
                                           "totalDislikes" => 0,
                                           "ownOpinion" => 0);
         
-        while ($stmt->fetch()) {
+        while ($dbcollected = $stmt->fetch()) {
             if ($dbcollected['voter'] == $email) {
                 $moprositionOpinons['ownOpinion'] = $dbcollected['opinion'];
             }
-            if ($dbcollected[opinion] == "1") {
+            if ($dbcollected['opinion'] == "1") {
                 $moprositionOpinions['totalLikes']++;
             }
-            else if ($dbcollected[opinion] == "1") {
-                $moprositionOpinions['totalDisikes']++;
+            else if ($dbcollected['opinion'] == "-1") {
+                $moprositionOpinions['totalDislikes']++;
             }
         }
     }
@@ -50,7 +50,7 @@ else {
 echo "{'success' : '{$success}'";
 
 if ($success == "true") {
-    for ($moprositionOpinions as $key => $value) {
+    foreach ($moprositionOpinions as $key => $value) {
         echo ", '{$key}' : {$value}";
     }
 }
