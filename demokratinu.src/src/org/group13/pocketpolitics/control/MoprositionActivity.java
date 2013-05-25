@@ -81,10 +81,13 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
-		progressBar.setVisibility(View.GONE);
 		
 		//webView.loadData(mopr.getText(), "text/html", "UTF-8");
+		
+		// this is also a net-operation, show progressindicator until text is displayed
 		webView.loadUrl(mopr.getTextURL());
+		progressBar.setVisibility(View.GONE);
+		
 		/*
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
 		textTextView.setText(Html.fromHtml(mopr.getText()));*/
