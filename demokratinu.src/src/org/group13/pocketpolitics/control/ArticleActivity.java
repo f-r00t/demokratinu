@@ -18,7 +18,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
-//import android.widget.ListView;
 import android.widget.TextView;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
@@ -27,13 +26,10 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	
 	private TextView titleTextView;
 	private TextView textTextView;
-	//private ListView listViewMotions;
+	
 	private ExpandableListView listViewCommitteeProposal;
 	private View articleHeader;
 	private View progressBar;
-	
-	//private List<CommitteeProposal> listComPro;
-	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
 	private Article article;
 
@@ -42,7 +38,6 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article);
-		//article = (Article) getIntent().getSerializableExtra("Article");
 		
 		this.progressBar = findViewById(R.id.progressBarContainer);
 		
