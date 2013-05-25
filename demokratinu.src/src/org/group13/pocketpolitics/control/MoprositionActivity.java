@@ -8,6 +8,7 @@ import org.group13.pocketpolitics.net.riksdag.Retriever;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -18,7 +19,6 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private String year;
 	private String id;
 	private Moprosition mopr;
-	private TextView titleTextView;
 	private TextView textTextView;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,13 +59,9 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
-		// TODO snurrande hjul
-		
-		titleTextView = (TextView)findViewById(R.id.moprositionTitleText);
-		titleTextView.setText(result.getTitle());
-			
+		// TODO snurrande hjul		
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
-		textTextView.setText(result.getText());
+		textTextView.setText(Html.fromHtml(mopr.getText()));
 	}
 
 	@Override
