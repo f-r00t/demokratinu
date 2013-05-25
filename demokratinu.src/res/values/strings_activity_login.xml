@@ -13,5 +13,7 @@
     <string name="error_incorrect_password">Inkorrekt lösenord</string>
     <string name="error_field_required">Fältet måste fyllas i</string>
     <string name="filler_passwordfield">Logga in</string>
+    <string name="wrong_email_or_password">Felaktig e-post eller lösenord</string>
+    <string name="login_failed_unknown_reason">Inloggningen misslyckades, försök igen.</string>
 
 </resources>

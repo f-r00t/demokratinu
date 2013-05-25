@@ -19,5 +19,6 @@
     <string name="committeProposalListItemTitleText">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
     <string name="title_reg">Registrera</string>
     <string name="proposal_title">#FF00FF</string>
+    <string name="no_connection_found">Hittade ingen anslutning</string>
     
 </resources>

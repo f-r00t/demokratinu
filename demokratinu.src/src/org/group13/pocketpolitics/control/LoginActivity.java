@@ -168,7 +168,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 			Syncer.authenticate(this);
 		} else {
 			Toast.makeText(getApplicationContext(),
-					"Hittade ingen anslutning", Toast.LENGTH_LONG)
+					getString(R.string.no_connection_found), Toast.LENGTH_LONG)
 					.show();
 		}
 	}
@@ -195,7 +195,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 			finish();
 		} else {
 			Toast.makeText(getApplicationContext(),
-					"Felaktig e-post eller lösenord", Toast.LENGTH_LONG)
+					getString(R.string.wrong_email_or_password), Toast.LENGTH_LONG)
 					.show();
 		}
 	}
@@ -206,7 +206,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 		progressBar.setVisibility(View.GONE);
 		
 		Toast.makeText(getApplicationContext(),
-				"Inloggningen misslyckades, försök igen.", Toast.LENGTH_LONG)
+				getString(R.string.login_failed_unknown_reason), Toast.LENGTH_LONG)
 				.show();
 	}
 
