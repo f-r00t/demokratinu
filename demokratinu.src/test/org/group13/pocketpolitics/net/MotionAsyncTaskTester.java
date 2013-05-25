@@ -44,7 +44,7 @@ public class MotionAsyncTaskTester extends AndroidTestCase implements ActivityNe
 	}
 	
 	private void atestMotion(){
-		Retriever.retrieveMoprosition(this, "2012/13", "A1");
+		Retriever.retrieveMoprosition(this, "2012/13", "Kr320");
 	}
 	
 	private void atestProposition(){
