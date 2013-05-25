@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.zip.Inflater;
 
 import org.group13.pocketpolitics.R;
+import org.group13.pocketpolitics.control.ArticleActivity;
+import org.group13.pocketpolitics.control.MoprositionActivity;
 import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -81,16 +84,29 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 			LinearLayout cpListItemLayout = (LinearLayout) vi
 					.findViewById(R.id.committeeProposalLinearLayout);
-			for (String element : moprIds) {
+
+			for (int i = 0; i < moprIds.size() && i < moprYrs.size(); i++) {
 				Button btn = new Button(context);
-				btn.setText(element);
-				btn.setOnClickListener(new OnClickListener(){
+				btn.setText(moprYrs.get(i) + ":" + moprIds.get(i));
+
+				final String THIS_YEAR = moprYrs.get(i);
+				final String THIS_ID = moprIds.get(i);
+				
+				btn.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
-						Log.i("Viking","Button was clicked!");
+						Log.i("Viking", "Button was clicked!");
+
+						Intent intent = new Intent(context,
+								MoprositionActivity.class);
+						intent.putExtra(MoprositionActivity.MOPR_YEAR_SENT,
+								THIS_YEAR);
+						intent.putExtra(MoprositionActivity.MOPR_ID_SENT,
+								THIS_ID);
+						context.startActivity(intent);
 					}
-					
+
 				});
 				cpListItemLayout.addView(btn, new LayoutParams(
 						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -166,42 +182,3 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 	}
 
 }
-
-/*
- * LayoutInflater inflater; List<CommitteeProposal> items;
- * 
- * public CommitteeProposalListAdapter(Context context, List<CommitteeProposal>
- * items) { super();
- * 
- * this.items = items;
- * 
- * this.inflater = (LayoutInflater) context
- * .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
- * Log.i("Viking","In adapter: "+items.size()); }
- * 
- * @Override public View getView(final int position, View convertView, ViewGroup
- * parent) { CommitteeProposal committeProposal = items.get(position); View vi =
- * convertView;
- * 
- * 
- * if (convertView == null) { vi =
- * inflater.inflate(R.layout.committee_proposal_list_item, null); }
- * 
- * // Sets the title text TextView committeProposalTitle = (TextView)
- * vi.findViewById(R.id.committeeProposalListItemTitle);
- * committeProposalTitle.setText(committeProposal.getTitle());
- * 
- * //Set text TextView committeProposalText = (TextView)
- * vi.findViewById(R.id.committeeProposalListItemText);
- * committeProposalText.setText(committeProposal.getForslag());
- * 
- * return vi; }
- * 
- * @Override public int getCount() { return items.size();
- * 
- * }
- * 
- * @Override public Object getItem(int arg0) { return items.get(arg0); }
- * 
- * @Override public long getItemId(int arg0) { return 0; }
- */
