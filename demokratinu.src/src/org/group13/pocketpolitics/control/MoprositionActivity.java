@@ -1,5 +1,6 @@
 package org.group13.pocketpolitics.control;
 
+import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Moprosition;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
@@ -8,6 +9,7 @@ import org.group13.pocketpolitics.net.riksdag.Retriever;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
 	public static final String MOPR_YEAR_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_year";
@@ -16,10 +18,14 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private String year;
 	private String id;
 	private Moprosition mopr;
+	private TextView titleTextView;
+	private TextView textTextView;
 	
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_moprosition);
+		
 		this.mopr = null;
 		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
 		this.id = getIntent().getStringExtra(MoprositionActivity.MOPR_ID_SENT);
@@ -55,13 +61,17 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		this.mopr = result;
 		// TODO snurrande hjul
 		
+		titleTextView = (TextView)findViewById(R.id.moprositionTitleText);
+		titleTextView.setText(result.getTitle());
+			
+		textTextView = (TextView)findViewById(R.id.moprositionTextView);
+		textTextView.setText(result.getText());
 	}
 
 	@Override
 	public void onFailure(String message) {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: Retrieve moprosition failed: "+message);
 		// TODO snurrande hjul
-		
 	}
 
 }
