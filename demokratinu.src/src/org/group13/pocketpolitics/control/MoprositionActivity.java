@@ -2,9 +2,12 @@ package org.group13.pocketpolitics.control;
 
 import org.group13.pocketpolitics.R;
 import org.group13.pocketpolitics.model.riksdag.Moprosition;
+import org.group13.pocketpolitics.model.user.ArticleData;
 import org.group13.pocketpolitics.net.Connected;
 import org.group13.pocketpolitics.net.riksdag.ActivityNetInterface;
 import org.group13.pocketpolitics.net.riksdag.Retriever;
+import org.group13.pocketpolitics.net.server.ServerInterface;
+import org.group13.pocketpolitics.net.server.Syncer;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,7 +19,7 @@ import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
+public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>, ServerInterface{
 	public static final String MOPR_YEAR_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_year";
 	public static final String MOPR_ID_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_id";
 	
@@ -114,7 +117,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		likeBtn = (ToggleButton) findViewById(R.id.likeMoproBtn);
 	    dislikeBtn = (ToggleButton) findViewById(R.id.dislikeMoproBtn);
 	    likeDislikeTV = (TextView) findViewById(R.id.likeDislikeMoproTV);
-	    likeDislikeTV.setText("Likes: 0 Dislikes: 0"); //TODO 
+	    likeDislikeTV.setText("Likes: ? Dislikes: ?"); 
 	    
 	    OnClickListener changeChecker = new OnClickListener() {
 
@@ -129,25 +132,25 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 						likeBtn.setChecked(false);
 					}
 				}
+				int opinion = 0; 
+				if(likeBtn.isChecked()){
+					opinion = 1;
+				} else if(dislikeBtn.isChecked()){
+					opinion = -1;
+				}
 				
+				//Syncer.postOpinion(this, "issue", opinion);
 			}
 		};
 		
 	    likeBtn.setOnClickListener(changeChecker);
 	    dislikeBtn.setOnClickListener(changeChecker);
 	    
-		
-	    
-	    //webView.loadData(mopr.getText(), "text/html", "UTF-8");
-		
 
 		// this is also a net-operation, show progressindicator until text is displayed
 		webView.loadUrl(mopr.getTextURL());
 		progressBar.setVisibility(View.GONE);
 
-		/*
-		textTextView = (TextView)findViewById(R.id.moprositionTextView);
-		textTextView.setText(Html.fromHtml(mopr.getText()));*/
 	}
 
 	@Override
@@ -156,6 +159,42 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		progressBar.setVisibility(View.GONE);
 		
 		webView.loadData("<p>Hämtningen misslyckades.</p>", "text/html", "UTF-8");
+	}
+
+	@Override
+	public void postOpinionReturned(boolean succeded) {
+		// TODO 
+		likeDislikeTV.setText("Likes: 1 Dislikes: 1");
+	}
+	
+	@Override
+	public void getArticleDataReturned(ArticleData data) {
+		// TODO
+		
+	}
+	
+	@Override
+	public void operationFailed(String oper) {
+		// TODO Auto-generated method stub
+	}
+	
+	@Override
+	public void authenticateReturned(boolean succeded, String username) {
+		// ignore
+	}
+
+	@Override
+	public void registrationReturned(boolean succeded, boolean unameExists,
+			boolean emailExists) {
+		// ignore
+	}
+
+	
+
+	@Override
+	public void postCommentReturned(boolean succeded) {
+		// ignore
+		
 	}
 }
 
