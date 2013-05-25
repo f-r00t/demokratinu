@@ -53,8 +53,7 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public CommitteeProposal getChild(int groupPosition, int childPosition) {
-		// TODO Auto-generated method stub
-		return getGroup(groupPosition).get(childPosition); // mNotes[groupPosition][childPosition];
+		return getGroup(groupPosition).get(childPosition);
 	}
 
 	@Override
@@ -126,7 +125,6 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public int getChildrenCount(int groupPosition) {
-		// TODO Auto-generated method stub
 		return getGroup(groupPosition).size();
 	}
 
@@ -137,7 +135,6 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 	@Override
 	public int getGroupCount() {
-		// TODO Auto-generated method stub
 		return listNotes.size();
 	}
 
