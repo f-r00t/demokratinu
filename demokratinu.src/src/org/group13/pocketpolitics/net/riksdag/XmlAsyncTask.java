@@ -79,11 +79,11 @@ abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 			
 			return parsedXml;
 		} catch (XmlPullParserException e) {
-			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieve() caught XmlPullParserException",e);
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieve() caught XmlPullParserException"+e,e);
 			e.printStackTrace();
 			this.cancel(true);
 		} catch (IOException e) {
-			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieve() caught IOException",e);
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: in .retrieve() caught IOException"+e,e);
 			e.printStackTrace();
 			this.cancel(true);
 		}
