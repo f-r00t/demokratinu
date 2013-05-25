@@ -88,10 +88,12 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		}
 
 		while(parser.next()!=XmlPullParser.START_TAG);
-		String[] strs = parseDokforslag(parser, ddata.motion);
+		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
+		skip(parser);
 		
-		String utskottet = strs[0];
-		String kammaren = strs[1];
+		//String[] strs = parseDokforslag(parser, ddata.motion);
+		//String utskottet = strs[0];
+		//String kammaren = strs[1];
 		
 
 		while(parser.next()!=XmlPullParser.START_TAG);
@@ -99,7 +101,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 
 		Moprosition ret;
 		if(ddata.motion){
-			ret = new Motion(intressenter, ddata.textURL, ddata.rm, ddata.beteckning, ddata.subtype, ddata.title, ddata.subtitle, ddata.uts, kammaren, utskottet);
+			ret = new Motion(intressenter, ddata.textURL, ddata.rm, ddata.beteckning, ddata.subtype, ddata.title, ddata.subtitle, ddata.uts);
 		} else {
 			ret = new Proposition(ddata.textURL, ddata.rm, ddata.beteckning, ddata.title, ddata.uts);
 		}
@@ -110,19 +112,28 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 	}
 
 	/**
-	 * 
+	 * Parses "dokforslag" tag in xml. Data unused.
+	 * @deprecated
 	 * @param parser
 	 * @param motion
 	 * @return String [utskottet, kammaren]
 	 * @throws IOException 
 	 * @throws XmlPullParserException 
 	 */
+	@SuppressWarnings("unused")
 	private String[] parseDokforslag(XmlPullParser parser, boolean motion) throws XmlPullParserException, IOException{
-		String[] strs = new String[2];
+		String[] strs = new String[]{"", ""};
 
 		parser.require(XmlPullParser.START_TAG, xmlns, "dokforslag");
+		
+		while(parser.next()!=XmlPullParser.END_TAG){
+			if(parser.getEventType()!=XmlPullParser.START_TAG){
+				continue;
+			}
+			skip(parser);
+		}
 
-		if(motion){
+		/*if(motion){
 			while(parser.next()!=XmlPullParser.START_TAG);
 			parser.require(XmlPullParser.START_TAG, xmlns, "forslag");
 			while(parser.next()!=XmlPullParser.END_TAG && !this.isCancelled()){
@@ -145,7 +156,9 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 			parser.require(XmlPullParser.END_TAG, xmlns, "dokforslag");
 		} else {
 			skip(parser);
-		}
+		}*/
+		
+		parser.require(XmlPullParser.END_TAG, xmlns, "dokforslag");
 
 		return strs;
 	}
