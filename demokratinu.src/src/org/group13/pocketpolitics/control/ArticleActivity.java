@@ -18,7 +18,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
+//import android.widget.ListView;
 import android.widget.TextView;
 
 public class ArticleActivity extends Activity implements ActivityNetInterface<String>{
@@ -27,9 +27,11 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	
 	private TextView titleTextView;
 	private TextView textTextView;
-	private ListView listViewMotions;
+	//private ListView listViewMotions;
 	private ExpandableListView listViewCommitteeProposal;
 	private View articleHeader;
+	private View progressBar;
+	
 	//private List<CommitteeProposal> listComPro;
 	//private ArrayList<Motion> motionList = new ArrayList<Motion>();
 	
@@ -41,6 +43,8 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_article);
 		//article = (Article) getIntent().getSerializableExtra("Article");
+		
+		this.progressBar = findViewById(R.id.progressBarContainer);
 		
 		int ix = getIntent().getIntExtra(ArticleActivity.ARTICLE_NUM_SENT, -1);
 		article = ArticleMemoryController.article(ix);
@@ -92,26 +96,24 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	
 	@Override
 	public void onPreExecute() {
-		// TODO snurrande hjul
-		
+		this.progressBar.setVisibility(View.VISIBLE);
 	}
 
 	@Override
 	public void onProgressUpdate(Integer procent) {
 		// ignore, anropas i nuläget aldrig
-		
 	}
 
 	@Override
 	public void onFailure(String message) {
-		// TODO snurrande hjul
+		this.progressBar.setVisibility(View.GONE);
 		Log.w(this.getClass().getSimpleName(),"PocketDebug: Recieve articles failed: "+message);
 		
 	}
 
 	@Override
 	public void onSuccess(String result) {
-		// TODO snurrande hjul
+		this.progressBar.setVisibility(View.GONE);
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
 		//listComPro =  article.getAgenda().getFors();
 		

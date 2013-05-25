@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
@@ -19,12 +20,16 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private String year;
 	private String id;
 	private Moprosition mopr;
+	
 	private TextView textTextView;
+	private View progressBar;
 	
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_moprosition);
+		
+		this.progressBar = findViewById(R.id.progressBarContainer);
 		
 		this.mopr = null;
 		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
@@ -60,8 +65,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 
 	@Override
 	public void onPreExecute() {
-		// TODO snurrande hjul
-		
+		progressBar.setVisibility(View.VISIBLE);
 	}
 
 	@Override
@@ -73,7 +77,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
-		// TODO snurrande hjul		
+		progressBar.setVisibility(View.GONE);		
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
 		textTextView.setText(Html.fromHtml(mopr.getText()));
 	}
@@ -81,7 +85,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void onFailure(String message) {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: Retrieve moprosition failed: "+message);
-		// TODO snurrande hjul
+		progressBar.setVisibility(View.GONE);
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
 		textTextView.setText("Inhämtandet misslyckas.");
 		
