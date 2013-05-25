@@ -137,7 +137,7 @@ class ArticlesAsyncTask extends XmlAsyncTask<QueryParam, QueryResult>{
 			} else if(name.equals("notisrubrik")){ 
 				notisrubrik=(readString(parser, "notisrubrik", xmlns));
 			} else if(name.equals("notis")){ 
-				summary=((readString(parser, "notis", xmlns)));
+				summary=((readString(parser, "notis", xmlns))).replace("&nbsp;", " ");
 			} else if(name.equals("beslutsdag")){ 
 				beslutsdag=(readString(parser, "beslutsdag", xmlns));
 			} else if(name.equals("beslutad")){
