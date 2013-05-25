@@ -25,6 +25,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private Moprosition mopr;
 	private ToggleButton likeBtn;
 	private ToggleButton dislikeBtn;
+	private TextView likeDislikeTV;
 	
 	//private TextView textTextView;
 	private WebView webView;
@@ -88,6 +89,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		
 		likeBtn = (ToggleButton) findViewById(R.id.likeMoproBtn);
 	    dislikeBtn = (ToggleButton) findViewById(R.id.dislikeMoproBtn);
+	    likeDislikeTV = (TextView) findViewById(R.id.likeDislikeMoproTV);
+	    likeDislikeTV.setText("Likes: 0 Dislikes: 0"); //TODO 
 	    
 	    OnClickListener changeChecker = new OnClickListener() {
 
