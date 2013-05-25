@@ -8,11 +8,9 @@ import org.group13.pocketpolitics.net.riksdag.Retriever;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.TextView;
 
 public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
 	public static final String MOPR_YEAR_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_year";
@@ -22,7 +20,6 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private String id;
 	private Moprosition mopr;
 	
-	//private TextView textTextView;
 	private WebView webView;
 	
 	private View progressBar;
@@ -82,15 +79,10 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
 		
-		//webView.loadData(mopr.getText(), "text/html", "UTF-8");
-		
 		// this is also a net-operation, show progressindicator until text is displayed
 		webView.loadUrl(mopr.getTextURL());
 		progressBar.setVisibility(View.GONE);
 		
-		/*
-		textTextView = (TextView)findViewById(R.id.moprositionTextView);
-		textTextView.setText(Html.fromHtml(mopr.getText()));*/
 	}
 
 	@Override
@@ -99,10 +91,6 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		progressBar.setVisibility(View.GONE);
 		
 		webView.loadData("<p>Hämtningen misslyckades.</p>", "text/html", "UTF-8");
-		/*
-		textTextView = (TextView)findViewById(R.id.moprositionTextView);
-		textTextView.setText("Inhämtandet misslyckas."); */
-		
 	}
 
 }

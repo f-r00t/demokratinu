@@ -214,11 +214,16 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 		return ddata;
 	}
 
-	/**<p>Retrieves html-text for a motion or proposition.
+	/**
+	 * @deprecated
+	 * <p>Retrieves the HTML-text for a moprosition as a String.
+	 * <p>This method is no longer needed since Android has better 
+	 * methods for loading and displaying HTML
 	 * <p>Källa: http://www.mkyong.com/java/how-to-convert-inputstream-to-string-in-java/
 	 * @param mop
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private boolean retrieveText(Moprosition mop){
 
 		BufferedReader bred = new BufferedReader( new InputStreamReader( retrieveStream(mop.getTextURL())));
