@@ -138,7 +138,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 			cancel = true;
 		}
 
-		// Check for a valid email address.
+		// Check for a valid email address, needs better check.
 		if (TextUtils.isEmpty(email)) {
 			emailView.setError(getString(R.string.error_field_required));
 			focusView = emailView;
