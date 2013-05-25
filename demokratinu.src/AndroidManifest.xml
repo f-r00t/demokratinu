@@ -45,7 +45,7 @@
         </activity>
         
         <activity
-            android:name="org.group13.pocketpolitics.control.MotionActivity"
+            android:name="org.group13.pocketpolitics.control.MoprositionActivity"
             android:label="@string/label_activity_motion" >
             <meta-data 
                 android:name="android.support.PARENT_ACTIVITY"
