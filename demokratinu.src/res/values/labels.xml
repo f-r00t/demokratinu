@@ -5,6 +5,7 @@
     <string name="label_activity_registration">Registrering</string>
     <string name="label_activity_article">Artikel</string>
     <string name="label_activity_motion">Motion</string>
+    <string name="label_activity_proposition">Proposition</string>
     
     <string name="menu_logout">Logga ut</string>
 </resources>
