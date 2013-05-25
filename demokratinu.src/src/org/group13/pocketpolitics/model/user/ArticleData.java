@@ -11,7 +11,7 @@ public class ArticleData {
 	private Map<String, UserOpinion> cpmap;
 	
 	
-	ArticleData(List<Comment> replies){
+	public ArticleData(List<Comment> replies){
 		this.replies = replies;
 	}
 

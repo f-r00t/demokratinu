@@ -1,18 +1,23 @@
 package org.group13.pocketpolitics.net.server;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 import org.group13.pocketpolitics.model.user.Account;
 import org.group13.pocketpolitics.model.user.ArticleData;
 import org.group13.pocketpolitics.model.user.Comment;
+import org.group13.pocketpolitics.model.user.UserOpinion;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterface{
 
 	private final int sleep = 200;
+	private static final String ISSUE = "H001UbU5_Debug";
 	
 	private boolean finished;
 	
@@ -25,11 +30,23 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	//////////////////////////////////////////////////////////
 	
-	public void testGetArticleData(){
+	public void testArticleDataGson(){
+		ArticleData dd = new ArticleData(null);
+		dd.setCpmap(new HashMap<String, UserOpinion>());
+		
+		dd.getCpmap().put(ISSUE, new UserOpinion(1, 100, 87));
+		dd.getCpmap().put(ISSUE+"/1", new UserOpinion(1, 122, 56));
+		
+		Gson g = new Gson();
+		
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: AData map json: "+g.toJson(dd));
+	}
+	
+	public void atestGetArticleData(){
 		testsOnThisObject++;
 		Account.set("debug@chalmers.se", "debug", "debug");
 		
-		Syncer.getArticleData(this, "H001UbU5_Debug");
+		Syncer.getArticleData(this, ISSUE);
 		
 		this.waitTillReturn();
 	}
@@ -149,6 +166,11 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	@Override
 	public void getArticleDataReturned(ArticleData data) {
 		this.finished = true;
+		if(!data.getCpmap().containsKey(ISSUE)){
+			Log.e(this.getClass().getSimpleName(), "PocketDebug: opinion for "+ISSUE+" was not found!");
+			fail();
+		}
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: opinion for "+ISSUE+": "+data.getCpmap().get(ISSUE));
 		printComments(data.getReplies());
 	}
 
