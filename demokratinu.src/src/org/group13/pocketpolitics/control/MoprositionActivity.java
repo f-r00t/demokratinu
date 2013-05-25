@@ -83,7 +83,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		this.mopr = result;
 		progressBar.setVisibility(View.GONE);
 		
-		webView.loadData(mopr.getText(), "text/html", "UTF-8");
+		//webView.loadData(mopr.getText(), "text/html", "UTF-8");
+		webView.loadUrl(mopr.getTextURL());
 		/*
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
 		textTextView.setText(Html.fromHtml(mopr.getText()));*/

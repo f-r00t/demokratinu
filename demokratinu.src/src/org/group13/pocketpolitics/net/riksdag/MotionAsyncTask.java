@@ -106,7 +106,7 @@ class MotionAsyncTask extends XmlAsyncTask< Void, Moprosition> {
 			ret = new Proposition(ddata.textURL, ddata.rm, ddata.beteckning, ddata.title, ddata.uts);
 		}
 
-		retrieveText(ret);
+		//retrieveText(ret);
 
 		return ret;
 	}
