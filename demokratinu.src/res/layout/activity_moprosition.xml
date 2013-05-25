@@ -17,8 +17,8 @@
             <TextView
                 android:id="@+id/moprositionTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Lorem Ipsum" />
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
