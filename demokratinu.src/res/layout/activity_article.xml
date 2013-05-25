@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
+    <include layout="@layout/progress_bar" />
+
     <ExpandableListView
         android:id="@+id/detailViewVotesList"
         android:layout_width="match_parent"
         android:layout_height="fill_parent" >
     </ExpandableListView>
-    
-    <include layout="@layout/progress_bar" />
 
 </LinearLayout>
