@@ -25,12 +25,17 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	
 	private String year;
 	private String id;
-	private String completeId;
 	
 	private Moprosition mopr;
 	private ToggleButton likeBtn;
 	private ToggleButton dislikeBtn;
 	private TextView likeDislikeTV;
+	
+	
+	private int totalLikes = -1;
+	private int totalDislikes = -1;
+	private int myOpinion = 0;
+	private int prevOpinion = 0;
 	
 	private WebView webView;
 	
@@ -50,7 +55,6 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		this.mopr = null;
 		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
 		this.id = getIntent().getStringExtra(MoprositionActivity.MOPR_ID_SENT);
-		this.completeId = Retriever.translate(year, id);
 		
 		if(isMotion(this.id)){
 			setTitle(getString(R.string.label_activity_motion));
@@ -99,7 +103,31 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private void orderMoprosition(){
 		if(Connected.isConnected(this)){
 			Retriever.retrieveMoprosition(this, this.year, this.id);
+			Syncer.getOpinions(this, code());
 		}
+	}
+	
+	/**
+	 * 
+	 * @return code to identify this motion/proposition in the database
+	 */
+	private String code(){
+		return year+":"+id;
+	}
+	
+	private void showTotals(){
+		likeDislikeTV = (TextView) findViewById(R.id.likeDislikeMoproTV);
+		
+		String likes = ""+totalLikes;
+		if(totalLikes == -1){
+			likes ="?";
+		}
+		String dislikes = ""+totalDislikes;
+		if(totalDislikes == -1){
+			dislikes = "?";
+		}
+		
+	    likeDislikeTV.setText("Likes: "+likes+" Dislikes: "+dislikes);
 	}
 
 	@Override
@@ -110,17 +138,15 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void onProgressUpdate(Integer procent) {
 		// ignore
-		
 	}
-
+	
 	@Override
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
 		
 		likeBtn = (ToggleButton) findViewById(R.id.likeMoproBtn);
 	    dislikeBtn = (ToggleButton) findViewById(R.id.dislikeMoproBtn);
-	    likeDislikeTV = (TextView) findViewById(R.id.likeDislikeMoproTV);
-	    likeDislikeTV.setText("Likes: ? Dislikes: ?"); 
+	    showTotals();
 	    
 	    OnClickListener changeChecker = new OnClickListener() {
 
@@ -135,14 +161,20 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 						likeBtn.setChecked(false);
 					}
 				}
-				int opinion = 0;
+				
+				prevOpinion = myOpinion;
+				
+				myOpinion = 0;
 				if(likeBtn.isChecked()){
-					opinion = 1;
+					myOpinion = 1;
 				} else if(dislikeBtn.isChecked()){
-					opinion = -1;
+					myOpinion = -1;
 				}
 				
-				Syncer.postOpinion(getThisInstance(), completeId, opinion);
+				totalLikes+=myOpinion-prevOpinion;
+				totalDislikes-=myOpinion-prevOpinion;
+				showTotals();
+				Syncer.postOpinion(getThisInstance(), code(), myOpinion);
 			}
 		};
 		
@@ -170,14 +202,26 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 
 	@Override
 	public void postOpinionReturned(boolean succeded) {
-		// TODO 
-		likeDislikeTV.setText("Likes: 1 Dislikes: 1");
+		if(!succeded){
+			Syncer.getOpinions(this, code());
+		}
+	}
+	
+	@Override
+	public void getOpinionsReturned(boolean succeded, int myOpinion, int totalLike,
+			int totalDislike) {
+		if(succeded){
+			this.myOpinion = myOpinion;
+			this.totalLikes = totalLike;
+			this.totalDislikes = totalDislike;
+			
+			this.showTotals();
+		}
 	}
 	
 	@Override
 	public void getArticleDataReturned(ArticleData data) {
 		// TODO
-		
 	}
 	
 	@Override
@@ -203,6 +247,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		// ignore
 		
 	}
+
+	
 }
 
 

@@ -11,6 +11,7 @@ public interface ServerInterface {
 	public void postOpinionReturned(boolean succeded);
 	public void postCommentReturned(boolean succeded);
 	public void getArticleDataReturned(ArticleData data);
+	public void getOpinionsReturned(boolean succeded, int myOpinion, int totalLike, int totalDislike);
 	
 	/**
 	 * Something went wrong in network operation

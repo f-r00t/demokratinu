@@ -239,4 +239,11 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	public void getArticleDataReturned(ArticleData data) {
 		// ignore
 	}
+
+	@Override
+	public void getOpinionsReturned(boolean succeded, int myOpinion,
+			int totalLike, int totalDislike) {
+		// ignore
+		
+	}
 }

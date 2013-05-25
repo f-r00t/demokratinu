@@ -5,7 +5,8 @@ enum ServerOperation {
 	Authenticate("http://fruktnet.no-ip.org/pocketpolitics/authenticate.php"),
 	PostOpinion("http://fruktnet.no-ip.org/pocketpolitics/post-opinion.php"),
 	PostComment("http://fruktnet.no-ip.org/pocketpolitics/post-comment.php"),
-	GetArticleData("http://fruktnet.no-ip.org/pocketpolitics/get-article-data.php");
+	GetArticleData("http://fruktnet.no-ip.org/pocketpolitics/get-article-data.php"),
+	GetOpinions("http://fruktnet.no-ip.org/pocketpolitics/get-moprosition.php");
 	
 	private String url;
 	ServerOperation(String url){

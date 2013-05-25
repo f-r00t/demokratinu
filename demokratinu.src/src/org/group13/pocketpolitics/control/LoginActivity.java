@@ -226,4 +226,11 @@ public class LoginActivity extends Activity implements ServerInterface{
 		// ignore
 	}
 
+	@Override
+	public void getOpinionsReturned(boolean succeded, int myOpinion,
+			int totalLike, int totalDislike) {
+		// ignore
+		
+	}
+
 }

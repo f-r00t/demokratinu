@@ -34,6 +34,12 @@ public class Syncer {
 		task.execute();
 	}
 	
+	public static void getOpinions(ServerInterface activity, String moprositionId){
+		checkInstance();
+		PostAsyncTask task = new PostAsyncTask(activity, ServerOperation.GetOpinions, moprositionId);
+		task.execute();
+	}
+	
 	////////////////////////////////////////////
 	private Syncer(){
 		

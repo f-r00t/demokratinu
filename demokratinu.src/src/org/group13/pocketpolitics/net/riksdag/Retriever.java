@@ -95,9 +95,9 @@ public class Retriever {
 	 * @param docNum ex Ub354
 	 * @return id ex H002Ub354
 	 */
-	public static String translate(String year, String docNum){
+	/*public static String translate(String year, String docNum){
 		return MotionAsyncTask.translate(year, docNum);
-	}
+	}*/
 
 	protected static void threadFinished(){
 		threads--;
