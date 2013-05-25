@@ -171,22 +171,16 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 					myOpinion = -1;
 				}
 				
-				if(prevOpinion==1 && myOpinion!=1){
+				if(prevOpinion!=1 && myOpinion==1){
+					totalLikes++;
+				} else if(prevOpinion==1 && myOpinion!=1){
 					totalLikes--;
-					if(myOpinion == -1){
-						totalDislikes++;
-					}
+				}
+				
+				if(prevOpinion!=-1 && myOpinion==-1){
+					totalDislikes++;
 				} else if(prevOpinion==-1 && myOpinion!=-1){
 					totalDislikes--;
-					if(myOpinion==1){
-						totalLikes++;
-					}
-				} else{
-					if(myOpinion == 1){
-						totalLikes++;
-					} else {
-						totalDislikes++;
-					}
 				}
 				
 				showTotals();
