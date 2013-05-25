@@ -7,7 +7,7 @@ $replies = array();
 $replyStrings = array();
 
 function addReply($parent, $child) {
-    $pattern = '/\'replies\'\s\:\s\[(.?)\]/';
+    $pattern = '/\'replies\'\s\:\s\[(.+?)\]/';
     preg_match($pattern, $parent, $match);
     if ($match[1] != "") {
         return $parent = preg_replace($pattern, ("'replies' : [{$child}, {$match[1]}]"), $parent);
@@ -126,8 +126,8 @@ if ($success == "true") {
     $numberOfItems = count($replies);
     $i = 0;
     
-    $firstPattern = '/^' . trim($_POST['article']) . '\/\d?$/';
-    $lastPattern = '/(\/\d?$)/';
+    $firstPattern = '/^' . trim($_POST['article']) . '\/\d+?$/';
+    $lastPattern = '/(\/\d+?$)/';
     
     foreach ($replies as $key => $value) {
         $replyStrings[$key] = "{'author' : '{$value['author']}', 'content' : '{$value['content']}', 'replies' : [],
