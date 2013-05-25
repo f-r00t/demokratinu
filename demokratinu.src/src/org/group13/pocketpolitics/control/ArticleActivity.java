@@ -77,11 +77,6 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		
 		return super.onOptionsItemSelected(item);
 	}
-	
-
-	public void setTitle(String title){
-		titleTextView.setText(title);
-	}
 
 	/**
 	 * Retrives the CommitteeProposals for the article and their respective votes
