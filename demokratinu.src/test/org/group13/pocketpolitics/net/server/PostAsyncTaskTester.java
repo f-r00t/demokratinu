@@ -74,7 +74,7 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		
 		Account.set("debug@chalmers.se", "debug", "debug");
 		
-		Syncer.postOpinion(this, "H001UbU5_Debug/1/30", 1);
+		Syncer.postOpinion(this, ISSUE, 1);
 		
 		waitTillReturn();
 	}
@@ -189,6 +189,20 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		fail();
 	}
 	
+	@Override
+	public void getOpinionsReturned(boolean succeded, int myOpinion,
+			int totalLike, int totalDislike) {
+		this.finished=true;
+		if(!succeded){
+			fail();
+		}
+		
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: getOptions returned.");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: myOpinion: "+myOpinion);
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: totalLike: "+totalLike);
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: totalDislike: "+totalDislike);
+	}
+	
 	/////////////////////////////////////////////////////
 
 	public static void printComments(List<Comment> clist){
@@ -208,12 +222,5 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 		return gen;
 	}
 
-	@Override
-	public void getOpinionsReturned(boolean succeded, int myOpinion,
-			int totalLike, int totalDislike) {
-		Log.w(this.getClass().getSimpleName(), "PocketDebug: getOptions returned.");
-		Log.i(this.getClass().getSimpleName(), "PocketDebug: myOpinion: "+myOpinion);
-		Log.i(this.getClass().getSimpleName(), "PocketDebug: mytotalLike: "+totalLike);
-		Log.i(this.getClass().getSimpleName(), "PocketDebug: totalDislike: "+totalDislike);
-	}
+	
 }

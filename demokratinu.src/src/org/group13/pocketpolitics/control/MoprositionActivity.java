@@ -171,8 +171,24 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 					myOpinion = -1;
 				}
 				
-				totalLikes+=myOpinion-prevOpinion;
-				totalDislikes-=myOpinion-prevOpinion;
+				if(prevOpinion==1 && myOpinion!=1){
+					totalLikes--;
+					if(myOpinion == -1){
+						totalDislikes++;
+					}
+				} else if(prevOpinion==-1 && myOpinion!=-1){
+					totalDislikes--;
+					if(myOpinion==1){
+						totalLikes++;
+					}
+				} else{
+					if(myOpinion == 1){
+						totalLikes++;
+					} else {
+						totalDislikes++;
+					}
+				}
+				
 				showTotals();
 				Syncer.postOpinion(getThisInstance(), code(), myOpinion);
 			}
@@ -190,6 +206,11 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	
 	private MoprositionActivity getThisInstance(){
 		return this;
+	}
+	
+	private void updateButtons(){
+		likeBtn.setChecked(this.myOpinion>0);
+		dislikeBtn.setChecked(this.myOpinion<0);
 	}
 
 	@Override
@@ -216,6 +237,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 			this.totalLikes = totalLike;
 			this.totalDislikes = totalDislike;
 			
+			this.updateButtons();
 			this.showTotals();
 		}
 	}

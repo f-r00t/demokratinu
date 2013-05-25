@@ -67,7 +67,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		case Register:
 			break;
 		case GetOpinions:
-			postData.add(new BasicNameValuePair("issue", this.postId));
+			postData.add(new BasicNameValuePair("moprosition", this.postId));
 			break;
 		default:
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: in doInBckg(): Operation not recognized: "+this.oper.name());
@@ -102,7 +102,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			act.postOpinionReturned(rr.success);
 			break;
 		case GetOpinions:
-			act.getOpinionsReturned(rr.success, rr.myOpinion, rr.totalLikes, rr.totalDislikes);
+			act.getOpinionsReturned(rr.success, rr.ownOpinion, rr.totalLikes, rr.totalDislikes);
 			break;
 		default:
 			Log.e(this.getClass().getSimpleName(), "PocketDebug: in respond(): Operation not recognized: "+this.oper.name());
@@ -211,7 +211,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 		private final boolean userExists;
 		private final String username;
 		
-		private final int myOpinion;
+		private final int ownOpinion;
 		private final int totalLikes;
 		private final int totalDislikes;
 
@@ -220,7 +220,7 @@ class PostAsyncTask extends AsyncTask<Void, Integer, HttpEntity> {
 			this.emailExists=emailExists;
 			this.userExists=userExists;
 			this.username=null;
-			this.myOpinion=0;
+			this.ownOpinion=0;
 			this.totalDislikes=0;
 			this.totalLikes=0;
 		}
