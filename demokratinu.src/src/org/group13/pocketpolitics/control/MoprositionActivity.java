@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
@@ -21,7 +22,9 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private String id;
 	private Moprosition mopr;
 	
-	private TextView textTextView;
+	//private TextView textTextView;
+	private WebView webView;
+	
 	private View progressBar;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		setContentView(R.layout.activity_moprosition);
 		
 		this.progressBar = findViewById(R.id.progressBarContainer);
+		this.webView = (WebView) findViewById(R.id.moprosition_web_view);
 		
 		this.mopr = null;
 		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
@@ -77,17 +81,23 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void onSuccess(Moprosition result) {
 		this.mopr = result;
-		progressBar.setVisibility(View.GONE);		
+		progressBar.setVisibility(View.GONE);
+		
+		webView.loadData(mopr.getText(), "text/html", "UTF-8");
+		/*
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
-		textTextView.setText(Html.fromHtml(mopr.getText()));
+		textTextView.setText(Html.fromHtml(mopr.getText()));*/
 	}
 
 	@Override
 	public void onFailure(String message) {
 		Log.w(this.getClass().getSimpleName(), "PocketDebug: Retrieve moprosition failed: "+message);
 		progressBar.setVisibility(View.GONE);
+		
+		webView.loadData("<p>Hämtningen misslyckades.</p>", "text/html", "UTF-8");
+		/*
 		textTextView = (TextView)findViewById(R.id.moprositionTextView);
-		textTextView.setText("Inhämtandet misslyckas.");
+		textTextView.setText("Inhämtandet misslyckas."); */
 		
 	}
 
