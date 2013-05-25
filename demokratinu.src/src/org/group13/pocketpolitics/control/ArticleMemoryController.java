@@ -20,7 +20,6 @@ import android.util.Log;
 class ArticleMemoryController {
 	private static ArticleMemoryController INSTANCE;
 	
-	// TODO Make ArticleMemCtrl should handle Articles, not Articles
 	private List<Article> articles;
 	private Filter filter;
 	private int lastPage;
