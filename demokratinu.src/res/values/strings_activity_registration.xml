@@ -10,5 +10,7 @@
     <string name="email_taken">E-post upptaget</string>
     <string name="filler_reg_passwordagainfield">Registrera</string>
     <string name="passwords_dont_match">Lösenorden matchar inte</string>
+    <string name="successfully_registered">Du är nu registrerad!</string>
+    <string name="register_operation_failed">Registreringen misslyckades. Försök igen</string>
     
 </resources>

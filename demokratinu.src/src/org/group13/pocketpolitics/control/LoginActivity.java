@@ -206,7 +206,7 @@ public class LoginActivity extends Activity implements ServerInterface{
 		progressBar.setVisibility(View.GONE);
 		
 		Toast.makeText(getApplicationContext(),
-				getString(R.string.login_failed_unknown_reason), Toast.LENGTH_LONG)
+				getString(R.string.login_operation_failed), Toast.LENGTH_LONG)
 				.show();
 	}
 
