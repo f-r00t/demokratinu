@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.util.Log;
 
 public class MoprositionActivity extends Activity implements ActivityNetInterface<Moprosition>{
+	public static final String MOPR_YEAR_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_year";
+	public static final String MOPR_ID_SENT = "org.group13.pocketpolitics.control.MoprositionActivity.sent_id";
+	
 	private String year;
 	private String id;
 	private Moprosition mopr;
@@ -18,8 +21,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 
 		super.onCreate(savedInstanceState);
 		this.mopr = null;
-		this.year = getIntent().getStringExtra(ArticleActivity.MOPR_YEAR_SENT);
-		this.id = getIntent().getStringExtra(ArticleActivity.MOPR_ID_SENT);
+		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
+		this.id = getIntent().getStringExtra(MoprositionActivity.MOPR_ID_SENT);
 		
 		orderMoprosition();
 	}
