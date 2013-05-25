@@ -16,6 +16,7 @@ import android.util.Log;
 
 public class Retriever {
 
+
 	private static int threads=0;
 	@SuppressWarnings("rawtypes")
 	private static List<AsyncTask> tasks = new ArrayList<AsyncTask>();
@@ -86,6 +87,16 @@ public class Retriever {
 		}
 
 		tasks.clear();
+	}
+	
+	/**
+	 * Translates document code of any motion or proposition from year + docNum to complete id.
+	 * @param year	ex 2012/13
+	 * @param docNum ex Ub354
+	 * @return id ex H002Ub354
+	 */
+	public static String translate(String year, String docNum){
+		return MotionAsyncTask.translate(year, docNum);
 	}
 
 	protected static void threadFinished(){

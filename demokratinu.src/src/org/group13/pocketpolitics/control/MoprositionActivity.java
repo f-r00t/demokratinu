@@ -25,6 +25,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	
 	private String year;
 	private String id;
+	private String completeId;
+	
 	private Moprosition mopr;
 	private ToggleButton likeBtn;
 	private ToggleButton dislikeBtn;
@@ -48,6 +50,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		this.mopr = null;
 		this.year = getIntent().getStringExtra(MoprositionActivity.MOPR_YEAR_SENT);
 		this.id = getIntent().getStringExtra(MoprositionActivity.MOPR_ID_SENT);
+		this.completeId = Retriever.translate(year, id);
 		
 		if(isMotion(this.id)){
 			setTitle(getString(R.string.label_activity_motion));
@@ -132,14 +135,14 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 						likeBtn.setChecked(false);
 					}
 				}
-				int opinion = 0; 
+				int opinion = 0;
 				if(likeBtn.isChecked()){
 					opinion = 1;
 				} else if(dislikeBtn.isChecked()){
 					opinion = -1;
 				}
 				
-				//Syncer.postOpinion(this, "issue", opinion);
+				Syncer.postOpinion(getThisInstance(), completeId, opinion);
 			}
 		};
 		
@@ -151,6 +154,10 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		webView.loadUrl(mopr.getTextURL());
 		progressBar.setVisibility(View.GONE);
 
+	}
+	
+	private MoprositionActivity getThisInstance(){
+		return this;
 	}
 
 	@Override
@@ -175,7 +182,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	
 	@Override
 	public void operationFailed(String oper) {
-		// TODO Auto-generated method stub
+		// TODO 
 	}
 	
 	@Override
