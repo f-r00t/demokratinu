@@ -61,14 +61,10 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+		case android.R.id.home: // The up-button
+			// finish() to jump to the previous activity. We can't
+			// return to it the normal way because there is more than one
+			// possible parent activity as long as the manifest is aware.
 			finish();
 			return true;
 		}
