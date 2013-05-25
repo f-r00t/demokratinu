@@ -32,7 +32,7 @@ if (isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['moprosition
         
         while ($dbcollected = $stmt->fetch()) {
             if ($dbcollected['voter'] == $email) {
-                $moprositionOpinons['ownOpinion'] = $dbcollected['opinion'];
+                $moprositionOpinions['ownOpinion'] = $dbcollected['opinion'];
             }
             if ($dbcollected['opinion'] == "1") {
                 $moprositionOpinions['totalLikes']++;
