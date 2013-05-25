@@ -30,7 +30,14 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 	
 	//////////////////////////////////////////////////////////
 	
-	public void testArticleDataGson(){
+	public void testGetOpinions(){
+		testsOnThisObject++;
+		Account.set("debug@chalmers.se", "debug", "debug");
+		
+		Syncer.getOpinions(this, ISSUE);
+	}
+	
+	public void atestArticleDataGson(){
 		ArticleData dd = new ArticleData(null);
 		dd.setCpmap(new HashMap<String, UserOpinion>());
 		
@@ -197,5 +204,14 @@ public class PostAsyncTaskTester extends AndroidTestCase implements ServerInterf
 			gen+=chars.charAt(r.nextInt(chars.length()));
 		}
 		return gen;
+	}
+
+	@Override
+	public void getOpinionsReturned(boolean succeded, int myOpinion,
+			int totalLike, int totalDislike) {
+		Log.w(this.getClass().getSimpleName(), "PocketDebug: getOptions returned.");
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: myOpinion: "+myOpinion);
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: mytotalLike: "+totalLike);
+		Log.i(this.getClass().getSimpleName(), "PocketDebug: totalDislike: "+totalDislike);
 	}
 }

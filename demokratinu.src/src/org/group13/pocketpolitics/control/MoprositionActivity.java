@@ -208,8 +208,9 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	}
 	
 	@Override
-	public void getOpinionsReturned(boolean succeded, int myOpinion, int totalLike,
-			int totalDislike) {
+	public void getOpinionsReturned(boolean succeded, int myOpinion, 
+			int totalLike, int totalDislike) {
+		
 		if(succeded){
 			this.myOpinion = myOpinion;
 			this.totalLikes = totalLike;
@@ -220,14 +221,16 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	}
 	
 	@Override
-	public void getArticleDataReturned(ArticleData data) {
-		// TODO
+	public void operationFailed(String oper) {
+		Log.e(this.getClass().getSimpleName(), "PocketDebug: server operation failed: "+oper); 
 	}
 	
 	@Override
-	public void operationFailed(String oper) {
-		// TODO 
+	public void getArticleDataReturned(ArticleData data) {
+		// ignore
 	}
+	
+	
 	
 	@Override
 	public void authenticateReturned(boolean succeded, String username) {
