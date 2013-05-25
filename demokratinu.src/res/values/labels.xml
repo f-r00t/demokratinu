@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="label_activity_main">Welcome dear user to MainActivity</string>
+    <string name="label_activity_main">Denna används väl aldrig?</string>
+    
     <string name="label_activity_registration">Registrering</string>
-    <string name="label_activity_article">Article</string>
+    <string name="label_activity_article">Artikel</string>
     <string name="label_activity_motion">Motion</string>
     
     <string name="menu_logout">Logga ut</string>
