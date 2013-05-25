@@ -142,7 +142,9 @@ abstract class XmlAsyncTask<I, O> extends AsyncTask<I, Integer, O> {
 			return readFeed(parser);
 		}
 		finally{
-			instr.close();
+			if(instr!=null){
+				instr.close();
+			}
 		}
 
 	}
