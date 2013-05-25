@@ -46,9 +46,6 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 			elementList.add(element);
 			listNotes.add(elementList);
 		}
-
-		Log.i("Viking", "Size dim 1: " + listNotes.size());
-		Log.i("Viking", "Size dim 2: " + listNotes.get(0).size());
 	}
 
 	@Override
@@ -89,8 +86,6 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 					@Override
 					public void onClick(View v) {
-						Log.i("Viking", "Button was clicked!");
-
 						Intent intent = new Intent(context,
 								MoprositionActivity.class);
 						intent.putExtra(MoprositionActivity.MOPR_YEAR_SENT,
@@ -155,8 +150,6 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 		row.setTextSize(16);
 		row.setText(listTopics.get(groupPosition));
 		row.setPadding(45, 0, 0, 0);
-		// notifyDataSetChanged();
-		// Log.i("Viking","In parent: "+listTopics.get(groupPosition));
 		return row;
 	}
 

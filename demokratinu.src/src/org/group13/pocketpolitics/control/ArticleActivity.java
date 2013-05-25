@@ -110,14 +110,11 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	public void onSuccess(String result) {
 		this.progressBar.setVisibility(View.GONE);
 		Log.i(this.getClass().getSimpleName(), "PocketDebug: Votes retrieved for article "+result);
-		//listComPro =  article.getAgenda().getFors();
-		
 		setAdapter();
 	}
 	
 	private void setAdapter() {
 		List<CommitteeProposal> listComPro = article.getAgenda().getFors();
-		Log.i("Viking","Before setAdapter: "+listComPro.size());
 		listViewCommitteeProposal.setAdapter(new CommitteeProposalListAdapter(this, listComPro));
 	}
 }
