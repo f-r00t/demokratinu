@@ -10,7 +10,6 @@ import org.group13.pocketpolitics.model.riksdag.CommitteeProposal;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -97,7 +96,7 @@ public class CommitteeProposalListAdapter extends BaseExpandableListAdapter {
 
 				});
 				cpListItemLayout.addView(btn, new LayoutParams(
-						LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
+						android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT));
 			}
 		}
 

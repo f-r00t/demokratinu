@@ -25,6 +25,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	
 	private View progressBar;
 	
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
