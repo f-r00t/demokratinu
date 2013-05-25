@@ -9,6 +9,7 @@ import org.group13.pocketpolitics.net.riksdag.Retriever;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -29,6 +30,8 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_moprosition);
 		
+		setupActionBar();
+		
 		this.progressBar = findViewById(R.id.progressBarContainer);
 		this.webView = (WebView) findViewById(R.id.moprosition_web_view);
 		
@@ -43,6 +46,28 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		}
 		
 		orderMoprosition();
+	}
+	
+	/**
+	 * Set up the {@link android.app.ActionBar}.
+	 */
+	private void setupActionBar() {
+
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home: // The up-button
+			// finish() to jump to the previous activity. We can't
+			// return to it the normal way because there is more than one
+			// possible parent activity as long as the manifest is aware.
+			finish();
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	private static boolean isMotion(String id){

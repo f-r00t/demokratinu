@@ -78,22 +78,14 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	 * Set up the {@link android.app.ActionBar}.
 	 */
 	private void setupActionBar() {
-
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+			// Navigates up to the parent (in this case LoginActivity)
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
@@ -136,7 +128,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 			cancel = true;
 		}
 		
-		// Check for a valid email address.
+		// Check for a valid email address, needs better check.
 		if (TextUtils.isEmpty(email)) {
 			emailView.setError(getString(R.string.error_field_required));
 			focusView = emailView;
@@ -171,7 +163,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 				Syncer.register(this);
 			} else {
 				Toast.makeText(getApplicationContext(),
-						"Hittade ingen anslutning", Toast.LENGTH_LONG)
+						getString(R.string.no_connection_found), Toast.LENGTH_LONG)
 						.show();
 			}
 			
@@ -203,7 +195,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 			finish();
 			
 			Toast.makeText(getApplicationContext(),
-					"Du är nu registrerad!", Toast.LENGTH_LONG)
+					getString(R.string.successfully_registered), Toast.LENGTH_LONG)
 					.show();
 		} else {
 			View focusView = null;
@@ -224,7 +216,7 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 		progressBar.setVisibility(View.GONE);
 		
 		Toast.makeText(getApplicationContext(),
-				"Registreringen misslyckades. Försök igen", Toast.LENGTH_LONG)
+				getString(R.string.register_operation_failed), Toast.LENGTH_LONG)
 				.show();
 	}
 
@@ -247,7 +239,4 @@ public class RegistrationActivity extends Activity implements ServerInterface{
 	public void getArticleDataReturned(ArticleData data) {
 		// ignore
 	}
-
-	
-
 }
