@@ -103,7 +103,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	private void orderMoprosition(){
 		if(Connected.isConnected(this)){
 			Retriever.retrieveMoprosition(this, this.year, this.id);
-			Syncer.getOpinions(this, code());
+			Syncer.getOpinions(this, idOnServer());
 		}
 	}
 	
@@ -111,7 +111,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	 * 
 	 * @return code to identify this motion/proposition in the database
 	 */
-	private String code(){
+	private String idOnServer(){
 		return year+":"+id;
 	}
 	
@@ -184,7 +184,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 				}
 				
 				showTotals();
-				Syncer.postOpinion(getThisInstance(), code(), myOpinion);
+				Syncer.postOpinion(getThisInstance(), idOnServer(), myOpinion);
 			}
 		};
 		
@@ -218,7 +218,7 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 	@Override
 	public void postOpinionReturned(boolean succeded) {
 		if(!succeded){
-			Syncer.getOpinions(this, code());
+			Syncer.getOpinions(this, idOnServer());
 		}
 	}
 	
