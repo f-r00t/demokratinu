@@ -129,6 +129,16 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 		
 	    likeDislikeTV.setText("Likes: "+likes+" Dislikes: "+dislikes);
 	}
+	
+
+	private MoprositionActivity getThisInstance(){
+		return this;
+	}
+	
+	private void updateButtons(){
+		likeBtn.setChecked(this.myOpinion>0);
+		dislikeBtn.setChecked(this.myOpinion<0);
+	}
 
 	@Override
 	public void onPreExecute() {
@@ -198,14 +208,6 @@ public class MoprositionActivity extends Activity implements ActivityNetInterfac
 
 	}
 	
-	private MoprositionActivity getThisInstance(){
-		return this;
-	}
-	
-	private void updateButtons(){
-		likeBtn.setChecked(this.myOpinion>0);
-		dislikeBtn.setChecked(this.myOpinion<0);
-	}
 
 	@Override
 	public void onFailure(String message) {
