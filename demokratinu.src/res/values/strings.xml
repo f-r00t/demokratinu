@@ -20,5 +20,6 @@
     <string name="title_reg">Registrera</string>
     <string name="proposal_title">#FF00FF</string>
     <string name="no_connection_found">Hittade ingen anslutning</string>
+    <string name="goto_comments">Se Kommentarer</string>
     
 </resources>

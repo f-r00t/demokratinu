@@ -30,6 +30,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 	private ExpandableListView listViewCommitteeProposal;
 	private View articleHeader;
 	private View progressBar;
+	private View articleFooter;
 	
 	private Article article;
 
@@ -62,6 +63,8 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 			
 		textTextView = (TextView)findViewById(R.id.activityArticleText);
 		textTextView.setText(article.getAgenda().getSummary());
+		
+		articleFooter = inflater.inflate(R.layout.goto_comment_btn_layout, null);
 	}
 	
 	/*
