@@ -65,6 +65,7 @@ public class ArticleActivity extends Activity implements ActivityNetInterface<St
 		textTextView.setText(article.getAgenda().getSummary());
 		
 		articleFooter = inflater.inflate(R.layout.goto_comment_btn_layout, null);
+		listViewCommitteeProposal.addFooterView(articleFooter);
 	}
 	
 	/*
